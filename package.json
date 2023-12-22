@@ -1,8 +1,17 @@
 {
-  "name": "easy-build",
+  "name": "gigachat",
   "private": false,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontandrew/middle.messenger.praktikum.yandex.git"
+  },
+  "author": {
+    "name": "Andrew Bubnov",
+    "email": "jackblack.nt@gmail.com"
+  },
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
