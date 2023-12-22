@@ -1,4 +1,4 @@
-### gigaChat
+# gigaChat
 
 ---
 
@@ -6,7 +6,9 @@
 
 ## Licence: MIT
 
-## Start and use:
+---
+
+### Start and use:
 - clone repo
 - install: pnpm
 - for build: pnpm build
