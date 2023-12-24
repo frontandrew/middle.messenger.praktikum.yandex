@@ -3,7 +3,7 @@ import * as Pages from './pages';
 import * as Components from './components';
 
 const pages = {
-  'login': [Pages.LoginPage, { test: 'Its alive!!', label: 'Lable', error: 'FUKC' }],
+  'login': [Pages.LoginPage, { test: 'Its alive!!', label: 'Lable', error: 'FUKC', value: 1988 }],
 };
 
 Object.entries(Components).forEach(([name, component]) => {
