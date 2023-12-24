@@ -1,0 +1,11 @@
+@import '/src/components/button/button.css';
+@import '/src/components/input/input.css';
+@import '/src/components/typography/typography.css';
+
+:root {
+    --main-color: #3369F3;
+    --second-color: #E4EDFD;
+    --error-color: #FF0000;
+    --text-color: #1E1E1E;
+    --text-color-light: #999;
+}
