@@ -1,3 +1,4 @@
+export { AppContainer } from './app-container';
 export { Button } from './button';
 export { Field } from './field';
 export { FormAuth } from './form-auth';
