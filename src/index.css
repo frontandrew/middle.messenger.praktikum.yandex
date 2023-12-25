@@ -12,4 +12,19 @@
     /* --font-family-base: 'Inter', sans-serif; */
     --font-family-base: san-serif;
     --font-family-accent: san-serif;
+    --font-size: 16px;
+}
+
+/* like reset.css */
+body, ul, li, input, button {
+  margin: 0;
+  padding: 0;
+}
+
+/* global styles */
+body {
+    width: 100vw;
+    height: 100vh;
+
+    font-size: var(--font-size);
 }
