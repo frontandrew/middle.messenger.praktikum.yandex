@@ -1,7 +1,17 @@
 .button {
-    background-color: var(--main-color);
+    font-size: 0.75em;
 }
 
-.button_red {
-    background-color: red;
+.button__fill {
+    background: var(--main-color);
+    border: none;
+    min-height: 2em;
+    border-radius: 0.5em;
+    color: var(--text-color-contrast);
+}
+
+.button__link {
+    background: none;
+    border: none;
+    color: var(--main-color)
 }
