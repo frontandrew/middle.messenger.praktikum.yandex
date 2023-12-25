@@ -1,0 +1,8 @@
+.error__title {
+    font-size: 2.5em;
+}
+
+.error__message {
+    padding: 20px 0 69px;
+    font-size: 1.25em;
+}
