@@ -4,3 +4,8 @@ body {
 
     font-size: var(--font-size);
 }
+
+#app {
+    min-width: 480px;
+    height: 100%;
+}

@@ -1,8 +1,2 @@
-@import '/src/theme/global.css';
-@import '/src/theme/fonts.css';
-@import '/src/theme/reset.css';
-@import '/src/theme/variables.css';
-
-@import '/src/components/button/button.css';
-@import '/src/components/field/field.css';
-@import '/src/components/typography/typography.css';
+@import './components/components.css';
+@import './theme/theme.css';
