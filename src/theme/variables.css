@@ -2,11 +2,10 @@
     --main-color: #3369F3;
     --second-color: #E4EDFD;
     --error-color: #FF0000;
-    --text-color: #1E1E1E;
+    --text-color-main: #1E1E1E;
     --text-color-light: #999;
 
-    /* --font-family-base: 'Inter', sans-serif; */
-    --font-family-base: san-serif;
+    --font-family-base: 'Inter', sans-serif;
     --font-family-accent: san-serif;
     --font-size: 16px;
 

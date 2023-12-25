@@ -3,6 +3,8 @@ body {
     height: 100vh;
 
     font-size: var(--font-size);
+    font-family: var(--font-family-base);
+    color: var(--text-color-main);
 }
 
 #app {
