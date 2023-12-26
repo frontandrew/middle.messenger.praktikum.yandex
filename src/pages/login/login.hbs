@@ -2,8 +2,8 @@
         {{#> FormAuth}}
             <h1 class="auth__title text">Authtorisation</h1>
             <div class="fields-container">
-                {{> Field label="Login"}}
-                {{> Field label="Password"}}            
+                {{> Field label="Login" help="email or phone" value="Andrew Bubnov"}}
+                {{> Field label="Password" error="Ivalid password" value="qwerty"}}            
             </div>
             {{> Button label="Sign in" type="fill text text_contrast-color" page="list"}}
             {{> Button label="Sign up" type="link link text" page="registration"}}

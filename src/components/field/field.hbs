@@ -1,6 +1,13 @@
 <div class='field'>
-  <label class='field__label'>{{label}}</label>
-  <input class='field__field' value={{value}}/>
-  <span class='field__error'>{{error}}</span>
-  <span class='field__help'>{{help}}</span>
+  <label class='field__lable text text_light-color text_lable'>{{label}}</label>
+  {{#if error}}
+    <input class='field__input field__input_error text text_error-color' value='{{value}}'/>
+  {{else}}
+    <input class='field__input text' value='{{value}}'/>
+  {{/if}}  
+  {{#if error}}
+    <span class='field__help text text_error-color text_info'>{{error}}</span>
+  {{else}}
+    <span class='field__help text text_light-color text_info'>{{help}}</span>
+  {{/if}}  
 </div>

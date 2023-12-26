@@ -1,14 +1,12 @@
 .button {
-    /* font-size: 0.75em; */
     cursor: pointer;
 }
 
 .button__fill {
     background: var(--main-color);
     border: none;
-    padding: 0.6em 1.2em;
+    padding: 1em 1.6em;
     border-radius: 0.67em;
-    /* color: var(--text-color-contrast); */
 }
 
 .button__link {
