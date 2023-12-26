@@ -14,6 +14,6 @@
     --background-color-default: #FFFFFF;
     --background-color-contrast: #EFEFEF;
 
-    --surface-border: 1.75em;
+    --surface-border: 0.75em;
     --surface-shadow: 0 0 6px 0 var(--shadow-color);
 }
