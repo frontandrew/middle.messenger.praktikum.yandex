@@ -1,7 +1,9 @@
 .form-auth {
     display: flex;
     flex-direction: column;
+    gap: 0.5em;
 
-    min-height: 250px;
+    min-height: 350px;
+    padding: 3.1em 1.9em 1.9em;
 }
 
