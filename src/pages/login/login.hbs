@@ -1,11 +1,11 @@
 {{#> BaseLayout}}
         {{#> FormAuth}}
-            <h1 class="auth__title">Authtorisation</h1>
+            <h1 class="auth__title text">Authtorisation</h1>
             <div class="fields-container">
                 {{> Field label="Login"}}
                 {{> Field label="Password"}}            
             </div>
-            {{> Button label="Sign in" type="fill" page="list"}}
-            {{> Button label="Sign up" type="link" page="registration"}}
+            {{> Button label="Sign in" type="fill text text_contrast-color" page="list"}}
+            {{> Button label="Sign up" type="link link text" page="registration"}}
         {{/FormAuth}}
 {{/BaseLayout}}
