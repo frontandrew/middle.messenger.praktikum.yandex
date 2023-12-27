@@ -8,3 +8,19 @@
     padding: 3.1em 1.9em 1.9em;
 }
 
+.form-auth__title {
+    padding-bottom: 2em;
+    text-align: center;
+}
+
+.form-auth__container {
+    padding: 3em 1.9em 1.9em;
+}
+
+.form-auth__fields-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    gap: 0.5em;
+}
+

@@ -1,3 +1,9 @@
 <form class="form-auth surface surface_shadow surface_rounded">
-    {{> @partial-block }}
+    <h1 class="form-auth__title text text_form-title">Authtorisation</h1>
+    <div class="form-auth__fields-container">
+        {{> Field label="Login" name="login" type="text" help="email or phone" value="Andrew Bubnov"}}
+        {{> Field label="Password" name="password" type="password" error="Ivalid password" value="qwerty"}}            
+    </div>
+    {{> Button label="Sign in" type="fill text text_contrast-color" page="list"}}
+    {{> Button label="Sign up" type="link link text" page="registration"}}
 </form>

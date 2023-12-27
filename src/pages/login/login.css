@@ -1,16 +1,1 @@
-.auth__title {
-    font-size: 1.25em;
-    padding-bottom: 2em;
-    text-align: center;
-}
 
-.auth__container {
-    padding: 3em 1.9em 1.9em;
-}
-
-.fields-container {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 2;
-    gap: 0.5em;
-}
