@@ -17,6 +17,7 @@ function navigate(page: string) {
   // @ts-ignore
   const [source, context] = pages[page];
   const container = document.getElementById('app');
+  // @ts-ignore
   container.innerHTML = Handlebars.compile(source)(context);
 }
 
