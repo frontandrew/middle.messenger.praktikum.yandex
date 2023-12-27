@@ -7,6 +7,7 @@
     --text-color-contrast: #FFFFFF;
     --shadow-color: #00000024;
     --visited-link-color: yellow;
+    --disabled-color: var(--text-color-light);
 
     --font-family-base: 'Inter', sans-serif;
     --font-family-accent: san-serif;

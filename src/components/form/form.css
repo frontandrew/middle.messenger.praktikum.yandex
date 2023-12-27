@@ -1,0 +1,20 @@
+@import './fields-container/fields-container.css';
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+
+    min-height: 350px;
+    min-width: 280px;
+    padding: 3.1em 1.9em 1.9em;
+}
+
+.form__title {
+    padding-bottom: 2em;
+    text-align: center;
+}
+
+.form__container {
+    padding: 3em 1.9em 1.9em;
+}
