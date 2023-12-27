@@ -14,8 +14,12 @@
     border-color: var(--main-color);
 }
 
-.field__input_error {
-    border-color: var(--error-color);
+.field__input:focus-visible {
+    outline: none;
+}
+
+.field__input:disabled {
+    border-color: var(--disabled-color);
 }
 
 .field__lable {
