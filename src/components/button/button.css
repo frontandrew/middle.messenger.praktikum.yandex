@@ -2,7 +2,7 @@
     cursor: pointer;
 }
 
-.button__fill {
+.button__button {
     background: var(--main-color);
     border: none;
     padding: 1em 1.6em;
