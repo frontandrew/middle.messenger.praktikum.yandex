@@ -1,9 +1,13 @@
-<form class="form-reg surface surface_shadow surface_rounded">
-    <h1 class="form-reg__title text text_form-title">Registration</h1>
-    <div class="form-reg__fields-container">
-        {{> Field label="Login" name="login" type="text" help="email or phone" value="Andrew Bubnov"}}
-        {{> Field label="Password" name="password" type="password" error="Ivalid password" value="qwerty"}}            
-    </div>
-    {{> Button label="Sign in" page="list" type="button" class="text text_contrast-color"}}
-    {{> Button label="Sign up" page="reg" type="link" class="link text" page="registration"}}
-</form>
+{{#> Form title="Authtorisation"}}
+    {{#> FieldsContainer}}
+        {{> Field label="Email" name="email" type="email" error="Ivalid email" value="вячеслав@rf.ru"}}
+        {{> Field label="Login" name="login" type="text" error="Only letters and numbers accepted" value="Admin$wag"}}
+        {{> Field label="Name" name="name" type="text" value="Vecheslav"}}
+        {{> Field label="Surname" name="surname" type="text" value="Свыгодора"}}
+        {{> Field label="Phone" name="phone" type="phone" value="+66 45 955 12"}}
+        {{> Field label="Password" name="password" type="password" help="Must include number, spetial simbol and capital letter" value="36at'rot"}}
+        {{> Field label="Password (one more)" name="passwordonemore" type="password" help="Repeat you password" disabled="true"}}
+    {{/FieldsContainer}}
+    {{> Button label="Submit" page="prof" type="button" class="text text_contrast-color"}}
+    {{> Button label="Sign in" page="login" type="link" class="link text"}}
+{{/Form}}
