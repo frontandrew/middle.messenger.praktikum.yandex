@@ -1,0 +1,9 @@
+<form class="form-reg surface surface_shadow surface_rounded">
+    <h1 class="form-reg__title text text_form-title">Registration</h1>
+    <div class="form-reg__fields-container">
+        {{> Field label="Login" name="login" type="text" help="email or phone" value="Andrew Bubnov"}}
+        {{> Field label="Password" name="password" type="password" error="Ivalid password" value="qwerty"}}            
+    </div>
+    {{> Button label="Sign in" page="list" type="button" class="text text_contrast-color"}}
+    {{> Button label="Sign up" page="reg" type="link" class="link text" page="registration"}}
+</form>
