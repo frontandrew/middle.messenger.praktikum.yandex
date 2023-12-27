@@ -1,11 +1,11 @@
-{{#> Form title="Authtorisation"}}
+{{#> Form title="Registration"}}
     {{#> FieldsContainer}}
-        {{> Field label="Email" name="email" type="email" error="Ivalid email" value="вячеслав@rf.ru"}}
-        {{> Field label="Login" name="login" type="text" error="Only letters and numbers accepted" value="Admin$wag"}}
+        {{> Field label="Email" name="email" type="email" help="your@email.some" value="вячеслав@rf.ру"}}
+        {{> Field label="Login" name="login" type="text" error="Only letters and numbers accepted" value="Admin $wag"}}
         {{> Field label="Name" name="name" type="text" value="Vecheslav"}}
         {{> Field label="Surname" name="surname" type="text" value="Свыгодора"}}
         {{> Field label="Phone" name="phone" type="phone" value="+66 45 955 12"}}
-        {{> Field label="Password" name="password" type="password" help="Must include number, spetial simbol and capital letter" value="36at'rot"}}
+        {{> Field label="Password" name="password" type="password" error="Must include number, spetial simbol and capital letter" value="36at'rot"}}
         {{> Field label="Password (one more)" name="passwordonemore" type="password" help="Repeat you password" disabled="true"}}
     {{/FieldsContainer}}
     {{> Button label="Submit" page="prof" type="button" class="text text_contrast-color"}}
