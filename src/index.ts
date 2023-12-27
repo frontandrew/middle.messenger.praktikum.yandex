@@ -4,6 +4,7 @@ import * as Components from './components';
 
 const pages = {
   'login': [Pages.LoginPage, {}],
+  'reg': [Pages.RegPage, {}],
   '404': [Pages.ErrorPage, { error: '404', message: 'Amm... There is no such page ;(' }],
   '505': [Pages.ErrorPage, { error: '505', message: 'Ooops. Unavalible now, try later.' }],
 };
@@ -19,7 +20,7 @@ function navigate(page: string) {
   container.innerHTML = Handlebars.compile(source)(context);
 }
 
-document.addEventListener('DOMContentLoaded', () => navigate('login'));
+document.addEventListener('DOMContentLoaded', () => navigate('reg'));
 
 document.addEventListener('click', event => {
   // @ts-ignore
