@@ -5,4 +5,5 @@ export { Form } from './form';
 export { FieldsContainer } from './form/fields-container';
 export { FormAuth } from './form-auth';
 export { FormReg } from './form-reg';
+export { Input } from './input';
 export { Text } from './text';
