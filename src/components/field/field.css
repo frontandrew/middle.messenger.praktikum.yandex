@@ -32,11 +32,11 @@
     border-color: var(--disabled-color);
 }
 
-.field__lable {
+.field__label {
     height: 0px;
 }
 
-.field__lable:has(+ .field__input:not(:focus):placeholder-shown) {
+.field__label:has(+ .field__input:not(:focus):placeholder-shown) {
     transform: translateY(1.2em);
     font-size: 0.75em;
     transition:
@@ -44,7 +44,7 @@
       transform 0.2s;
 }
 
-.field__lable:has(+ .field__input:focus) {
+.field__label:has(+ .field__input:focus) {
     transform: translateY(0px);
     transition:
       font-size 0.2s,
