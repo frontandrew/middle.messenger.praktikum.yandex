@@ -10,9 +10,10 @@
     padding: 3.1em 1.9em 1.9em;
 }
 
-.form__title {
+.form .form__title {
     padding-bottom: 1.5em;
     text-align: center;
+    font-size: 1.25em;
 }
 
 .form__container {

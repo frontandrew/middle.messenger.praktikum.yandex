@@ -1,0 +1,14 @@
+<form class="form-user">
+    <div class="form-user__avatar"></div>
+    <h1 class="form-user__title text text_title">{{name}}</h1>
+    <div class="form-user__fields-container">
+        {{> Field label="Email" name="email" type="email" help="your@email.some" value="вячеслав@rf.ру"}}
+        {{> Field label="Login" name="login" type="text" error="Only letters and numbers accepted" value="Admin $wag"}}
+        {{> Field label="Name" name="name" type="text" value="Vecheslav"}}
+        {{> Field label="Surname" name="surname" type="text" value="Свыгодора"}}
+        {{> Field label="Chat name" name="chatName" type="text" value="SLA"}}
+        {{> Field label="Phone" name="phone" type="phone" value="+66 45 955 12"}}
+    </div>
+    {{> Button label="Submit" page="prof" type="button" class="text text_contrast-color"}}
+</form>
+
