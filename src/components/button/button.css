@@ -1,0 +1,18 @@
+.button {
+    cursor: pointer;
+}
+
+.button__button {
+    background: var(--main-color);
+    border: none;
+    padding: 1em 1.6em;
+    border-radius: 0.67em;
+
+    width: 280px;
+}
+
+.button__link {
+    background: none;
+    border: none;
+    color: var(--main-color)
+}

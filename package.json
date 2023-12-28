@@ -1,0 +1,32 @@
+{
+  "name": "gigachat",
+  "private": false,
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontandrew/middle.messenger.praktikum.yandex.git"
+  },
+  "author": {
+    "name": "Andrew Bubnov",
+    "email": "jackblack.nt@gmail.com"
+  },
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.5",
+    "express": "^4.18.2",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8",
+    "vite-plugin-handlebars": "^1.6.0"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8",
+    "lodash-es": "^4.17.21"
+  }
+}
