@@ -5,6 +5,7 @@
     --text-color-main: #1E1E1E;
     --text-color-light: #999;
     --text-color-contrast: #FFFFFF;
+    --text-hided-color: #FFFFFF00;
     --shadow-color: #00000024;
     --visited-link-color: yellow;
     --disabled-color: var(--text-color-light);
