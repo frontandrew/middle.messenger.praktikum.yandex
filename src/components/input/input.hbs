@@ -1,9 +1,13 @@
 <div class="input" >
-    <label class="input__container">
-    <input
-        class="input__element"
-        placeholder=""
-    />
-        <div class="input__label">{{label}}</div>
+    <label for="{{name}}" class="input__container">
+        <input
+            class="input__element text"
+            placeholder=""
+            type="{{type}}"
+            name="{{name}}"
+            id="{{name}}"
+            value="{{value}}"
+        />
+        <div class="input__label text text_light-color text_lable">{{label}}</div>
     </label>
 </div>
