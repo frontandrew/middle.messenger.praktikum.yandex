@@ -1,22 +1,12 @@
 <div class="field">
-  <label for="{{name}}" class="field__lable text text_light-color text_lable">{{label}}</label>
-  {{#if error}}
-    <input
-      class="field__input field__input_error text text_error-color"
-      type="{{type}}"
-      name="{{name}}"
-      id="{{name}}"
-      value="{{value}}"
-    />
-  {{else}}
-    <input
-      class="field__input text"
-      type="{{type}}"
-      name="{{name}}"
-      id="{{name}}"
-      value="{{value}}"
-    />
-  {{/if}}  
+  <label for="{{name}}" class="field field__lable text text_light-color text_lable">{{label}}</label>
+  <input
+    class="field__input text {{#if error}}field__input_error text_error-color{{/if}}"
+    type="{{type}}"
+    name="{{name}}"
+    id="{{name}}"
+    value="{{value}}"
+  />
   {{#if error}}
     <span class="field__help text text_error-color text_info">{{error}}</span>
   {{else}}
