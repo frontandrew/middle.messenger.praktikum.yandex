@@ -9,6 +9,10 @@
     font-weight: 600;
 }
 
+.text_rigth {
+    text-align: right;
+}
+
 .text_label {
     font-size: 0.54em;
     font-weight: 500;

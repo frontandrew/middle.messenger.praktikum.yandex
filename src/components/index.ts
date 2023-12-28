@@ -1,7 +1,7 @@
 export { BaseLayout } from './base-layout';
 export { Button } from './button';
 export { Field } from './field';
-export { Form } from './form';
+export { FieldInline } from './field-inline';
 export { FieldsContainer } from './form/fields-container';
 export { Form } from './form';
 export { FormAuth } from './form-auth';
