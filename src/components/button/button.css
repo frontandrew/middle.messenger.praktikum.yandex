@@ -8,7 +8,7 @@
     padding: 1em 1.6em;
     border-radius: 0.67em;
 
-    width: 280px;
+    min-width: 2em;
 }
 
 .button__link {
