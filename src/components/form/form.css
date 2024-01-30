@@ -1,12 +1,15 @@
 @import './fields-container/fields-container.css';
+@import './actions-container/actions-container.css';
 
 .form {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
 
-    min-height: 350px;
-    min-width: 280px;
+    height: 100%;
+    width: 100%;
+
+    box-sizing: border-box;
     padding: 3.1em 1.9em 1.9em;
 }
 
@@ -14,8 +17,4 @@
     padding-bottom: 1.5em;
     text-align: center;
     font-size: 1.25em;
-}
-
-.form__container {
-    padding: 3em 1.9em 1.9em;
 }

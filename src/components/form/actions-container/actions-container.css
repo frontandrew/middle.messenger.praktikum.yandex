@@ -1,0 +1,10 @@
+/**
+ * кажется что это неотемлемый элемент формы поэтому положил в форму
+ * и импортировал из нее же
+*/
+
+.form__actions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+}
