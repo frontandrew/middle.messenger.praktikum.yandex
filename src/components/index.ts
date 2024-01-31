@@ -1,3 +1,4 @@
+export { Avatar } from './avatar';
 export { BaseLayout } from './base-layout';
 export { Button } from './button';
 export { Field } from './field';

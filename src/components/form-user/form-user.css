@@ -7,14 +7,6 @@
     max-width: 510px;
     width: 100%;
 }
-.form-user__avatar {
-    width: 130px;
-    height: 130px;
-
-    border-radius: 50%;
-
-    background-color: var(--background-color-contrast);
-}
 
 .form-user__title {
     padding: 20px 0 60px;
