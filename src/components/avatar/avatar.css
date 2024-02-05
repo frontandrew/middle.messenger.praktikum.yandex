@@ -13,16 +13,22 @@
 .avatar_large {
     width: 130px;
     height: 130px;
+    min-width: 130px;
+    min-height: 130px;
 }
 
 .avatar_medium {
     width: 37px;
     height: 37px;
+    min-width: 37px;
+    min-height: 37px;
 }
 
 .avatar_small {
     width: 34px;
     height: 34px;
+    min-width: 34px;
+    min-height: 34px;
 }
 
 .avatar__image_default {

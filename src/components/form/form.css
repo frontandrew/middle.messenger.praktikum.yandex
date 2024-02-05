@@ -4,17 +4,10 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
-
+    justify-content: space-between;
+    
     height: 100%;
     width: 100%;
 
     box-sizing: border-box;
-    padding: 3.1em 1.9em 1.9em;
-}
-
-.form .form__title {
-    padding-bottom: 1.5em;
-    text-align: center;
-    font-size: 1.25em;
 }

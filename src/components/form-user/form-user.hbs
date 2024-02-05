@@ -1,14 +1,17 @@
-<form class="form-user">
+<div class="form-user">
     {{> Avatar size="large" source="/avatar.jpg"}}
     <h1 class="form-user__title text text_title">{{name}}</h1>
-    <div class="form-user__fields-container">
-        {{> FieldInline label="Email" name="email" type="email" help="your@email.some" value="вячеслав@rf.ру"}}
-        {{> FieldInline label="Login" name="login" type="text" error="Only letters and numbers accepted" value="Admin $wag"}}
-        {{> FieldInline label="Name" name="name" type="text" value="Vecheslav"}}
-        {{> FieldInline label="Surname" name="surname" type="text" value="Свыгодора"}}
-        {{> FieldInline label="Chat name" name="chatName" type="text" value="SLA"}}
-        {{> FieldInline label="Phone" name="phone" type="phone" value="+66 45 955 12"}}
-    </div>
-    {{> Button label="Submit" page="user" type="button" class="text text_contrast-color"}}
-</form>
-
+    {{#> Form}}
+        {{#> FieldsContainer}}
+            {{> FieldInline label="Email" name="email" type="email" help="your@email.some" value="вячеслав@rf.ру"}}
+            {{> FieldInline label="Login" name="login" type="text" error="Only letters and numbers accepted" value="Admin $wag"}}
+            {{> FieldInline label="Name" name="name" type="text" value="Vecheslav"}}
+            {{> FieldInline label="Surname" name="surname" type="text" value="Свыгодора"}}
+            {{> FieldInline label="Chat name" name="chatName" type="text" value="SLA"}}
+            {{> FieldInline label="Phone" name="phone" type="phone" value="+66 45 955 12"}}
+        {{/FieldsContainer}}
+        {{#> ActionsContainer}}
+            {{> Button label="Submit" page="user" type="button" class="text text_contrast-color"}}
+        {{/ActionsContainer}}
+    {{/Form}}
+</div>
