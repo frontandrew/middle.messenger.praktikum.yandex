@@ -1,3 +1,8 @@
-{{#> BaseLayout}}
-        {{> FormUser}}
-{{/BaseLayout}}
+{{#> LayoutUserPage}}
+        {{#> SidePanel}}
+                {{> ButtonIcon page="login" src="/public/arrow.svg"}}                        
+        {{/SidePanel}}
+        {{#> BaseLayout}}
+                {{> FormUser}}
+        {{/BaseLayout}}
+{{/LayoutUserPage}}

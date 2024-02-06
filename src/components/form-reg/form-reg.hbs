@@ -2,7 +2,7 @@
     <h1 class="form-reg__title text">Registration</h1>
     {{#> Form}}
         {{#> FieldsContainer}}
-            {{> Field label="Email" name="email" type="email" help="your@email.some" value="вячеслав@rf.ру"}}
+            {{> Field label="Email" name="email" type="email" help="your@email.some" value="slava@rf.ру"}}
             {{> Field label="Login" name="login" type="text" error="Only letters and numbers accepted" value="Admin $wag"}}
             {{> Field label="Name" name="name" type="text" value="Vecheslav"}}
             {{> Field label="Surname" name="surname" type="text" value="Свыгодора"}}
@@ -11,7 +11,7 @@
             {{> Field label="Password (one more)" name="passwordonemore" type="password" help="Repeat you password" disabled="true"}}
         {{/FieldsContainer}}
         {{#> ActionsContainer}}
-            {{> Button label="Submit" page="prof" type="button" class="text text_contrast-color"}}
+            {{> Button label="Submit" page="user" type="button" class="text text_contrast-color"}}
             {{> Button label="Sign in" page="login" type="link" class="link text"}}
         {{/ActionsContainer}}
     {{/Form}}

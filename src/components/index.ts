@@ -1,6 +1,7 @@
 export { Avatar } from './avatar';
 export { BaseLayout } from './base-layout';
 export { Button } from './button';
+export { ButtonIcon } from './button-icon';
 export { Field } from './field';
 export { FieldInline } from './field-inline';
 export { FieldsContainer } from './form/fields-container';
@@ -10,4 +11,6 @@ export { FormAuth } from './form-auth';
 export { FormReg } from './form-reg';
 export { FormUser } from './form-user';
 export { Input } from './input';
+export { LayoutUserPage } from './layout-user-page';
 export { Text } from './text';
+export { SidePanel } from './side-panel';
