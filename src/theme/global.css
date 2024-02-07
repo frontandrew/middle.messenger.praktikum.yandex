@@ -5,6 +5,8 @@ body {
     font-size: var(--font-size);
     font-family: var(--font-family-base);
     color: var(--text-color-main);
+
+    z-index: var(--z-index-content);
 }
 
 #app {

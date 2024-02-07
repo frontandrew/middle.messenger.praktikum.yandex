@@ -12,5 +12,6 @@ export { FormReg } from './form-reg';
 export { FormUser } from './form-user';
 export { Input } from './input';
 export { LayoutUserPage } from './layout-user-page';
+export { Modal } from './modal';
 export { Text } from './text';
 export { SidePanel } from './side-panel';
