@@ -2,6 +2,7 @@ export { Avatar } from './avatar';
 export { BaseLayout } from './base-layout';
 export { Button } from './button';
 export { ButtonIcon } from './button-icon';
+export { Divider } from './divider';
 export { Field } from './field';
 export { FieldInline } from './field-inline';
 export { FieldsContainer } from './form/fields-container';

@@ -2,6 +2,7 @@
 @import './base-layout/base-layout.css';
 @import './button/button.css';
 @import './button-icon/button-icon.css';
+@import './divider/divider.css';
 @import './field/field.css';
 @import './field-inline/field-inline.css';
 @import './form/form.css';
