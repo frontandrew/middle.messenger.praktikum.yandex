@@ -10,6 +10,6 @@ body {
 }
 
 #app {
-    min-width: 480px;
+    min-width: 100%;
     height: 100%;
 }

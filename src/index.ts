@@ -6,13 +6,14 @@ const pages = {
   'login': [Pages.LoginPage, {}],
   'reg': [Pages.RegPage, {}],
   'user': [Pages.User, { name: '$uperUser' }],
+  'chat': [Pages.Chat, {}],
   '404': [Pages.ErrorPage, { error: '404', message: 'Amm... There is no such page ;(' }],
   '505': [Pages.ErrorPage, { error: '505', message: 'Ooops. Unavalible now, try later.' }],
 };
 
 Object.entries(Components).forEach(([name, component]) => {
   Handlebars.registerPartial(name, component)
-})
+});
 
 function navigate(page: string) {
   // @ts-ignore
@@ -20,9 +21,9 @@ function navigate(page: string) {
   const container = document.getElementById('app');
   // @ts-ignore
   container.innerHTML = Handlebars.compile(source)(context);
-}
+};
 
-document.addEventListener('DOMContentLoaded', () => navigate('login'));
+document.addEventListener('DOMContentLoaded', () => navigate('chat'));
 
 document.addEventListener('click', event => {
   // @ts-ignore
@@ -33,5 +34,5 @@ document.addEventListener('click', event => {
 
     event.preventDefault();
     event.stopImmediatePropagation();
-  }
+  };
 });

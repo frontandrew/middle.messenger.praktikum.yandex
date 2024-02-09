@@ -23,10 +23,10 @@
 }
 
 .avatar_medium {
-    width: 37px;
-    height: 37px;
-    min-width: 37px;
-    min-height: 37px;
+    width: 47px;
+    height: 47px;
+    min-width: 47px;
+    min-height: 47px;
 }
 
 .avatar_small {
@@ -43,7 +43,7 @@
     width: 40px;
 }
 .avatar__image-default_medium {
-    width: 20px;
+    width: 24px;
 }
 .avatar__image-default_small {
     width: 18px;

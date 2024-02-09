@@ -17,6 +17,9 @@
 
     --background-color-default: #FFFFFF;
     --background-color-contrast: #EFEFEF;
+    --background-color-tint: #FBFBFB;
+
+    --item-hover-color: #E4EDFD;
 
     --surface-border: 0.75em;
     --surface-shadow: 0 0 6px 0 var(--shadow-color);

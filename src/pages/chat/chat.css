@@ -1,0 +1,134 @@
+.chat__layout {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+}
+
+/** NAV */
+
+.chat__nav {
+    height: 100%;
+    width: 100%;
+    max-width: 310px;
+    
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+
+    border-right: 1px solid var(--background-color-contrast);
+    background-color: var(--background-color-tint);
+}
+
+.chat__nav .divider {
+    margin: 0 10px
+}
+
+.chat__nav-panel {
+    height: 102px;
+
+    flex-shrink: 0;
+}
+
+/** LIST */
+
+.chat__list {
+    height: 100%;
+    padding: 2px 0;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/** ITEM */
+
+.chat__item-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.chat__item-container:last-child > .divider {
+    display: none;
+}
+
+.chat__item {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    
+    padding: 10px;
+}
+
+.chat__item:hover {
+    background-color: var(--item-hover-color);
+}
+
+.chat__item-info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    justify-content: space-between;
+    gap: 4px 20px;
+}
+
+.chat__item-name {
+    max-width: 160px;
+
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.chat__item-date {
+    align-self: center;
+}
+
+.chat__item-message {
+    overflow: hidden;
+
+    max-height: 30px;
+    max-width: 190px;
+
+    /** durty hack https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.chat__item-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+
+    height: 20px;
+    width: 20px;
+
+    border-radius: 50%;
+    background-color: var(--main-color);
+    align-self: flex-end;
+    justify-self: end;
+}
+
+/** MESSAGES */
+
+.messages__container {
+    height: 100%;
+    width: 100%;
+
+    background-color: rgb(255, 255, 255);
+}
+
+.messages__header {
+
+}
+
+.messages__list {
+
+}
+
+.messages__footer {
+
+}
