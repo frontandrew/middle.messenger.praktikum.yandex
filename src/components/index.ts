@@ -15,4 +15,5 @@ export { Input } from './input';
 export { LayoutUserPage } from './layout-user-page';
 export { Modal } from './modal';
 export { Text } from './text';
+export { SearchField } from './search-field';
 export { SidePanel } from './side-panel';
