@@ -16,3 +16,9 @@
     border: none;
     color: var(--main-color)
 }
+
+.button__text {
+    background: none;
+    border: none;
+    color: var(--main-color)
+}

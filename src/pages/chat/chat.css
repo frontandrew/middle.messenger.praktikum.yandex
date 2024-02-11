@@ -25,9 +25,20 @@
 }
 
 .chat__nav-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     height: 102px;
 
+    box-sizing: border-box;
+    padding: 21px 10px 14px;
+
     flex-shrink: 0;
+}
+
+.chat__nav-panel .button {
+    align-self: flex-end;
 }
 
 /** LIST */
