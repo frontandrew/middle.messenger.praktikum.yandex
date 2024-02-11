@@ -8,9 +8,6 @@
     padding: 0.4em 0;
 
     border-bottom: 1px solid;
-    border-top: none;
-    border-left: none;
-    border-right: none;
     border-color: var(--main-color);
     margin-top: 0.8em;
 }
@@ -21,11 +18,6 @@
 
 .field__input_error {
     border-color: var(--error-color);
-}
-
-/* костыль для дефолтной обводки полей в хроме */
-.field__input:focus-visible {
-    outline: none;
 }
 
 .field__input:disabled {
