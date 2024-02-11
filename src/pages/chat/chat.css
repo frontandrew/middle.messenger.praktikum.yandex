@@ -66,32 +66,48 @@
 
 .chat__item-info {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: column nowrap;
+    justify-content: center;
+    gap: 4px;
     
+    width: 233px;
+}
+
+.chat__item-info-title {
+    display: flex;
+    flex-flow: row nowrap;
     justify-content: space-between;
-    gap: 4px 20px;
+    align-items: center;
+    gap: 20px;
+}
+
+.chat__item-info-subtitle {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    gap: 20px;
 }
 
 .chat__item-name {
-    max-width: 160px;
-
     text-wrap: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
 .chat__item-date {
-    align-self: center;
+    text-wrap: nowrap;
 }
 
 .chat__item-message {
-    overflow: hidden;
-
     max-height: 30px;
     max-width: 190px;
 
+    align-self: flex-start;
+
     /** durty hack https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp */
+    overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -101,15 +117,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-grow: 0;
-
+    
     height: 20px;
     width: 20px;
+    align-self: flex-end;
 
     border-radius: 50%;
     background-color: var(--main-color);
-    align-self: flex-end;
-    justify-self: end;
 }
 
 /** MESSAGES */
