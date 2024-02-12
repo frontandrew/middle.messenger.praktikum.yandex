@@ -13,6 +13,7 @@ export { FormReg } from './form-reg';
 export { FormUser } from './form-user';
 export { Input } from './input';
 export { LayoutUserPage } from './layout-user-page';
+export { MessageField } from './message-field';
 export { Modal } from './modal';
 export { Text } from './text';
 export { SearchField } from './search-field';

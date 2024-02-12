@@ -1,0 +1,18 @@
+.message-field {
+    display: flex;
+    height: 32px;
+    max-width: 100%;
+
+    padding: 0 20px;
+
+    border-radius: 16px;
+    background: var(--background-color-contrast);
+}
+
+.message-field__input {
+    width: 100%;
+}
+
+.message-field__input::placeholder {
+    color: var(--text-color-light);
+}
