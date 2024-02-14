@@ -11,7 +11,7 @@
                                         {{> Avatar size="medium"}}
                                         <div class="chat__item-info">
                                                 <div class="chat__item-info-title">
-                                                        <p class="chat__item-name text text_title">$wag $wag $wag $wag $wag $wag $wag</p>
+                                                        <p class="chat__item-name text text_title">John Doe</p>
                                                         <date class="chat__item-date text text_label text_light-color">Su</date>
                                                 </div>
                                                 <div class="chat__item-info-subtitle">
@@ -74,7 +74,7 @@
                 <header class="messages__header">
                         {{> Avatar size="small"}}
                         <h1 class="messages__header-title text text_title">Some User</h1>
-                        {{> ButtonIcon}}
+                        {{> ButtonIcon src="/public/menu-icon.svg" alt="show chat menu"}}
                 </header>
                 {{> Divider}}
                 {{#> MessagesList}}
@@ -82,7 +82,7 @@
                                 type="text"
                                 origin="system"
                                 time=""
-                                text="02 January 2045"
+                                text="02 january"
                         }}
                         {{> Message
                                 type="text"
@@ -123,8 +123,9 @@
                 {{/MessagesList}}
                 {{> Divider}}
                 <footer class="messages__footer">
+                        {{> ButtonIcon src="/public/clip.svg" alt="send attachment"}}
                         {{> MessageField}}
-                        {{> ButtonIcon}}
+                        {{> ButtonIcon src="/public/arrow.svg" alt="send message" rotate="180" color="main"}}
                 </footer>
         </div>
 </div>
