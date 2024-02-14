@@ -34,3 +34,7 @@
 .text_contrast-color {
     color: var(--text-color-contrast);
 }
+
+.text_main-color {
+    color: var(--main-color);
+}
