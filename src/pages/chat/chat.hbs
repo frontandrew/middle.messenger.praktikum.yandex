@@ -71,8 +71,54 @@
                  </ul>
         </nav>
         <div class="messages__container">
-                <div class="messages__header"></div>
-                <div class="messages__list"></div>
-                <div class="messages__footer"></div>
+                <header class="messages__header">
+                        {{> Avatar size="small"}}
+                        <h1 class="messages__header-title text text_title">Some User</h1>
+                        {{> ButtonIcon}}
+                </header>
+                {{> Divider}}
+                {{#> MessagesList}}
+                        {{> Message
+                                type="text"
+                                origin="system"
+                                text="02 January 2045"
+                        }}
+                        {{> Message
+                                type="text"
+                                origin="incoming"
+                                text="Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Vel ea at doloribus mollitia adipisci suscipit quisquam
+                                exercitationem et, tenetur inventore tempore tempora
+                                doloremque accusamus rerum consequatur ratione voluptate
+                                provident assumenda."
+                        }}
+                        {{> Message
+                                type="media"
+                                origin="incoming"
+                                media="/public/img-cont.png"
+                        }}
+                        {{> Message
+                                type="text"
+                                origin="outgoing"
+                                text="Шалом, православные!"
+                        }}
+                        {{> Message
+                                type="media"
+                                origin="outgoing"
+                                media="/public/avatar.jpg"
+                        }}
+                        {{> Message
+                                type="text"
+                                origin="outgoing"
+                                text="Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Vel ea at doloribus mollitia adipisci suscipit quisquam
+                                exercitationem et, tenetur inventore!"
+                        }}
+                {{/MessagesList}}
+                {{> Divider}}
+                <footer class="messages__footer">
+                        {{> MessageField}}
+                        {{> ButtonIcon}}
+                </footer>
         </div>
 </div>
