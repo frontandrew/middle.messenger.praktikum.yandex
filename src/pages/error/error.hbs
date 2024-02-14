@@ -1,5 +1,5 @@
 {{#> BaseLayout}}
-    <h1 class="error__title">{{error}}</h1>
-    <h1 class="error__message">{{message}}</h1>
-    <a class="link" page="chat">Return to chat list?</a>
+    <h1 class="error__title text">{{error}}</h1>
+    <p class="error__message text">{{message}}</p>
+    {{> Button label="Return to chat list" page="chat" type="link" class="link text"}}
 {{/BaseLayout}}
