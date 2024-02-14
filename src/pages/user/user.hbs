@@ -1,9 +1,9 @@
 {{#> LayoutUserPage}}
         {{#> SidePanel}}
-                {{> ButtonIcon page="login" src="/public/arrow.svg"}}                        
+                {{> ButtonIcon page="chat" src="/public/arrow.svg"}}                        
         {{/SidePanel}}
         {{#> BaseLayout}}
-                {{> FormUser}}
+                {{> FormUser this}}
         {{/BaseLayout}}
         {{#> Modal title="Load file"}}
                 {{#> ModalContent}}
