@@ -1,11 +1,14 @@
 import Handlebars from 'handlebars';
+
+import Avatar from './assets/images/avatar.jpg';
+
 import * as Pages from './pages';
 import * as Components from './components';
 
 const pages = {
   'login': [Pages.LoginPage, {}],
   'reg': [Pages.RegPage, {}],
-  'user': [Pages.User, { name: '$uperUser' }],
+  'user': [Pages.User, { name: '$uperUser', userAvatar: Avatar }],
   'chat': [Pages.Chat, {}],
   '404': [Pages.ErrorPage, { error: '404', message: 'Amm... There is no such page ;(' }],
   '505': [Pages.ErrorPage, { error: '505', message: 'Ooops. Unavalible now, try later.' }],

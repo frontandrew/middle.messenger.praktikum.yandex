@@ -11,3 +11,7 @@ input {
 input:focus-visible {
   outline: none;
 }
+
+button {
+  background: none;
+}
