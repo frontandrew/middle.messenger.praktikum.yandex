@@ -1,0 +1,18 @@
+{{#> LayoutUserPage}}
+        {{#> SidePanel}}
+                {{> ButtonIcon color="main" page="chat" src="/public/arrow.svg" alt="return"}}
+        {{/SidePanel}}
+        {{#> BaseLayout}}
+                <div class="user">
+                        {{> Avatar size="large" source=userAvatar}}
+                        <h1 class="user-title text text_title">{{name}}</h1>
+                        {{> FormUser}}
+                </div>
+        {{/BaseLayout}}
+        {{!-- {{#> Modal title="Load file"}}
+                {{#> ModalContent}}
+                {{/ModalContent}}
+                {{#> ModalActions}}
+                {{/ModalActions}}
+        {{/Modal}} --}}
+{{/LayoutUserPage}}

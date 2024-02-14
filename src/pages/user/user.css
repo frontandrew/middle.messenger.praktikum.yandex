@@ -22,3 +22,27 @@
     width: 17.5rem;
     align-self: center;
 }
+
+.user-info {
+    width: 100%;
+
+    .divider {
+        margin: .62rem 0;
+    }
+}
+.user-field {
+    
+}
+
+.user-field__lable {
+
+}
+
+.user-field__value {
+    position: sticky;
+    left: 100%;
+}
+
+.user-actions {
+    padding-top: 3.7rem;
+}

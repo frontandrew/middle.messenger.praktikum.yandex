@@ -12,6 +12,8 @@ const pages = {
   'chat': [Pages.Chat, {}],
   '404': [Pages.ErrorPage, { error: '404', message: 'Amm... There is no such page ;(' }],
   '505': [Pages.ErrorPage, { error: '505', message: 'Ooops. Unavalible now, try later.' }],
+  // temp pages for example
+  'user-form': [Pages.UserForm, { name: '$uperUser', userAvatar: Avatar }],
 };
 
 Object.entries(Components).forEach(([name, component]) => {
