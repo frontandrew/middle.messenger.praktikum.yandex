@@ -1,5 +1,4 @@
 .button-icon {
-    background: var(--main-color);
     border: none;
     border-radius: 50%;
 
@@ -7,4 +6,24 @@
     height: 28px;
 
     cursor: pointer;
+}
+
+.button-icon_color-main {
+    background: var(--main-color);
+}
+
+.button-icon__icon-90 {
+    transform: rotate(90deg);;
+}
+
+.button-icon__icon-135 {
+    transform: rotate(135deg);;
+}
+
+.button-icon__icon-180 {
+    transform: rotate(180deg);;
+}
+
+.button-icon__icon-125 {
+    transform: rotate(125deg);;
 }
