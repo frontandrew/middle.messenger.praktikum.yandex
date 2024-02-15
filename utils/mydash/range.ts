@@ -31,7 +31,7 @@ export function range(start?: number, end: number, step?: number): number[] {
 
     const empty: number[] = new Array(arrayItemsQauntity)
 
-    const filled = empty.fill(conf.start, 0)    
+    const filled = empty.fill(conf.start, 0)
 
     const stepped = filled.map(function (item, index) {
         const next = (index * conf.step * Math.sign(conf.end)) + item
@@ -42,4 +42,3 @@ export function range(start?: number, end: number, step?: number): number[] {
     const result = stepped.filter((item) => item !== undefined)
     return result
 }
-
