@@ -12,9 +12,11 @@ const pages = {
   'chat': [Pages.Chat, {}],
   '404': [Pages.ErrorPage, { error: '404', message: 'Amm... There is no such page ;(' }],
   '505': [Pages.ErrorPage, { error: '505', message: 'Ooops. Unavalible now, try later.' }],
+
   // temp pages for example
   'user-form': [Pages.UserForm, { name: '$uperUser', userAvatar: Avatar }],
   'user-avatar-change': [Pages.UserAvatarChange, { name: '$uperUser', userAvatar: Avatar }],
+  'chat-modal': [Pages.ChatModal, {}],
 };
 
 Object.entries(Components).forEach(([name, component]) => {
@@ -29,7 +31,7 @@ function navigate(page: string) {
   container.innerHTML = Handlebars.compile(source)(context);
 };
 
-document.addEventListener('DOMContentLoaded', () => navigate('user'));
+document.addEventListener('DOMContentLoaded', () => navigate('chat-modal'));
 
 document.addEventListener('click', event => {
   // @ts-ignore
