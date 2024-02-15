@@ -13,8 +13,8 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "start": "vite",
-    "build": "tsc && vite build",
+    "dev": "vite",
+    "start": "tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
