@@ -1,23 +1,80 @@
 import Handlebars from 'handlebars';
 
-import * as Images from './assets/images';
-
 import * as Pages from './pages';
 import * as Components from './components';
+
+import {
+  Arrow,
+  Avatar,
+  Clip,
+  DefaltImage,
+  ImgCont,
+  Menu,
+  Search,
+} from './assets/images';
 
 const pages = {
   'login': [Pages.LoginPage, {}],
   'reg': [Pages.RegPage, {}],
-  'user': [Pages.User, { name: '$uperUser', userAvatar: Images.Avatar, arrowIcon: Images.Arrow, defaultImage: Images.DefaltImage }],
-  'chat': [Pages.Chat, { searchIcon: Images.Search, arrowIcon: Images.Arrow, clipIcon: Images.Clip, menuIcon: Images.Menu, defaultImage: Images.DefaltImage, imageContent: Images.ImgCont }],
-  '404': [Pages.ErrorPage, { error: '404', message: 'Amm... There is no such page ;(' }],
-  '505': [Pages.ErrorPage, { error: '505', message: 'Ooops. Unavalible now, try later.' }],
+
+  'user': [Pages.User, {
+    name: '$uperUser',
+    userAvatar: Avatar,
+    arrowIcon: Arrow,
+    defaultImage: DefaltImage,
+  }],
+
+  'chat': [Pages.Chat, {
+    userAvatar: Avatar,
+    searchIcon: Search,
+    arrowIcon: Arrow,
+    clipIcon: Clip,
+    menuIcon: Menu,
+    defaultImage: DefaltImage,
+    imageContent: ImgCont,
+  }],
+
+  '404': [Pages.ErrorPage, {
+    error: '404',
+    message: 'Amm... There is no such page ;(',
+  }],
+
+  '505': [Pages.ErrorPage, {
+    error: '505',
+    message: 'Ooops. Unavalible now, try later.',
+  }],
 
   // temp pages for example
-  'user-form': [Pages.UserForm, { name: '$uperUser', userAvatar: Images.Avatar, arrowIcon: Images.Arrow, defaultImage: Images.DefaltImage }],
-  'user-avatar': [Pages.UserAvatar, { name: '$uperUser', userAvatar: Images.Avatar, arrowIcon: Images.Arrow, defaultImage: Images.DefaltImage }],
-  'user-password': [Pages.UserPassword, { name: '$uperUser', userAvatar: Images.Avatar, arrowIcon: Images.Arrow, defaultImage: Images.DefaltImage }],
-  'chat-modal': [Pages.ChatModal, { searchIcon: Images.Search, arrowIcon: Images.Arrow, clipIcon: Images.Clip, menuIcon: Images.Menu, defaultImage: Images.DefaltImage, imageContent: Images.ImgCont }],
+  'user-form': [Pages.UserForm, {
+    name: '$uperUser',
+    userAvatar: Avatar,
+    arrowIcon: Arrow,
+    defaultImage: DefaltImage,
+  }],
+
+  'user-avatar': [Pages.UserAvatar, {
+    name: '$uperUser',
+    userAvatar: Avatar,
+    arrowIcon: Arrow,
+    defaultImage: DefaltImage,
+  }],
+
+  'user-password': [Pages.UserPassword, {
+    name: '$uperUser',
+    userAvatar: Avatar,
+    arrowIcon: Arrow,
+    defaultImage: DefaltImage,
+  }],
+
+  'chat-modal': [Pages.ChatModal, {
+    userAvatar: Avatar,
+    searchIcon: Search,
+    arrowIcon: Arrow,
+    clipIcon: Clip,
+    menuIcon: Menu,
+    defaultImage: DefaltImage,
+    imageContent: ImgCont,
+  }],
 };
 
 Object.entries(Components).forEach(([name, component]) => {
@@ -45,7 +102,3 @@ document.addEventListener('click', event => {
     event.stopImmediatePropagation();
   };
 });
-
-//log
-
-document.addEventListener('click', (e) => console.log(e.target));
