@@ -8,7 +8,7 @@ export default defineConfig({
   },
   plugins: [
     handlebars({
-      partialDirectory: resolve(__dirname, 'src')
+      partialDirectory: resolve(__dirname, 'src/components')
     }),
   ],
 });
