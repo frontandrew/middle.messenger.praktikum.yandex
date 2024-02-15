@@ -14,6 +14,7 @@ const pages = {
   '505': [Pages.ErrorPage, { error: '505', message: 'Ooops. Unavalible now, try later.' }],
   // temp pages for example
   'user-form': [Pages.UserForm, { name: '$uperUser', userAvatar: Avatar }],
+  'user-avatar-change': [Pages.UserAvatarChange, { name: '$uperUser', userAvatar: Avatar }],
 };
 
 Object.entries(Components).forEach(([name, component]) => {

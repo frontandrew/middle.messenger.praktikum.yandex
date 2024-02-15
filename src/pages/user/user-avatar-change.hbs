@@ -4,8 +4,8 @@
         {{/SidePanel}}
         {{#> BaseLayout}}
                 <div class="user">
-                        <button class="image-picker button">
-                                <span class="image-picker__text text text_title text_contrast-color" page="user-avatar-change">Change avatar</span>
+                        <button class="image-picker button" page="">
+                                <span class="image-picker__text text text_title text_contrast-color">Change avatar</span>
                                 {{> Avatar size="large" source=userAvatar}}
                         </button>
                         <h1 class="user-title text text_title">{{name}}</h1>
@@ -49,4 +49,12 @@
                         </div>                        
                 </div>
         {{/BaseLayout}}
+        {{#> Modal title="Load file"}}
+                {{#> ModalContent}}
+                        {{> Button label="Select file from your computer" page="user" type="link" class="text text_main-color" alt="submit avatar change"}}
+                {{/ModalContent}}
+                {{#> ModalActions}}
+                        {{> Button label="Submit" page="user" type="button" class="text text_contrast-color" alt="submit avatar change"}}
+                {{/ModalActions}}
+        {{/Modal}}
 {{/LayoutUserPage}}
