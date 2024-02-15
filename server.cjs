@@ -1,29 +1,13 @@
-"use strict";
-
-const express = require("express");
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const app = express();
 const PORT = 3000;
 
-app.use("static", express.static(__dirname));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const API_PREFIX = "/api/v1";
+app.use(express.static('./dist'));
 
-// Если мы сделаем POST-запрос сюда, то получим верный ответ
-// Если отправим GET-запрос, то получим либо 405 HTTP ошибку, либо 404
-app.get(`${API_PREFIX}/text`, (req, res) => {
-  res.status(200).send("Hello, World!");
-});
-
-app.put(`${API_PREFIX}/json`, (req, res) => {
-  res.setHeader("Content-Type", "application/json");
-  res.status(201).send({
-    data: {
-      items: [1, 2, 3],
-    },
-  });
-});
-
-app.listen(PORT, function () {
-  console.log(`API RUN LOCALHOST:${PORT}!`);
-});
+app.use('/*', (req, res) => res.sendFile(path.join(__dirname, 'dist/index.html')));
