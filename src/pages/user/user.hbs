@@ -4,7 +4,10 @@
         {{/SidePanel}}
         {{#> BaseLayout}}
                 <div class="user">
-                        {{> Avatar size="large" source=userAvatar}}
+                        <button class="image-picker button" page="">
+                                <span class="image-picker__text text text_title text_contrast-color">Change avatar</span>
+                                {{> Avatar size="large" source=userAvatar}}
+                        </button>
                         <h1 class="user-title text text_title">{{name}}</h1>
                         <div class="user-info">
                                 <div class="user-field">

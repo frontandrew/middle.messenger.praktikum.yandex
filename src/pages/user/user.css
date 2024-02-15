@@ -46,3 +46,29 @@
 .user-actions {
     padding-top: 3.7rem;
 }
+
+.image-picker {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.image-picker:hover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .image-picker__text {
+        display: block;
+    }
+}
+
+.image-picker__text {
+    position: absolute;
+    display: none;
+
+    padding: 50%;
+    background-color: var(--modal-background-color);
+    /* width: 100%;
+    height: 100%; */
+}
