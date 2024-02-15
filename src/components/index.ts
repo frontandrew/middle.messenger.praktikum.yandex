@@ -11,7 +11,6 @@ export { Form } from './form';
 export { FormAuth } from './form-auth';
 export { FormReg } from './form-reg';
 export { FormUser } from './form-user';
-export { Input } from './input';
 export { LayoutUserPage } from './layout-user-page';
 export { Message } from './message';
 export { MessageField } from './message-field';
