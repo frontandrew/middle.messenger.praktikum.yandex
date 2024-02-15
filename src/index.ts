@@ -89,7 +89,7 @@ function navigate(page: string) {
   container.innerHTML = Handlebars.compile(source)(context);
 };
 
-document.addEventListener('DOMContentLoaded', () => navigate('chat'));
+document.addEventListener('DOMContentLoaded', () => navigate('login'));
 
 document.addEventListener('click', event => {
   // @ts-ignore
