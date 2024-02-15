@@ -1,12 +1,12 @@
 {{#> LayoutUserPage}}
         {{#> SidePanel}}
-                {{> ButtonIcon color="main" page="chat" src="/public/arrow.svg" alt="return"}}
+                {{> ButtonIcon color="main" page="chat" src=arrowIcon alt="return"}}
         {{/SidePanel}}
         {{#> BaseLayout}}
                 <div class="user">
                         <button class="image-picker button" page="">
                                 <span class="image-picker__text text text_title text_contrast-color">Change avatar</span>
-                                {{> Avatar size="large" source=userAvatar}}
+                                {{> Avatar size="large" source=userAvatar defaultImage=defaultImage}}
                         </button>
                         <h1 class="user-title text text_title">{{name}}</h1>
                         <div class="user-info">

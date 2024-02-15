@@ -2,13 +2,13 @@
         <nav class="chat__nav">
                 <div class="chat__nav-panel">
                         {{> Button type="text" class="text text_light-color" page="user" label="Profile  ❯"}}
-                        {{> SearchField}}
+                        {{> SearchField icon=searchIcon}}
                 </div>
                 {{> Divider}}
                 <ul class="chat__list">
                         <li class="chat__item-container">
                                 <div class="chat__item">
-                                        {{> Avatar size="medium"}}
+                                        {{> Avatar size="medium" defaultImage=defaultImage}}
                                         <div class="chat__item-info">
                                                 <div class="chat__item-info-title">
                                                         <p class="chat__item-name text text_title">John Doe</p>
@@ -26,7 +26,7 @@
                         </li>
                         <li class="chat__item-container">
                                 <div class="chat__item">
-                                        {{> Avatar size="medium"}}
+                                        {{> Avatar size="medium" defaultImage=defaultImage}}
                                         <div class="chat__item-info">
                                                 <div class="chat__item-info-title">
                                                         <p class="chat__item-name text text_title">Kornelius Disappointovichev</p>
@@ -44,7 +44,7 @@
                         </li>
                         <li class="chat__item-container">
                                 <div class="chat__item">
-                                        {{> Avatar size="medium"}}
+                                        {{> Avatar size="medium" defaultImage=defaultImage}}
                                         <div class="chat__item-info">
                                                 <div class="chat__item-info-title">
                                                         <p class="chat__item-name text text_title">Kornelius Disappointovichev</p>
@@ -59,7 +59,7 @@
                         </li>
                         <li class="chat__item-container">
                                 <div class="chat__item">
-                                        {{> Avatar size="medium"}}
+                                        {{> Avatar size="medium" defaultImage=defaultImage}}
                                         <div class="chat__item-info">
                                                 <div class="chat__item-info-title">
                                                         <p class="chat__item-name text text_title">Andrew</p>
@@ -72,9 +72,9 @@
         </nav>
         <div class="messages__container">
                 <header class="messages__header">
-                        {{> Avatar size="small"}}
+                        {{> Avatar size="small" defaultImage=defaultImage}}
                         <h1 class="messages__header-title text text_title">Some User</h1>
-                        {{> ButtonIcon src="/public/menu-icon.svg" alt="show chat menu"}}
+                        {{> ButtonIcon src=menuIcon page="chat-modal" alt="show chat menu"}}
                 </header>
                 {{> Divider}}
                 {{#> MessagesList}}
@@ -98,7 +98,7 @@
                                 type="media"
                                 origin="incoming"
                                 time="12:35"
-                                media="/public/img-cont.png"
+                                media=imageContent
                         }}
                         {{> Message
                                 type="text"
@@ -123,9 +123,9 @@
                 {{/MessagesList}}
                 {{> Divider}}
                 <footer class="messages__footer">
-                        {{> ButtonIcon src="/public/clip.svg" alt="send attachment"}}
+                        {{> ButtonIcon src=clipIcon alt="send attachment"}}
                         {{> MessageField}}
-                        {{> ButtonIcon src="/public/arrow.svg" alt="send message" rotate="180" color="main"}}
+                        {{> ButtonIcon src=arrowIcon alt="send message" rotate="180" color="main"}}
                 </footer>
         </div>
         {{#> Modal title="Add user"}}
