@@ -10,4 +10,6 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static('./dist'));
 
-app.use('/*', (req, res) => res.sendFile(path.join(__dirname, 'dist/index.html')));
+app.use('/*', (_, res) => res.sendFile(path.join(__dirname, 'dist/index.html')));
+
+app.listen(PORT, () => console.log(`Server was started on port ${PORT}!`));
