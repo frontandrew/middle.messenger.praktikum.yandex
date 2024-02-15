@@ -16,6 +16,7 @@ const pages = {
   // temp pages for example
   'user-form': [Pages.UserForm, { name: '$uperUser', userAvatar: Avatar }],
   'user-avatar': [Pages.UserAvatar, { name: '$uperUser', userAvatar: Avatar }],
+  'user-password': [Pages.UserPassword, { name: '$uperUser', userAvatar: Avatar }],
   'chat-modal': [Pages.ChatModal, {}],
 };
 
@@ -31,7 +32,7 @@ function navigate(page: string) {
   container.innerHTML = Handlebars.compile(source)(context);
 };
 
-document.addEventListener('DOMContentLoaded', () => navigate('user'));
+document.addEventListener('DOMContentLoaded', () => navigate('login'));
 
 document.addEventListener('click', event => {
   // @ts-ignore
