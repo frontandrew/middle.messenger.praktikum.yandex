@@ -3,7 +3,10 @@
         <span class="text">{{text}}</span>
     {{/if}}
     {{#if media}}
-        <img src={{media}}>
+        <img
+            src={{media}}
+            alt={{media}}  {{! TODO: use file name like 'alt' attr for UGC content }}
+        >
     {{/if}}
     <time class="text text_label">{{time}}</time>
 </div>
