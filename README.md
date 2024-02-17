@@ -1,4 +1,4 @@
-# gigaChat
+# 🦠 gigaChat
 
 ##### Yet another chat with NO features!
 
