@@ -14,6 +14,6 @@
 
 ---
 
-#### Templates: https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1
+#### Templates: [Figma](https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1)
 
 #### Live action: [gigaChat](https://ephemeral-duckanoo-a59b6e.netlify.app/)
