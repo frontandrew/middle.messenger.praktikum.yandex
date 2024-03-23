@@ -14,7 +14,7 @@
   "license": "MIT",
   "scripts": {
     "start": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
@@ -33,6 +33,6 @@
   },
   "dependencies": {
     "handlebars": "^4.7.8",
-    "lodash-es": "^4.17.21"
+    "nanoid": "^5.0.6"
   }
 }
