@@ -7,7 +7,7 @@ import {
   Arrow,
   Avatar,
   Clip,
-  DefaltImage,
+  DefaltPic,
   ImgCont,
   Menu,
   Search,
@@ -21,7 +21,7 @@ const pages = {
     name: '$uperUser',
     userAvatar: Avatar,
     arrowIcon: Arrow,
-    defaultImage: DefaltImage,
+    defaultImage: DefaltPic,
   }],
 
   'chat': [Pages.Chat, {
@@ -30,7 +30,7 @@ const pages = {
     arrowIcon: Arrow,
     clipIcon: Clip,
     menuIcon: Menu,
-    defaultImage: DefaltImage,
+    defaultImage: DefaltPic,
     imageContent: ImgCont,
   }],
 
@@ -49,21 +49,21 @@ const pages = {
     name: '$uperUser',
     userAvatar: Avatar,
     arrowIcon: Arrow,
-    defaultImage: DefaltImage,
+    defaultImage: DefaltPic,
   }],
 
   'user-avatar': [Pages.UserAvatar, {
     name: '$uperUser',
     userAvatar: Avatar,
     arrowIcon: Arrow,
-    defaultImage: DefaltImage,
+    defaultImage: DefaltPic,
   }],
 
   'user-password': [Pages.UserPassword, {
     name: '$uperUser',
     userAvatar: Avatar,
     arrowIcon: Arrow,
-    defaultImage: DefaltImage,
+    defaultImage: DefaltPic,
   }],
 
   'chat-modal': [Pages.ChatModal, {
@@ -72,7 +72,7 @@ const pages = {
     arrowIcon: Arrow,
     clipIcon: Clip,
     menuIcon: Menu,
-    defaultImage: DefaltImage,
+    defaultImage: DefaltPic,
     imageContent: ImgCont,
   }],
 };
@@ -82,17 +82,16 @@ Object.entries(Components).forEach(([name, component]) => {
 });
 
 function navigate(page: string) {
-  // @ts-ignore
   const [source, context] = pages[page];
   const container = document.getElementById('app');
-  // @ts-ignore
+
   container.innerHTML = Handlebars.compile(source)(context);
 };
 
 document.addEventListener('DOMContentLoaded', () => navigate('login'));
 
 document.addEventListener('click', event => {
-  // @ts-ignore
+
   const page = event.target.getAttribute('page');
 
   if (page) {
