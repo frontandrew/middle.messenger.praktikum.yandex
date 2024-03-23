@@ -16,7 +16,13 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@ui/*": ["./shared/ui/index.ts"],
+      "@tools/*": ["./shared/tools/index.ts"],
+      "@images/*": ["./assets/images/index.ts"],
+    },
   },
-  "include": ["src"]
+  "include": ["src"],
 }
