@@ -10,3 +10,6 @@ insert_final_newline = true
 
 [*.hbs]
 indent_size = 4
+
+[*.css]
+indent_size = 4
