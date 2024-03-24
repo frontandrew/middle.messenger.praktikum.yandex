@@ -1,45 +1,44 @@
 import Handlebars from 'handlebars';
 
-import * as Pages from './pages';
-import * as Components from './components';
-
 import {
   Arrow,
   Avatar,
   Clip,
-  DefaltPic,
+  DefaultPic,
   ImgCont,
   Menu,
   Search,
-} from './assets/images';
+} from 'images';
+
+import * as Pages from './pages';
 
 const pages = {
-  'login': [Pages.LoginPage, {}],
-  'reg': [Pages.RegPage, {}],
+  login: new Pages.PageLogin(),
+  reg: [Pages.RegPage, {}],
 
-  'user': [Pages.User, {
+  user: [Pages.User, {
     name: '$uperUser',
     userAvatar: Avatar,
     arrowIcon: Arrow,
-    defaultImage: DefaltPic,
+    defaultImage: DefaultPic,
   }],
 
-  'chat': [Pages.Chat, {
+  chat: [Pages.Chat, {
     userAvatar: Avatar,
     searchIcon: Search,
     arrowIcon: Arrow,
     clipIcon: Clip,
     menuIcon: Menu,
-    defaultImage: DefaltPic,
+    defaultImage: DefaultPic,
     imageContent: ImgCont,
   }],
 
-  '404': [Pages.ErrorPage, {
+  404: [Pages.ErrorPage, {
     error: '404',
     message: 'Amm... There is no such page ;(',
   }],
 
-  '505': [Pages.ErrorPage, {
+  505: [Pages.ErrorPage, {
     error: '505',
     message: 'Ooops. Unavalible now, try later.',
   }],
@@ -49,21 +48,21 @@ const pages = {
     name: '$uperUser',
     userAvatar: Avatar,
     arrowIcon: Arrow,
-    defaultImage: DefaltPic,
+    defaultImage: DefaultPic,
   }],
 
   'user-avatar': [Pages.UserAvatar, {
     name: '$uperUser',
     userAvatar: Avatar,
     arrowIcon: Arrow,
-    defaultImage: DefaltPic,
+    defaultImage: DefaultPic,
   }],
 
   'user-password': [Pages.UserPassword, {
     name: '$uperUser',
     userAvatar: Avatar,
     arrowIcon: Arrow,
-    defaultImage: DefaltPic,
+    defaultImage: DefaultPic,
   }],
 
   'chat-modal': [Pages.ChatModal, {
@@ -72,26 +71,21 @@ const pages = {
     arrowIcon: Arrow,
     clipIcon: Clip,
     menuIcon: Menu,
-    defaultImage: DefaltPic,
+    defaultImage: DefaultPic,
     imageContent: ImgCont,
   }],
 };
 
-Object.entries(Components).forEach(([name, component]) => {
-  Handlebars.registerPartial(name, component)
-});
-
 function navigate(page: string) {
-  const [source, context] = pages[page];
-  const container = document.getElementById('app');
+  const content = pages[page].getContent();
+  const container = document.querySelector('.main');
 
-  container.innerHTML = Handlebars.compile(source)(context);
-};
+  container.appendChild(content);
+}
 
 document.addEventListener('DOMContentLoaded', () => navigate('login'));
 
-document.addEventListener('click', event => {
-
+document.addEventListener('click', (event) => {
   const page = event.target.getAttribute('page');
 
   if (page) {
@@ -99,5 +93,5 @@ document.addEventListener('click', event => {
 
     event.preventDefault();
     event.stopImmediatePropagation();
-  };
+  }
 });
