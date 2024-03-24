@@ -1,0 +1,58 @@
+.button {
+    cursor: pointer;
+    font-size: .8125em;
+    line-height: 1em;
+}
+
+.button:focus,
+.button:hover {
+    filter: brightness(1.2);
+}
+
+.button:active {
+    filter: brightness(0.9);
+}
+
+
+.button:disabled {
+    cursor: not-allowed;
+}
+
+.button__filled {
+    background: var(--main-color);
+    border: none;
+    padding: .92308em;
+    border-radius: .615385em;
+
+    color: var(--text-color-contrast);
+
+    width: 100%;
+}
+
+
+.button__filled:disabled {
+    background: var(--disabled-color);
+}
+
+.button__filled:disabled {
+    background: var(--disabled-color);
+}
+
+.button__link {
+    background: none;
+    border: none;
+    color: var(--main-color);
+}
+
+.button__link:disabled {
+    color: var(--disabled-color);
+}
+
+.button__text {
+    background: none;
+    border: none;
+}
+
+.button__text:disabled {
+    color: var(--disabled-color);
+}
