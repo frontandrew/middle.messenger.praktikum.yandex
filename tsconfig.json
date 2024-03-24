@@ -19,9 +19,10 @@
     "noImplicitAny": true,
     "baseUrl": "./src",
     "paths": {
-      "@ui/*": ["./shared/ui/index.ts"],
-      "@tools/*": ["./shared/tools/index.ts"],
-      "@images/*": ["./assets/images/index.ts"],
+      "core": ["./shared/core/index"],
+      "images": ["./assets/images/index"],
+      "tools": ["./shared/tools/index"],
+      "ui": ["./shared/ui/index"],
     },
   },
   "include": ["src"],
