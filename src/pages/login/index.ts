@@ -1,9 +1,11 @@
-import { Layout } from './components';
+import { Button, Field, Text } from 'ui';
+
+import { FormAuth, Layout } from './components';
 
 export class PageLogin extends Layout {
   constructor() {
     super({
-      title: {
+      title: new Text({
         tag: 'h1',
         text: 'Authorization',
         /**
@@ -11,32 +13,32 @@ export class PageLogin extends Layout {
          * конструктор блока, нужно придумать что то...
          */
         class: 'layout-content__title',
-      },
-      form: {
-        password: {
+      }),
+      form: new FormAuth({
+        password: new Field({
           name: 'password',
           type: 'password',
           label: 'Password',
           required: true,
-          // value: '!Q1qwert',
-        },
-        login: {
+          value: '!Q1qwert',
+        }),
+        login: new Field({
           name: 'login',
           type: 'text',
           label: 'Login',
           required: true,
-          // value: 'And',
-        },
-        submit: {
+          value: 'And',
+        }),
+        submit: new Button({
           label: 'Sign in',
           type: 'submit',
-        },
-        reset: {
+        }),
+        reset: new Button({
           label: 'Sign up',
           type: 'reset',
           variant: 'link',
-        },
-      },
+        }),
+      }),
     });
   }
 }

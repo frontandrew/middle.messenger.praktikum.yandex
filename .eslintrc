@@ -19,6 +19,9 @@
     "import/extensions": ["error", "never", { "ts": "alvays" }],
     "class-methods-use-this": "off",
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
-    "max-len": [2, 100]
+    "max-len": [2, 100],
+    "sort-imports": ["warn", { "allowSeparatedGroups": true, "memberSyntaxSortOrder": ["single", "all", "multiple", "none"] }],
+    "lines-between-class-members": "off",
+    "no-empty-pattern": "off"
   }
 }

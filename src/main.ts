@@ -1,5 +1,3 @@
-import Handlebars from 'handlebars';
-
 import {
   Arrow,
   Avatar,
@@ -10,9 +8,11 @@ import {
   Search,
 } from 'images';
 
+import type { Props } from 'core';
+
 import * as Pages from './pages';
 
-const pages = {
+const pages: Record<string, Props> = {
   login: new Pages.PageLogin(),
   reg: [Pages.RegPage, {}],
 
@@ -76,7 +76,7 @@ const pages = {
   }],
 };
 
-function navigate(page: string) {
+function navigate(page: string): void {
   const content = pages[page].getContent();
   const container = document.querySelector('.main');
 
@@ -85,8 +85,9 @@ function navigate(page: string) {
 
 document.addEventListener('DOMContentLoaded', () => navigate('login'));
 
-document.addEventListener('click', (event) => {
-  const page = event.target.getAttribute('page');
+document.addEventListener('click', (event: Event) => {
+  const targetElement = event.target as HTMLElement;
+  const page = targetElement.getAttribute('page');
 
   if (page) {
     navigate(page);

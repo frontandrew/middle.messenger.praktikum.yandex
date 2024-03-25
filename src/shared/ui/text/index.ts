@@ -9,7 +9,7 @@ Handlebars.registerPartial('Text', template);
 
 export class Text extends Component {
   constructor(props = {}) {
-    super({ tag: 'span', ...props });
+    super({ tag: 'span', text: 'Some text', ...props });
   }
 
   render() {

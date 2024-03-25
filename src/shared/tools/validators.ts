@@ -1,34 +1,46 @@
+type ValidatorParams = {
+  value: string
+  required: boolean
+}
+
+type ValidationState = {
+  textError: string
+  hasError: boolean
+}
+
+type Validators = Record<string, ({}: ValidatorParams) => ValidationState>
+
 const requiredStatus = { hasError: true, textError: 'This field is required.' };
 
-function password({ string, isRequred = false }) {
-  if (!string && isRequred) return requiredStatus;
+function password({ value, required = false }: ValidatorParams): ValidationState {
+  if (!value && required) return requiredStatus;
 
   const MIN_LENGTH = 8;
 
   let message = '';
   let status = false;
 
-  if (string.length < MIN_LENGTH) {
+  if (value.length < MIN_LENGTH) {
     message = message.concat(`Minimum of ${MIN_LENGTH} characters. `);
     status = true;
   }
 
-  if (/\s/.test(string)) {
+  if (/\s/.test(value)) {
     message = message.concat('Without whitespases. ');
     status = true;
   }
 
   let atLeastCheckResult = '';
 
-  if (!/[A-Z]/.test(string)) {
+  if (!/[A-Z]/.test(value)) {
     atLeastCheckResult = atLeastCheckResult.concat(' capital letter,');
     status = true;
   }
-  if (!/\d/.test(string)) {
+  if (!/\d/.test(value)) {
     atLeastCheckResult = atLeastCheckResult.concat(' digit,');
     status = true;
   }
-  if (!/[!@#№$%^&?*()-_+={}[\]|/\\<>]/.test(string)) {
+  if (!/[!@#№$%^&?*()-_+={}[\]|/\\<>]/.test(value)) {
     atLeastCheckResult = atLeastCheckResult.concat(' special symbol.');
     status = true;
   }
@@ -46,8 +58,8 @@ function password({ string, isRequred = false }) {
   return { hasError: status, textError: status ? message : '' };
 }
 
-function login({ string, isRequred = false }) {
-  if (!string && isRequred) return requiredStatus;
+function login({ value, required = false }: ValidatorParams): ValidationState {
+  if (!value && required) return requiredStatus;
 
   const MIN_LENGTH = 3;
   const MAX_LENGTH = 20;
@@ -55,11 +67,11 @@ function login({ string, isRequred = false }) {
   let message = '';
   let status = false;
 
-  if (string.length < MIN_LENGTH) {
+  if (value.length < MIN_LENGTH) {
     message = message.concat(`Minimum length is ${MIN_LENGTH} characters.`);
     status = true;
   }
-  if (string.length > MAX_LENGTH) {
+  if (value.length > MAX_LENGTH) {
     message = message.concat(`Maximum length is ${MAX_LENGTH} characters.`);
     status = true;
   }
@@ -67,4 +79,5 @@ function login({ string, isRequred = false }) {
   return { hasError: status, textError: status ? message : '' };
 }
 
-export const validators = { password, login, username: login };
+export const validators: Validators = { login, password, username: login };
+export type { ValidatorParams, ValidationState };

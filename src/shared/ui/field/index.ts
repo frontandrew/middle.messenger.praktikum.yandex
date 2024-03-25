@@ -1,54 +1,57 @@
-import Handlebars from 'handlebars';
-
 import { Component } from 'core';
 import { validators } from 'tools';
+
+import type{ FieldProps } from './type';
+import type { ValidatorParams } from 'tools';
 
 import template from './template.hbs?raw';
 import './style.css';
 
-Handlebars.registerPartial('Field', template);
-
 export class Field extends Component {
-  constructor(props = {}) {
+  private value: string | undefined;
+
+  constructor(props: FieldProps) {
     super({
-      onInput: (event) => {
-        this._setValue(event);
-        return event;
-      },
-      onChange: (event) => {
+      onChange: (event: InputEvent) => {
         this.validate();
         return event;
       },
+      onInput: (event: InputEvent) => {
+        this.setValue(event);
+        return event;
+      },
 
-      validator: validators[props.name],
-      touched: false,
+      disabled: false,
       hasError: false,
+      required: false,
       textError: null,
       textHelp: null,
-      required: false,
-      disabled: false,
+      touched: false,
+      validator: validators[props.name],
 
       ...props,
     });
 
-    this._value = this.props.value;
+    this.value = this.props.value;
   }
 
-  _setValue({ target }) {
-    this._value = target.value;
+  private setValue({ target }: InputEvent) {
+    if (target instanceof HTMLInputElement) {
+      this.value = target.value;
+    }
   }
 
   validate() {
     const validationState = this.props.validator({
-      string: this._value,
-      isRequred: this.props.required,
+      required: this.props.required,
+      value: this.value,
     });
-    this.setProps({ ...validationState, value: this._value });
+    this.setProps({ ...validationState, value: this.value });
   }
 
   reset() {
-    this.setProps({ value: '', hasError: false, touched: false });
-    this._value = this.props.value;
+    this.setProps({ hasError: false, touched: false, value: '' });
+    this.value = this.props.value;
   }
 
   render() {

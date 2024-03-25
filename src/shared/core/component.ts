@@ -1,31 +1,34 @@
 import Handlebars from 'handlebars';
 import { nanoid } from 'nanoid';
 
+import { deepEqual } from 'tools';
+
 import { EventBus } from './event-bus';
 import { createProxy } from './proxy-object';
-import { deepEqual } from 'tools';
+
+export type Props = Record<string, unknown>;
 
 export class Component {
   static EVENTS = {
-    INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
-    FLOW_RENDER: 'flow:render',
     FLOW_CDU: 'flow:component-did-update',
+    FLOW_RENDER: 'flow:render',
+    INIT: 'init',
   };
 
-  id = nanoid(6);
+  public id = nanoid(6);
+  public props: Props = {};
 
-  _meta = null;
+  _meta: Props | null = null;
+  _element: HTMLElement | null = null;
 
-  _element = null;
-
-  constructor(args = {}) {
+  constructor(args) {
     const eventBus = new EventBus();
     this.count = 0; // temporary
 
-    const { props, children, events } = this._separatePropsWithCildren(args);
+    const { children, events, props } = this.separatePropsWithCildren(args);
 
-    this._meta = { props, children, events };
+    this._meta = { children, events, props };
     this.children = this._makePropsProxy(children);
     this.props = this._makePropsProxy(props);
     this.events = this._makePropsProxy(events);
@@ -34,7 +37,7 @@ export class Component {
     eventBus.emit(Component.EVENTS.INIT);
   }
 
-  _separatePropsWithCildren(args) {
+  private separatePropsWithCildren(args) {
     const props = {};
     const children = {};
     const events = {};
@@ -49,7 +52,7 @@ export class Component {
       } else props[key] = value;
     });
 
-    return { props, children, events };
+    return { children, events, props };
   }
 
   _registerEvents(eventBus) {
@@ -173,8 +176,8 @@ export class Component {
     return this.element;
   }
 
-  _makePropsProxy(props) {
-    return createProxy(props);
+  _makePropsProxy(args) {
+    return createProxy(args);
   }
 
   _attachEvents() {
