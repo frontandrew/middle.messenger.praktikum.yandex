@@ -27,6 +27,7 @@
     "no-underscore-dangle": ["warn", {
       "enforceInMethodNames": false,
       "allowAfterThis": true
-    }]
+    }],
+    "no-console": ["error", { "allow": ["warn", "error"] }]
   }
 }
