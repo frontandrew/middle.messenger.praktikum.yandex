@@ -12,16 +12,21 @@
   },
   "rules": {
     "@typescript-eslint/no-unused-vars": "error",
-    /** next need to correct ts-lint no-unused-vars */
     "no-unused-vars": "off",
-    "import/no-unresolved": ["error", { "ignore": ["\\.hbs\\?raw$"] }],
     "import/prefer-default-export": "off",
     "import/extensions": ["error", "never", { "ts": "alvays" }],
     "class-methods-use-this": "off",
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
-    "max-len": [2, 100],
-    "sort-imports": ["warn", { "allowSeparatedGroups": true, "memberSyntaxSortOrder": ["single", "all", "multiple", "none"] }],
+    "max-len": [2, 80],
+    "sort-imports": ["warn", {
+      "allowSeparatedGroups": true,
+      "memberSyntaxSortOrder": ["multiple", "single", "none", "all"]
+    }],
     "lines-between-class-members": "off",
-    "no-empty-pattern": "off"
+    "no-empty-pattern": "off",
+    "no-underscore-dangle": ["warn", {
+      "enforceInMethodNames": false,
+      "allowAfterThis": true
+    }]
   }
 }
