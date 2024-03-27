@@ -1,6 +1,8 @@
 import Handlebars from 'handlebars';
 
 import { Component } from 'core';
+
+import type { ValidationState } from 'tools';
 import { validators } from 'tools';
 
 import { InputArgs, InputProps } from './type';
@@ -11,19 +13,13 @@ Handlebars.registerPartial('Input', template);
 
 export class Input extends Component<InputProps> {
   private value: string;
+  private validationState: ValidationState;
 
   constructor(args: InputArgs) {
     super({
-      // onChange: (event: InputEvent) => {
-      //   this.setValue(event);
-      //   return event;
-      // },
-      // onBlur: (event: InputEvent) => {
-      //   this.validate();
-      //   return event;
-      // },
+      onBlur: () => this.handleBlur(),
       onInput: (event: InputEvent) => {
-        this.validate();
+        this.setValue(event);
         return event;
       },
 
@@ -37,6 +33,7 @@ export class Input extends Component<InputProps> {
     });
 
     this.value = this.props.value;
+    this.validationState = { hasError: this.props.hasError, textError: '' };
   }
 
   private setValue({ target }: InputEvent) {
@@ -45,13 +42,29 @@ export class Input extends Component<InputProps> {
     }
   }
 
-  validate() {
-    const validationState = this.props.validator({
+  private handleBlur() {
+    this.validate();
+    this.validity = this.validationState;
+    this.setProps({ ...this.validity, value: this.value });
+  }
+
+  public validate() {
+    this.validationState = this.props.validator({
       required: this.props.required,
       value: this.value,
     });
-    console.log('Valid State:', validationState, this.value);
-    this.setProps({ hasError: validationState.hasError, value: this.value });
+  }
+
+  get validity(): ValidationState {
+    return this.validationState;
+  }
+
+  set validity(state: ValidationState) {
+    this.validationState = state;
+  }
+
+  reset() {
+    this.setProps({ value: '', hasError: false, disabled: false });
   }
 
   render() {

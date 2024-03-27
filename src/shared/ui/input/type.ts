@@ -30,6 +30,5 @@ export interface InputProps {
   validator: ({}: ValidatorParams) => ValidationState,
 
   onBlur: ({}: InputEvent) => Event
-  onChange: ({}: InputEvent) => Event
   onInput: ({}: InputEvent) => Event
 }
