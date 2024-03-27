@@ -1,29 +1,36 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Listener<T extends unknown[] = any[]> = (...args: T) => void | unknown;
+
 export class EventBus {
+  private listeners: Record<string, Listener[]>;
+
   constructor() {
     this.listeners = {};
   }
 
-  on(event, callback) {
+  on(event: string, callback: Listener) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
-    // console.log(`ON::${event}:${JSON.stringify(callback)}`)
+
     this.listeners[event].push(callback);
   }
 
-  off(event, callback) {
+  off(event: string, callback: Listener) {
     if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
+      console.warn(`Envent is not defined: ${event}`);
     }
-    // console.log(`OFF::${event}:${JSON.stringify(callback)}`)
-    this.listeners[event] = this.listeners[event].filter((listener) => listener !== callback);
+
+    this.listeners[event] = this.listeners[event].filter(
+      (listener) => listener !== callback,
+    );
   }
 
-  emit(event, ...args) {
+  emit(event: string, ...args: unknown[]) {
     if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
+      console.warn(`Envent is not defined: ${event}`);
     }
-    // console.log(`EMIT::${event}:${JSON.stringify({...args})}`)
+
     this.listeners[event].forEach((listener) => {
       listener(...args);
     });

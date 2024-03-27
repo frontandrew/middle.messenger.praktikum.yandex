@@ -1,22 +1,21 @@
 import { Component } from 'core';
 import { validators } from 'tools';
 
-import type{ FieldProps } from './type';
-import type { ValidatorParams } from 'tools';
+import type{ FieldArgs, FieldProps } from './type';
 
 import template from './template.hbs?raw';
 import './style.css';
 
-export class Field extends Component {
-  private value: string | undefined;
+export class Field extends Component<FieldProps> {
+  private value: string;
 
-  constructor(props: FieldProps) {
+  constructor(args: FieldArgs) {
     super({
-      onChange: (event: InputEvent) => {
+      onChange: (event) => {
         this.validate();
         return event;
       },
-      onInput: (event: InputEvent) => {
+      onInput: (event) => {
         this.setValue(event);
         return event;
       },
@@ -24,12 +23,13 @@ export class Field extends Component {
       disabled: false,
       hasError: false,
       required: false,
-      textError: null,
-      textHelp: null,
+      textError: '',
+      textHelp: '',
       touched: false,
-      validator: validators[props.name],
+      validator: validators[args.name],
+      value: '',
 
-      ...props,
+      ...args,
     });
 
     this.value = this.props.value;

@@ -6,9 +6,11 @@ import { deepEqual } from 'tools';
 import { EventBus } from './event-bus';
 import { createProxy } from './proxy-object';
 
-export type Props = Record<string, unknown>;
+// eslint-disable-next-line no-use-before-define
+export type Children = Record<string, Component>
+export type Events = Record<string, ({}: Event) => Event>
 
-export class Component {
+export class Component<Props> {
   static EVENTS = {
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
@@ -16,19 +18,28 @@ export class Component {
     INIT: 'init',
   };
 
-  public id = nanoid(6);
-  public props: Props = {};
+  public id;
+  public instance;
+  public props: Props;
+  public children: Children;
+  public events: Events;
 
-  _meta: Props | null = null;
-  _element: HTMLElement | null = null;
+  protected _element: HTMLElement | null = null;
+  protected count;
 
-  constructor(args) {
+  readonly meta: any = null;
+
+  private eventBus: () => EventBus;
+
+  constructor(args: Record<string, unknown>) {
     const eventBus = new EventBus();
-    this.count = 0; // temporary
 
-    const { children, events, props } = this.separatePropsWithCildren(args);
+    const { children, events, props } = this.separateArguments(args);
 
-    this._meta = { children, events, props };
+    this.id = nanoid(6);
+    this.count = 0;
+    this.instance = 'Component';
+    this.meta = { children, events, props };
     this.children = this._makePropsProxy(children);
     this.props = this._makePropsProxy(props);
     this.events = this._makePropsProxy(events);
@@ -37,10 +48,10 @@ export class Component {
     eventBus.emit(Component.EVENTS.INIT);
   }
 
-  private separatePropsWithCildren(args) {
-    const props = {};
-    const children = {};
-    const events = {};
+  private separateArguments(args: Record<string, unknown>) {
+    const props: Record<string, unknown> = {};
+    const children: Record<string, unknown> = {};
+    const events: Record<string, unknown> = {};
 
     Object.entries(args).forEach(([key, value]) => {
       if (value instanceof Component) {
@@ -55,7 +66,7 @@ export class Component {
     return { children, events, props };
   }
 
-  _registerEvents(eventBus) {
+  _registerEvents(eventBus: EventBus) {
     eventBus.on(Component.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Component.EVENTS.FLOW_RENDER, this._render.bind(this));
@@ -71,21 +82,23 @@ export class Component {
     const element = this.createDOMElement();
 
     Object.values(this.children).forEach((child) => {
-      const stub = element.querySelector(`[data-id='${child.id}']`);
-      stub?.replaceWith(child.getContent());
+      const stub = element!.querySelector(`[data-id='${child.id}']`);
+      stub?.replaceWith(child.getContent() as HTMLElement);
     });
 
-    if (this._element) this._element.replaceWith(element);
-    this._element = element;
+    if (this._element) this._element.replaceWith(element as Node);
+    this._element = element as HTMLElement;
 
     this._attachEvents();
-    console.log(
-      `RNDR[${`${this.instance}:${this.id}`}]::${++this.count}`,
+    console.warn(
+      `RNDR[${`${this.instance}:${this.id}`}]::${this.count + 1}`,
       this,
     );
   }
 
-  render() { }
+  render() {
+    return '';
+  }
 
   createDOMElement() {
     const stubs = Object.entries(this.children).reduce(
@@ -105,25 +118,28 @@ export class Component {
     tempElement.insertAdjacentHTML('afterbegin', elementString.trim());
 
     const resultElement = tempElement.firstElementChild;
-    resultElement.setAttribute('data-id', this.id);
+    resultElement!.setAttribute('data-id', this.id);
 
     return resultElement;
   }
 
-  _componentDidMount() {
-    this.componentDidMount();
+  _componentDidMount(props: Props) {
+    this.componentDidMount(props);
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidMount(oldProps) { }
+  componentDidMount(props: Props) {}
 
   dispatchComponentDidMount() {
-    this._eventBus().emit(Component.EVENTS.FLOW_CDM);
-    console.log(`dispatch:CDM[${this.id}]`);
+    this.eventBus().emit(Component.EVENTS.FLOW_CDM);
+    // console.log(`dispatch:CDM[${this.id}]`);
   }
 
-  _componentDidUpdate(oldProps, newProps) {
-    // console.log(`_CDU[${this._element?.nodeName + '::' + this.id}]::${this.count}`, { ...this._meta, elem: this._element })
+  _componentDidUpdate(oldProps: Props, newProps: Props) {
+    // console.log(
+    //   `_CDU[${this._element?.nodeName + '::' + this.id}]::${this.count}`,
+    //   { ...this.meta, elem: this._element }
+    // )
     const response = this.componentDidUpdate(oldProps, newProps);
     if (response) {
       this._detachEvents();
@@ -135,23 +151,22 @@ export class Component {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps, newProps) {
+  componentDidUpdate(oldProps: Props, newProps: Props) {
     return true;
   }
 
-  setProps(nextProps) {
+  setProps<T>(nextProps: T) {
     if (!nextProps || !Object.keys(nextProps)?.length) {
       console.warn(`Properties not passed.`);
       return;
     }
 
     /**
-     *  TODO: попытка сравнивать пропсы, чтоб принять решение, ножно ли их обновлять.
-     *  Иногда кажется, что работает не корректно, нужно
+     * TODO: попытка сравнивать пропсы, чтоб принять решение,
+     * ножно ли их обновлять. Иногда кажется, что работает не корректно.
      */
     const expectedProps = { ...this.props, ...nextProps };
     const isEqual = deepEqual(this.props, expectedProps);
-    // console.log(`set::equality:`, { curr: this.props, expc: expectedProps })
     if (isEqual) {
       console.warn(`Properties arent changed.`, {
         curr: this.props,
@@ -161,7 +176,6 @@ export class Component {
     }
 
     Object.entries(nextProps).forEach(([key, value]) => {
-      // console.log(`set[${key}]:${this.props[key]} > ${value}`)
       this.props[key] = value;
     });
 
@@ -183,25 +197,25 @@ export class Component {
   _attachEvents() {
     if (Object.keys(this.events).length <= 0) return;
 
-    for (const [key, value] of Object.entries(this.events)) {
-      this._element.addEventListener(key.toLowerCase().slice(2), value);
-    }
+    Object.entries(this.events).forEach(([key, value]) => {
+      this._element!.addEventListener(key.toLowerCase().slice(2), value);
+    });
   }
 
   _detachEvents() {
     if (Object.keys(this.events).length <= 0) return;
 
-    for (const [key, value] of Object.entries(this.events)) {
-      this._element.removeEventListener(key.toLowerCase().slice(2), value);
-    }
+    Object.entries(this.events).forEach(([key, value]) => {
+      this._element!.addEventListener(key.toLowerCase().slice(2), value);
+    });
   }
 
   show() {
-    this.getContent().style.display = 'block';
+    (this.getContent() as HTMLElement).style.display = 'block';
   }
 
   hide() {
-    this.getContent().style.display = 'none';
+    (this.getContent() as HTMLElement).style.display = 'none';
   }
 
   getPropsChildren() {

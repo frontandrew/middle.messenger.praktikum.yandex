@@ -1,9 +1,15 @@
 import type { Props } from 'core';
 
-type TagProp = 'p' | 'span' | 'h1' | 'h2' | 'h3'
+type Tag = 'p' | 'span' | 'h1' | 'h2' | 'h3'
+
+export interface TextArgs {
+  text: string,
+  tag?: Tag,
+  class?: string,
+}
 
 export interface TextProps extends Props {
   text: string,
-  tag?: TagProp,
+  tag: Tag,
   class?: string,
 }

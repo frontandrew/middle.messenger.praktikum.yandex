@@ -1,6 +1,12 @@
-import type { Props } from './component';
+/**
+ * Нет смысла контролировать типы здесь, поскольку
+ * тут формируются структуры. Необходимые сигнатуры
+ * присвоены в базовом компоненте, передаваемые свойства
+ * контролируются при создании нового инстанса компонента
+ */
 
-export function createProxy(props: Props) {
+// @ts-nocheck
+export function createProxy(props = {}) {
   return new Proxy(props, {
     get(target, prop: string) {
       if (prop.indexOf('_') === 0) {
@@ -18,9 +24,7 @@ export function createProxy(props: Props) {
         console.warn(`Cant set this property: ${prop}`);
         return false;
       }
-
-      //   console.log(`SET:[${this.id}]`, { target, prop })
-
+      // eslint-disable-next-line no-param-reassign
       target[prop] = value;
       return true;
     },
