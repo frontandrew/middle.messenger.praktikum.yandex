@@ -1,0 +1,8 @@
+/dist
+/build
+/node_modules
+**/*.min.js
+
+src/assets/**
+server.js
+vite.config.js
