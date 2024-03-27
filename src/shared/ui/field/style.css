@@ -21,7 +21,15 @@
     flex-direction: column;
 }
 
-.field__input {
+.field .field__label {
+    height: 0px;
+
+    /* font-size: .8125em; */
+    font-size: .5625em;
+    color: var(--text-color-light);
+}
+
+/* .field__input {
     padding: .4615385em 0;
     margin-top: .69231em;
 }
@@ -32,15 +40,7 @@
 
 .field__input:disabled {
     color: var(--disabled-color);
-}
-
-.field .field__label {
-    height: 0px;
-
-    /* font-size: .8125em; */
-    font-size: .5625em;
-    color: var(--text-color-light);
-}
+} */
 
 .field__label:has(+ .field__input:not(:focus):placeholder-shown) {
     transform: translateY(1.3em);

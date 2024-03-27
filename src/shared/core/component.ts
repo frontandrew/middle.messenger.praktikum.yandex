@@ -91,7 +91,7 @@ export class Component<Props> {
 
     this._attachEvents();
     console.warn(
-      `RNDR[${`${this.instance}:${this.id}`}]::${this.count + 1}`,
+      `RNDR[${`${this.instance}:${this.id}`}]::${++this.count}`,
       this,
     );
   }
@@ -157,7 +157,7 @@ export class Component<Props> {
 
   setProps<T>(nextProps: T) {
     if (!nextProps || !Object.keys(nextProps)?.length) {
-      console.warn(`Properties not passed.`);
+      console.warn(`Properties not passed.`, nextProps);
       return;
     }
 

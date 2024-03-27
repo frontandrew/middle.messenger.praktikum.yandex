@@ -1,39 +1,35 @@
 import type { ValidationState, ValidatorParams } from 'tools';
 
-export interface FieldArgs {
+export interface InputArgs {
   name: string,
-  label: string,
   type: 'text' | 'password',
 
   class?: string,
   disabled?: boolean,
   hasError?: boolean,
-  textError?: string,
-  textHelp?: string,
-  touched?: boolean,
   required?: boolean,
+  touched?: boolean,
   value?: string,
   validator?: ({}: ValidatorParams) => ValidationState,
 
+  onBlur?: ({}: InputEvent) => Event
   onChange?: ({}: InputEvent) => Event
   onInput?: ({}: InputEvent) => Event
 }
 
-export interface FieldProps {
+export interface InputProps {
   readonly name: string,
-  readonly label: string,
   type: 'text' | 'password',
 
   class: string,
   disabled: boolean,
   hasError: boolean,
-  textError: string,
-  textHelp: string,
-  touched: boolean,
   required: boolean,
+  touched: boolean,
   value: string,
   validator: ({}: ValidatorParams) => ValidationState,
 
+  onBlur: ({}: InputEvent) => Event
   onChange: ({}: InputEvent) => Event
   onInput: ({}: InputEvent) => Event
 }
