@@ -1,5 +1,7 @@
 import { Component } from 'core';
 import { Input } from 'ui';
+
+import type { ValidationState } from 'tools';
 import { validators } from 'tools';
 
 import type { FieldArgs, FieldProps } from './type';
@@ -10,23 +12,9 @@ import './style.css';
 export class Field extends Component<FieldProps> {
   constructor(args: FieldArgs) {
     super({
-      // onChange: (event: InputEvent) => {
-      //   this.validate();
-      //   return event;
-      // },
-      // onInput: (event: InputEvent) => {
-      //   this.setValue(event);
-      //   return event;
-      // },
-
-      disabled: false,
       hasError: false,
-      required: false,
       textError: '',
       textHelp: '',
-      touched: false,
-      validator: validators[args.name],
-      value: '',
 
       input: new Input({
         class: 'field__input',
@@ -37,29 +25,31 @@ export class Field extends Component<FieldProps> {
         required: args.required,
         value: args.value,
         validator: validators[args.name],
+
+        onBlur: () => this.handleValidation(),
       }),
 
       ...args,
     });
   }
 
-  // private setValue({ target }: InputEvent) {
-  //   if (target instanceof HTMLInputElement) {
-  //     this.value = target.value;
-  //   }
-  // }
+  handleValidation() {
+    this.children.input.validate();
+    const state: ValidationState = this.children.input.validity;
+    this.setProps(state);
+  }
 
-  // validate() {
-  //   const validationState = this.props.validator({
-  //     required: this.props.required,
-  //     value: this.value,
-  //   });
-  //   this.setProps(validationState);
-  // }
+  validate() {
+    this.children.input.validate();
+  }
 
-  reset() {
-    this.setProps({ hasError: false, touched: false, value: '' });
-    // this.value = this.props.value;
+  get fieldState(): ValidationState {
+    return this.children.input.validity;
+  }
+
+  resetState() {
+    this.setProps({ hasError: false });
+    this.children.input.resetState();
   }
 
   render() {

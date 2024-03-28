@@ -12,7 +12,7 @@ export interface InputArgs {
   value?: string,
   validator?: ({}: ValidatorParams) => ValidationState,
 
-  onBlur?: ({}: InputEvent) => Event
+  onBlur?: () => void
   onChange?: ({}: InputEvent) => Event
   onInput?: ({}: InputEvent) => Event
 }
@@ -29,6 +29,12 @@ export interface InputProps {
   value: string,
   validator: ({}: ValidatorParams) => ValidationState,
 
-  onBlur: ({}: InputEvent) => Event
+  onBlur: () => void,
   onInput: ({}: InputEvent) => Event
+}
+
+export interface InputState {
+  value?: string,
+  hasError?: boolean,
+  disabled?: boolean,
 }

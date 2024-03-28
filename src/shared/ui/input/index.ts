@@ -5,7 +5,7 @@ import { Component } from 'core';
 import type { ValidationState } from 'tools';
 import { validators } from 'tools';
 
-import { InputArgs, InputProps } from './type';
+import { InputArgs, InputProps, InputState } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
@@ -42,17 +42,18 @@ export class Input extends Component<InputProps> {
     }
   }
 
-  private handleBlur() {
+  handleBlur() {
+    if (this.value === this.props.value) return;
     this.validate();
-    this.validity = this.validationState;
-    this.setProps({ ...this.validity, value: this.value });
   }
 
-  public validate() {
+  validate() {
     this.validationState = this.props.validator({
       required: this.props.required,
       value: this.value,
     });
+    this.validity = this.validationState;
+    this.setState({ hasError: this.validity.hasError, value: this.value });
   }
 
   get validity(): ValidationState {
@@ -63,8 +64,12 @@ export class Input extends Component<InputProps> {
     this.validationState = state;
   }
 
-  reset() {
-    this.setProps({ value: '', hasError: false, disabled: false });
+  setState(state: InputState) {
+    this.setProps(state);
+  }
+
+  resetState() {
+    this.setState({ value: '', hasError: false, disabled: false });
   }
 
   render() {

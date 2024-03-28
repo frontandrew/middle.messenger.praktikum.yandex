@@ -1,4 +1,5 @@
 import type { ValidationState, ValidatorParams } from 'tools';
+import { Component } from 'core';
 
 export interface FieldArgs {
   name: string,
@@ -17,6 +18,8 @@ export interface FieldArgs {
 
   onChange?: ({}: InputEvent) => Event
   onInput?: ({}: InputEvent) => Event
+
+  input?: Component
 }
 
 export interface FieldProps {
