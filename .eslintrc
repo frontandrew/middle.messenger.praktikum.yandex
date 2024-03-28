@@ -20,7 +20,7 @@
     "max-len": [2, 80],
     "sort-imports": ["warn", {
       "allowSeparatedGroups": true,
-      "memberSyntaxSortOrder": ["multiple", "single", "none", "all"]
+      "memberSyntaxSortOrder": ["all", "multiple", "single", "none"]
     }],
     "lines-between-class-members": "off",
     "no-empty-pattern": "off",
