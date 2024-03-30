@@ -29,12 +29,12 @@
     color: var(--text-color-light);
 }
 
-/* .field__input {
+.field__input {
     padding: .4615385em 0;
     margin-top: .69231em;
 }
 
-.field__input::placeholder {
+/* .field__input::placeholder {
     color: var(--text-hided-color);
 }
 
@@ -61,7 +61,7 @@
 }
 
 .field__text {
-    padding: .875em 0 0;
+    padding: .5em 0 0;
     height: 1em;
 }
 

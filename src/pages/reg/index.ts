@@ -8,10 +8,6 @@ export class PageReg extends Layout {
       title: new Text({
         tag: 'h1',
         text: 'Registration',
-        /**
-         * TODO: Пришлось передать специальные стили через
-         * конструктор блока, нужно придумать что то...
-         */
         class: 'layout-content__title',
       }),
       form: new FormReg({
@@ -53,7 +49,7 @@ export class PageReg extends Layout {
         password: new Field({
           name: 'password',
           type: 'password',
-          label: 'password',
+          label: 'Password',
           required: true,
           value: '!Q1qwerty',
         }),
