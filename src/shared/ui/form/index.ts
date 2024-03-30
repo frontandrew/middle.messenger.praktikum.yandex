@@ -91,7 +91,7 @@ export class Form extends Component<FormProps> {
 
   submitForm() {
     const submitted = Object.entries(this.getInputChildren(this)).reduce(
-      (acc, [key, child]) => ({ ...acc, [key]: child.props.value }),
+      (acc, [key, child]) => ({ ...acc, [key]: child.children.input.value }),
       {},
     );
 
