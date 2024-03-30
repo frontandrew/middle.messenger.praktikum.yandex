@@ -31,3 +31,9 @@ export interface InputProps {
   onBlur: () => void,
   onInput: ({}: InputEvent) => Event
 }
+
+export type InputState = {
+  value?: string,
+  disabled?: boolean,
+  hasError?: boolean
+}

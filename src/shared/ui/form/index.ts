@@ -31,7 +31,7 @@ export class Form extends Component<FormProps> {
     this.validate();
     this.hasError = this.getErrorState();
 
-    if (this.hasError) {
+    if (!this.hasError) {
       this.submitForm();
     }
 

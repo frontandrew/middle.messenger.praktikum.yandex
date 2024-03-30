@@ -48,7 +48,7 @@ export class Field extends Component<FieldProps> {
   }
 
   resetState() {
-    this.setProps({ hasError: false });
+    this.setProps({ hasError: false, value: '', textError: '' });
     this.children.input.resetState();
   }
 
