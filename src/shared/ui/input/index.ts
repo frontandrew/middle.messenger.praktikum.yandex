@@ -26,7 +26,7 @@ export class Input extends Component<InputProps> {
       disabled: false,
       hasError: false,
       required: false,
-      validator: validators[args.name],
+      validator: validators[args.name] ?? validators.isRequired,
       value: '',
 
       ...args,

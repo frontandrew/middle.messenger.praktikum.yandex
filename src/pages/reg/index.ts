@@ -56,7 +56,7 @@ export class PageReg extends Layout {
         password_more: new Field({
           name: 'password_more',
           type: 'password',
-          label: 'Password (one more)',
+          label: 'Repeat password',
           required: true,
           value: 'cvakjvcl',
         }),

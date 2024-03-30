@@ -63,6 +63,10 @@
 .field__text {
     padding: .5em 0 0;
     height: 1em;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 /* INLINE RULES */

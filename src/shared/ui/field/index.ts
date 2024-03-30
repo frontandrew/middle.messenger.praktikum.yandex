@@ -2,7 +2,6 @@ import { Component } from 'core';
 import { Input } from 'ui';
 
 import type { ValidationState } from 'tools';
-import { validators } from 'tools';
 
 import type { FieldArgs, FieldProps } from './type';
 
@@ -26,7 +25,6 @@ export class Field extends Component<FieldProps> {
         hasError: args.hasError,
         required: args.required,
         value: args.value,
-        validator: validators[args.name],
 
         onBlur: () => this.handleValidation(),
       }),
