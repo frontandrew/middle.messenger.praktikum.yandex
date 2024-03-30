@@ -14,14 +14,7 @@ import * as Pages from './pages';
 
 const pages: Record<string, Props> = {
   login: new Pages.PageLogin(),
-  reg: [Pages.RegPage, {}],
-
-  user: [Pages.User, {
-    name: '$uperUser',
-    userAvatar: Avatar,
-    arrowIcon: Arrow,
-    defaultImage: DefaultPic,
-  }],
+  reg: new Pages.PageReg(),
 
   chat: [Pages.Chat, {
     userAvatar: Avatar,
@@ -83,7 +76,7 @@ function navigate(page: string): void {
   container.appendChild(content);
 }
 
-document.addEventListener('DOMContentLoaded', () => navigate('login'));
+document.addEventListener('DOMContentLoaded', () => navigate('reg'));
 
 document.addEventListener('click', (event: Event) => {
   const targetElement = event.target as HTMLElement;

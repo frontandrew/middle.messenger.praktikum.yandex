@@ -35,7 +35,7 @@ export class PageLogin extends Layout {
         }),
         reset: new Button({
           label: 'Sign up',
-          type: 'reset',
+          page: 'reg',
           variant: 'link',
         }),
       }),

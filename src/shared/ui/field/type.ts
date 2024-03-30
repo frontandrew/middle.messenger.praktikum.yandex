@@ -3,7 +3,7 @@ import type { ValidationState, ValidatorParams } from 'tools';
 export interface FieldArgs {
   name: string,
   label: string,
-  type: 'text' | 'password',
+  type: 'text' | 'password' | 'phone' | 'email',
 
   class?: string,
   disabled?: boolean,
