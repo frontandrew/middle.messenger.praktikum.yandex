@@ -1,128 +1,102 @@
+import Handlebars from 'handlebars';
+
 import { Component } from 'core';
 
+import type { FormArgs, FormProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-import Handlebars from 'handlebars';
-
 Handlebars.registerPartial('Form', template);
 
-export class Form extends Component {
-  constructor(props = {}) {
+export class Form extends Component<FormProps> {
+  public hasError = false;
+
+  constructor(props: FormArgs) {
     super({
-      // onSubmit: (event) => {
-      //   event.preventDefault();
-      //   event.stopPropagation();
-      //   this.processEvents(event);
-      //   return event;
-      // },
-      // onChange: (event) => {
-      //   this.processEvents(event);
-      //   return event;
-      // },
-      // onReset: (event) => {
-      //   this.processEvents(event);
-      //   return event;
-      // },
-      // onInput: (event) => {
-      //   this.processEvents(event);
-      //   return event;
-      // },
+      onSubmit: (event: Event) => {
+        event.preventDefault();
+        this.handleSubmit();
+        return event;
+      },
+      onReset: () => this.resetForm(),
+      onInput: () => this.updateErrorState(false),
 
       ...props,
     });
 
-    this.hasError = false;
+    this.hasError = this.props.hasError;
   }
 
-  processEvents(event) {
-    console.log('Event:', event)
-    if (event.type === 'input') {
-      this.updateErrorState(false);
-      return;
+  handleSubmit() {
+    this.validate();
+    this.hasError = this.getErrorState();
+
+    if (this.hasError) {
+      this.submitForm();
     }
 
-    if (event.type === 'change') {
-      this.updateErrorState(this.getErrorState());
-      return;
-    }
-
-    if (event.type === 'submit') {
-      this.validate();
-      this.updateErrorState(this.getErrorState());
-
-      if (!this.hasError) this.submitForm();
-      return;
-    }
-
-    if (event.type === 'reset') {
-      this.resetForm();
-    }
+    this.updateErrorState(this.hasError);
   }
 
-  // setSubmitState() {
-  //   this.children.submit.setDisabled(this.hasError);
-  // }
+  resetForm() {
+    Object.values(this.children).forEach((child) => {
+      child.resetState();
+    });
 
-  // getErrorState() {
-  //   const errorState = Object.values(this.getInputChildren(this))
-  //     .reduce((acc, child) => [...acc, child.props.hasError], [])
-  //     .some(Boolean);
+    this.updateErrorState(false);
+  }
 
-  //   return errorState;
-  // }
+  getErrorState() {
+    const errorState: boolean = Object.values(this.getInputChildren(this))
+      .reduce((acc, child) => [...acc, child.props.hasError], [])
+      .some(Boolean);
 
-  // updateErrorState(state) {
-  //   this.hasError = state;
-  //   this.setSubmitState();
-  // }
+    return errorState;
+  }
 
-  // validate() {
-  //   Object.values(this.getInputChildren(this)).forEach((child) => {
-  //     child.validate();
-  //   });
-  // }
+  updateErrorState(state: boolean) {
+    // this.hasError = state;
+    this.children.submit.setDisabled(state);
+  }
 
-  // getInputChildren(component) {
-  //   const inputs = Object.entries(component.children).reduce(
-  //     (acc, [key, value]) => {
-  //       if (value.instance === 'Field') {
-  //         return { ...acc, [key]: value };
-  //       }
+  validate() {
+    Object.values(this.getInputChildren(this)).forEach((child) => {
+      child.handleValidation();
+    });
+  }
 
-  //       /**
-  //        * можно попробовать сделать рекурсивный обход всех потомков
-  //        * передав на вход инстанс компонента
-  //        *
-  //        * UPD: реализовано, не тестировал
-  //        */
-  //       if (Object.keys(value.children) > 0) {
-  //         return { ...acc, ...this.getInputChildren(value) };
-  //       }
+  getInputChildren(component) {
+    const inputs = Object.entries(component.children).reduce(
+      (acc, [key, value]) => {
+        if (value.instance === 'Field') {
+          return { ...acc, [key]: value };
+        }
 
-  //       return acc;
-  //     },
-  //     {},
-  //   );
-  //   return inputs;
-  // }
+        /**
+         * можно попробовать сделать рекурсивный обход всех потомков
+         * передав на вход инстанс компонента
+         *
+         * UPD: реализовано, не тестировал
+         */
+        if (Object.keys(value.children) > 0) {
+          return { ...acc, ...this.getInputChildren(value) };
+        }
 
-  // resetForm() {
-  //   Object.values(this.children).forEach((child) => {
-  //     child.reset();
-  //   });
+        return acc;
+      },
+      {},
+    );
+    return inputs;
+  }
 
-  //   this.updateErrorState(false);
-  // }
+  submitForm() {
+    const submitted = Object.entries(this.getInputChildren(this)).reduce(
+      (acc, [key, child]) => ({ ...acc, [key]: child.props.value }),
+      {},
+    );
 
-  // submitForm() {
-  //   const submitted = Object.entries(this.getInputChildren(this)).reduce(
-  //     (acc, [key, child]) => ({ ...acc, [key]: child.props.value }),
-  //     {},
-  //   );
-
-  //   console.warn(`FORM SUBMITTED:`, submitted);
-  // }
+    console.warn(`FORM SUBMITTED:`, submitted);
+  }
 
   render() {
     return template;

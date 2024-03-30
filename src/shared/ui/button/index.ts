@@ -23,7 +23,7 @@ export class Button extends Component<ButtonProps> {
     this.setProps({ disabled: state });
   }
 
-  reset() {
+  resetState() {
     this.setProps({ disabled: false });
   }
 

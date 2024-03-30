@@ -10,6 +10,8 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class Field extends Component<FieldProps> {
+  public hasError = false;
+
   constructor(args: FieldArgs) {
     super({
       hasError: false,
@@ -31,16 +33,14 @@ export class Field extends Component<FieldProps> {
 
       ...args,
     });
+
+    this.hasError = this.props.hasError;
   }
 
   handleValidation() {
     this.children.input.validate();
     const state: ValidationState = this.children.input.validity;
     this.setProps(state);
-  }
-
-  validate() {
-    this.children.input.validate();
   }
 
   get fieldState(): ValidationState {

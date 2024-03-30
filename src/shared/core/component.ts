@@ -7,8 +7,8 @@ import { EventBus } from './event-bus';
 import { createProxy } from './proxy-object';
 
 // eslint-disable-next-line no-use-before-define
-export type Children = Record<string, Component>
-export type Events = Record<string, ({}: Event) => Event>
+// export type Children = Record<string, Component>
+// export type Events = Record<string, ({}: Event) => Event>
 
 export class Component<Props> {
   static EVENTS = {
@@ -21,8 +21,8 @@ export class Component<Props> {
   public id;
   public instance;
   public props: Props;
-  public children: Children;
-  public events: Events;
+  public children: Record<string, unknown>;
+  public events: Record<string, ({}: Event) => Event>;
 
   protected _element: HTMLElement | null = null;
   protected count;
@@ -41,7 +41,7 @@ export class Component<Props> {
     this.instance = 'Component';
     this.meta = { children, events, props };
     this.children = this._makePropsProxy(children);
-    this.props = this._makePropsProxy(props);
+    this.props = this._makePropsProxy(props) as Props;
     this.events = this._makePropsProxy(events);
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
@@ -169,7 +169,7 @@ export class Component<Props> {
     const isEqual = deepEqual(this.props, expectedProps);
     if (isEqual) {
       console.warn(`Properties arent changed.`, {
-        curr: this.props,
+        curr: this.meta.props,
         next: expectedProps,
       });
       return;
