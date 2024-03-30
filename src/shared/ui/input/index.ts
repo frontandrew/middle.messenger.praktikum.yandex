@@ -5,7 +5,7 @@ import { Component } from 'core';
 import type { ValidationState } from 'tools';
 import { validators } from 'tools';
 
-import { InputArgs, InputProps, InputState } from './type';
+import { InputArgs, InputProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
@@ -69,6 +69,7 @@ export class Input extends Component<InputProps> {
   }
 
   resetState() {
+    console.log('input reset')
     this.setState({ value: '', hasError: false, disabled: false });
   }
 
