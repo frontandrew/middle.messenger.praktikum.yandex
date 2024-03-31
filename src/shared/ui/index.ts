@@ -1,12 +1,13 @@
-export { ActionsContainer } from './form/actions-container';
 export { Avatar } from './avatar';
 export { BaseLayout } from './base-layout';
 export { Button } from './button';
 export { Divider } from './divider';
 export { Form } from './form';
 export { Field } from './field';
+export { ActionsContainer } from './form/actions-container';
 export { FieldsContainer } from './form/fields-container';
 export { Input } from './input';
 export { List } from './list';
+export { SidePanel } from './side-panel';
 export { Surface } from './surface';
 export { Text } from './text';

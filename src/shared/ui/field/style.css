@@ -13,7 +13,7 @@
 }
 
 .field_disabled .divider {
-    background-color: var(--disabled-color);
+    background-color: var(--background-color-contrast);
 }
 
 .field__container {
