@@ -9,6 +9,7 @@ export interface FieldArgs {
 
   class?: string,
   disabled?: boolean,
+  inline?: boolean,
   hasError?: boolean,
   textError?: string,
   textHelp?: string,
@@ -26,6 +27,7 @@ export interface FieldProps {
 
   class: string,
   hasError: boolean,
+  inline: boolean,
   textError: string,
   textHelp: string,
 

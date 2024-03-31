@@ -1,5 +1,8 @@
 .input {
     height: 1em;
+    width: 100%;
+
+    padding: 0.4615385em 0;
 }
 
 .input::placeholder {

@@ -18,7 +18,6 @@ export class Field extends Component<FieldProps> {
       textHelp: '',
 
       input: new Input({
-        class: 'field__input',
         name: args.name,
         type: args.type,
         disabled: args.disabled,
