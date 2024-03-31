@@ -1,5 +1,20 @@
-export { default as User } from './user.hbs?raw';
+import { Avatar, Button, Field, Form, Text } from 'ui';
 
-export { default as UserForm } from './user-form.hbs?raw';
-export { default as UserAvatar } from './user-avatar.hbs?raw';
-export { default as UserPassword } from './user-password.hbs?raw';
+import { FormUser, Layout } from './components';
+
+import type { PageUserArgs } from './type';
+
+export class PageUser extends Layout {
+  constructor(args: PageUserArgs) {
+    super({
+      avatar: new Avatar({}),
+      title: new Text({
+        text: args.nick_name,
+      }),
+      form: new FormUser({}),
+      // side: new SidePanel({
+      //   redirect: new Button({})
+      // })
+    });
+  }
+}

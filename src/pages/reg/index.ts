@@ -16,6 +16,8 @@ export class PageReg extends Layout {
           type: 'email',
           label: 'Email',
           required: true,
+          disabled: true,
+          inline: true,
           value: 'some@email.com',
         }),
         login: new Field({

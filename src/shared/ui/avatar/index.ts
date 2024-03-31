@@ -9,11 +9,12 @@ import './style.css';
 Handlebars.registerPartial('Avatar', template);
 
 export class Avatar extends Component {
-  constructor(props = {}) {
+  constructor(args = {}) {
     super({
       defaultPic: DefaultPic,
       size: 'medium',
-      ...props,
+
+      ...args,
     });
   }
 

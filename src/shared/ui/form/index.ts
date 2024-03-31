@@ -11,7 +11,7 @@ Handlebars.registerPartial('Form', template);
 export class Form extends Component<FormProps> {
   public hasError = false;
 
-  constructor(props: FormArgs) {
+  constructor(args: FormArgs) {
     super({
       onSubmit: (event: Event) => {
         event.preventDefault();
@@ -21,7 +21,7 @@ export class Form extends Component<FormProps> {
       onReset: () => this.resetForm(),
       onInput: () => this.updateErrorState(false),
 
-      ...props,
+      ...args,
     });
 
     this.hasError = this.props.hasError;

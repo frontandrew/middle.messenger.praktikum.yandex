@@ -15,6 +15,15 @@ import * as Pages from './pages';
 const pages: Record<string, Props> = {
   login: new Pages.PageLogin(),
   reg: new Pages.PageReg(),
+  user: new Pages.PageUser({
+    avatar: Avatar,
+    email: 'some@email.com',
+    login: 'devostator777',
+    first_name: 'John',
+    second_name: 'Doe',
+    nick_name: 'Devostator',
+    phone: '+66 45 955 12 12',
+  }),
   404: new Pages.PageError({
     title: '404',
     message: 'Amm... There is no such page ;(',
@@ -75,7 +84,7 @@ function navigate(page: string): void {
   const content = pages[page].getContent();
   const container = document.querySelector('.main');
 
-  container.appendChild(content);
+  container!.appendChild(content);
 }
 
 document.addEventListener('DOMContentLoaded', () => navigate('505'));
