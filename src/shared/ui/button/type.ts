@@ -1,5 +1,3 @@
-import type { Props } from 'core';
-
 export interface ButtonArgs {
   label: string,
 
@@ -12,7 +10,7 @@ export interface ButtonArgs {
   onClick?: ({}: Event) => Event
 }
 
-export interface ButtonProps extends Props {
+export interface ButtonProps {
   readonly label: string,
   disabled: boolean,
   type: 'submit' | 'reset' | 'button',

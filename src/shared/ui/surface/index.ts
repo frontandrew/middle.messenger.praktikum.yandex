@@ -7,7 +7,7 @@ import './style.css';
 
 Handlebars.registerPartial('Surface', template);
 
-export class Surface extends Component {
+export class Surface extends Component<object> {
   render() {
     return template;
   }
