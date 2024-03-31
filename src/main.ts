@@ -15,8 +15,20 @@ import * as Pages from './pages';
 const pages: Record<string, Props> = {
   login: new Pages.PageLogin(),
   reg: new Pages.PageReg(),
+  404: new Pages.PageError({
+    title: '404',
+    message: 'Amm... There is no such page ;(',
+    redirectLabel: 'Return to chats page',
+    redirectTarget: 'chats',
+  }),
+  505: new Pages.PageError({
+    title: '505',
+    message: 'Ooops. Unavalible now, try later.',
+    redirectLabel: 'Return to chats page',
+    redirectTarget: 'chats',
+  }),
 
-  chat: [Pages.Chat, {
+  chats: [Pages.Chat, {
     userAvatar: Avatar,
     searchIcon: Search,
     arrowIcon: Arrow,
@@ -24,16 +36,6 @@ const pages: Record<string, Props> = {
     menuIcon: Menu,
     defaultImage: DefaultPic,
     imageContent: ImgCont,
-  }],
-
-  404: [Pages.ErrorPage, {
-    error: '404',
-    message: 'Amm... There is no such page ;(',
-  }],
-
-  505: [Pages.ErrorPage, {
-    error: '505',
-    message: 'Ooops. Unavalible now, try later.',
   }],
 
   // temp pages for example
@@ -76,7 +78,7 @@ function navigate(page: string): void {
   container.appendChild(content);
 }
 
-document.addEventListener('DOMContentLoaded', () => navigate('reg'));
+document.addEventListener('DOMContentLoaded', () => navigate('505'));
 
 document.addEventListener('click', (event: Event) => {
   const targetElement = event.target as HTMLElement;
