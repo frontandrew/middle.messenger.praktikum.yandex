@@ -39,10 +39,7 @@ function password({ value = '', required = false }: ValidatorParams): Validation
     status = true;
   }
   if (atLeastCheckResult.length > 0) {
-    message = message.concat(
-      // ' Must contain at least one more',
-      atLeastCheckResult,
-    );
+    message = message.concat(atLeastCheckResult);
   }
 
   if (message.trim().endsWith(',')) message = message.slice(0, -1).concat('.');
