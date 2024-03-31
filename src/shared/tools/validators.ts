@@ -86,25 +86,19 @@ function email({ value = '', required = false }: ValidatorParams): ValidationSta
 function phone({ value = '', required = false }: ValidatorParams): ValidationState {
   const MIN_PHONE_LENGTH = 11;
 
-  let message = '';
-  let status = false;
+  let { textError: message, hasError: status } = isRequired({ value, required });
 
   const lengthMatcher = (value).match(/\d/g);
 
+  if (!value.match(/^\+?\s?(\d{1,16}\s?)?(\d{1,4}\s?){1,6}$/)) {
+    message = message.concat(' Incorrect phone format.');
+    status = true;
+  }
+
   if (!Array.isArray(lengthMatcher) || (lengthMatcher.length < MIN_PHONE_LENGTH)) {
-    message = ' Not enough characters.';
+    message = message.concat(' Not enough numbers.');
     status = true;
   }
-
-  if (!value.match(/^\+\s?(\d{1,16}\s?)?(\d{2,4}\s?){1,6}$/)) {
-    message = ' Incorrect phone format.';
-    status = true;
-  }
-
-  const { textError, hasError } = isRequired({ value, required });
-
-  message = textError || message;
-  status = status || hasError;
 
   return { hasError: status, textError: status ? message.trim() : '' };
 }

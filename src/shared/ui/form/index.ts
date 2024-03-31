@@ -65,7 +65,7 @@ export class Form extends Component<FormProps> {
     });
   }
 
-  getInputChildren(component) {
+  getInputChildren(component): Record<string, typeof component> {
     const inputs = Object.entries(component.children).reduce(
       (acc, [key, value]) => {
         if (value.instance === 'Field') {
@@ -78,7 +78,7 @@ export class Form extends Component<FormProps> {
          *
          * UPD: реализовано, не тестировал
          */
-        if (Object.keys(value.children) > 0) {
+        if (Object.keys(value.children).length > 0) {
           return { ...acc, ...this.getInputChildren(value) };
         }
 
@@ -95,7 +95,7 @@ export class Form extends Component<FormProps> {
       {},
     );
 
-    console.warn(`FORM SUBMITTED:`, submitted);
+    console.warn(`FORM "${this.instance}" SUBMITTED:`, submitted);
   }
 
   render() {
