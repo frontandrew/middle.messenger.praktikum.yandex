@@ -1,8 +1,15 @@
 import type { ValidationState, ValidatorParams } from 'tools';
 
+export type InputTypes = 'text'
+| 'password'
+| 'email'
+| 'tel'
+| 'file'
+| 'image';
+
 export interface InputArgs {
   name: string,
-  type: 'text' | 'password',
+  type: InputTypes,
 
   class?: string,
   disabled?: boolean,
@@ -18,7 +25,7 @@ export interface InputArgs {
 
 export interface InputProps {
   readonly name: string,
-  type: 'text' | 'password',
+  type: InputTypes,
 
   class: string,
   disabled: boolean,

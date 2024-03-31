@@ -55,7 +55,6 @@ export class Form extends Component<FormProps> {
   }
 
   updateErrorState(state: boolean) {
-    // this.hasError = state;
     this.children.submit.setDisabled(state);
   }
 

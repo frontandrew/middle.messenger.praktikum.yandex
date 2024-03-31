@@ -1,9 +1,11 @@
 import type { ValidationState, ValidatorParams } from 'tools';
 
+import type { InputTypes } from '../input/type';
+
 export interface FieldArgs {
   name: string,
   label: string,
-  type: 'text' | 'password' | 'phone' | 'email',
+  type: InputTypes,
 
   class?: string,
   disabled?: boolean,

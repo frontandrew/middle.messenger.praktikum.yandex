@@ -41,10 +41,10 @@ export class PageReg extends Layout {
         }),
         phone: new Field({
           name: 'phone',
-          type: 'phone',
+          type: 'tel',
           label: 'Phone',
           required: true,
-          value: '+66 45 955 12',
+          value: '+66 45 955 12 12',
         }),
         password: new Field({
           name: 'password',
