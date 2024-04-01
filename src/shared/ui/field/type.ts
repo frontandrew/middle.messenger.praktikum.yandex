@@ -1,5 +1,6 @@
 import type { ValidationState, ValidatorParams } from 'tools';
 
+import { Input } from '../input';
 import type { InputTypes } from '../input/type';
 
 export interface FieldArgs {
@@ -33,4 +34,8 @@ export interface FieldProps {
 
   onChange: ({}: InputEvent) => Event
   onInput: ({}: InputEvent) => Event
+}
+
+export interface FieldChildren {
+  input: Input
 }

@@ -11,8 +11,8 @@ import './style.css';
 
 Handlebars.registerPartial('Input', template);
 
-export class Input extends Component<InputProps> {
-  private value: string;
+export class Input extends Component<InputArgs, object, InputProps> {
+  public value: string;
   private validationState: ValidationState;
 
   constructor(args: InputArgs) {

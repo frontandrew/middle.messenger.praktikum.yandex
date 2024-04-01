@@ -3,12 +3,12 @@ import { Input } from 'ui';
 
 import type { ValidationState } from 'tools';
 
-import type { FieldArgs, FieldProps } from './type';
+import type { FieldArgs, FieldChildren, FieldProps } from './type';
 
 import template from './template.hbs?raw';
 import './style.css';
 
-export class Field extends Component<FieldProps> {
+export class Field extends Component<FieldArgs, FieldChildren, FieldProps> {
   public hasError = false;
 
   constructor(args: FieldArgs) {

@@ -1,17 +1,15 @@
-import Handlebars from 'handlebars';
-
 import { Component } from 'core';
+import { Field } from 'ui';
 
-import type { FormArgs, FormProps } from './type';
+import type { FormArgs, FormChildren, FormProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-Handlebars.registerPartial('Form', template);
-
-export class Form extends Component<FormProps> {
+export class Form<A extends FormArgs, C extends FormChildren, P extends FormProps>
+  extends Component<A, C, P> {
   public hasError = false;
 
-  constructor(args: FormArgs) {
+  constructor(args: A) {
     super({
       onSubmit: (event: Event) => {
         event.preventDefault();
@@ -47,8 +45,11 @@ export class Form extends Component<FormProps> {
   }
 
   getErrorState() {
-    const errorState: boolean = Object.values(this.getInputChildren(this))
-      .reduce((acc, child) => [...acc, child.props.hasError], [])
+    const errorState: boolean = Object.values(this.children)
+      .reduce((acc: boolean[], child) => {
+        if (child instanceof Field) return [...acc, child.props.hasError];
+        return acc;
+      }, [])
       .some(Boolean);
 
     return errorState;
@@ -59,38 +60,17 @@ export class Form extends Component<FormProps> {
   }
 
   validate() {
-    Object.values(this.getInputChildren(this)).forEach((child) => {
-      child.handleValidation();
+    Object.values(this.children).forEach((child) => {
+      if (child instanceof Field) child.handleValidation();
     });
   }
 
-  getInputChildren(component): Record<string, typeof component> {
-    const inputs = Object.entries(component.children).reduce(
-      (acc, [key, value]) => {
-        if (value.instance === 'Field') {
-          return { ...acc, [key]: value };
-        }
-
-        /**
-         * можно попробовать сделать рекурсивный обход всех потомков
-         * передав на вход инстанс компонента
-         *
-         * UPD: реализовано, не тестировал
-         */
-        if (Object.keys(value.children).length > 0) {
-          return { ...acc, ...this.getInputChildren(value) };
-        }
-
+  submitForm() {
+    const submitted = Object.entries(this.children).reduce(
+      (acc, [key, child]) => {
+        if (child instanceof Field) return ({ ...acc, [key]: child.children.input.value });
         return acc;
       },
-      {},
-    );
-    return inputs;
-  }
-
-  submitForm() {
-    const submitted = Object.entries(this.getInputChildren(this)).reduce(
-      (acc, [key, child]) => ({ ...acc, [key]: child.children.input.value }),
       {},
     );
 
