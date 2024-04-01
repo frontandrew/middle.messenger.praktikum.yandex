@@ -2,6 +2,8 @@ body {
     width: 100vw;
     height: 100vh;
 
+    overflow: hidden;
+
     font-size: var(--font-size);
     font-family: var(--font-family-base);
     color: var(--text-color-main);
