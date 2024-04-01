@@ -8,9 +8,11 @@ import {
   Search,
 } from 'images';
 
-import type { Props } from 'core';
+import * as Pages from 'pages';
+import { Templates } from 'ui';
+import { registerPartials } from 'tools';
 
-import * as Pages from './pages';
+registerPartials(Templates);
 
 const pages: Record<string, Props> = {
   login: new Pages.PageLogin(),
