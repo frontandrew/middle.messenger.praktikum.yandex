@@ -6,11 +6,7 @@ import { deepEqual } from 'tools';
 import { EventBus } from './event-bus';
 import { createProxy } from './proxy-object';
 
-// eslint-disable-next-line no-use-before-define
-// export type Children = Record<string, Component>
-// export type Events = Record<string, ({}: Event) => Event>
-
-export class Component<Props> {
+export class Component<Args extends object, Children extends object, Props extends object> {
   static EVENTS = {
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
@@ -21,7 +17,7 @@ export class Component<Props> {
   public id;
   public instance;
   public props: Props;
-  public children: Record<string, unknown>;
+  public children: Children;
   public events: Record<string, ({}: Event) => Event>;
 
   protected _element: HTMLElement | null = null;
@@ -31,7 +27,7 @@ export class Component<Props> {
 
   private eventBus: () => EventBus;
 
-  constructor(args: Record<string, unknown>) {
+  constructor(args: Args) {
     const eventBus = new EventBus();
 
     const { children, events, props } = this.separateArguments(args);
@@ -40,7 +36,7 @@ export class Component<Props> {
     this.count = 0;
     this.instance = 'Component';
     this.meta = { children, events, props };
-    this.children = this._makePropsProxy(children);
+    this.children = this._makePropsProxy(children) as Children;
     this.props = this._makePropsProxy(props) as Props;
     this.events = this._makePropsProxy(events);
     this.eventBus = () => eventBus;
@@ -48,7 +44,7 @@ export class Component<Props> {
     eventBus.emit(Component.EVENTS.INIT);
   }
 
-  private separateArguments(args: Record<string, unknown>) {
+  private separateArguments(args: Args) {
     const props: Record<string, unknown> = {};
     const children: Record<string, unknown> = {};
     const events: Record<string, unknown> = {};
@@ -118,7 +114,7 @@ export class Component<Props> {
     tempElement.insertAdjacentHTML('afterbegin', elementString.trim());
 
     const resultElement = tempElement.firstElementChild;
-    resultElement!.setAttribute('data-id', this.id);
+    // resultElement!.setAttribute('data-id', this.id);
 
     return resultElement;
   }
