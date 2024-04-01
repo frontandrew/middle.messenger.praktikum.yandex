@@ -8,7 +8,7 @@ import './style.css';
 
 Handlebars.registerPartial('Button', template);
 
-export class Button extends Component<ButtonProps> {
+export class Button extends Component<ButtonArgs, object, ButtonProps> {
   constructor(args: ButtonArgs) {
     super({
       variant: 'filled',

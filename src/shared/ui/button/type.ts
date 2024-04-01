@@ -7,7 +7,8 @@ export interface ButtonArgs {
   type?: 'submit' | 'reset' | 'button',
   variant?: 'filled' | 'link' | 'text',
 
-  onClick?: ({}: Event) => Event
+  onClick?: () => void,
+  // onClick?: ({}: Event) => Event
 }
 
 export interface ButtonProps {
@@ -19,5 +20,5 @@ export interface ButtonProps {
   class?: string,
   page?: string,
 
-  onClick?: ({}: Event) => Event
+  // onClick?: ({}: Event) => Event
 }
