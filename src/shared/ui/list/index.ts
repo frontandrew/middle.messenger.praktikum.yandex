@@ -1,11 +1,7 @@
-import Handlebars from 'handlebars';
-
 import { Component } from 'core';
 
 import template from './template.hbs?raw';
 import './style.css';
-
-Handlebars.registerPartial('List', template);
 
 export class List extends Component {
   constructor(props = {}) {

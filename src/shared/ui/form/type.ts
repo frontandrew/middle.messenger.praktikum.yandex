@@ -17,3 +17,8 @@ export interface FormChildren {
   submit: Button,
   reset: Button,
 }
+
+// export interface FormChildren {
+//   fields: { [key: string]: Field },
+//   actions: { submit: Button, reset: Button },
+// }

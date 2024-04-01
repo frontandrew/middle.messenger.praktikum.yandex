@@ -2,10 +2,9 @@ import { Component } from 'core';
 import { Field } from 'ui';
 
 import type { FormArgs, FormChildren, FormProps } from './type';
-import template from './template.hbs?raw';
 import './style.css';
 
-export class Form<A extends FormArgs, C extends FormChildren, P extends FormProps>
+export abstract class Form<A extends FormArgs, C extends FormChildren, P extends FormProps>
   extends Component<A, C, P> {
   public hasError = false;
 
@@ -75,9 +74,5 @@ export class Form<A extends FormArgs, C extends FormChildren, P extends FormProp
     );
 
     console.warn(`FORM "${this.instance}" SUBMITTED:`, submitted);
-  }
-
-  render() {
-    return template;
   }
 }

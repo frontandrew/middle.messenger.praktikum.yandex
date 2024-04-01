@@ -1,5 +1,3 @@
-import Handlebars from 'handlebars';
-
 import { Component } from 'core';
 
 import type { ValidationState } from 'tools';
@@ -8,8 +6,6 @@ import { validators } from 'tools';
 import { InputArgs, InputProps, InputState } from './type';
 import template from './template.hbs?raw';
 import './style.css';
-
-Handlebars.registerPartial('Input', template);
 
 export class Input extends Component<InputArgs, object, InputProps> {
   public value: string;
