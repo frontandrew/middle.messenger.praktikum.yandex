@@ -1,1 +1,1 @@
-export { Layout } from './layout';
+export { LayoutError } from './layout-error';
