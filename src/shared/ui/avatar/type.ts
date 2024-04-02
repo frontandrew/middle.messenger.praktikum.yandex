@@ -4,10 +4,12 @@ export interface AvatarArgs {
   class?: string,
   pic?: string,
   size?: SizeType,
+  def?: string,
 }
 
 export interface AvatarProps {
   class?: string,
-  pic?: string,
+  pic: string,
   size: SizeType,
+  def: string,
 }

@@ -1,17 +1,17 @@
 import { Component } from 'core';
-import { DefaultPic } from 'images';
+import { DefPic } from 'images';
 
-import type { AvatarArgs, AvatarProps } from './tipe';
+import type { AvatarArgs, AvatarProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class Avatar extends Component<AvatarProps> {
+export class Avatar extends Component<AvatarArgs, object, AvatarProps> {
   constructor(args: AvatarArgs) {
-    super({
-      defaultPic: DefaultPic,
-      size: 'medium',
+    const { size, def } = args;
 
-      ...args,
+    super({
+      size: size ?? 'medium',
+      def: def ?? DefPic,
     });
   }
 
