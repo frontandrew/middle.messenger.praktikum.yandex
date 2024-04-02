@@ -1,0 +1,60 @@
+.user-layout {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.user-container {
+    justify-content: center;
+
+    .avatar {
+        margin-bottom: 1.3125em;
+    }
+}
+.text_title {
+    margin-bottom: 4.15385em;
+    height: 1.71em;
+}
+
+.user-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 31.875em;
+
+    .form__fields-container {
+        height: 19.6em;
+    }
+}
+
+.user-content_edit .form__actions-container {
+    height: 5.75em;
+    align-items: center;
+
+    .button {
+        width: 21.5385em;
+    }
+}
+.user-content .form__actions-container {
+    display: none;
+}
+
+.user-actions {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    width: 100%;
+    height: 9.511em;
+
+    .button:last-child {
+        color: var(--error-color);
+    }
+}
+
+.user-actions_edit {
+    display: none;
+}
