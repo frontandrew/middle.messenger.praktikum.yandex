@@ -2,7 +2,7 @@ import {
   Arrow,
   Avatar,
   Clip,
-  DefaultPic,
+  DefPic,
   ImgCont,
   Menu,
   Search,
@@ -14,82 +14,83 @@ import { registerPartials } from 'tools';
 
 registerPartials(Templates);
 
-const pages: Record<string, Props> = {
-  login: new Pages.PageLogin(),
-  reg: new Pages.PageReg(),
-  user: new Pages.PageUser({
-    avatar: Avatar,
+const pages = {
+  login: [Pages.PageLogin, {}],
+  reg: [Pages.PageReg, {}],
+  user: [Pages.PageUser, {
+    image: Avatar,
     email: 'some@email.com',
     login: 'devostator777',
     first_name: 'John',
     second_name: 'Doe',
-    nick_name: 'Devostator',
+    nick: 'Devostator',
     phone: '+66 45 955 12 12',
-  }),
-  404: new Pages.PageError({
+  }],
+  404: [Pages.PageError, {
     title: '404',
     message: 'Amm... There is no such page ;(',
     redirectLabel: 'Return to chats page',
     redirectTarget: 'chats',
-  }),
-  505: new Pages.PageError({
+  }],
+  505: [Pages.PageError, {
     title: '505',
     message: 'Ooops. Unavalible now, try later.',
     redirectLabel: 'Return to chats page',
     redirectTarget: 'chats',
-  }),
-
-  chats: [Pages.Chat, {
-    userAvatar: Avatar,
-    searchIcon: Search,
-    arrowIcon: Arrow,
-    clipIcon: Clip,
-    menuIcon: Menu,
-    defaultImage: DefaultPic,
-    imageContent: ImgCont,
   }],
+
+  // chats: [Pages.Chat, {
+  //   userAvatar: Avatar,
+  //   searchIcon: Search,
+  //   arrowIcon: Arrow,
+  //   clipIcon: Clip,
+  //   menuIcon: Menu,
+  //   defaultImage: DefPic,
+  //   imageContent: ImgCont,
+  // }],
 
   // temp pages for example
-  'user-form': [Pages.UserForm, {
-    name: '$uperUser',
-    userAvatar: Avatar,
-    arrowIcon: Arrow,
-    defaultImage: DefaultPic,
-  }],
+  // 'user-form': [Pages.UserForm, {
+  //   name: '$uperUser',
+  //   userAvatar: Avatar,
+  //   arrowIcon: Arrow,
+  //   defaultImage: DefPic,
+  // }],
 
-  'user-avatar': [Pages.UserAvatar, {
-    name: '$uperUser',
-    userAvatar: Avatar,
-    arrowIcon: Arrow,
-    defaultImage: DefaultPic,
-  }],
+  // 'user-avatar': [Pages.UserAvatar, {
+  //   name: '$uperUser',
+  //   userAvatar: Avatar,
+  //   arrowIcon: Arrow,
+  //   defaultImage: DefPic,
+  // }],
 
-  'user-password': [Pages.UserPassword, {
-    name: '$uperUser',
-    userAvatar: Avatar,
-    arrowIcon: Arrow,
-    defaultImage: DefaultPic,
-  }],
+  // 'user-password': [Pages.UserPassword, {
+  //   name: '$uperUser',
+  //   userAvatar: Avatar,
+  //   arrowIcon: Arrow,
+  //   defaultImage: DefPic,
+  // }],
 
-  'chat-modal': [Pages.ChatModal, {
-    userAvatar: Avatar,
-    searchIcon: Search,
-    arrowIcon: Arrow,
-    clipIcon: Clip,
-    menuIcon: Menu,
-    defaultImage: DefaultPic,
-    imageContent: ImgCont,
-  }],
+  // 'chat-modal': [Pages.ChatModal, {
+  //   userAvatar: Avatar,
+  //   searchIcon: Search,
+  //   arrowIcon: Arrow,
+  //   clipIcon: Clip,
+  //   menuIcon: Menu,
+  //   defaultImage: DefPic,
+  //   imageContent: ImgCont,
+  // }],
 };
 
 function navigate(page: string): void {
-  const content = pages[page].getContent();
+  const [Page, context] = pages[page];
+  const content = new Page({ context }).getContent();
   const container = document.querySelector('.main');
 
-  container!.appendChild(content);
+  container!.replaceChildren(content);
 }
 
-document.addEventListener('DOMContentLoaded', () => navigate('505'));
+document.addEventListener('DOMContentLoaded', () => navigate('login'));
 
 document.addEventListener('click', (event: Event) => {
   const targetElement = event.target as HTMLElement;

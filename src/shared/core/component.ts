@@ -164,10 +164,10 @@ export class Component<Args extends object, Children extends object, Props exten
     const expectedProps = { ...this.props, ...nextProps };
     const isEqual = deepEqual(this.props, expectedProps);
     if (isEqual) {
-      console.warn(`Properties arent changed.`, {
-        curr: this.meta.props,
-        next: expectedProps,
-      });
+      // console.warn(`Properties arent changed.`, {
+      //   curr: this.meta.props,
+      //   next: expectedProps,
+      // });
       return;
     }
 
