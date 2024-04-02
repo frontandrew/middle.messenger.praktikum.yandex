@@ -1,5 +1,5 @@
-{{#>Form class='form-reg'}}
-    {{#>FieldsContainer}}
+<form class='form form-reg'>
+    {{#>FormFields}}
         {{{email}}}
         {{{login}}}
         {{{first_name}}}
@@ -7,9 +7,9 @@
         {{{phone}}}
         {{{password}}}
         {{{password_more}}}
-    {{/FieldsContainer}}
-    {{#>ActionsContainer}}
+    {{/FormFields}}
+    {{#>FormActions}}
         {{{submit}}}
         {{{reset}}}
-    {{/ActionsContainer}}
-{{/Form}}
+    {{/FormActions}}
+</form>
