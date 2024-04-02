@@ -6,7 +6,12 @@ import { deepEqual } from 'tools';
 import { EventBus } from './event-bus';
 import { createProxy } from './proxy-object';
 
-export class Component<Args extends object, Children extends object, Props extends object> {
+import type { Components } from 'ui'
+
+type Events = Record<string, ({}: Event) => Event>
+
+export class Component
+  <Args extends object, Children extends object, Props> {
   static EVENTS = {
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
@@ -18,12 +23,12 @@ export class Component<Args extends object, Children extends object, Props exten
   public instance;
   public props: Props;
   public children: Children;
-  public events: Record<string, ({}: Event) => Event>;
+  public events: Events;
 
   protected _element: HTMLElement | null = null;
   protected count;
 
-  readonly meta: any = null;
+  private meta: Nullable<UnknwnObject> = null;
 
   private eventBus: () => EventBus;
 
@@ -38,16 +43,16 @@ export class Component<Args extends object, Children extends object, Props exten
     this.meta = { children, events, props };
     this.children = this._makePropsProxy(children) as Children;
     this.props = this._makePropsProxy(props) as Props;
-    this.events = this._makePropsProxy(events);
+    this.events = this._makePropsProxy(events) as Events;
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
     eventBus.emit(Component.EVENTS.INIT);
   }
 
   private separateArguments(args: Args) {
-    const props: Record<string, unknown> = {};
-    const children: Record<string, unknown> = {};
-    const events: Record<string, unknown> = {};
+    const props: UnknwnObject = {};
+    const children: UnknwnObject = {};
+    const events: UnknwnObject = {};
 
     Object.entries(args).forEach(([key, value]) => {
       if (value instanceof Component) {
@@ -70,14 +75,14 @@ export class Component<Args extends object, Children extends object, Props exten
   }
 
   init() {
-    this.instance = this.__proto__.constructor.name;
+    this.instance = Object.getPrototypeOf(this).constructor.name;
     this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
   }
 
   _render() {
     const element = this.createDOMElement();
 
-    Object.values(this.children).forEach((child) => {
+    Object.values(this.children).forEach((child: Components) => {
       const stub = element!.querySelector(`[data-id='${child.id}']`);
       stub?.replaceWith(child.getContent() as HTMLElement);
     });
@@ -86,10 +91,8 @@ export class Component<Args extends object, Children extends object, Props exten
     this._element = element as HTMLElement;
 
     this._attachEvents();
-    console.warn(
-      `RNDR[${`${this.instance}:${this.id}`}]::${++this.count}`,
-      this,
-    );
+    // eslint-disable-next-line no-plusplus
+    console.warn(`RNDR{${++this.count}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
   }
 
   render() {
@@ -114,7 +117,7 @@ export class Component<Args extends object, Children extends object, Props exten
     tempElement.insertAdjacentHTML('afterbegin', elementString.trim());
 
     const resultElement = tempElement.firstElementChild;
-    // resultElement!.setAttribute('data-id', this.id);
+    resultElement!.setAttribute('data-id', this.id);
 
     return resultElement;
   }
@@ -123,7 +126,7 @@ export class Component<Args extends object, Children extends object, Props exten
     this.componentDidMount(props);
   }
 
-  // Может переопределять пользователь, необязательно трогать
+  // Может переопределять пользователь, необязательно трогать. Не используется
   componentDidMount(props: Props) {}
 
   dispatchComponentDidMount() {
@@ -151,7 +154,7 @@ export class Component<Args extends object, Children extends object, Props exten
     return true;
   }
 
-  setProps<T>(nextProps: T) {
+  setProps(nextProps: Props) {
     if (!nextProps || !Object.keys(nextProps)?.length) {
       console.warn(`Properties not passed.`, nextProps);
       return;
@@ -172,7 +175,7 @@ export class Component<Args extends object, Children extends object, Props exten
     }
 
     Object.entries(nextProps).forEach(([key, value]) => {
-      this.props[key] = value;
+      this.props = { ...this.props, [key]: value };
     });
 
     this.eventBus().emit(Component.EVENTS.FLOW_CDU, nextProps, this.props);
@@ -186,7 +189,7 @@ export class Component<Args extends object, Children extends object, Props exten
     return this.element;
   }
 
-  _makePropsProxy(args) {
+  _makePropsProxy(args: UnknwnObject) {
     return createProxy(args);
   }
 

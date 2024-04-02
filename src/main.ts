@@ -1,29 +1,31 @@
 import {
-  Arrow,
+  // Arrow,
   Avatar,
-  Clip,
-  DefPic,
-  ImgCont,
-  Menu,
-  Search,
+  // Clip,
+  // DefPic,
+  // ImgCont,
+  // Menu,
+  // Search,
 } from 'images';
 
-import * as Pages from 'pages';
+import { Pages } from 'pages';
 import { Templates } from 'ui';
 import { registerPartials } from 'tools';
 
+import type { PagesType } from 'pages';
+
 registerPartials(Templates);
 
-const pages = {
+const pages: { [key: string]: [PagesType, Record<string, string>] } = {
   login: [Pages.PageLogin, {}],
   reg: [Pages.PageReg, {}],
   user: [Pages.PageUser, {
     image: Avatar,
     email: 'some@email.com',
     login: 'devostator777',
-    first_name: 'John',
-    second_name: 'Doe',
-    nick: 'Devostator',
+    firstName: 'John',
+    secondName: 'Doe',
+    nickName: 'Devostator',
     phone: '+66 45 955 12 12',
   }],
   404: [Pages.PageError, {
@@ -82,15 +84,15 @@ const pages = {
   // }],
 };
 
-function navigate(page: string): void {
+function navigate(page: string) {
   const [Page, context] = pages[page];
-  const content = new Page({ context }).getContent();
+  const content = new Page(context).getContent();
   const container = document.querySelector('.main');
 
-  container!.replaceChildren(content);
+  container!.replaceChildren(content!);
 }
 
-document.addEventListener('DOMContentLoaded', () => navigate('login'));
+document.addEventListener('DOMContentLoaded', () => navigate('user'));
 
 document.addEventListener('click', (event: Event) => {
   const targetElement = event.target as HTMLElement;

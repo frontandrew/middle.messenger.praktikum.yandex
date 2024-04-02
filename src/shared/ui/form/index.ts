@@ -4,7 +4,7 @@ import { Field } from 'ui';
 import type { FormArgs, FormChildren, FormProps } from './type';
 import './style.css';
 
-export abstract class Form<A extends FormArgs, C extends FormChildren, P extends FormProps>
+export class Form<A extends FormArgs, C extends FormChildren, P extends FormProps>
   extends Component<A, C, P> {
   public hasError = false;
 
@@ -37,7 +37,7 @@ export abstract class Form<A extends FormArgs, C extends FormChildren, P extends
 
   resetForm() {
     Object.values(this.children).forEach((child) => {
-      child.resetState();
+      child!.resetState();
     });
 
     this.updateErrorState(false);

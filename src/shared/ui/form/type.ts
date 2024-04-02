@@ -6,19 +6,10 @@ export interface FormArgs {
 
 export interface FormProps {
   hasError: boolean,
-
-  validate: () => void,
-  resetForm: () => void,
-  submitForm: () => void,
 }
 
 export interface FormChildren {
-  [key: string]: Field | Button,
+  [key: string]: Field | Button | undefined,
   submit: Button,
-  reset: Button,
+  reset?: Button,
 }
-
-// export interface FormChildren {
-//   fields: { [key: string]: Field },
-//   actions: { submit: Button, reset: Button },
-// }

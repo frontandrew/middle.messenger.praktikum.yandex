@@ -1,20 +1,12 @@
-/**
- * Нет смысла контролировать типы здесь, поскольку
- * тут формируются структуры. Необходимые сигнатуры
- * присвоены в базовом компоненте, передаваемые свойства
- * контролируются при создании нового инстанса компонента
- */
-
-// @ts-nocheck
-export function createProxy(props = {}) {
+export function createProxy(props: UnknwnObject) {
   return new Proxy(props, {
-    get(target, prop: string) {
-      if (prop.indexOf('_') === 0) {
-        console.warn(`Cant get this property: ${prop}`);
+    get(target, prop) {
+      if ((prop as string).indexOf('_') === 0) {
+        console.warn(`Cant get this property: ${(prop as string)}`);
         return;
       }
 
-      const value = target[prop];
+      const value = target[(prop as string)];
       // eslint-disable-next-line consistent-return
       return typeof value === 'function' ? value.bind(target) : value;
     },
