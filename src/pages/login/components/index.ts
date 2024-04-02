@@ -1,2 +1,1 @@
-export { FormAuth } from './form-auth';
-export { Layout } from './layout';
+export { LayoutAuth } from './layout-auth';
