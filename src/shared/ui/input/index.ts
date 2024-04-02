@@ -1,7 +1,7 @@
 import { Component } from 'core';
 
 import type { ValidationState } from 'tools';
-import { validators } from 'tools';
+import { deepEqual, validators } from 'tools';
 
 import { InputArgs, InputProps, InputState } from './type';
 import template from './template.hbs?raw';
@@ -44,12 +44,12 @@ export class Input extends Component<InputArgs, object, InputProps> {
   }
 
   validate() {
-    this.validationState = this.props.validator({
+    const state = this.props.validator({
       required: this.props.required,
       value: this.value,
     });
-    this.validity = this.validationState;
-    this.setState({ hasError: this.validity.hasError, value: this.value });
+
+    this.validity = state;
   }
 
   get validity(): ValidationState {
@@ -57,7 +57,10 @@ export class Input extends Component<InputArgs, object, InputProps> {
   }
 
   set validity(state: ValidationState) {
-    this.validationState = state;
+    if (!deepEqual(this.validationState, state)) {
+      this.validationState = state;
+      this.setState({ hasError: this.validationState.hasError, value: this.value });
+    }
   }
 
   setState(state: InputState) {
