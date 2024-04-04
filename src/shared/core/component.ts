@@ -6,8 +6,6 @@ import { deepEqual } from 'tools';
 import { EventBus } from './event-bus';
 import { createProxy } from './proxy-object';
 
-import type { Components } from 'ui'
-
 type Events = Record<string, ({}: Event) => Event>
 
 export class Component
@@ -28,7 +26,7 @@ export class Component
   protected _element: HTMLElement | null = null;
   protected count;
 
-  private meta: Nullable<UnknwnObject> = null;
+  private meta: Nullable<UnknownObject> = null;
 
   private eventBus: () => EventBus;
 
@@ -41,18 +39,18 @@ export class Component
     this.count = 0;
     this.instance = 'Component';
     this.meta = { children, events, props };
-    this.children = this._makePropsProxy(children) as Children;
-    this.props = this._makePropsProxy(props) as Props;
-    this.events = this._makePropsProxy(events) as Events;
+    this.children = this.makePropsProxy(children) as Children;
+    this.props = this.makePropsProxy(props) as Props;
+    this.events = this.makePropsProxy(events) as Events;
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
     eventBus.emit(Component.EVENTS.INIT);
   }
 
   private separateArguments(args: Args) {
-    const props: UnknwnObject = {};
-    const children: UnknwnObject = {};
-    const events: UnknwnObject = {};
+    const props: UnknownObject = {};
+    const children: UnknownObject = {};
+    const events: UnknownObject = {};
 
     Object.entries(args).forEach(([key, value]) => {
       if (value instanceof Component) {
@@ -68,23 +66,27 @@ export class Component
   }
 
   _registerEvents(eventBus: EventBus) {
-    eventBus.on(Component.EVENTS.INIT, this.init.bind(this));
+    eventBus.on(Component.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Component.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
 
-  init() {
+  _init() {
     this.instance = Object.getPrototypeOf(this).constructor.name;
+
+    this.init();
     this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
   }
+
+  init() {}
 
   _render() {
     const element = this.createDOMElement();
 
-    Object.values(this.children).forEach((child: Components) => {
+    Object.values(this.children).forEach((child) => {
       const stub = element!.querySelector(`[data-id='${child.id}']`);
-      stub?.replaceWith(child.getContent() as HTMLElement);
+      stub?.replaceWith(child!.getContent() as HTMLElement);
     });
 
     if (this._element) this._element.replaceWith(element as Node);
@@ -189,7 +191,7 @@ export class Component
     return this.element;
   }
 
-  _makePropsProxy(args: UnknwnObject) {
+  private makePropsProxy(args: UnknownObject) {
     return createProxy(args);
   }
 

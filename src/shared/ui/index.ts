@@ -1,3 +1,22 @@
+import { Avatar } from './avatar';
+import { Button } from './button';
+import { Field } from './field';
+import { Form } from './form';
+import { Input } from './input';
+import { List } from './list';
+import { Text } from './text';
+
+// Этот тип скорее всего не нужен, эксперимент
+
+export type ComponentsType = typeof Avatar
+  | typeof Button
+  | typeof Field
+  | typeof Form
+  | typeof Input
+  | typeof List
+  | typeof Text
+  | typeof undefined
+
 export { Avatar } from './avatar';
 export { Button } from './button';
 export { Field } from './field';

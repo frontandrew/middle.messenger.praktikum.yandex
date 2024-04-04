@@ -4,4 +4,4 @@ declare module '*.hbs' {
 }
 
 declare type Nullable<T> = T | null
-declare type UnknwnObject = Record<string, unknown>
+declare type UnknownObject = Record<string, unknown>

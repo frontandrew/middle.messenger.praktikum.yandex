@@ -1,4 +1,4 @@
-export function createProxy(props: UnknwnObject) {
+export function createProxy(props: UnknownObject) {
   return new Proxy(props, {
     get(target, prop) {
       if ((prop as string).indexOf('_') === 0) {
