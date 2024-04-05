@@ -29,6 +29,12 @@
       "allowAfterThis": true
     }],
     "no-console": ["error", { "allow": ["warn", "error"] }],
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "object-curly-newline": ["warn", {
+        "ObjectExpression": { "multiline": true, "minProperties": 6 },
+        "ObjectPattern": { "multiline": true, "minProperties": 6 },
+        "ImportDeclaration": "never",
+        "ExportDeclaration": { "multiline": true, "minProperties": 6 }
+    }]
   }
 }
