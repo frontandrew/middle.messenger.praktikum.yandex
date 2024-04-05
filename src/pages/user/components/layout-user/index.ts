@@ -47,6 +47,7 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
       sign_out: new Button({
         variant: 'link',
         label: 'Sign out',
+        page: 'login',
       }),
     });
   }

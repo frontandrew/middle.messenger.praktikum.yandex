@@ -1,5 +1,3 @@
-import type { ValidationState, ValidatorParams } from 'tools';
-
 export type InputTypes = 'text'
 | 'password'
 | 'email'
@@ -9,16 +7,12 @@ export type InputTypes = 'text'
 
 export interface InputArgs {
   name: string,
-  type: InputTypes,
 
+  type?: InputTypes,
   class?: string,
   disabled?: boolean,
   hasError?: boolean,
-  inline?: boolean,
-  required?: boolean,
-  touched?: boolean,
   value?: string,
-  validator?: ({}: ValidatorParams) => ValidationState,
 
   onBlur?: () => void
   onInput?: ({}: InputEvent) => Event
@@ -26,23 +20,13 @@ export interface InputArgs {
 
 export interface InputProps {
   readonly name: string,
-  type: InputTypes,
+  readonly type: InputTypes,
 
-  class: string,
-  disabled: boolean,
-  hasError: boolean,
-  inline: boolean,
-  required: boolean,
-  touched: boolean,
-  value: string,
-  validator: ({}: ValidatorParams) => ValidationState,
-
-  onBlur: () => void,
-  onInput: ({}: InputEvent) => Event
-}
-
-export type InputState = {
-  value?: string,
+  class?: string,
   disabled?: boolean,
-  hasError?: boolean
+  hasError?: boolean,
+  value?: string,
+
+  onBlur?: () => void,
+  onInput?: ({}: InputEvent) => Event
 }

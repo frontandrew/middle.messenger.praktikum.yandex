@@ -1,11 +1,12 @@
 type ValidatorParams = {
-  value: string
-  required: boolean
+  value: string,
+  required?: boolean,
 }
 
 type ValidationState = {
-  textError: string
-  hasError: boolean
+  textError: string,
+  hasError: boolean,
+  value: string,
 }
 
 type Validators = Record<string, ({}: ValidatorParams) => ValidationState>
@@ -44,7 +45,7 @@ function password({ value = '', required = false }: ValidatorParams): Validation
 
   if (message.trim().endsWith(',')) message = message.slice(0, -1).concat('.');
 
-  return { hasError: status, textError: status ? message : '' };
+  return { hasError: status, textError: status ? message : '', value };
 }
 
 function login({ value = '', required = false }: ValidatorParams): ValidationState {
@@ -66,7 +67,7 @@ function login({ value = '', required = false }: ValidatorParams): ValidationSta
     status = true;
   }
 
-  return { hasError: status, textError: status ? message.trim() : '' };
+  return { hasError: status, textError: status ? message.trim() : '', value };
 }
 
 function email({ value = '', required = false }: ValidatorParams): ValidationState {
@@ -77,7 +78,7 @@ function email({ value = '', required = false }: ValidatorParams): ValidationSta
     status = true;
   }
 
-  return { hasError: status, textError: status ? message.trim() : '' };
+  return { hasError: status, textError: status ? message.trim() : '', value };
 }
 
 function phone({ value = '', required = false }: ValidatorParams): ValidationState {
@@ -97,14 +98,14 @@ function phone({ value = '', required = false }: ValidatorParams): ValidationSta
     status = true;
   }
 
-  return { hasError: status, textError: status ? message.trim() : '' };
+  return { hasError: status, textError: status ? message.trim() : '', value };
 }
 
 function isRequired({ value = '', required = false }: ValidatorParams): ValidationState {
-  const requiredStatus = { hasError: true, textError: 'This field is required.' };
+  const requiredStatus = { hasError: true, textError: 'This field is required.', value };
 
   if (!value && required) return requiredStatus;
-  return { hasError: false, textError: '' };
+  return { hasError: false, textError: '', value};
 }
 
 export const validators: Validators = {
