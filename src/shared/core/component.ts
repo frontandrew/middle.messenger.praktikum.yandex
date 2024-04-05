@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
 import { nanoid } from 'nanoid';
 
-import { deepEqual } from 'tools';
+import { deepCopy, deepEqual } from 'tools';
 
 import { EventBus } from './event-bus';
 import { createProxy } from './proxy-object';
@@ -137,12 +137,9 @@ export class Component
   }
 
   _componentDidUpdate(oldProps: Props, newProps: Props) {
-    // console.log(
-    //   `_CDU[${this._element?.nodeName + '::' + this.id}]::${this.count}`,
-    //   { ...this.meta, elem: this._element }
-    // )
-    const response = this.componentDidUpdate(oldProps, newProps);
-    if (response) {
+    const isEqual = this.componentDidUpdate(oldProps, newProps);
+
+    if (!isEqual) {
       this._detachEvents();
       this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
       return true;
@@ -153,7 +150,13 @@ export class Component
 
   // Может переопределять пользователь, необязательно трогать
   componentDidUpdate(oldProps: Props, newProps: Props) {
-    return true;
+    const isEqual = deepEqual(newProps, oldProps);
+    console.warn(`EQUA{${this.count}}:[${this.instance}:${this.id}]:`, {
+      eql: isEqual,
+      new: newProps,
+      old: oldProps,
+    });
+    return isEqual;
   }
 
   setProps(nextProps: { [Prop in keyof Props]?: Props[Prop] }) {
@@ -162,25 +165,27 @@ export class Component
       return;
     }
 
+    const oldProps = deepCopy(this.props);
+
     /**
      * TODO: попытка сравнивать пропсы, чтоб принять решение,
      * ножно ли их обновлять. Иногда кажется, что работает не корректно.
      */
-    const expectedProps = { ...this.props, ...nextProps };
-    const isEqual = deepEqual(this.props, expectedProps);
-    if (isEqual) {
-      // console.warn(`Properties arent changed.`, {
-      //   curr: this.meta.props,
-      //   next: expectedProps,
-      // });
-      return;
-    }
+    // const expectedProps = { ...this.props, ...nextProps };
+    // const isEqual = deepEqual(this.props, expectedProps);
+    // if (isEqual) {
+    //   // console.warn(`Properties arent changed.`, {
+    //   //   curr: this.meta.props,
+    //   //   next: expectedProps,
+    //   // });
+    //   return;
+    // }
 
     Object.entries(nextProps).forEach(([key, value]) => {
       this.props = { ...this.props, [key]: value };
     });
 
-    this.eventBus().emit(Component.EVENTS.FLOW_CDU, nextProps, this.props);
+    this.eventBus().emit(Component.EVENTS.FLOW_CDU, oldProps, this.props);
   }
 
   get element() {

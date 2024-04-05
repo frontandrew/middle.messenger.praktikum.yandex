@@ -1,3 +1,4 @@
+export { deepCopy } from './deep-copy';
 export { deepEqual } from './deep-equal';
 export { validators } from './validators';
 export { registerPartials } from './register-partials';
