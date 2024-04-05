@@ -7,16 +7,28 @@ import './style.css';
 export class Input extends Component<InputArgs, object, InputProps> {
   public value: string;
 
-  constructor(args: InputArgs) {
+  constructor({
+    classes = '',
+    disabled = false,
+    hasError = false,
+    name = '!unnamed!',
+    type = 'text',
+    value = '',
+    onBlur = () => {},
+    onInput = (event: InputEvent) => {
+      this.setValue(event);
+      return event;
+    },
+  }: InputArgs) {
     super({
-      disabled: false,
-      hasError: false,
-
-      ...args,
-      onInput: (event: InputEvent) => {
-        this.setValue(event);
-        return event;
-      },
+      classes,
+      disabled,
+      hasError,
+      name,
+      type,
+      value,
+      onInput,
+      onBlur,
     });
 
     this.value = this.props.value ?? '';

@@ -92,7 +92,7 @@ function navigate(page: string) {
   container!.replaceChildren(content!);
 }
 
-document.addEventListener('DOMContentLoaded', () => navigate('user'));
+document.addEventListener('DOMContentLoaded', () => navigate('login'));
 
 document.addEventListener('click', (event: Event) => {
   const targetElement = event.target as HTMLElement;

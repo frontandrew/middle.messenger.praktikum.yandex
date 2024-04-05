@@ -3,12 +3,6 @@ import type { ValidationState, ValidatorParams } from 'tools';
 import { Input } from '../input';
 import type { InputTypes } from '../input/type';
 
-export type FieldState = {
-  value: string,
-  textError: string,
-  hasError: boolean,
-}
-
 export interface FieldArgs {
   readonly name: string,
   readonly label: string,
@@ -23,9 +17,6 @@ export interface FieldArgs {
   required?: boolean,
   value?: string,
   validator?: ({}: ValidatorParams) => ValidationState,
-
-  onChange?: ({}: InputEvent) => Event
-  onInput?: ({}: InputEvent) => Event
 }
 
 export interface FieldProps {
@@ -42,9 +33,6 @@ export interface FieldProps {
   required?: boolean,
   value?: string,
   validator?: ({}: ValidatorParams) => ValidationState,
-
-  onChange?: ({}: InputEvent) => Event
-  onInput?: ({}: InputEvent) => Event
 }
 
 export interface FieldChildren {

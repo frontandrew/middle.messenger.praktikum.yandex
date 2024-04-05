@@ -74,12 +74,14 @@ export class Component
 
   _init() {
     this.instance = Object.getPrototypeOf(this).constructor.name;
-
     this.init();
+    this.createChildren();
     this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
   }
 
   init() {}
+
+  createChildren() {}
 
   _render() {
     const element = this.createDOMElement();

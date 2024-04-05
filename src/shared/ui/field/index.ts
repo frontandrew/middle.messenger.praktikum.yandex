@@ -9,23 +9,48 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class Field extends Component<FieldArgs, FieldChildren, FieldProps> {
-  constructor(args: FieldArgs) {
+  constructor({
+    name,
+    label,
+    type,
+    classes = '',
+    disabled = false,
+    inline = false,
+    hasError = false,
+    textError = '',
+    textHelp = '',
+    required = false,
+    validator = validators[name] || validators.isRequired,
+    value = '',
+  }: FieldArgs) {
     super({
-      validator: validators[args.name] ?? validators.isRequired,
-      ...args,
+      classes,
+      disabled,
+      hasError,
+      inline,
+      label,
+      name,
+      required,
+      type,
+      textError,
+      textHelp,
+      validator,
+      value,
     });
   }
 
-  init(): void {
-    const { value, type, name, disabled, hasError } = this.props;
+  createChildren(): void {
+    const {
+      name, type, classes = '', disabled, hasError, value,
+    } = this.props;
     this.children = {
       input: new Input({
         name,
         type,
+        classes,
         disabled,
         hasError,
         value,
-
         onBlur: () => this.handleValidation(),
       }),
     };
@@ -45,7 +70,7 @@ export class Field extends Component<FieldArgs, FieldChildren, FieldProps> {
   }
 
   reset() {
-    this.setProps({ hasError: false, textError: '', value: '' });
+    this.setProps({ hasError: false, textError: '' });
     this.children.input.reset();
   }
 
