@@ -9,7 +9,7 @@ export interface InputArgs {
   name: string,
 
   type?: InputTypes,
-  class?: string,
+  classes?: string,
   disabled?: boolean,
   hasError?: boolean,
   value?: string,
@@ -22,7 +22,7 @@ export interface InputProps {
   readonly name: string,
   readonly type: InputTypes,
 
-  class?: string,
+  classes?: string,
   disabled?: boolean,
   hasError?: boolean,
   value?: string,

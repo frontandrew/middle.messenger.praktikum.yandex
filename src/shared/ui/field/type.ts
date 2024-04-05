@@ -14,7 +14,7 @@ export interface FieldArgs {
   readonly label: string,
   readonly type: InputTypes,
 
-  class?: string,
+  classes?: string,
   disabled?: boolean,
   inline?: boolean,
   hasError?: boolean,
@@ -33,7 +33,7 @@ export interface FieldProps {
   readonly label: string,
   readonly type: InputTypes,
 
-  class?: string,
+  classes?: string,
   disabled?: boolean,
   inline?: boolean,
   hasError?: boolean,

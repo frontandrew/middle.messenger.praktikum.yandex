@@ -1,7 +1,7 @@
 export interface ButtonArgs {
   label: string,
 
-  class?: string,
+  classes?: string,
   disabled?: boolean,
   page?: string,
   type?: 'submit' | 'reset' | 'button',
@@ -17,7 +17,7 @@ export interface ButtonProps {
   type: 'submit' | 'reset' | 'button',
   variant: 'filled' | 'link' | 'text',
 
-  class?: string,
+  classes?: string,
   page?: string,
 
   // onClick?: ({}: Event) => Event

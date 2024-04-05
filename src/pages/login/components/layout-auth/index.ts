@@ -10,7 +10,7 @@ export class LayoutAuth extends Component<object, object, object> {
   constructor() {
     super({
       title: new Text({
-        class: 'layout-auth__title',
+        classes: 'layout-auth__title',
         tag: 'h1',
         text: 'Authorization',
       }),

@@ -12,12 +12,12 @@ export class LayoutError extends Component<LayoutErrorArgs, LayoutErrorChildren,
       title: new Text({
         tag: 'h1',
         text: args.title,
-        class: 'error-page__title',
+        classes: 'error-page__title',
       }),
       message: new Text({
         tag: 'h2',
         text: args.message,
-        class: 'error-page__message',
+        classes: 'error-page__message',
       }),
       redirect: new Button({
         label: args.redirectLabel,

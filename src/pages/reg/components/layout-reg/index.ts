@@ -10,7 +10,7 @@ export class LayoutReg extends Component<{}, {}, {}> {
   constructor() {
     super({
       title: new Text({
-        class: 'layout-reg__title',
+        classes: 'layout-reg__title',
         tag: 'h1',
         text: 'Registration',
       }),

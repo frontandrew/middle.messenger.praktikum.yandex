@@ -23,7 +23,7 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
         size: 'large',
       }),
       nick: new Text({
-        class: 'text_title',
+        classes: 'text_title',
         text: nickName!,
         tag: 'h1',
       }),
