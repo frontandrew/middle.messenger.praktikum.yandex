@@ -156,7 +156,7 @@ export class Component
     return true;
   }
 
-  setProps(nextProps: Props) {
+  setProps(nextProps: { [Prop in keyof Props]?: Props[Prop] }) {
     if (!nextProps || !Object.keys(nextProps)?.length) {
       console.warn(`Properties not passed.`, nextProps);
       return;
