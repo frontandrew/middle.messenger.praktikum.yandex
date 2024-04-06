@@ -1,16 +1,12 @@
 import { Component } from 'core';
 
-import { TextArgs, TextProps } from './type';
+import { TextProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class Text extends Component<TextProps> {
-  constructor(args: TextArgs) {
-    super({
-      tag: 'span',
-
-      ...args,
-    });
+export class Text extends Component<object, TextProps> {
+  constructor({ classes = '', tag = 'span', ...rest }: TextProps) {
+    super({ classes, tag, ...rest });
   }
 
   render() {

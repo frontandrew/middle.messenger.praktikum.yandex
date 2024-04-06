@@ -6,13 +6,8 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class Avatar extends Component<AvatarArgs, object, AvatarProps> {
-  constructor(args: AvatarArgs) {
-    const { size, def } = args;
-
-    super({
-      size: size ?? 'medium',
-      def: def ?? DefPic,
-    });
+  constructor({ classes = '', size = 'medium', stub = DefPic, ...rest }: AvatarArgs) {
+    super({ classes, size, stub, ...rest });
   }
 
   render() {

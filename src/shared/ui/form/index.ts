@@ -1,25 +1,27 @@
 import { Component } from 'core';
 import { Field } from 'ui';
 
-import type { FormArgs, FormChildren, FormProps } from './type';
+import type { FormChildren, FormProps } from './type';
 import './style.css';
 
-export class Form<A extends FormArgs, C extends FormChildren, P extends FormProps>
-  extends Component<A, C, P> {
-  public hasError = false;
+export class Form<C extends FormChildren, P extends FormProps>
+  extends Component<C, P> {
+  public hasError? = false;
 
-  constructor(args: A) {
-    super({
-      onSubmit: (event: Event) => {
-        event.preventDefault();
-        this.handleSubmit();
-        return event;
-      },
-      onReset: () => this.resetForm(),
-      onInput: () => this.updateErrorState(false),
+  constructor({
+    disabled = false,
+    hasError = false,
 
-      ...args,
-    });
+    onSubmit = (event: Event) => {
+      event.preventDefault();
+      this.handleSubmit();
+      return event;
+    },
+    onReset = () => this.resetForm(),
+    onInput = () => this.updateErrorState(false),
+    ...rest
+  }: P) {
+    super({ disabled, hasError, onSubmit, onReset, onInput, ...rest});
 
     this.hasError = this.props.hasError;
   }

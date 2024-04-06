@@ -7,11 +7,9 @@ import type { LayoutUserArgs, LayoutUserChildren, LayoutUserProps } from './type
 import template from './template.hbs?raw';
 import './style.css';
 
-export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, LayoutUserProps> {
+export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
   constructor(args: LayoutUserArgs) {
-    const {
-      image, nickName, email, login, firstName, secondName, phone, isEdit,
-    } = args;
+    const { image, nickName, ...formData } = args;
 
     super({
       back: new Button({
@@ -27,15 +25,7 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
         text: nickName!,
         tag: 'h1',
       }),
-      form: new FormUser({
-        isEdit,
-        emailValue: email,
-        loginValue: login,
-        firstNameValue: firstName,
-        secondNameValue: secondName,
-        nickNameValue: nickName,
-        phoneValue: phone,
-      }),
+      form: new FormUser({ nickName, ...formData }),
       change_info: new Button({
         variant: 'link',
         label: 'Change user data',

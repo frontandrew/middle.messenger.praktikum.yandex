@@ -1,11 +1,13 @@
 import { Button, Field } from 'ui';
 
-export interface FormArgs {
-  hasError?: boolean,
-}
-
 export interface FormProps {
-  hasError: boolean,
+  [key: string]: any,
+  disabled?: boolean,
+  hasError?: boolean,
+
+  onSubmit?: ({}: Event) => Event,
+  onReset?: () => void,
+  onInput?: () => void,
 }
 
 export interface FormChildren {

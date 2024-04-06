@@ -4,31 +4,37 @@ import { InputArgs, InputProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class Input extends Component<InputArgs, object, InputProps> {
+export class Input extends Component<{}, InputProps> {
   public value: string;
 
   constructor({
+    type = 'text',
+
     classes = '',
     disabled = false,
     hasError = false,
-    name = '!unnamed!',
-    type = 'text',
     value = '',
+
     onBlur = () => {},
     onInput = (event: InputEvent) => {
       this.setValue(event);
       return event;
     },
+
+    ...rest
   }: InputArgs) {
     super({
+      type,
+
       classes,
       disabled,
       hasError,
-      name,
-      type,
       value,
+
       onInput,
       onBlur,
+
+      ...rest,
     });
 
     this.value = this.props.value ?? '';

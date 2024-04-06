@@ -1,15 +1,17 @@
 type SizeType = 'large' | 'medium' | 'small';
 
 export interface AvatarArgs {
-  classes?: string,
   pic?: string,
+
+  classes?: string,
   size?: SizeType,
-  def?: string,
+  stub?: string,
 }
 
 export interface AvatarProps {
+  pic?: string,
+
   classes?: string,
-  pic: string,
-  size: SizeType,
-  def: string,
+  size?: SizeType,
+  stub?: string,
 }

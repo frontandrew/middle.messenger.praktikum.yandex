@@ -1,24 +1,26 @@
+type ButtonTypes = 'submit' | 'reset' | 'button';
+type ButtonVariants = 'filled' | 'link' | 'text';
+
 export interface ButtonArgs {
-  label: string,
+  readonly label: string,
 
   classes?: string,
   disabled?: boolean,
   page?: string,
-  type?: 'submit' | 'reset' | 'button',
-  variant?: 'filled' | 'link' | 'text',
+  type?: ButtonTypes,
+  variant?: ButtonVariants,
 
-  onClick?: () => void,
-  // onClick?: ({}: Event) => Event
+  onClick?: ({}: Event) => Event
 }
 
 export interface ButtonProps {
   readonly label: string,
-  disabled: boolean,
-  type: 'submit' | 'reset' | 'button',
-  variant: 'filled' | 'link' | 'text',
 
   classes?: string,
+  disabled: boolean,
   page?: string,
+  type?: ButtonTypes,
+  variant?: ButtonVariants,
 
-  // onClick?: ({}: Event) => Event
+  onClick?: ({}: Event) => Event
 }

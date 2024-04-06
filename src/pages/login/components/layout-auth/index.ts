@@ -3,10 +3,11 @@ import { Text } from 'ui';
 
 import { FormAuth } from '../form-auth';
 
+import type { LayoutAuthChildren, LayoutAuthProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class LayoutAuth extends Component<object, object, object> {
+export class LayoutAuth extends Component<LayoutAuthChildren, LayoutAuthProps> {
   constructor() {
     super({
       title: new Text({
@@ -14,7 +15,10 @@ export class LayoutAuth extends Component<object, object, object> {
         tag: 'h1',
         text: 'Authorization',
       }),
-      form: new FormAuth({}),
+      form: new FormAuth({
+        login: 'And',
+        password: '!Q1gsdgr',
+      }),
     });
   }
 

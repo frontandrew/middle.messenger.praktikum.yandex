@@ -1,7 +1,12 @@
+{{log "avatar" this}}
 <div class="{{#if classes}}{{classes}} {{/if}} avatar avatar_{{size}}">
     {{#if pic}}
-        <img class="avatar__image" src="{{pic}}" alt="user avatar">
+        <img class="avatar__image" alt="user avatar" src="{{pic}}">
     {{else}}
-        <img class="avatar__image-default avatar__image-default_{{size}}" src="{{def}}" alt="empty user avatar">
+        <img
+            class="avatar__stub avatar__stub_{{size}}"
+            alt="avatar not configured"
+            src="{{stub}}"
+        >
     {{/if}}
 </div>

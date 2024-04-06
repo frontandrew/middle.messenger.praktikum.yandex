@@ -5,12 +5,12 @@ export interface FormUserArgs {
   isEdit: boolean,
   hasError?: boolean,
 
-  emailValue?: string,
-  loginValue?: string,
-  firstNameValue?: string,
-  secondNameValue?: string,
-  nickNameValue?: string,
-  phoneValue?: string,
+  email?: string,
+  login?: string,
+  firstName?: string,
+  secondName?: string,
+  nickName?: string,
+  phone?: string,
 }
 
 export interface FormUserProps {

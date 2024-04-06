@@ -36,15 +36,15 @@
     min-height: 2.125em;
 }
 
-.avatar__image-default {    
+.avatar__stub {
     object-fit: contain;
 }
-.avatar__image-default_large {
+.avatar__stub_large {
     width: 2.5em;
 }
-.avatar__image-default_medium {
+.avatar__stub_medium {
     width: 1.5em;
 }
-.avatar__image-default_small {
+.avatar__stub_small {
     width: 1.125em;
 }

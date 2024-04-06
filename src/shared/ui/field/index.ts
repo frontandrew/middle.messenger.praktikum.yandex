@@ -8,11 +8,10 @@ import type { FieldArgs, FieldChildren, FieldProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class Field extends Component<FieldArgs, FieldChildren, FieldProps> {
+export class Field extends Component<FieldChildren, FieldProps> {
   constructor({
     name,
-    label,
-    type,
+
     classes = '',
     disabled = false,
     inline = false,
@@ -20,29 +19,30 @@ export class Field extends Component<FieldArgs, FieldChildren, FieldProps> {
     textError = '',
     textHelp = '',
     required = false,
-    validator = validators[name] || validators.isRequired,
     value = '',
+    validator = validators[name] || validators.isRequired,
+
+    ...rest
   }: FieldArgs) {
     super({
+      name,
+
       classes,
       disabled,
       hasError,
       inline,
-      label,
-      name,
       required,
-      type,
       textError,
       textHelp,
       validator,
       value,
+
+      ...rest,
     });
   }
 
   createChildren(): void {
-    const {
-      name, type, classes = '', disabled, hasError, value,
-    } = this.props;
+    const { name, type, classes = '', disabled, hasError, value } = this.props;
     this.children = {
       input: new Input({
         name,
