@@ -5,7 +5,7 @@ export interface ButtonProps {
   readonly label: string,
 
   classes?: string,
-  disabled: boolean,
+  disabled?: boolean,
   page?: string,
   type?: ButtonTypes,
   variant?: ButtonVariants,
