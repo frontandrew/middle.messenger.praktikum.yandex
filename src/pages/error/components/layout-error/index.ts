@@ -7,24 +7,27 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class LayoutError extends Component<LayoutErrorArgs, LayoutErrorChildren, LayoutErrorProps> {
-  constructor(args: LayoutErrorArgs) {
+  constructor({ data, ...rest }: LayoutErrorArgs) {
     super({
+      data,
       title: new Text({
         tag: 'h1',
-        text: args.title,
+        text: data!.title,
         classes: 'error-page__title',
       }),
       message: new Text({
         tag: 'h2',
-        text: args.message,
+        text: data!.message,
         classes: 'error-page__message',
       }),
       redirect: new Button({
-        label: args.redirectLabel,
+        label: `Return to ${data?.target} page`,
         type: 'button',
-        page: args.redirectTarget,
+        page: data?.target,
         variant: 'link',
       }),
+
+      ...rest,
     });
   }
 

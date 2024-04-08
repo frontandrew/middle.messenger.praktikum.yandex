@@ -3,8 +3,8 @@ import { Button, Field } from 'ui';
 import type { FormData } from 'shared/ui/form/type';
 
 export interface FormAuthData extends FormData {
-  login: string,
-  password: string,
+  login?: string,
+  password?: string,
 }
 
 export interface FormAuthArgs {

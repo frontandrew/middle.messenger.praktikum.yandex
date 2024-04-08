@@ -1,17 +1,19 @@
 import { Button, Field, Form } from 'ui';
 
+import type { FormRegArgs, FormRegChildren, FormRegProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class FormReg extends Form<object, object, object> {
-  constructor(args) {
+export class FormReg extends Form<FormRegArgs, FormRegChildren, FormRegProps> {
+  constructor({ data, ...rest }: FormRegArgs) {
     super({
+      data,
       email: new Field({
         name: 'email',
         type: 'email',
         label: 'Email',
         required: true,
-        value: 'some@email.com',
+        value: data?.email,
       }),
       login: new Field({
         name: 'login',
@@ -19,51 +21,53 @@ export class FormReg extends Form<object, object, object> {
         label: 'Login',
         textHelp: 'Only letters and numbers accepted.',
         required: true,
-        value: 'devostator777',
+        value: data?.login,
       }),
       first_name: new Field({
         name: 'first_name',
         type: 'text',
         label: 'Name',
         required: true,
-        value: 'John',
+        value: data?.firstName,
       }),
       second_name: new Field({
         name: 'second_name',
         type: 'text',
         label: 'Surname',
-        value: 'Doe',
+        value: data?.secondName,
       }),
       phone: new Field({
         name: 'phone',
         type: 'tel',
         label: 'Phone',
         required: true,
-        value: '+66 45 955 12 12',
+        value: data?.phone,
       }),
       password: new Field({
         name: 'password',
         type: 'password',
         label: 'Password',
         required: true,
-        value: '!Q1qwerty',
+        value: data?.password,
       }),
       password_more: new Field({
         name: 'password_more',
         type: 'password',
         label: 'Repeat password',
         required: true,
-        value: 'cvakjvcl',
+        value: data?.passwordMore,
       }),
       submit: new Button({
         label: 'Register',
         type: 'submit',
       }),
-      reset: new Button({
+      redirect: new Button({
         label: 'Sign in',
         page: 'login',
         variant: 'link',
       }),
+
+      ...rest,
     });
   }
 

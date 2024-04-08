@@ -12,16 +12,25 @@ import { Pages } from 'pages';
 import { Templates } from 'ui';
 import { registerPartials } from 'tools';
 
-import type { PagesType } from 'pages';
+import type { PagesContext, PagesType } from 'pages';
 
 registerPartials(Templates);
 
-const pages: { [key: string]: [PagesType, Record<string, string>] } = {
+const pages: { [key: string]: [PagesType, PagesContext] } = {
+  unknown: [Pages.PageError, {}],
   login: [Pages.PageLogin, {
     login: 'And',
     password: '!Q1gsdgr',
   }],
-  reg: [Pages.PageReg, {}],
+  reg: [Pages.PageReg, {
+    email: 'some@email.com',
+    login: 'devostator777',
+    firstName: 'John',
+    secondName: 'Doe',
+    phone: '+66 45 955 12 12',
+    password: 'Q!1qwert',
+    passwordMore: 'Q!1qwert',
+  }],
   user: [Pages.PageUser, {
     image: Avatar,
     email: 'some@email.com',
@@ -31,17 +40,15 @@ const pages: { [key: string]: [PagesType, Record<string, string>] } = {
     nickName: 'Devostator',
     phone: '+66 45 955 12 12',
   }],
-  404: [Pages.PageError, {
+  400: [Pages.PageError, {
     title: '404',
     message: 'Amm... There is no such page ;(',
-    redirectLabel: 'Return to chats page',
-    redirectTarget: 'chats',
+    target: 'chats',
   }],
-  505: [Pages.PageError, {
+  500: [Pages.PageError, {
     title: '505',
     message: 'Ooops. Unavalible now, try later.',
-    redirectLabel: 'Return to chats page',
-    redirectTarget: 'chats',
+    target: 'login',
   }],
 
   // chats: [Pages.Chat, {
@@ -87,12 +94,12 @@ const pages: { [key: string]: [PagesType, Record<string, string>] } = {
   // }],
 };
 
-function navigate(page: string) {
+function navigate(page: string = 'unknown') {
   const [Page, context] = pages[page];
-  const content = new Page(context).getContent();
+  const content: HTMLElement = new Page(context).getContent();
   const container = document.querySelector('.main');
 
-  container!.replaceChildren(content!);
+  container!.replaceChildren(content);
 }
 
 document.addEventListener('DOMContentLoaded', () => navigate('login'));

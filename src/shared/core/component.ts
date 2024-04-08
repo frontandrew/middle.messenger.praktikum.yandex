@@ -160,7 +160,7 @@ export abstract class Component <Args, Children, Props> {
     return isEqual;
   }
 
-  setProps(nextProps: { [Prop in keyof Props]?: Props[Prop] }) {
+  public setProps(nextProps: { [Prop in keyof Props]?: Props[Prop] }) {
     if (!nextProps || !Object.keys(nextProps)?.length) {
       console.warn(`Properties not passed.`, nextProps);
       return;
@@ -193,7 +193,7 @@ export abstract class Component <Args, Children, Props> {
     return this._element;
   }
 
-  getContent() {
+  public getContent() {
     return this.element;
   }
 
@@ -225,7 +225,7 @@ export abstract class Component <Args, Children, Props> {
     (this.getContent() as HTMLElement).style.display = 'none';
   }
 
-  getPropsChildren() {
+  public getPropsChildren() {
     return Object.entries(this.children).reduce(
       (acc, [key, child]) => ({ ...acc, [key]: child.props }),
       {},

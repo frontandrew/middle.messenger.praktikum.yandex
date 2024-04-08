@@ -29,7 +29,7 @@ export * as Templates from './templates';
 
 export type { AvatarArgs, AvatarChildren, AvatarProps } from './avatar/type';
 export type { ButtonArgs, ButtonChildren, ButtonProps } from './button/type';
-export type { FormArgs, FormChildren, FormProps } from './form/type';
+export type { FormArgs, FormData, FormChildren, FormProps } from './form/type';
 export type { FieldArgs, FieldChildren, FieldProps } from './field/type';
 export type { InputArgs, InputChildren, InputProps } from './input/type';
 export type { ListArgs, ListChildren, ListProps } from './list/type';

@@ -1,10 +1,17 @@
 import { Button, Text } from 'ui';
 
+export interface LayoutErrorData {
+    title: string,
+    message: string,
+    target: string,
+  }
+
 export interface LayoutErrorArgs {
-  title: string,
-  message: string,
-  redirectLabel: string,
-  redirectTarget: string,
+  data?: LayoutErrorData,
+
+  title?: Text,
+  message?: Text,
+  redirect?: Button,
 }
 
 export interface LayoutErrorChildren {
@@ -14,5 +21,5 @@ export interface LayoutErrorChildren {
 }
 
 export interface LayoutErrorProps {
-
+  data: LayoutErrorData,
 }
