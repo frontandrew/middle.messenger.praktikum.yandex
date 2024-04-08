@@ -1,6 +1,6 @@
 .button {
     cursor: pointer;
-    font-size: .8125em;
+    font-size: 0.8125em;
     line-height: 1em;
 }
 
@@ -13,22 +13,20 @@
     filter: brightness(0.9);
 }
 
-
 .button:disabled {
-    cursor: not-allowed;
+    filter: none;
 }
 
 .button__filled {
     background: var(--main-color);
     border: none;
-    padding: .92308em;
-    border-radius: .615385em;
+    padding: 0.92308em;
+    border-radius: 0.615385em;
 
     color: var(--text-color-contrast);
 
     width: 100%;
 }
-
 
 .button__filled:disabled {
     background: var(--disabled-color);
