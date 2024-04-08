@@ -17,7 +17,10 @@ import type { PagesType } from 'pages';
 registerPartials(Templates);
 
 const pages: { [key: string]: [PagesType, Record<string, string>] } = {
-  login: [Pages.PageLogin, {}],
+  login: [Pages.PageLogin, {
+    login: 'And',
+    password: '!Q1gsdgr',
+  }],
   reg: [Pages.PageReg, {}],
   user: [Pages.PageUser, {
     image: Avatar,

@@ -1,45 +1,45 @@
+import { Button, Field } from 'ui';
 import { Component } from 'core';
-import { Field } from 'ui';
 
-import type { FormChildren, FormProps } from './type';
+import type { FormArgs, FormChildren, FormProps } from './type';
 import './style.css';
 
-export class Form<C extends FormChildren, P extends FormProps>
-  extends Component<C, P> {
-  public hasError? = false;
-
+export abstract class Form<A extends FormArgs, C extends FormChildren, P extends FormProps>
+  extends Component<A, C, P> {
   constructor({
+    data = {},
     disabled = false,
     hasError = false,
 
+    onInput = () => this.updateErrorState(false),
+    onReset = () => this.reset(),
     onSubmit = (event: Event) => {
       event.preventDefault();
       this.handleSubmit();
       return event;
     },
-    onReset = () => this.resetForm(),
-    onInput = () => this.updateErrorState(false),
-    ...rest
-  }: P) {
-    super({ disabled, hasError, onSubmit, onReset, onInput, ...rest});
 
-    this.hasError = this.props.hasError;
+    submit = new Button({ label: 'Submit', type: 'submit' }),
+
+    ...rest
+  }: A) {
+    super({ data, disabled, hasError, onInput, onReset, onSubmit, submit, ...rest });
   }
 
   handleSubmit() {
     this.validate();
-    this.hasError = this.getErrorState();
+    this.props.hasError = this.getErrorState();
 
-    if (!this.hasError) {
+    if (!this.props.hasError) {
       this.submitForm();
     }
 
-    this.updateErrorState(this.hasError);
+    this.updateErrorState(this.props.hasError);
   }
 
-  resetForm() {
+  reset() {
     Object.values(this.children).forEach((child) => {
-      child!.resetState();
+      child!.reset();
     });
 
     this.updateErrorState(false);
@@ -47,11 +47,11 @@ export class Form<C extends FormChildren, P extends FormProps>
 
   getErrorState() {
     const errorState: boolean = Object.values(this.children)
-      .reduce((acc: boolean[], child) => {
+      ?.reduce((acc: boolean[], child) => {
         if (child instanceof Field) return [...acc, child.props.hasError];
         return acc;
       }, [])
-      .some(Boolean);
+      ?.some(Boolean);
 
     return errorState;
   }

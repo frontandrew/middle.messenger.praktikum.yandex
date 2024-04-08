@@ -1,9 +1,12 @@
 import { Text } from 'ui';
 
 import { FormAuth } from '../form-auth';
+import type { FormAuthData } from '../form-auth/type';
 
-export interface LayoutAuthProps {
-  [key: string]: string,
+export interface LayoutAuthArgs {
+  data?: FormAuthData,
+  form?: FormAuth,
+  title?: Text,
 }
 
 export interface LayoutAuthChildren {

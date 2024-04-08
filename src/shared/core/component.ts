@@ -8,7 +8,7 @@ import { createProxy } from './proxy-object';
 
 type Events = Record<string, ({}: Event) => Event>
 
-export class Component <Args, Children, Props> {
+export abstract class Component <Args, Children, Props> {
   static EVENTS = {
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
