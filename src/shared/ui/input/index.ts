@@ -4,12 +4,11 @@ import { InputArgs, InputProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class Input extends Component<{}, InputProps> {
+export class Input extends Component<InputProps, object, InputProps> {
   public value: string;
 
   constructor({
     type = 'text',
-
     classes = '',
     disabled = false,
     hasError = false,
@@ -25,7 +24,6 @@ export class Input extends Component<{}, InputProps> {
   }: InputArgs) {
     super({
       type,
-
       classes,
       disabled,
       hasError,

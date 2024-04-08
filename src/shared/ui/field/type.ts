@@ -17,6 +17,8 @@ export interface FieldArgs {
   required?: boolean,
   value?: string,
   validator?: ({}: ValidatorParams) => ValidationState,
+
+  input?: Input,
 }
 
 export interface FieldProps {

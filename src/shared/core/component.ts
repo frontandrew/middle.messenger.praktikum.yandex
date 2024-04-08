@@ -8,8 +8,7 @@ import { createProxy } from './proxy-object';
 
 type Events = Record<string, ({}: Event) => Event>
 
-export class Component
-  <Args extends object, Children extends object, Props> {
+export class Component <Args, Children, Props> {
   static EVENTS = {
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
@@ -19,9 +18,9 @@ export class Component
 
   public id;
   public instance;
-  public props: Props;
-  public children: Children;
-  public events: Events;
+  public props;
+  public children;
+  public events;
 
   protected _element: HTMLElement | null = null;
   protected count;
@@ -88,7 +87,7 @@ export class Component
 
     Object.values(this.children).forEach((child) => {
       const stub = element!.querySelector(`[data-id='${child.id}']`);
-      stub?.replaceWith(child!.getContent() as HTMLElement);
+      stub?.replaceWith(child.getContent() as HTMLElement);
     });
 
     if (this._element) this._element.replaceWith(element as Node);

@@ -1,10 +1,10 @@
 import { Component } from 'core';
 
-import { ButtonArgs, ButtonProps } from './type';
+import { ButtonProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class Button extends Component<{}, ButtonProps> {
+export class Button extends Component<ButtonProps, object, ButtonProps> {
   constructor({
     classes = '',
     disabled = false,
@@ -15,7 +15,7 @@ export class Button extends Component<{}, ButtonProps> {
     onClick = (event: Event) => event,
 
     ...rest
-  }: ButtonArgs) {
+  }: ButtonProps) {
     super({ classes, disabled, page, type, variant, onClick, ...rest });
   }
 
