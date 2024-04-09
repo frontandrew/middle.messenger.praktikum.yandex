@@ -1,18 +1,24 @@
 import { Button, Field } from 'ui';
 import { Component } from 'core';
 
-import type { FormArgs, FormChildren, FormProps } from './type';
+import type { FormArgs, FormChildren, FormData, FormProps } from './type';
 import './style.css';
 
 export abstract class Form<A extends FormArgs, C extends FormChildren, P extends FormProps>
   extends Component<A, C, P> {
   constructor({
-    data = {},
+    data = {} as FormData,
     disabled = false,
     hasError = false,
 
-    onInput = () => this.updateErrorState(false),
-    onReset = () => this.reset(),
+    onInput = (event: Event) => {
+      this.updateErrorState(false);
+      return event;
+    },
+    onReset = (event: Event) => {
+      this.reset();
+      return event;
+    },
     onSubmit = (event: Event) => {
       event.preventDefault();
       this.handleSubmit();
@@ -23,7 +29,16 @@ export abstract class Form<A extends FormArgs, C extends FormChildren, P extends
 
     ...rest
   }: A) {
-    super({ data, disabled, hasError, onInput, onReset, onSubmit, submit, ...rest });
+    super({
+      data,
+      disabled,
+      hasError,
+      onInput,
+      onReset,
+      onSubmit,
+      submit,
+      ...rest,
+    });
   }
 
   handleSubmit() {

@@ -1,14 +1,13 @@
 import { Button, Field } from 'ui';
 
-import type { FormData } from 'shared/ui/form/type';
+import type { FormArgs, FormChildren, FormData, FormProps } from 'ui';
 
 export interface FormAuthData extends FormData {
   login?: string,
   password?: string,
 }
 
-export interface FormAuthArgs {
-  [key: string]: unknown,
+export interface FormAuthArgs extends FormArgs {
   data?: FormAuthData,
   login?: Field,
   password?: Field,
@@ -16,13 +15,11 @@ export interface FormAuthArgs {
   redirect?: Button,
 }
 
-export interface FormAuthProps {
-  [key: string]: unknown,
+export interface FormAuthProps extends FormProps {
   data?: FormAuthData,
 }
 
-export interface FormAuthChildren {
-  [key: string]: Field | Button,
+export interface FormAuthChildren extends FormChildren {
   login: Field,
   password: Field,
   submit: Button,

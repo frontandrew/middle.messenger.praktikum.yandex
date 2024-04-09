@@ -1,10 +1,23 @@
 import { Button, Field } from 'ui';
-import type { FormChildren } from 'ui';
 
-export interface FormUserArgs {
+import type { FormArgs, FormChildren, FormData, FormProps } from 'ui';
+
+export interface FormUserArgs extends FormArgs {
   isEdit: boolean,
   hasError?: boolean,
 
+  data?: FormUserData,
+
+  email: Field,
+  login: Field,
+  first_name: Field,
+  second_name: Field,
+  nick_name: Field,
+  phone: Field,
+  submit: Button,
+}
+
+export interface FormUserData extends FormData {
   email?: string,
   login?: string,
   firstName?: string,
@@ -13,7 +26,9 @@ export interface FormUserArgs {
   phone?: string,
 }
 
-export interface FormUserProps {
+export interface FormUserProps extends FormProps {
+  data?: FormUserData,
+
   isEdit: boolean,
   hasError: boolean,
 }

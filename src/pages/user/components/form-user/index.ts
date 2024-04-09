@@ -5,25 +5,15 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class FormUser extends Form<FormUserArgs, FormUserChildren, FormUserProps> {
-  constructor(args: FormUserArgs) {
-    const {
-      emailValue,
-      loginValue,
-      firstNameValue,
-      secondNameValue,
-      nickNameValue,
-      phoneValue,
-      isEdit,
-    } = args;
-
+  constructor({ data, isEdit }: FormUserArgs) {
     super({
-      isEdit: isEdit ?? false,
+      isEdit,
 
       email: new Field({
         name: 'email',
         type: 'email',
         label: 'Email',
-        value: emailValue,
+        value: data?.email,
         inline: true,
         disabled: !isEdit,
       }),
@@ -31,7 +21,7 @@ export class FormUser extends Form<FormUserArgs, FormUserChildren, FormUserProps
         name: 'login',
         type: 'text',
         label: 'Login',
-        value: loginValue,
+        value: data?.login,
         inline: true,
         disabled: !isEdit,
       }),
@@ -39,7 +29,7 @@ export class FormUser extends Form<FormUserArgs, FormUserChildren, FormUserProps
         name: 'first_name',
         type: 'text',
         label: 'Name',
-        value: firstNameValue,
+        value: data?.firstName,
         inline: true,
         disabled: !isEdit,
       }),
@@ -47,7 +37,7 @@ export class FormUser extends Form<FormUserArgs, FormUserChildren, FormUserProps
         name: 'second_name',
         type: 'text',
         label: 'Surname',
-        value: secondNameValue,
+        value: data?.secondName,
         inline: true,
         disabled: !isEdit,
       }),
@@ -55,7 +45,7 @@ export class FormUser extends Form<FormUserArgs, FormUserChildren, FormUserProps
         name: 'nick_name',
         type: 'text',
         label: 'Nickname',
-        value: nickNameValue,
+        value: data?.nickName,
         inline: true,
         disabled: !isEdit,
       }),
@@ -63,7 +53,7 @@ export class FormUser extends Form<FormUserArgs, FormUserChildren, FormUserProps
         name: 'phone',
         type: 'tel',
         label: 'Phone',
-        value: phoneValue,
+        value: data?.phone,
         inline: true,
         disabled: !isEdit,
       }),
