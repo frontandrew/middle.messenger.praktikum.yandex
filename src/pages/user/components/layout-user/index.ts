@@ -7,11 +7,10 @@ import type { LayoutUserArgs, LayoutUserChildren, LayoutUserProps } from './type
 import template from './template.hbs?raw';
 import './style.css';
 
-export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
-  constructor(args: LayoutUserArgs) {
-    const { image, nickName, ...formData } = args;
-
+export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, LayoutUserProps> {
+  constructor({ image, isEdit, data }: LayoutUserArgs) {
     super({
+      isEdit,
       back: new Button({
         label: '<',
         page: 'login', // TODO: > chats
@@ -22,13 +21,17 @@ export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
       }),
       nick: new Text({
         classes: 'text_title',
-        text: nickName!,
+        text: data?.nickName,
         tag: 'h1',
       }),
-      form: new FormUser({ nickName, ...formData }),
+      form: new FormUser({ data, isEdit }),
       change_info: new Button({
         variant: 'link',
         label: 'Change user data',
+        onClick: (event: Event) => {
+          this.setEditMode();
+          return event;
+        },
       }),
       change_pass: new Button({
         variant: 'link',
@@ -40,6 +43,11 @@ export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
         page: 'login',
       }),
     });
+  }
+
+  setEditMode() {
+    this.setProps({ isEdit: true });
+    this.children.form.setProps({ isEdit: this.props.isEdit });
   }
 
   render() {

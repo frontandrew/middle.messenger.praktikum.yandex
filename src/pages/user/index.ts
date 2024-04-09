@@ -1,12 +1,28 @@
 import { LayoutUser } from './components';
 
-import type { PageUserArgs } from './type';
+import type { FormUserData } from './components/form-user/type';
 
 export class PageUser extends LayoutUser {
-  constructor(args: PageUserArgs) {
+  constructor({
+    image = '',
+    email = '',
+    login = '',
+    firstName = '',
+    secondName = '',
+    nickName = '',
+    phone = '',
+  }: FormUserData) {
     super({
       isEdit: false,
-      ...args,
+      image,
+      data: {
+        email,
+        login,
+        firstName,
+        secondName,
+        nickName,
+        phone,
+      },
     });
   }
 }

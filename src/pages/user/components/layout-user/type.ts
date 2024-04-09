@@ -1,16 +1,21 @@
 import { Avatar, Button, Text } from 'ui';
 import { FormUser } from '../form-user';
 
+import type { FormUserData } from '../form-user/type';
+
 export interface LayoutUserArgs {
   isEdit: boolean,
 
+  data?: FormUserData,
   image?: string,
-  nickName?: string,
-  email?: string,
-  login?: string,
-  firstName?: string,
-  secondName?: string,
-  phone?: string,
+
+  back?: Button,
+  avatar?: Avatar,
+  nick?: Text,
+  form?: FormUser,
+  change_info?: Button,
+  change_pass?: Button,
+  sign_out?: Button,
 }
 
 export interface LayoutUserChildren {
@@ -24,5 +29,5 @@ export interface LayoutUserChildren {
 }
 
 export interface LayoutUserProps {
-
+  isEdit: boolean,
 }

@@ -168,20 +168,6 @@ export abstract class Component <Args, Children, Props> {
 
     const oldProps = deepCopy(this.props);
 
-    /**
-     * TODO: попытка сравнивать пропсы, чтоб принять решение,
-     * ножно ли их обновлять. Иногда кажется, что работает не корректно.
-     */
-    // const expectedProps = { ...this.props, ...nextProps };
-    // const isEqual = deepEqual(this.props, expectedProps);
-    // if (isEqual) {
-    //   // console.warn(`Properties arent changed.`, {
-    //   //   curr: this.meta.props,
-    //   //   next: expectedProps,
-    //   // });
-    //   return;
-    // }
-
     Object.entries(nextProps).forEach(([key, value]) => {
       this.props = { ...this.props, [key]: value };
     });

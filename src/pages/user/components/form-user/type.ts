@@ -8,13 +8,13 @@ export interface FormUserArgs extends FormArgs {
 
   data?: FormUserData,
 
-  email: Field,
-  login: Field,
-  first_name: Field,
-  second_name: Field,
-  nick_name: Field,
-  phone: Field,
-  submit: Button,
+  email?: Field,
+  login?: Field,
+  first_name?: Field,
+  second_name?: Field,
+  nick_name?: Field,
+  phone?: Field,
+  submit?: Button,
 }
 
 export interface FormUserData extends FormData {

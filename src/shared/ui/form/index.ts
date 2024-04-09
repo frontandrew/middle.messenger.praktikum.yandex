@@ -7,7 +7,7 @@ import './style.css';
 export abstract class Form<A extends FormArgs, C extends FormChildren, P extends FormProps>
   extends Component<A, C, P> {
   constructor({
-    data = {} as FormData,
+    data = {},
     disabled = false,
     hasError = false,
 
@@ -91,5 +91,6 @@ export abstract class Form<A extends FormArgs, C extends FormChildren, P extends
     );
 
     console.warn(`FORM "${this.instance}" SUBMITTED:`, submitted);
+    // TODO: > navigate()
   }
 }
