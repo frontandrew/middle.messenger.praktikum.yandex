@@ -1,12 +1,13 @@
 import { Component } from 'core';
 
+import type { ListArgs } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class List extends Component {
-  constructor(props = {}) {
+export class List extends Component<ListArgs, {}, {}> {
+  constructor({ items }: ListArgs) {
     super({
-      items: [],
+      items,
       // itemClass: Component, // похоже нужно создать класс по умолчаниюю
 
       onClick: (event) => {
