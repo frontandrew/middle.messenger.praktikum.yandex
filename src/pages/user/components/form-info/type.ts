@@ -2,22 +2,22 @@ import { Button, Field } from 'ui';
 
 import type { FormArgs, FormChildren, FormData, FormProps } from 'ui';
 
-export interface FormUserArgs extends FormArgs {
+export interface FormInfoArgs extends FormArgs {
   isEdit: boolean,
   hasError?: boolean,
 
-  data?: FormUserData,
+  data?: FormInfoData,
 
   email?: Field,
   login?: Field,
-  first_name?: Field,
-  second_name?: Field,
-  nick_name?: Field,
+  firstName?: Field,
+  secondName?: Field,
+  nickName?: Field,
   phone?: Field,
   submit?: Button,
 }
 
-export interface FormUserData extends FormData {
+export interface FormInfoData extends FormData {
   email?: string,
   login?: string,
   firstName?: string,
@@ -26,19 +26,19 @@ export interface FormUserData extends FormData {
   phone?: string,
 }
 
-export interface FormUserProps extends FormProps {
-  data?: FormUserData,
+export interface FormInfoProps extends FormProps {
+  data?: FormInfoData,
 
   isEdit: boolean,
   hasError: boolean,
 }
 
-export interface FormUserChildren extends FormChildren {
+export interface FormInfoChildren extends FormChildren {
   email: Field,
   login: Field,
-  first_name: Field,
-  second_name: Field,
-  nick_name: Field,
+  firstName: Field,
+  secondName: Field,
+  nickName: Field,
   phone: Field,
   submit: Button,
 }

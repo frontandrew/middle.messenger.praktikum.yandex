@@ -6,14 +6,23 @@
         <div class="user-content">
             {{{avatar}}}
             {{{nick}}}
-            {{{form}}}
-            <div class="user-actions{{#if isEdit}} user-actions_edit{{/if}}">
-                {{{change_info}}}
-                {{> Divider}}
-                {{{change_pass}}}
-                {{> Divider}}
-                {{{sign_out}}}
-            </div>
+            {{#if mode.pass}}
+                {{{formPass}}}
+            {{else}}
+                {{{formInfo}}}
+            {{/if}}
+            {{#if mode.view}}
+                <div class="user-actions">
+                    {{{changeInfo}}}
+                    {{> Divider}}
+                    {{{changePass}}}
+                    {{> Divider}}
+                    {{{signOut}}}
+                </div>
+            {{/if}}
         </div>
     {{/BaseLayout}}
+    {{#if mode.avatar}}
+        {{{modalAvatar}}}
+    {{/if}}
 </div>

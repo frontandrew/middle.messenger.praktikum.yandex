@@ -1,16 +1,16 @@
 import { Avatar, Button, Text } from 'ui';
 import { Component } from 'core';
 
-import { FormUser } from '../form-user';
+import { FormInfo } from '../form-info';
 
 import type { LayoutUserArgs, LayoutUserChildren, LayoutUserProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
 export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, LayoutUserProps> {
-  constructor({ image, isEdit, data }: LayoutUserArgs) {
+  constructor({ image, data }: LayoutUserArgs) {
     super({
-      isEdit,
+      mode: { pass: false, image: false, view: true, info: false },
       back: new Button({
         label: '<',
         page: 'login', // TODO: > chats
@@ -24,20 +24,25 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
         text: data?.nickName,
         tag: 'h1',
       }),
-      form: new FormUser({ data, isEdit }),
-      change_info: new Button({
+      formInfo: new FormInfo({ data, isEdit: false }),
+      // formPass: new FormUser({ data, isEdit: false }),
+      changeInfo: new Button({
         variant: 'link',
         label: 'Change user data',
         onClick: (event: Event) => {
-          this.setEditMode();
+          this.setMode('info');
           return event;
         },
       }),
-      change_pass: new Button({
+      changePass: new Button({
         variant: 'link',
         label: 'Change password',
+        onClick: (event: Event) => {
+          this.setMode('pass');
+          return event;
+        },
       }),
-      sign_out: new Button({
+      signOut: new Button({
         variant: 'link',
         label: 'Sign out',
         page: 'login',
@@ -45,9 +50,21 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
     });
   }
 
-  setEditMode() {
-    this.setProps({ isEdit: true });
-    this.children.form.setEditMode(this.props.isEdit);
+  setMode(mode: string) {
+    if (mode === 'info') {
+      this.setProps({ mode: { pass: false, image: false, view: false, info: true } });
+    }
+    if (mode === 'pass') {
+      this.setProps({ mode: { pass: true, image: false, view: false, info: false } });
+    }
+    if (mode === 'view') {
+      this.setProps({ mode: { pass: false, image: false, view: true, info: false } });
+    }
+    if (mode === 'image') {
+      this.setProps({ mode: { pass: false, image: true, view: true, info: false } });
+    }
+
+    this.children.formInfo?.setEditMode(this.props.mode.info);
   }
 
   render() {

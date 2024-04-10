@@ -1,6 +1,6 @@
 import { LayoutUser } from './components';
 
-import type { FormUserData } from './components/form-user/type';
+import type { FormInfoData } from './components/form-info/type';
 
 export class PageUser extends LayoutUser {
   constructor({
@@ -11,9 +11,8 @@ export class PageUser extends LayoutUser {
     secondName = '',
     nickName = '',
     phone = '',
-  }: FormUserData) {
+  }: FormInfoData) {
     super({
-      isEdit: false,
       image,
       data: {
         email,

@@ -1,11 +1,11 @@
 import { Button, Field, Form } from 'ui';
 
-import type { FormUserArgs, FormUserChildren, FormUserProps } from './type';
+import type { FormInfoArgs, FormInfoChildren, FormInfoProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class FormUser extends Form<FormUserArgs, FormUserChildren, FormUserProps> {
-  constructor({ data, isEdit, hasError }: FormUserArgs) {
+export class FormInfo extends Form<FormInfoArgs, FormInfoChildren, FormInfoProps> {
+  constructor({ data, isEdit, hasError }: FormInfoArgs) {
     super({
       data,
       isEdit,
@@ -27,7 +27,7 @@ export class FormUser extends Form<FormUserArgs, FormUserChildren, FormUserProps
         inline: true,
         disabled: !isEdit,
       }),
-      first_name: new Field({
+      firstName: new Field({
         name: 'first_name',
         type: 'text',
         label: 'Name',
@@ -35,7 +35,7 @@ export class FormUser extends Form<FormUserArgs, FormUserChildren, FormUserProps
         value: data?.firstName,
         disabled: !isEdit,
       }),
-      second_name: new Field({
+      secondName: new Field({
         name: 'second_name',
         type: 'text',
         label: 'Surname',
@@ -43,7 +43,7 @@ export class FormUser extends Form<FormUserArgs, FormUserChildren, FormUserProps
         value: data?.secondName,
         disabled: !isEdit,
       }),
-      nick_name: new Field({
+      nickName: new Field({
         name: 'nick_name',
         type: 'text',
         label: 'Nickname',

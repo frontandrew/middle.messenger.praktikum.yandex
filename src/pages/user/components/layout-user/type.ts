@@ -1,33 +1,31 @@
 import { Avatar, Button, Text } from 'ui';
-import { FormUser } from '../form-user';
+import { FormInfo } from '../form-info';
 
-import type { FormUserData } from '../form-user/type';
+import type { FormInfoData } from '../form-info/type';
 
-export interface LayoutUserArgs {
-  isEdit: boolean,
+interface LayoutUserMode {
+      pass: boolean,
+      image: boolean,
+      view: boolean,
+      info: boolean,
+  }
 
-  data?: FormUserData,
+export interface LayoutUserArgs extends LayoutUserChildren {
+  mode?: LayoutUserMode
+  data?: FormInfoData,
   image?: string,
-
-  back?: Button,
-  avatar?: Avatar,
-  nick?: Text,
-  form?: FormUser,
-  change_info?: Button,
-  change_pass?: Button,
-  sign_out?: Button,
 }
 
 export interface LayoutUserChildren {
-  back: Button,
-  avatar: Avatar,
-  nick: Text,
-  form: FormUser,
-  change_info: Button,
-  change_pass: Button,
-  sign_out: Button,
+  back?: Button,
+  avatar?: Avatar,
+  nick?: Text,
+  formInfo?: FormInfo,
+  changeInfo?: Button,
+  changePass?: Button,
+  signOut?: Button,
 }
 
 export interface LayoutUserProps {
-  isEdit: boolean,
+  mode: LayoutUserMode,
 }
