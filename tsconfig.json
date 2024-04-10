@@ -24,7 +24,7 @@
       "pages": ["./pages/index"],
       "tools": ["./shared/tools/index"],
       "ui": ["./shared/ui/index"],
-    },
+    }
   },
-  "include": ["src"],
+  "include": ["src"]
 }
