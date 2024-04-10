@@ -76,4 +76,9 @@ export class Field extends Component<FieldArgs, FieldChildren, FieldProps> {
   render() {
     return template;
   }
+
+  setDisabledState(state: boolean) {
+    this.setProps({ disabled: state });
+    this.children.input.setProps({ disabled: state });
+  }
 }

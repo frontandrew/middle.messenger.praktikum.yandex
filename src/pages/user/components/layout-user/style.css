@@ -22,22 +22,7 @@
     align-items: center;
 
     width: 31.875em;
-
-    .form__fields-container {
-        height: 19.6em;
-    }
-}
-
-.user-content_edit .form__actions-container {
-    height: 5.75em;
-    align-items: center;
-
-    .button {
-        width: 21.5385em;
-    }
-}
-.user-content .form__actions-container {
-    display: none;
+    height: 38em;
 }
 
 .user-actions {

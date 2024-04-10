@@ -47,7 +47,7 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
 
   setEditMode() {
     this.setProps({ isEdit: true });
-    this.children.form.setProps({ isEdit: this.props.isEdit });
+    this.children.form.setEditMode(this.props.isEdit);
   }
 
   render() {

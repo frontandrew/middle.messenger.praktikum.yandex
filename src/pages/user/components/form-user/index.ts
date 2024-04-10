@@ -15,8 +15,8 @@ export class FormUser extends Form<FormUserArgs, FormUserChildren, FormUserProps
         name: 'email',
         type: 'email',
         label: 'Email',
-        value: data?.email,
         inline: true,
+        value: data?.email,
         disabled: !isEdit,
       }),
       login: new Field({
@@ -31,39 +31,48 @@ export class FormUser extends Form<FormUserArgs, FormUserChildren, FormUserProps
         name: 'first_name',
         type: 'text',
         label: 'Name',
-        value: data?.firstName,
         inline: true,
+        value: data?.firstName,
         disabled: !isEdit,
       }),
       second_name: new Field({
         name: 'second_name',
         type: 'text',
         label: 'Surname',
-        value: data?.secondName,
         inline: true,
+        value: data?.secondName,
         disabled: !isEdit,
       }),
       nick_name: new Field({
         name: 'nick_name',
         type: 'text',
         label: 'Nickname',
-        value: data?.nickName,
         inline: true,
+        value: data?.nickName,
         disabled: !isEdit,
       }),
       phone: new Field({
         name: 'phone',
         type: 'tel',
         label: 'Phone',
-        value: data?.phone,
         inline: true,
+        value: data?.phone,
         disabled: !isEdit,
       }),
       submit: new Button({
-        variant: 'filled',
         label: 'Save',
         type: 'submit',
       }),
+    });
+  }
+
+  setEditMode(mode: boolean) {
+    this.setProps({ isEdit: mode });
+
+    Object.values(this.children).forEach((child) => {
+      if (child instanceof Field) {
+        child.setDisabledState(!this.props.isEdit);
+      }
     });
   }
 

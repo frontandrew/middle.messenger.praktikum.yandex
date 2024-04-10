@@ -1,4 +1,10 @@
-.form-reg {
-    height: 29.6875em;
-    width: 17.5em;
+.form-user {
+    .form-actions {
+        align-items: center;
+        height: 4.66em;
+
+        .button {
+            width: 21.5385em;
+        }
+    }
 }
