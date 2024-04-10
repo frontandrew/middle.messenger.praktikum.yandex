@@ -23,7 +23,7 @@
       "images": ["./assets/images/index"],
       "pages": ["./pages/index"],
       "tools": ["./shared/tools/index"],
-      "ui": ["./shared/ui/index"],
+      "ui": ["./shared/ui/index"]
     }
   },
   "include": ["src"]
