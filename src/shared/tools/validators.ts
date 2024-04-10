@@ -105,11 +105,17 @@ function isRequired({ value = '', required = false }: ValidatorParams): Validati
   const requiredStatus = { hasError: true, textError: 'This field is required.', value };
 
   if (!value && required) return requiredStatus;
-  return { hasError: false, textError: '', value};
+  return { hasError: false, textError: '', value };
 }
 
 export const validators: Validators = {
-  login, password, password_more: password, email, phone, isRequired,
+  login,
+  password,
+  password_more: password,
+  password_new: password,
+  email,
+  phone,
+  isRequired,
 };
 
 export type { ValidatorParams, ValidationState };

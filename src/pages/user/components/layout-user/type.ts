@@ -1,5 +1,7 @@
 import { Avatar, Button, Text } from 'ui';
+
 import { FormInfo } from '../form-info';
+import { FormPass } from '../form-pass';
 
 import type { FormInfoData } from '../form-info/type';
 
@@ -21,6 +23,7 @@ export interface LayoutUserChildren {
   avatar?: Avatar,
   nick?: Text,
   formInfo?: FormInfo,
+  formPass?: FormPass,
   changeInfo?: Button,
   changePass?: Button,
   signOut?: Button,

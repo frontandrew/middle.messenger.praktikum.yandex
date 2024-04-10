@@ -8,8 +8,15 @@
     background-color: var(--main-color);
 }
 
-.field_error .divider {
-    background-color: var(--error-color);
+.field_error {
+
+    .divider {
+        background-color: var(--error-color);
+    }
+
+    .input {
+        color: var(--error-color);
+    }
 }
 
 .field_disabled .divider {
@@ -53,6 +60,10 @@
 }
 
 /* INLINE RULES */
+
+.field__label_inline {
+    white-space: nowrap;
+}
 
 .field__container_inline {
     display: flex;

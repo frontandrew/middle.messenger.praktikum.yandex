@@ -5,11 +5,10 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class FormInfo extends Form<FormInfoArgs, FormInfoChildren, FormInfoProps> {
-  constructor({ data, isEdit, hasError }: FormInfoArgs) {
+  constructor({ data, isEdit }: FormInfoArgs) {
     super({
       data,
       isEdit,
-      hasError,
 
       email: new Field({
         name: 'email',

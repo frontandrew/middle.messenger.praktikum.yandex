@@ -2,6 +2,7 @@ import { Avatar, Button, Text } from 'ui';
 import { Component } from 'core';
 
 import { FormInfo } from '../form-info';
+import { FormPass } from '../form-pass';
 
 import type { LayoutUserArgs, LayoutUserChildren, LayoutUserProps } from './type';
 import template from './template.hbs?raw';
@@ -25,7 +26,7 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
         tag: 'h1',
       }),
       formInfo: new FormInfo({ data, isEdit: false }),
-      // formPass: new FormUser({ data, isEdit: false }),
+      formPass: new FormPass(),
       changeInfo: new Button({
         variant: 'link',
         label: 'Change user data',
