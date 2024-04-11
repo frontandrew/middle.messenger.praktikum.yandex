@@ -32,10 +32,6 @@
     background: var(--disabled-color);
 }
 
-.button__filled:disabled {
-    background: var(--disabled-color);
-}
-
 .button__link {
     background: none;
     border: none;

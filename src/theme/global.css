@@ -10,3 +10,7 @@ body {
 
     z-index: var(--z-index-content);
 }
+
+:focus-visible {
+    outline: var(--main-color) auto;
+}

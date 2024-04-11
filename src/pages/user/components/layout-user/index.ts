@@ -1,10 +1,11 @@
-import { Avatar, Button, Text } from 'ui';
+import { Button, Text } from 'ui';
 import { Component } from 'core';
 
+import { ControlAvatar } from '../control-avatar';
 import { FormInfo } from '../form-info';
 import { FormPass } from '../form-pass';
 
-import type { LayoutUserArgs, LayoutUserChildren, LayoutUserProps } from './type';
+import type { LayoutUserArgs, LayoutUserChildren, LayoutUserMods, LayoutUserProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
@@ -16,9 +17,10 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
         label: '<',
         page: 'login', // TODO: > chats
       }),
-      avatar: new Avatar({
-        pic: image,
-        size: 'large',
+      avatar: new ControlAvatar({
+        image,
+        disabled: false,
+        onClick: () => this.setMode('image'),
       }),
       nick: new Text({
         classes: 'text_title',
@@ -51,7 +53,7 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
     });
   }
 
-  setMode(mode: string) {
+  setMode(mode: LayoutUserMods) {
     if (mode === 'info') {
       this.setProps({ mode: { pass: false, image: false, view: false, info: true } });
     }
@@ -66,6 +68,7 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
     }
 
     this.children.formInfo?.setEditMode(this.props.mode.info);
+    this.children.avatar?.setProps({ disabled: !this.props.mode.image });
   }
 
   render() {

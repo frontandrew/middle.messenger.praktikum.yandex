@@ -1,0 +1,36 @@
+.control-avatar {
+    width: max-content;
+    height: max-content;
+
+    position: relative;
+}
+
+.control-avatar:disabled > .control-avatar__trigger {
+    display: none;
+}
+
+.control-avatar__trigger {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    border-radius: 50%;
+}
+
+.control-avatar__trigger:hover {
+    background-color: #00000050;
+
+    .control-avatar__label {
+        display: block;
+    }
+}
+
+.control-avatar__label {
+    display: none;
+
+    line-height: 1.1rem;
+    word-spacing: 100vw;
+}

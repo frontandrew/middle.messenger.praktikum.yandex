@@ -1,5 +1,6 @@
-import { Avatar, Button, Text } from 'ui';
+import { Button, Text } from 'ui';
 
+import { ControlAvatar } from '../control-avatar';
 import { FormInfo } from '../form-info';
 import { FormPass } from '../form-pass';
 
@@ -12,6 +13,8 @@ interface LayoutUserMode {
       info: boolean,
   }
 
+export type LayoutUserMods = 'view' | 'info' | 'pass' | 'image';
+
 export interface LayoutUserArgs extends LayoutUserChildren {
   mode?: LayoutUserMode
   data?: FormInfoData,
@@ -20,7 +23,7 @@ export interface LayoutUserArgs extends LayoutUserChildren {
 
 export interface LayoutUserChildren {
   back?: Button,
-  avatar?: Avatar,
+  avatar?: ControlAvatar,
   nick?: Text,
   formInfo?: FormInfo,
   formPass?: FormPass,
