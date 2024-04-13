@@ -2,6 +2,7 @@ import { Button, Dialog, Text } from 'ui';
 import { Component } from 'core';
 
 import { ControlAvatar } from '../control-avatar';
+import { FormAvatar } from '../form-avatar';
 import { FormInfo } from '../form-info';
 import { FormPass } from '../form-pass';
 
@@ -45,7 +46,10 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
         label: 'Sign out',
         page: 'login',
       }),
-      avatarDialog: new Dialog({ isOpen: false }),
+      avatarDialog: new Dialog({
+        isOpen: false,
+        content: new FormAvatar(),
+      }),
     });
   }
 

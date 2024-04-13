@@ -8,7 +8,5 @@ export interface DialogChildren {
 
 export interface DialogProps {
   isOpen: boolean,
-
-  // onClose?: () => void,
   onClick?: () => void,
 }

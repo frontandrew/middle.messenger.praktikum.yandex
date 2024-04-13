@@ -102,7 +102,7 @@ function navigate(page: string = 'unknown') {
   container!.replaceChildren(content);
 }
 
-document.addEventListener('DOMContentLoaded', () => navigate('login'));
+document.addEventListener('DOMContentLoaded', () => navigate('user'));
 
 document.addEventListener('click', (event: Event) => {
   const targetElement = event.target as HTMLElement;
