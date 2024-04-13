@@ -94,7 +94,13 @@ export abstract class Component <Args, Children, Props> {
     this._element = element as HTMLElement;
 
     this._attachEvents();
-    // eslint-disable-next-line no-plusplus
+
+    this.meta = {
+      props: { ...this.props },
+      children: { ...this.children },
+      events: { ...this.events },
+    };
+
     console.warn(`RNDR{${++this.count}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
   }
 
@@ -120,7 +126,7 @@ export abstract class Component <Args, Children, Props> {
     tempElement.insertAdjacentHTML('afterbegin', elementString.trim());
 
     const resultElement = tempElement.firstElementChild;
-    resultElement!.setAttribute('data-id', this.id);
+    // resultElement!.setAttribute('data-id', this.id);
 
     return resultElement;
   }
