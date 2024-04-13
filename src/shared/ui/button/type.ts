@@ -10,5 +10,5 @@ export interface ButtonProps {
   type?: ButtonTypes,
   variant?: ButtonVariants,
 
-  onClick?: ({}: Event) => Event
+  onClick?: (({}: Event) => Event) | (() => void),
 }

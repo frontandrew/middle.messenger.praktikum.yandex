@@ -31,7 +31,7 @@
 
     img {
         border-bottom-right-radius: 0 !important;
-    }    
+    }
 }
 
 /* TYPE */
@@ -58,13 +58,13 @@
 
     time {
         position: absolute;
-        bottom: 10px;   
+        bottom: 10px;
         right: 10px;
 
         padding: 2px 7px;
         border-radius: 7px;
 
-        background: var(--modal-background-color);
+        background: var(--shading-color);
         color: var(--text-color-contrast)
 
     }

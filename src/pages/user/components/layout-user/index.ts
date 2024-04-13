@@ -1,26 +1,27 @@
-import { Button, Text } from 'ui';
+import { Button, Dialog, Text } from 'ui';
 import { Component } from 'core';
 
 import { ControlAvatar } from '../control-avatar';
 import { FormInfo } from '../form-info';
 import { FormPass } from '../form-pass';
 
-import type { LayoutUserArgs, LayoutUserChildren, LayoutUserMods, LayoutUserProps } from './type';
+import type { LayoutUserArgs, LayoutUserChildren, LayoutUserProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
 export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, LayoutUserProps> {
   constructor({ image, data }: LayoutUserArgs) {
     super({
-      mode: { pass: false, image: false, view: true, info: false },
+      showActions: true,
+      showInfo: true,
       back: new Button({
         label: '<',
-        page: 'login', // TODO: > chats
+        page: 'user', // TODO: > chats
       }),
       avatar: new ControlAvatar({
         image,
         disabled: false,
-        onClick: () => this.setMode('image'),
+        onClick: () => this.children.avatarDialog?.open(),
       }),
       nick: new Text({
         classes: 'text_title',
@@ -32,43 +33,29 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
       changeInfo: new Button({
         variant: 'link',
         label: 'Change user data',
-        onClick: (event: Event) => {
-          this.setMode('info');
-          return event;
-        },
+        onClick: () => this.handleEditInfo(),
       }),
       changePass: new Button({
         variant: 'link',
         label: 'Change password',
-        onClick: (event: Event) => {
-          this.setMode('pass');
-          return event;
-        },
+        onClick: () => this.handleEditPass(),
       }),
       signOut: new Button({
         variant: 'link',
         label: 'Sign out',
         page: 'login',
       }),
+      avatarDialog: new Dialog({ isOpen: false }),
     });
   }
 
-  setMode(mode: LayoutUserMods) {
-    if (mode === 'info') {
-      this.setProps({ mode: { pass: false, image: false, view: false, info: true } });
-    }
-    if (mode === 'pass') {
-      this.setProps({ mode: { pass: true, image: false, view: false, info: false } });
-    }
-    if (mode === 'view') {
-      this.setProps({ mode: { pass: false, image: false, view: true, info: false } });
-    }
-    if (mode === 'image') {
-      this.setProps({ mode: { pass: false, image: true, view: true, info: false } });
-    }
+  handleEditPass() {
+    this.setProps({ showActions: false, showInfo: false });
+  }
 
-    this.children.formInfo?.setEditMode(this.props.mode.info);
-    this.children.avatar?.setProps({ disabled: !this.props.mode.image });
+  handleEditInfo() {
+    this.setProps({ showActions: false });
+    this.children.formInfo?.setEditMode(true);
   }
 
   render() {

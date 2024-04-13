@@ -1,5 +1,6 @@
 import { Avatar } from './avatar';
 import { Button } from './button';
+import { Dialog } from './dialog';
 import { Field } from './field';
 import { Form } from './form';
 import { Input } from './input';
@@ -10,6 +11,7 @@ import { Text } from './text';
 
 export type ComponentsType = typeof Avatar
   | typeof Button
+  | typeof Dialog
   | typeof Field
   | typeof Form
   | typeof Input
@@ -19,6 +21,7 @@ export type ComponentsType = typeof Avatar
 
 export { Avatar } from './avatar';
 export { Button } from './button';
+export { Dialog } from './dialog';
 export { Field } from './field';
 export { Form } from './form';
 export { Input } from './input';
@@ -29,6 +32,7 @@ export * as Templates from './templates';
 
 export type { AvatarArgs, AvatarChildren, AvatarProps } from './avatar/type';
 export type { ButtonArgs, ButtonChildren, ButtonProps } from './button/type';
+export type { DialogArgs, DialogChildren, DialogProps } from './dialog/type';
 export type {
   FormArgument, FormArgs, FormChildren, FormData, FormEvent, FormProps,
 } from './form/type';

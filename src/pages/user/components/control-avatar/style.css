@@ -21,7 +21,7 @@
 }
 
 .control-avatar__trigger:hover {
-    background-color: #00000050;
+    background-color: var(--shading-color);
 
     .control-avatar__label {
         display: block;

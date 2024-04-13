@@ -1,4 +1,4 @@
-import { Button, Text } from 'ui';
+import { Button, Dialog, Text } from 'ui';
 
 import { ControlAvatar } from '../control-avatar';
 import { FormInfo } from '../form-info';
@@ -6,17 +6,7 @@ import { FormPass } from '../form-pass';
 
 import type { FormInfoData } from '../form-info/type';
 
-interface LayoutUserMode {
-      pass: boolean,
-      image: boolean,
-      view: boolean,
-      info: boolean,
-  }
-
-export type LayoutUserMods = 'view' | 'info' | 'pass' | 'image';
-
-export interface LayoutUserArgs extends LayoutUserChildren {
-  mode?: LayoutUserMode
+export interface LayoutUserArgs extends LayoutUserChildren, LayoutUserProps {
   data?: FormInfoData,
   image?: string,
 }
@@ -30,8 +20,10 @@ export interface LayoutUserChildren {
   changeInfo?: Button,
   changePass?: Button,
   signOut?: Button,
+  avatarDialog?: Dialog,
 }
 
 export interface LayoutUserProps {
-  mode: LayoutUserMode,
+      showActions: boolean,
+      showInfo: boolean,
 }

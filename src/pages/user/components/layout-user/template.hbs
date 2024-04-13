@@ -6,12 +6,12 @@
         <div class="user-content">
             {{{avatar}}}
             {{{nick}}}
-            {{#if mode.pass}}
-                {{{formPass}}}
-            {{else}}
+            {{#if showInfo}}
                 {{{formInfo}}}
+            {{else}}
+                {{{formPass}}}
             {{/if}}
-            {{#if mode.view}}
+            {{#if showActions}}
                 <div class="user-actions">
                     {{{changeInfo}}}
                     {{> Divider}}
@@ -22,7 +22,5 @@
             {{/if}}
         </div>
     {{/BaseLayout}}
-    {{#if mode.avatar}}
-        {{{modalAvatar}}}
-    {{/if}}
+    {{{avatarDialog}}}
 </div>

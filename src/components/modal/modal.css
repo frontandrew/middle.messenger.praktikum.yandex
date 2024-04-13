@@ -3,7 +3,7 @@
 
 .modal {
     position: absolute;
-    background-color: var(--modal-background-color);
+    background-color: var(--shading-color);
 
     display: flex;
     justify-content: center;
