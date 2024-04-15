@@ -1,10 +1,10 @@
 import { Button, Form } from 'ui';
 
-import type { FormAvatarArgs, FormAvatarChildren, FormAvatarProps } from './type';
+import type { FormAvatarChildren, FormAvatarProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class FormAvatar extends Form<FormAvatarArgs, FormAvatarChildren, FormAvatarProps> {
+export class FormAvatar extends Form<FormAvatarChildren, FormAvatarProps> {
   constructor() {
     super({
       submit: new Button({

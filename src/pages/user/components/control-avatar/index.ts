@@ -5,8 +5,7 @@ import type { ControlAvatarArgs, ControlAvatarChildren, ControlAvatarProps } fro
 import template from './template.hbs?raw';
 import './style.css';
 
-export class ControlAvatar
-  extends Component <ControlAvatarArgs, ControlAvatarChildren, ControlAvatarProps> {
+export class ControlAvatar extends Component <ControlAvatarChildren, ControlAvatarProps> {
   constructor({ image, onClick, disabled }: ControlAvatarArgs) {
     super({
       disabled,
@@ -15,10 +14,10 @@ export class ControlAvatar
         pic: image,
         size: 'large',
       }),
-    });
+    } as ControlAvatarChildren & ControlAvatarProps);
   }
 
-  render(): string {
+  render() {
     return template;
   }
 }

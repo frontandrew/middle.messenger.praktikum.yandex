@@ -4,8 +4,8 @@ import type { FormAuthArgs, FormAuthChildren, FormAuthProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class FormAuth extends Form<FormAuthArgs, FormAuthChildren, FormAuthProps> {
-  constructor({ data, ...rest }: FormAuthArgs) {
+export class FormAuth extends Form<FormAuthChildren, FormAuthProps> {
+  constructor({ data }: FormAuthArgs) {
     super({
       data,
       login: new Field({
@@ -13,14 +13,14 @@ export class FormAuth extends Form<FormAuthArgs, FormAuthChildren, FormAuthProps
         type: 'text',
         label: 'Login',
         required: true,
-        value: data?.login,
+        value: data.login,
       }),
       password: new Field({
         name: 'password',
         type: 'password',
         label: 'Password',
         required: true,
-        value: data?.password,
+        value: data.password,
       }),
       submit: new Button({
         label: 'Sign in',
@@ -31,8 +31,6 @@ export class FormAuth extends Form<FormAuthArgs, FormAuthChildren, FormAuthProps
         page: 'reg',
         variant: 'link',
       }),
-
-      ...rest,
     });
   }
 

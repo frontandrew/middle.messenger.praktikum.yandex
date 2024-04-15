@@ -1,27 +1,14 @@
 import { Button, Field } from 'ui';
 
-export type FormArgument = FormData | Field | Button | FormEvent | boolean | undefined;
-export type FormEvent = ({}: Event) => Event
+import { Children, Props } from 'core';
 
 export interface FormData {
-  [key: string]: string | undefined,
+  [key: string]: string,
 }
 
-export interface FormArgs {
-  [key: string]: FormArgument,
-  data?: FormData,
+export interface FormArgs extends FormProps, MakeOptional<FormChildren> {}
 
-  disabled?: boolean,
-  hasError?: boolean,
-
-  onSubmit?: ({}: Event) => Event,
-  onReset?: ({}: Event) => Event,
-  onInput?: ({}: Event) => Event,
-
-  submit?: Button,
-}
-
-export interface FormProps {
+export interface FormProps extends Props {
   data?: FormData,
   disabled?: boolean,
   hasError?: boolean,
@@ -31,8 +18,8 @@ export interface FormProps {
   onInput?: ({}: Event) => Event,
 }
 
-export interface FormChildren {
-  [key: string]: Field | Button | undefined,
+export interface FormChildren extends MakeOptional<Children> {
+  [key: string]: Field | Button | undefined
   submit: Button,
   reset?: Button,
 }

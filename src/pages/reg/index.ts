@@ -1,5 +1,6 @@
 import { LayoutReg } from './components';
 
+import type { LayoutRegArgs } from './components/layout-reg/type';
 import type { FormRegData as PageRegContext } from './components/form-reg/type';
 
 export class PageReg extends LayoutReg {
@@ -11,8 +12,6 @@ export class PageReg extends LayoutReg {
     phone = '',
     password = '',
     passwordMore = '',
-
-    ...rest
   }: PageRegContext) {
     super({
       data: {
@@ -24,9 +23,7 @@ export class PageReg extends LayoutReg {
         password,
         passwordMore,
       },
-
-      ...rest,
-    });
+    } as LayoutRegArgs);
   }
 }
 

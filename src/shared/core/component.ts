@@ -6,9 +6,16 @@ import { deepCopy, deepEqual } from 'tools';
 import { EventBus } from './event-bus';
 import { createProxy } from './proxy-object';
 
-type Events = Record<string, ({}: Event) => Event>
+export type DOMEvent = (({}: Event) => Event) | (() => void)
+export type Events = { [key: string]: DOMEvent }
 
-export abstract class Component <Args, Children, Props> {
+export type Child = InstanceType<typeof Component>
+export type Children = { [key: string]: Child }
+
+export type Prop = any
+export type Props = { [key: string]: Prop }
+
+export abstract class Component <C extends Children, P extends Props> {
   static EVENTS = {
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
@@ -29,24 +36,25 @@ export abstract class Component <Args, Children, Props> {
 
   private eventBus: () => EventBus;
 
-  constructor(args: Args) {
+  constructor(args: C & P) {
     const eventBus = new EventBus();
 
     const { children, events, props } = this.separateArguments(args);
+
+    this.children = this.makePropsProxy(children) as C;
+    this.props = this.makePropsProxy(props) as P;
+    this.events = this.makePropsProxy(events) as Events;
 
     this.id = nanoid(6);
     this.count = 0;
     this.instance = 'Component';
     this.meta = { children, events, props };
-    this.children = this.makePropsProxy(children) as Children;
-    this.props = this.makePropsProxy(props) as Props;
-    this.events = this.makePropsProxy(events) as Events;
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
     eventBus.emit(Component.EVENTS.INIT);
   }
 
-  private separateArguments(args: Args) {
+  private separateArguments(args: P & C) {
     const props: UnknownObject = {};
     const children: UnknownObject = {};
     const events: UnknownObject = {};
@@ -87,7 +95,7 @@ export abstract class Component <Args, Children, Props> {
 
     Object.values(this.children).forEach((child) => {
       const stub = element!.querySelector(`[data-id='${child.id}']`);
-      stub?.replaceWith(child.getContent() as HTMLElement);
+      stub?.replaceWith(child.getContent()!);
     });
 
     if (this._element) this._element.replaceWith(element as Node);
@@ -109,7 +117,7 @@ export abstract class Component <Args, Children, Props> {
   }
 
   createDOMElement() {
-    const stubs = Object.entries(this.children).reduce(
+    const stubs = Object.entries<Child>(this.children).reduce(
       (acc, [key, child]) => ({
         ...acc,
         [key]: `<div data-id='${child.id}'></div>`,
@@ -131,19 +139,19 @@ export abstract class Component <Args, Children, Props> {
     return resultElement;
   }
 
-  _componentDidMount(props: Props) {
+  _componentDidMount(props: P) {
     this.componentDidMount(props);
   }
 
   // Может переопределять пользователь, необязательно трогать. Не используется
-  componentDidMount(props: Props) {}
+  componentDidMount(props: P) {}
 
   dispatchComponentDidMount() {
     this.eventBus().emit(Component.EVENTS.FLOW_CDM);
     // console.log(`dispatch:CDM[${this.id}]`);
   }
 
-  _componentDidUpdate(oldProps: Props, newProps: Props) {
+  _componentDidUpdate(oldProps: P, newProps: P) {
     const isEqual = this.componentDidUpdate(oldProps, newProps);
 
     if (!isEqual) {
@@ -156,7 +164,7 @@ export abstract class Component <Args, Children, Props> {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps: Props, newProps: Props) {
+  componentDidUpdate(oldProps: P, newProps: P) {
     const isEqual = deepEqual(newProps, oldProps);
     console.warn(`EQUA{${this.count}}:[${this.instance}:${this.id}]:`, {
       eql: isEqual,
@@ -166,7 +174,7 @@ export abstract class Component <Args, Children, Props> {
     return isEqual;
   }
 
-  public setProps(nextProps: { [Prop in keyof Props]?: Props[Prop] }) {
+  public setProps(nextProps: { [K in keyof P]?: P[K] }) {
     if (!nextProps || !Object.keys(nextProps)?.length) {
       console.warn(`Properties not passed.`, nextProps);
       return;
@@ -219,7 +227,7 @@ export abstract class Component <Args, Children, Props> {
 
   public getPropsChildren() {
     return Object.entries(this.children).reduce(
-      (acc, [key, child]) => ({ ...acc, [key]: child.props }),
+      (acc, [key, child]) => ({ ...acc, [key]: (child as Child).props }),
       {},
     );
   }

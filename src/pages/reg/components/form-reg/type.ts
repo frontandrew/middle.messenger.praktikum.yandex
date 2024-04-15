@@ -1,6 +1,6 @@
 import { Button, Field } from 'ui';
 
-import type { FormData } from 'ui';
+import type { FormChildren, FormData, FormProps } from 'ui';
 
 export interface FormRegData extends FormData {
   email: string,
@@ -12,28 +12,15 @@ export interface FormRegData extends FormData {
   passwordMore: string,
 }
 
-export interface FormRegArgs {
-  [key: string]: unknown,
-  data?: FormRegData,
-
-  email?: Field,
-  login?: Field,
-  first_name?: Field,
-  second_name?: Field,
-  phone?: Field,
-  password?: Field,
-  password_more?: Field,
-  submit?: Button,
-  redirect?: Button,
-}
-
-export interface FormRegProps {
-  [key: string]: unknown,
+export interface FormRegArgs extends FormRegProps, MakeOptional<FormRegChildren> {
   data: FormRegData,
 }
 
-export interface FormRegChildren {
-  [key: string]: Field | Button,
+export interface FormRegProps extends FormProps {
+  data: FormRegData,
+}
+
+export interface FormRegChildren extends FormChildren {
   email: Field,
   login: Field,
   first_name: Field,

@@ -1,13 +1,12 @@
 import { Button, Field } from 'ui';
 import { Component } from 'core';
 
-import type { FormArgs, FormChildren, FormData, FormProps } from './type';
+import type { FormChildren, FormProps } from './type';
 import './style.css';
 
-export abstract class Form<A extends FormArgs, C extends FormChildren, P extends FormProps>
-  extends Component<A, C, P> {
+export abstract class Form<C extends FormChildren, P extends FormProps>
+  extends Component<C, P> {
   constructor({
-    data = {},
     disabled = false,
     hasError = false,
 
@@ -28,17 +27,17 @@ export abstract class Form<A extends FormArgs, C extends FormChildren, P extends
     submit = new Button({ label: 'Submit', type: 'submit' }),
 
     ...rest
-  }: A) {
+  }) {
     super({
-      data,
       disabled,
       hasError,
       onInput,
       onReset,
       onSubmit,
       submit,
+
       ...rest,
-    });
+    } as C & P);
   }
 
   handleSubmit() {
@@ -54,7 +53,7 @@ export abstract class Form<A extends FormArgs, C extends FormChildren, P extends
 
   reset() {
     Object.values(this.children).forEach((child) => {
-      child!.reset();
+      child?.reset();
     });
 
     this.updateErrorState(false);
@@ -62,11 +61,8 @@ export abstract class Form<A extends FormArgs, C extends FormChildren, P extends
 
   getErrorState() {
     const errorState: boolean = Object.values(this.children)
-      ?.reduce((acc: boolean[], child) => {
-        if (child instanceof Field) return [...acc, child.props.hasError];
-        return acc;
-      }, [])
-      ?.some(Boolean);
+      .filter((child) => child instanceof Field)
+      .some((child) => child.props.hasError);
 
     return errorState;
   }

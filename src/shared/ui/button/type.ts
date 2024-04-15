@@ -1,7 +1,11 @@
+import type { Children, Props } from 'core';
+
 type ButtonTypes = 'submit' | 'reset' | 'button';
 type ButtonVariants = 'filled' | 'link' | 'text';
 
-export interface ButtonProps {
+export interface ButtonChildren extends Children {}
+
+export interface ButtonProps extends Props {
   readonly label: string,
 
   classes?: string,

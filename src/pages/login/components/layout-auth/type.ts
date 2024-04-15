@@ -1,15 +1,15 @@
+import type { Children } from 'core';
+
 import { Text } from 'ui';
 
 import { FormAuth } from '../form-auth';
 import type { FormAuthData } from '../form-auth/type';
 
 export interface LayoutAuthArgs {
-  data?: FormAuthData,
-  form?: FormAuth,
-  title?: Text,
+  data: FormAuthData,
 }
 
-export interface LayoutAuthChildren {
+export interface LayoutAuthChildren extends Children {
   form: FormAuth,
   title: Text,
 }

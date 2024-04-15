@@ -1,22 +1,16 @@
 import { Button, Field } from 'ui';
 
-import type { FormArgs, FormChildren, FormData, FormProps } from 'ui';
+import type { FormChildren, FormData, FormProps } from 'ui';
 
 export interface FormAuthData extends FormData {
-  login?: string,
-  password?: string,
+  login: string,
+  password: string,
 }
 
-export interface FormAuthArgs extends FormArgs {
-  data?: FormAuthData,
-  login?: Field,
-  password?: Field,
-  submit?: Button,
-  redirect?: Button,
-}
+export interface FormAuthArgs extends FormAuthProps, MakeOptional<FormAuthChildren> {}
 
 export interface FormAuthProps extends FormProps {
-  data?: FormAuthData,
+  data: FormAuthData,
 }
 
 export interface FormAuthChildren extends FormChildren {

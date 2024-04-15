@@ -4,13 +4,13 @@ import type { DialogArgs, DialogChildren, DialogProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class Dialog extends Component<DialogArgs, DialogChildren, DialogProps> {
+export class Dialog extends Component<DialogChildren, DialogProps> {
   constructor({ isOpen = false, ...rest }: DialogArgs) {
     super({
       isOpen,
       onClick: () => this.close(),
       ...rest,
-    });
+    } as DialogArgs);
   }
 
   public setVisibility(state: boolean) {

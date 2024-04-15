@@ -1,10 +1,10 @@
 import { Button, Field, Form } from 'ui';
 
-import type { FormPassArgs, FormPassChildren, FormPassProps } from './type';
+import type { FormPassChildren, FormPassProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class FormPass extends Form<FormPassArgs, FormPassChildren, FormPassProps> {
+export class FormPass extends Form<FormPassChildren, FormPassProps> {
   constructor() {
     super({
       passCurr: new Field({
@@ -32,7 +32,7 @@ export class FormPass extends Form<FormPassArgs, FormPassChildren, FormPassProps
         label: 'Save',
         type: 'submit',
       }),
-    });
+    } as FormPassChildren);
   }
 
   render() {

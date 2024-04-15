@@ -4,8 +4,8 @@ import type { FormRegArgs, FormRegChildren, FormRegProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class FormReg extends Form<FormRegArgs, FormRegChildren, FormRegProps> {
-  constructor({ data, ...rest }: FormRegArgs) {
+export class FormReg extends Form<FormRegChildren, FormRegProps> {
+  constructor({ data }: FormRegArgs) {
     super({
       data,
       email: new Field({
@@ -66,8 +66,6 @@ export class FormReg extends Form<FormRegArgs, FormRegChildren, FormRegProps> {
         page: 'login',
         variant: 'link',
       }),
-
-      ...rest,
     });
   }
 

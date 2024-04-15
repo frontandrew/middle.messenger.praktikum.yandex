@@ -1,11 +1,11 @@
 import { Button, Field, Form } from 'ui';
 
-import type { FormInfoArgs, FormInfoChildren, FormInfoProps } from './type';
+import type { FormInfoChildren, FormInfoProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class FormInfo extends Form<FormInfoArgs, FormInfoChildren, FormInfoProps> {
-  constructor({ data, isEdit }: FormInfoArgs) {
+export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
+  constructor({ data, isEdit }: FormInfoProps) {
     super({
       data,
       isEdit,

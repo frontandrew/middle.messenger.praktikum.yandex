@@ -1,6 +1,7 @@
 import { LayoutUser } from './components';
 
-import type { FormInfoData } from './components/form-info/type';
+import type { LayoutUserArgs } from './components/layout-user/type';
+import type { FormInfoData as PageUserContext } from './components/form-info/type';
 
 export class PageUser extends LayoutUser {
   constructor({
@@ -11,7 +12,7 @@ export class PageUser extends LayoutUser {
     secondName = '',
     nickName = '',
     phone = '',
-  }: FormInfoData) {
+  }: PageUserContext) {
     super({
       image,
       data: {
@@ -22,6 +23,8 @@ export class PageUser extends LayoutUser {
         nickName,
         phone,
       },
-    });
+    } as LayoutUserArgs);
   }
 }
+
+export type { PageUserContext };

@@ -1,10 +1,8 @@
 import { Button } from 'ui';
 
-import type { FormArgs, FormChildren, FormProps } from 'ui';
+import type { FormChildren, FormProps } from 'ui';
 
-export interface FormAvatarArgs extends FormArgs {
-  submit?: Button,
-}
+export interface FormAvatarArgs extends FormAvatarChildren, FormAvatarProps {}
 
 export interface FormAvatarProps extends FormProps {
   isEdit: boolean,

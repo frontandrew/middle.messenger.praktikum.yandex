@@ -10,7 +10,7 @@ import type { LayoutUserArgs, LayoutUserChildren, LayoutUserProps } from './type
 import template from './template.hbs?raw';
 import './style.css';
 
-export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, LayoutUserProps> {
+export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
   constructor({ image, data }: LayoutUserArgs) {
     super({
       showActions: true,
@@ -26,7 +26,7 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
       }),
       nick: new Text({
         classes: 'text_title',
-        text: data?.nickName,
+        text: data.nickName,
         tag: 'h1',
       }),
       formInfo: new FormInfo({ data, isEdit: false }),
@@ -50,7 +50,7 @@ export class LayoutUser extends Component<LayoutUserArgs, LayoutUserChildren, La
         isOpen: false,
         content: new FormAvatar(),
       }),
-    });
+    } as LayoutUserChildren & LayoutUserProps);
   }
 
   handleEditPass() {

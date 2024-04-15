@@ -1,10 +1,10 @@
 import { Component } from 'core';
 
-import { ButtonProps } from './type';
+import { ButtonChildren, ButtonProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class Button extends Component<ButtonProps, object, ButtonProps> {
+export class Button extends Component<ButtonChildren, ButtonProps> {
   constructor({
     classes = '',
     disabled = false,
@@ -16,7 +16,16 @@ export class Button extends Component<ButtonProps, object, ButtonProps> {
 
     ...rest
   }: ButtonProps) {
-    super({ classes, disabled, page, type, variant, onClick, ...rest });
+    super({
+      classes,
+      disabled,
+      page,
+      type,
+      variant,
+      onClick,
+
+      ...rest,
+    } as ButtonChildren & ButtonProps);
   }
 
   setDisabled(state: boolean) {

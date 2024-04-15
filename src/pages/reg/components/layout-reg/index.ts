@@ -7,8 +7,8 @@ import type { LayoutRegArgs, LayoutRegChildren, LayoutRegProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class LayoutReg extends Component<LayoutRegArgs, LayoutRegChildren, LayoutRegProps> {
-  constructor({ data, ...rest }: LayoutRegArgs) {
+export class LayoutReg extends Component<LayoutRegChildren, LayoutRegProps> {
+  constructor({ data }: LayoutRegArgs) {
     super({
       title: new Text({
         classes: 'layout-reg__title',
@@ -16,9 +16,7 @@ export class LayoutReg extends Component<LayoutRegArgs, LayoutRegChildren, Layou
         text: 'Registration',
       }),
       form: new FormReg({ data }),
-
-      ...rest,
-    });
+    } as LayoutRegChildren & LayoutRegProps);
   }
 
   render() {

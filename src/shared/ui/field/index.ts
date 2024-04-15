@@ -8,7 +8,7 @@ import type { FieldArgs, FieldChildren, FieldProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class Field extends Component<FieldArgs, FieldChildren, FieldProps> {
+export class Field extends Component<FieldChildren, FieldProps> {
   constructor({
     name,
 
@@ -52,7 +52,7 @@ export class Field extends Component<FieldArgs, FieldChildren, FieldProps> {
       input,
 
       ...rest,
-    });
+    } as FieldProps & FieldChildren);
   }
 
   handleValidation() {
