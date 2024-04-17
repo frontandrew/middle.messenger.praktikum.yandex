@@ -1,13 +1,11 @@
-.dialog__container {
+.dialog {
     width: fit-content;
     height: fit-content;
 
     margin: auto;
-
-    padding: 2.5em 1.875em;
 }
 
-.dialog {
+.dialog__container {
     width: 100vw;
     height: 100vh;
 
@@ -19,6 +17,6 @@
     background-color: var(--shading-color);
 }
 
-.dialog_visible {
+.dialog__container_visible {
     display: flex;
 }

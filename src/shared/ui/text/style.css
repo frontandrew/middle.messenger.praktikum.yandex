@@ -38,3 +38,7 @@
 .text_main-color {
     color: var(--main-color);
 }
+
+.text_disabled-color {
+    color: var(--disabled-color);
+}

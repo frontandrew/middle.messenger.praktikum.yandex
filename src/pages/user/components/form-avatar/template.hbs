@@ -1,10 +1,8 @@
-<form class="form">
-    <label class="" for="avatar-input">Label</label>
-    <input
-        class="file-input"
-        id="avatar-input"
-        type="file"
-        accept="image/png, image/jpeg"
-    >
+<form class="form form-avatar">
+    {{{title}}}
+    {{{file}}}
     {{{submit}}}
+    {{#if hasError}}
+        {{{error}}}
+    {{/if}}
 </form>
