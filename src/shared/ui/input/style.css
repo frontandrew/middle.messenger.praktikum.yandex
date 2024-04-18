@@ -5,10 +5,6 @@
     padding: 0.4615385em 0;
 }
 
-.input::placeholder {
-    color: var(--text-hided-color);
-}
-
 .input:disabled {
     color: var(--disabled-color);
 }

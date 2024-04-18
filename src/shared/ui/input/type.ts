@@ -1,20 +1,21 @@
 import type { Children, Props } from 'core';
 
-export type InputTypes = 'text'
-| 'password'
-| 'email'
-| 'tel'
-| 'file';
+export type InputType = 'text' | 'password' | 'file';
+
+// type InputAccept = 'image/*' | 'video/*';
 
 export interface InputProps extends Props {
   readonly name: string,
-  readonly type?: InputTypes,
+  // label: string,
 
+  // inline?: boolean,
+  // accept?: InputAccept,
+  type?: InputType,
+  value?: string,
   placeholder?: string,
   classes?: string,
   disabled?: boolean,
-  hasError?: boolean,
-  value: string,
+  // hasError?: boolean,
 
   onBlur?: () => void,
   onInput?: ({}: InputEvent) => InputEvent,

@@ -1,43 +1,37 @@
 import { Component } from 'core';
 
-import type { Children } from 'core';
-import type { InputProps } from './type';
+import type { InputChildren, InputProps } from './type';
 
 import template from './template.hbs?raw';
 import './style.css';
 
-export class Input extends Component<Children, InputProps> {
+export type { InputChildren, InputProps };
+
+export class Input extends Component<InputChildren, InputProps> {
   public value: string;
 
   constructor({
     name,
-    type = 'text',
-    classes = '',
-    disabled = false,
-    hasError = false,
     value = '',
     placeholder,
 
-    onBlur = () => {},
     onInput = (event: InputEvent) => {
       this.setValue(event);
       return event;
     },
+
+    ...rest
   }: InputProps) {
     super({
       name,
-      type,
-      classes,
-      disabled,
-      hasError,
       value,
       placeholder: placeholder || name,
-
       onInput,
-      onBlur,
+
+      ...rest,
     } as InputProps);
 
-    this.value = this.props.value;
+    this.value = this.props.value!;
   }
 
   protected setValue({ target }: InputEvent) {
