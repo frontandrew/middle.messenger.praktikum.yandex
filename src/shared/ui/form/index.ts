@@ -52,9 +52,11 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
   }
 
   reset() {
-    Object.values(this.children).forEach((child) => {
-      child?.reset();
-    });
+    Object.values(this.children)
+      .filter((child) => child instanceof Button || child instanceof Field)
+      .forEach((child) => {
+        child?.reset();
+      });
 
     this.updateErrorState(false);
   }
@@ -87,6 +89,5 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
     );
 
     console.warn(`FORM "${this.instance}" SUBMITTED:`, submitted);
-    // TODO: > navigate()
   }
 }

@@ -1,13 +1,18 @@
 import { Component } from 'core';
 
-import type { InputChildren, InputProps } from './type';
+import type { InputChildren, InputProps, InputType } from './type';
 
 import template from './template.hbs?raw';
 import './style.css';
 
-export type { InputChildren, InputProps };
+export type { InputChildren, InputProps, InputType };
 
-export class Input extends Component<InputChildren, InputProps> {
+/**
+ * Can used like base input componet in more complex inputs, or like independed
+ * text input in cases without validation state
+ */
+
+export class Input<C extends InputChildren, P extends InputProps> extends Component<C, P> {
   public value: string;
 
   constructor({
@@ -29,7 +34,7 @@ export class Input extends Component<InputChildren, InputProps> {
       onInput,
 
       ...rest,
-    } as InputProps);
+    } as C & P);
 
     this.value = this.props.value!;
   }
@@ -41,7 +46,7 @@ export class Input extends Component<InputChildren, InputProps> {
   }
 
   reset() {
-    this.setProps({ hasError: false, value: '' });
+    this.setProps({ value: '' });
   }
 
   render() {

@@ -1,21 +1,21 @@
-import type { Children, Props } from 'core';
-import type { ValidationState, ValidatorParams } from 'tools';
+import { Input, InputField, InputFile } from 'ui';
 
-import { Input } from '../input';
-import type { InputTypes } from '../input/type';
+import type { Children, Props } from 'core';
+import type { InputChildren, InputFieldProps, InputType } from 'ui';
+import type { ValidationState, ValidatorParams } from 'tools';
 
 export interface FieldArgs extends FieldProps, MakeOptional<FieldChildren> {}
 
 export interface FieldProps extends Props {
   name: string,
   label: string,
-  type: InputTypes,
+  type: InputType | 'simple',
 
   classes?: string,
   disabled?: boolean,
   inline?: boolean,
   hasError?: boolean,
-  textError?: string,
+  // textError?: string,
   textHelp?: string,
   required?: boolean,
   value?: string,
@@ -23,5 +23,6 @@ export interface FieldProps extends Props {
 }
 
 export interface FieldChildren extends Children {
-  input: Input
+  input: Input<InputChildren, InputFieldProps> | InputField | InputFile
+  // input: InstanceType<typeof Input>
 }

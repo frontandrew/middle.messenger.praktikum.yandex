@@ -1,12 +1,3 @@
-<div class="{{#if classes}}{{classes}} {{/if}}field{{#if hasError}} field_error{{/if}}{{#if disabled}} field_disabled{{/if}}">
-  <div class="field__container{{#if inline}}_inline{{/if}}">
-    <label for="{{name}}" class="field__label{{#if inline}}_inline{{/if}} text">{{label}}</label>
+<div class="{{#if classes}}{{classes}} {{/if}}field">
     {{{input}}}
-    </div>
-  {{> Divider}}
-  {{#if hasError}}
-    <span class="field__text text text_error-color text_info">{{textError}}</span>
-  {{else}}
-    <span class="field__text text text_light-color text_info">{{textHelp}}</span>
-  {{/if}}
 </div>

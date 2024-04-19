@@ -1,0 +1,29 @@
+.input-file {
+    /* height: auto; */
+    /* width: 100%; */
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.input-file__label {
+    height: 1em;
+    width: 100%;
+
+    color: var(--text-hided-color);
+    text-decoration: underline;
+}
+
+.input-file__input {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.input-file__name {
+    height: 1em;
+    width: 100%;
+
+    color: red;
+}

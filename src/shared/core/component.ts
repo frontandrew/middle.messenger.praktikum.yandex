@@ -174,7 +174,7 @@ export abstract class Component <C extends Children, P extends Props> {
     return isEqual;
   }
 
-  public setProps(nextProps: { [K in keyof P]?: P[K] }) {
+  public setProps(nextProps: { [K in keyof Props]: Props[K] }) {
     if (!nextProps || !Object.keys(nextProps)?.length) {
       console.warn(`Properties not passed.`, nextProps);
       return;

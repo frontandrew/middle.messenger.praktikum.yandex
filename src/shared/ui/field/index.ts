@@ -1,5 +1,5 @@
+import { Input, InputField, InputFile } from 'ui';
 import { Component } from 'core';
-import { Input } from 'ui';
 
 import type { ValidationState } from 'tools';
 import { validators } from 'tools';
@@ -11,54 +11,69 @@ import './style.css';
 export class Field extends Component<FieldChildren, FieldProps> {
   constructor({
     name,
+    label,
 
     classes = '',
     disabled = false,
     inline = false,
     hasError = false,
-    textError = '',
+    // textError = '',
     textHelp = '',
     type = 'text',
     required = false,
     value = '',
     validator = validators[name] || validators.isRequired,
 
-    input = new Input({
-      name,
-      type,
-      classes: '',
-      disabled,
-      hasError,
-      value,
-      onBlur: () => this.handleValidation(),
-    }),
-
-    ...rest
+    input = type === 'simple'
+      ? new Input({
+        name,
+        type: 'text',
+        disabled,
+        value,
+      })
+      : type === 'file'
+        ? new InputFile({
+          label,
+          name,
+          type,
+          disabled,
+          hasError,
+          value,
+        })
+        : new InputField({
+          name,
+          type,
+          label,
+          disabled,
+          textHelp,
+          hasError,
+          value,
+          inline,
+          onBlur: () => this.handleValidation(),
+        }),
   }: FieldArgs) {
     super({
-      name,
+      // name,
 
       classes,
-      disabled,
+      // disabled,
       hasError,
-      inline,
+      // inline,
       required,
-      type,
-      textError,
-      textHelp,
+      // type,
+      // textError,
+      // textHelp,
       validator,
-      value,
+      // value,
 
       input,
-
-      ...rest,
     } as FieldProps & FieldChildren);
   }
 
   handleValidation() {
     const { hasError, textError, value } = this.validate();
-    this.setProps({ hasError, textError, value });
-    this.children.input.setProps({ hasError, value });
+    this.setProps({ hasError });
+    this.children.input.setProps({ hasError, value, textError });
   }
 
   validate(): ValidationState {
