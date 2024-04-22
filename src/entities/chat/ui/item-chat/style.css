@@ -6,11 +6,11 @@
     margin-top: 0.125em;
 }
 
-.item-chat .divider {
+.item-chat > .divider {
     margin: 0.125em 0.625em 0;
 }
 
-.item-chat:last-child .divider {
+.item-chat:last-child > .divider {
     display: none;
 }
 
@@ -57,7 +57,7 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 1em;
 }
 
 .item-chat__info-subtitle {
@@ -80,8 +80,8 @@
 }
 
 .item-chat__message {
-    max-height: 30px;
-    max-width: 100%;
+    /* max-height: 30px; */
+    /* max-width: 100%; */
 
     align-self: flex-start;
     overflow: hidden;

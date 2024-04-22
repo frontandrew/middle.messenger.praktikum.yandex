@@ -8,9 +8,9 @@
                                 <date class="item-chat__date text text_label text_light-color">{{date}}</date>
                             {{/if}}
                     </div>
-                    {{#if message}}
+                    {{#if lastMessage}}
                         <div class="item-chat__info-subtitle">
-                                <span class="item-chat__message text text_light-color">{{message}}</span>
+                                <span class="item-chat__message text text_light-color">{{lastMessage}}</span>
                                 {{#if count}}
                                         <div class="item-chat__count">
                                                 <span class="text text text_contrast-color">{{count}}</span>

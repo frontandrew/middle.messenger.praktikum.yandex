@@ -8,17 +8,16 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class ItemChat extends Component<ItemChatChildren, ItemChatProps> {
-  constructor(chat: ChatType) {
+  constructor({ avatar, ...chat }: ChatType) {
     super({
-      avatar: new Avatar({ pic: chat.avatar }),
-
-      name: chat.name,
+      avatar: new Avatar({ pic: avatar }),
       active: false,
+      ...chat,
     } as ItemChatChildren & ItemChatProps);
   }
 
   toggleActive() {
-    this.setProps({ active: this.props.active });
+    this.setProps({ active: !this.props.active });
   }
 
   render() {
