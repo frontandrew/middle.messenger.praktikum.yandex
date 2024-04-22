@@ -17,7 +17,7 @@ export class Field extends Component<FieldChildren, FieldProps> {
     disabled = false,
     inline = false,
     hasError = false,
-    // textError = '',
+    placeholder = '',
     textHelp = '',
     type = 'text',
     required = false,
@@ -28,6 +28,7 @@ export class Field extends Component<FieldChildren, FieldProps> {
       ? new Input({
         name,
         type: 'text',
+        placeholder,
         disabled,
         value,
       })

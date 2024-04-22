@@ -18,7 +18,7 @@ export class Input<C extends InputChildren, P extends InputProps> extends Compon
   constructor({
     name,
     value = '',
-    placeholder,
+    placeholder = '',
 
     onInput = (event: InputEvent) => {
       this.setValue(event);
@@ -30,7 +30,7 @@ export class Input<C extends InputChildren, P extends InputProps> extends Compon
     super({
       name,
       value,
-      placeholder: placeholder || name,
+      placeholder,
       onInput,
 
       ...rest,

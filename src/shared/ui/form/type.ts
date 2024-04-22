@@ -20,6 +20,6 @@ export interface FormProps extends Props {
 
 export interface FormChildren extends MakeOptional<Children> {
   [key: string]: Field | Button | Text | undefined
-  submit: Button,
+  submit?: Button,
   reset?: Button,
 }

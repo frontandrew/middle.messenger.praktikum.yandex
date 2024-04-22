@@ -24,8 +24,6 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
       return event;
     },
 
-    submit = new Button({ label: 'Submit', type: 'submit' }),
-
     ...rest
   }) {
     super({
@@ -34,7 +32,6 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
       onInput,
       onReset,
       onSubmit,
-      submit,
 
       ...rest,
     } as C & P);
@@ -70,7 +67,7 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
   }
 
   updateErrorState(state: boolean) {
-    this.children.submit.setDisabled(state);
+    this.children.submit?.setDisabled(state);
   }
 
   validate() {

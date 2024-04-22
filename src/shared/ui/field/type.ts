@@ -8,9 +8,10 @@ export interface FieldArgs extends FieldProps, MakeOptional<FieldChildren> {}
 
 export interface FieldProps extends Props {
   name: string,
-  label: string,
   type: InputType | 'simple',
 
+  label?: string,
+  placeholder?: string,
   classes?: string,
   disabled?: boolean,
   inline?: boolean,
