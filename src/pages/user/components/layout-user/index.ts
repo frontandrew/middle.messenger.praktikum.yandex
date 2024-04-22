@@ -25,7 +25,7 @@ export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
         onClick: () => this.children.avatarDialog?.open(),
       }),
       nick: new Text({
-        classes: 'text_title',
+        classes: 'user-nick',
         text: data.nickName,
         tag: 'h1',
       }),
