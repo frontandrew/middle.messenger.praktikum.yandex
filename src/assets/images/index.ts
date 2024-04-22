@@ -8,4 +8,4 @@ export { default as DefPic } from './default-image.svg';
 export { default as Content1 } from './content1.png';
 export { default as Content2 } from './content2.jpg';
 export { default as Menu } from './menu-icon.svg';
-export { default as Search } from './search.svg';
+export { default as Lens } from './search.svg';
