@@ -1,14 +1,14 @@
 .form-search {
-    border-radius: 0.3125em;
-    padding: 0.375em 0.625em;
-
     background: var(--background-color-contrast);
+    border-radius: 0.3125em;
 }
 
 .form-search__container {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    padding: 0.375em 0.625em;
 
     gap: 0.25em;
 
