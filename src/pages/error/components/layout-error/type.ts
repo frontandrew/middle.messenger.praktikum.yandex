@@ -3,9 +3,9 @@ import { Button, Text } from 'ui';
 import type { Children, Props } from 'core';
 
 export interface LayoutErrorData {
-    title: string,
-    message: string,
-    target: string,
+    title?: string,
+    message?: string,
+    target?: string,
   }
 
 export interface LayoutErrorArgs extends LayoutErrorProps, MakeOptional<LayoutErrorChildren> {
