@@ -1,4 +1,4 @@
-import { Button, Text } from 'ui';
+import { Avatar, Button, ButtonIcon, Text } from 'ui';
 import { Component } from 'core';
 
 import { FormSearch } from '../form-search';
@@ -8,6 +8,8 @@ import type { LayoutChatsChildren, LayoutChatsData, LayoutChatsProps } from './t
 
 import template from './template.hbs?raw';
 import './style.css';
+
+export { LayoutChatsData };
 
 export class LayoutChats extends Component<LayoutChatsChildren, LayoutChatsProps> {
   constructor({ user, chats, messages }: LayoutChatsData) {
@@ -20,14 +22,23 @@ export class LayoutChats extends Component<LayoutChatsChildren, LayoutChatsProps
         classes: 'text text_light-color',
       }),
       formSearch: new FormSearch({}),
-      listChats: new ListChats(chats)
-    //   chatInfo: new ChatItem(user),
-    //   chatAction: new Button(),
-    //   listMessage: new List(messages),
+      listChats: new ListChats(chats),
+      imageChat: new Avatar({
+        pic: user.image,
+        size: 'small',
+      }),
+      titleChat: new Text({
+        tag: 'h1',
+        text: user.nickName,
+        classes: 'messages__header-title text_title',
+      }),
+      actionsChat: new ButtonIcon({
+        variant: 'transparent',
+      }),
+    //   listMessages: new ListMessages(messages),
     //   attacment: new Button(),
     //   formMessage: new FormMessage(),
-    // } as LayoutChatsChildren);
-    });
+    } as LayoutChatsChildren);
   }
 
   render() {

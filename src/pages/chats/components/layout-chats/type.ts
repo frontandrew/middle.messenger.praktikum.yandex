@@ -1,13 +1,13 @@
 import { Button, Text } from 'ui';
 
-import type { ChatType, MessageType, UserType } from 'entities';
+import type { ChatType, MessageType, UserType } from 'entities/index';
 import type { Children, Props } from 'core';
 
 import type { FormSearch } from '../form-search';
 import type { ListChats } from '../list-chats';
 
 export interface LayoutChatsData {
-  user: Pick<UserType, 'id' | 'image' | 'name'>,
+  user: Pick<UserType, 'id' | 'image' | 'nickName'>,
   chats: ChatType[],
   messages: MessageType[],
 }
