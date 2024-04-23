@@ -21,7 +21,9 @@
 }
 .user-nick {
     margin-bottom: 4.15385em;
-    height: 1.71em;
+    height: 1em;
+    font-size: 1em;
+    font-weight: 600;
 }
 
 .user-content {

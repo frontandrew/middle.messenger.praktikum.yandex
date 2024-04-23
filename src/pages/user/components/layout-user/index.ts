@@ -1,4 +1,5 @@
-import { Button, Dialog, Text } from 'ui';
+import { Button, ButtonIcon, Dialog, Text } from 'ui';
+import { Arrow } from 'images';
 import { Component } from 'core';
 
 import { ControlAvatar } from '../control-avatar';
@@ -15,9 +16,9 @@ export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
     super({
       showActions: true,
       showInfo: true,
-      back: new Button({
-        label: '<',
-        page: 'user', // TODO: > chats
+      back: new ButtonIcon({
+        pic: Arrow,
+        page: 'chats',
       }),
       avatar: new ControlAvatar({
         image,
@@ -48,7 +49,7 @@ export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
       }),
       avatarDialog: new Dialog({
         isOpen: false,
-        content: new FormAvatar(),
+        content: new FormAvatar({}),
       }),
     } as LayoutUserChildren & LayoutUserProps);
   }
