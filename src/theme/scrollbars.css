@@ -1,0 +1,21 @@
+/* width */
+::-webkit-scrollbar {
+    width: 0.25em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--background-color-tint);
+}
+
+::-webkit-scrollbar-thumb {
+    /* background: var(--background-color-contrast); */
+    background: var(--shading-color);
+    border-radius: 2px;
+    /* opacity: .4; */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    /* background: var(--background-color-contrast); */
+    background: var(--shading-color);
+}

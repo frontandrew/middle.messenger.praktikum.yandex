@@ -1,4 +1,5 @@
-@import './global.css';
 @import './fonts.css';
+@import './global.css';
 @import './reset.css';
+@import './scrollbars.css';
 @import './variables.css';
