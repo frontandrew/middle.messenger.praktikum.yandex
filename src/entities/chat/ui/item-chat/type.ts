@@ -10,3 +10,5 @@ export interface ItemChatProps extends Props, ChatType {
 export interface ItemChatChildren extends Children {
   avatar: Avatar,
 }
+
+export interface ItemChatKeyAttr { key: { value: string } }
