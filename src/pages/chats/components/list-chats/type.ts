@@ -7,6 +7,8 @@ export interface ListChatsChildren extends Children {
   [key: string]: ItemChat,
 }
 
-export interface ListChatsProps extends Props, ListChatsChildren {
+export interface ListChatsProps extends Props {
   itemKeys: string,
+  onClick: ({}: Event) => Event,
+  active: string | number | null,
 }

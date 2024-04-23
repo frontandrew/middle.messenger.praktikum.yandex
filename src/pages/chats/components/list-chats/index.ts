@@ -1,7 +1,7 @@
 import { Component } from 'core';
-
-import type { ChatType } from 'entities/chat';
 import { ItemChat } from 'entities/chat';
+
+import type { ChatType, ItemChatKeyAttr } from 'entities/chat';
 
 import type { ListChatsChildren, ListChatsProps } from './type';
 import './style.css';
@@ -10,7 +10,7 @@ export class ListChats extends Component<ListChatsChildren, ListChatsProps> {
   constructor(chats: ChatType[]) {
     const items = chats.reduce((acc, chatData) => {
       const chatItem = new ItemChat(chatData);
-      return { ...acc, [chatItem.id]: chatItem };
+      return { ...acc, [chatItem.id.toString()]: chatItem };
     }, {});
 
     const itemKeys = Object.keys(items)
@@ -21,7 +21,30 @@ export class ListChats extends Component<ListChatsChildren, ListChatsProps> {
     super({
       ...items,
       itemKeys,
-    } as ListChatsProps);
+      active: null,
+      onClick: (event) => {
+        this.handleSelect(event.target as HTMLElement);
+        return event;
+      },
+    } as ListChatsProps & ListChatsChildren);
+  }
+
+  handleSelect({ attributes }: HTMLElement) {
+    if (!('key' in attributes)) return;
+
+    const { key } = attributes as ItemChatKeyAttr;
+    const id = key.value;
+
+    if (!id || id === this.props.active) return;
+    if (this.props.active) {
+      this.children[this.props.active].toggleActive();
+    }
+
+    this.props.active = id;
+    this.children[this.props.active!].toggleActive();
+
+    const { instance, id: index } = this.children[this.props.active!];
+    console.warn(`SELECTED:[${instance}:${index}]`);
   }
 
   render() {
