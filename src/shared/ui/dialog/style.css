@@ -3,6 +3,7 @@
     height: fit-content;
 
     margin: auto;
+    z-index: var(--z-index-modal);
 }
 
 .dialog__container {
