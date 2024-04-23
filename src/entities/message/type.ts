@@ -1,8 +1,10 @@
 export interface MessageType {
   id: number,
-  text?: string,
-  media?: string,
-  type?: string,
+  type: 'system' | 'user',
+  origin: 'incoming' | 'outgoing',
+
+  text?: string | null,
+  media?: string | null,
   userId?: number,
   date?: string,
 }
