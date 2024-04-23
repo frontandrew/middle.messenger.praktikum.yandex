@@ -1,10 +1,12 @@
 import Handlebars from 'handlebars';
-import { nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid';
 
 import { deepCopy, deepEqual } from 'tools';
 
 import { EventBus } from './event-bus';
 import { createProxy } from './proxy-object';
+
+const nanoid = customAlphabet('0123456789abcdefghjkmnpqrstuvwxyz');
 
 export type DOMEvent = (({}: Event) => Event) | (() => void)
 export type Events = { [key: string]: DOMEvent }
