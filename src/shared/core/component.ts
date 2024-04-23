@@ -47,7 +47,7 @@ export abstract class Component <C extends Children, P extends Props> {
     this.props = this.makePropsProxy(props) as P;
     this.events = this.makePropsProxy(events) as Events;
 
-    this.id = nanoid(6);
+    this.id = props.id || nanoid(6);
     this.count = 0;
     this.instance = 'Component';
     this.meta = { children, events, props };
