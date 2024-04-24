@@ -1,12 +1,11 @@
 <li class="message message_{{origin}} message_{{type}}" key="{{id}}">
-    {{#if text}}
-        <span class="text">{{text}}</span>
-    {{/if}}
-    {{#if media}}
+    {{#if isMediaType}}
         <img
-            src={{media}}
-            alt={{media}}  {{! TODO: use file name like 'alt' attr for UGC content }}
+            src={{content}}
+            alt={{content}}
         >
+    {{else}}
+        <span class="text">{{content}}</span>
     {{/if}}
     <time class="text text_label">{{date}}</time>
 </li>
