@@ -1,4 +1,4 @@
-import { Button, Field, Text } from 'ui';
+import { Button, ButtonIcon, Field, Text } from 'ui';
 
 import { Children, Props } from 'core';
 
@@ -19,7 +19,7 @@ export interface FormProps extends Props {
 }
 
 export interface FormChildren extends MakeOptional<Children> {
-  [key: string]: Field | Button | Text | undefined
-  submit?: Button,
-  reset?: Button,
+  [key: string]: Field | Button | ButtonIcon | Text | undefined
+  submit?: Button | ButtonIcon,
+  reset?: Button | ButtonIcon,
 }

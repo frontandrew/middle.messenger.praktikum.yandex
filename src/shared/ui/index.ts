@@ -37,7 +37,7 @@ export { Text } from './text';
 export * as Templates from './templates';
 
 export type { AvatarArgs, AvatarChildren, AvatarProps } from './avatar/type';
-export type { ButtonChildren, ButtonProps } from './button/type';
+export type { ButtonTypes, ButtonChildren, ButtonProps } from './button/type';
 export type { ButtonIconChildren, ButtonIconProps } from './button-icon/type';
 export type { DialogArgs, DialogChildren, DialogProps } from './dialog/type';
 export type { FormArgs, FormChildren, FormData, FormProps } from './form/type';

@@ -6,8 +6,8 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class ButtonIcon extends Component<ButtonIconChildren, ButtonIconProps> {
-  constructor({ pic = Menu, variant = 'filled', ...rest }: ButtonIconProps) {
-    super({ pic, variant, ...rest } as ButtonIconChildren & ButtonIconProps);
+  constructor({ pic = Menu, type = 'button', variant = 'filled', ...rest }: ButtonIconProps) {
+    super({ pic, type, variant, ...rest } as ButtonIconChildren & ButtonIconProps);
   }
 
   setDisabled(state: boolean) {

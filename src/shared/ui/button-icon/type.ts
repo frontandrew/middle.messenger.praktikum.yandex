@@ -1,4 +1,5 @@
 import type { Children, Props } from 'core';
+import type { ButtonTypes } from '../button/type';
 
 type ButtonIconVariants = 'filled' | 'transparent';
 
@@ -10,6 +11,7 @@ export interface ButtonIconProps extends Props {
   classes?: string,
   variant?: ButtonIconVariants,
   disabled?: boolean,
+  type?: ButtonTypes,
 
   onClick?: (({}: Event) => Event) | (() => void),
 }

@@ -85,6 +85,6 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
       {},
     );
 
-    console.warn(`FORM "${this.instance}" SUBMITTED:`, submitted);
+    console.warn(`SBMT{${this.count}}:[${this.instance}:${this.id}]:`, submitted);
   }
 }

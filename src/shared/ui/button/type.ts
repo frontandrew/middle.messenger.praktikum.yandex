@@ -1,6 +1,6 @@
 import type { Children, Props } from 'core';
 
-type ButtonTypes = 'submit' | 'reset' | 'button';
+export type ButtonTypes = 'submit' | 'reset' | 'button';
 type ButtonVariants = 'filled' | 'link' | 'text';
 
 export interface ButtonChildren extends Children {}
