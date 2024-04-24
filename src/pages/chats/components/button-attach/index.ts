@@ -6,8 +6,8 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class ButtonAttach extends Component<ButtonAttachChildren, ButtonAttachProps> {
-  constructor({ pic = Clip, ...props }: ButtonAttachProps) {
-    super({ pic, ...props } as ButtonAttachChildren & ButtonAttachProps);
+  constructor(props: Pick<ButtonAttachProps, 'onClick'>) {
+    super({ pic: Clip, ...props } as ButtonAttachChildren & ButtonAttachProps);
   }
 
   render() {

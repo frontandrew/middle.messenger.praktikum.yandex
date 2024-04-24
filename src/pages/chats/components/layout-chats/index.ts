@@ -21,7 +21,7 @@ export class LayoutChats extends Component<LayoutChatsChildren, LayoutChatsProps
         variant: 'text',
         page: 'user',
         label: 'Profile ❯',
-        classes: 'text text_light-color',
+        classes: 'text_light-color',
       }),
       formSearch: new FormSearch({}),
       listChats: new ListChats(chats),
@@ -32,13 +32,11 @@ export class LayoutChats extends Component<LayoutChatsChildren, LayoutChatsProps
       titleChat: new Text({
         tag: 'h1',
         text: user.nickName,
-        classes: 'messages__header-title text_title',
+        classes: 'messages__title text_title',
       }),
-      actionsChat: new ButtonIcon({
-        variant: 'transparent',
-      }),
+      actionsChat: new ButtonIcon({ variant: 'transparent' }),
       listMessages: new ListMessages(messages),
-      actionAttach: new ButtonAttach({}),
+      actionAttach: new ButtonAttach({ onClick: () => {} }),
       formMessage: new FormMessage(),
     } as LayoutChatsChildren & LayoutChatsProps);
   }

@@ -7,7 +7,7 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class FormSearch extends Form<FormSearchChildren, FormSearchProps> {
-  constructor({ search = '' }: FormSearchProps) {
+  constructor({ search = '' }: Pick<FormSearchProps, 'search'>) {
     super({
       img: Lens,
       fieldSearch: new Field({
