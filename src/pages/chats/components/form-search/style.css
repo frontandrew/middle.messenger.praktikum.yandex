@@ -4,19 +4,16 @@
 }
 
 .form-search__container {
+    width: 100%;
+    height: 2em;
+
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 
-    padding: 0.375em 0.625em;
-
+    padding: 0 0.625em;
     gap: 0.25em;
-
-    input {
-        color: var(--text-color-light);
-        font-size: 0.75em;
-        padding: unset;
-    }
 }
 
 .form-search__field {
@@ -24,10 +21,14 @@
     transition: all 0.2s;
 }
 
-.form-search__field:has(input:focus) {
+.form-search__field > .input {
+    font-size: 0.75em;
+}
+
+.form-search__field:has(.input:focus) {
     width: 100%;
 }
 
-.form-search__field:has(input:not(:placeholder-shown)) {
+.form-search__field:has(.input:not(:placeholder-shown)) {
     width: 100%;
 }

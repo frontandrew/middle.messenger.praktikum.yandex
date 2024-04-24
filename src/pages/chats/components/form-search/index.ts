@@ -17,7 +17,17 @@ export class FormSearch extends Form<FormSearchChildren, FormSearchProps> {
         placeholder: 'Search',
         classes: 'form-search__field',
       }),
+      onSubmit: (event) => {
+        event.preventDefault();
+        this.handleSearchSubmit();
+        return event;
+      },
     } as FormSearchChildren & FormSearchProps);
+  }
+
+  handleSearchSubmit() {
+    if (!this.children.fieldSearch.children.input.value) return;
+    this.handleSubmit();
   }
 
   render(): string {
