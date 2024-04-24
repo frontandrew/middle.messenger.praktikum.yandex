@@ -9,7 +9,7 @@ import './style.css';
 export class FormSearch extends Form<FormSearchChildren, FormSearchProps> {
   constructor({ search = '' }: FormSearchProps) {
     super({
-      lens: Lens,
+      img: Lens,
       fieldSearch: new Field({
         type: 'simple',
         value: search,
