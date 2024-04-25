@@ -1,8 +1,0 @@
-.side-panel {
-  display: flex;
-  align-items: center;
-
-  padding: 18px;
-
-  background-color: var(--background-color-contrast);
-}
