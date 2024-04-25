@@ -32,6 +32,7 @@ export { Form } from './form';
 export { Input } from './input';
 export { InputFile } from './input-file';
 export { InputField } from './input-field';
+export { MenuItem } from './menu-item';
 export { Text } from './text';
 
 export * as Templates from './templates';
@@ -45,4 +46,5 @@ export type { FieldArgs, FieldChildren, FieldProps } from './field/type';
 export type { InputChildren, InputProps, InputType } from './input';
 export type { InputFieldChildren, InputFieldProps } from './input-field';
 export type { InputFileChildren, InputFileProps } from './input-file';
+export type { MenuItemChildren, MenuItemProps } from './menu-item';
 export type { TextProps } from './text/type';
