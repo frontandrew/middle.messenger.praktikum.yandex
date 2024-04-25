@@ -1,11 +1,11 @@
 import { Button, Field, Form } from 'ui';
 
-import type { FormAuthArgs, FormAuthChildren, FormAuthProps } from './type';
+import type { FormAuthChildren, FormAuthData, FormAuthProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
 export class FormAuth extends Form<FormAuthChildren, FormAuthProps> {
-  constructor({ data }: FormAuthArgs) {
+  constructor(data: FormAuthData) {
     super({
       data,
       login: new Field({
@@ -31,10 +31,12 @@ export class FormAuth extends Form<FormAuthChildren, FormAuthProps> {
         page: 'reg',
         variant: 'link',
       }),
-    });
+    } as FormAuthChildren & FormAuthProps);
   }
 
   render() {
     return template;
   }
 }
+
+export type { FormAuthChildren, FormAuthData, FormAuthProps };
