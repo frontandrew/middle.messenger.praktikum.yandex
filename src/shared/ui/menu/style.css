@@ -1,0 +1,21 @@
+.menu-container {
+    position: absolute;
+
+    visibility: hidden;
+    width: 100vw;
+    height: 100vh;
+
+    z-index: var(--z-index-context);
+}
+
+.menu-container_visible {
+    visibility: visible;
+}
+
+.menu {
+    position: absolute;
+
+    width: min-content;
+    height: min-content;
+    padding: 0.48em 0;
+}
