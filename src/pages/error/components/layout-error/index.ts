@@ -1,13 +1,13 @@
 import { Button, Text } from 'ui';
 import { Component } from 'core';
 
-import type { LayoutErrorArgs, LayoutErrorChildren, LayoutErrorProps } from './type';
+import type { LayoutErrorChildren, LayoutErrorData, LayoutErrorProps } from './type';
 
 import template from './template.hbs?raw';
 import './style.css';
 
 export class LayoutError extends Component<LayoutErrorChildren, LayoutErrorProps> {
-  constructor({ data }: LayoutErrorArgs) {
+  constructor(data: LayoutErrorData) {
     super({
       title: new Text({
         tag: 'h1',
@@ -22,7 +22,7 @@ export class LayoutError extends Component<LayoutErrorChildren, LayoutErrorProps
       redirect: new Button({
         label: `Return to ${data.target} page`,
         type: 'button',
-        page: data?.target,
+        page: data.target,
         variant: 'link',
       }),
     } as LayoutErrorChildren);
