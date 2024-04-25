@@ -8,14 +8,14 @@ import { createProxy } from './proxy-object';
 
 const nanoid = customAlphabet('0123456789abcdefghjkmnpqrstuvwxyz');
 
-export type DOMEvent = (({}: Event) => Event) | (() => void)
-export type Events = { [key: string]: DOMEvent }
+export type DOMEvent = (({}: Event) => Event) | (() => void);
+export type Events = { [key: string]: DOMEvent };
 
-export type Child = InstanceType<typeof Component>
-export type Children = { [key: string]: Child }
+export type Child = InstanceType<typeof Component>;
+export type Children = { [key: string]: Child };
 
-export type Prop = any
-export type Props = { [key: string]: Prop }
+export type Prop = unknown;
+export type Props = { [key: string]: Prop };
 
 export abstract class Component <C extends Children, P extends Props> {
   static EVENTS = {
@@ -176,7 +176,7 @@ export abstract class Component <C extends Children, P extends Props> {
     return isEqual;
   }
 
-  public setProps(nextProps: { [K in keyof Props]: Props[K] }) {
+  public setProps(nextProps: { [K in keyof P]?: P[K] }) {
     if (!nextProps || !Object.keys(nextProps)?.length) {
       console.warn(`Properties not passed.`, nextProps);
       return;
