@@ -1,6 +1,7 @@
-import { Avatar, Button, ButtonIcon, Text } from 'ui';
+import { Avatar, Button, ButtonIcon, Menu, Text } from 'ui';
 import { Component } from 'core';
 
+import { IconAdd, IconFile, IconLoc, IconMedia } from 'images';
 import { ButtonAttach } from '../button-attach';
 import { FormMessage } from '../form-message';
 import { FormSearch } from '../form-search';
@@ -23,22 +24,82 @@ export class LayoutChats extends Component<LayoutChatsChildren, LayoutChatsProps
         label: 'Profile ❯',
         classes: 'text_light-color',
       }),
-      formSearch: new FormSearch({}),
+
       listChats: new ListChats(chats),
+      listMessages: new ListMessages(messages),
+
+      formSearch: new FormSearch({}),
+      formMessage: new FormMessage(),
+
       imageChat: new Avatar({
         pic: user.image,
         size: 'small',
       }),
+
       titleChat: new Text({
         tag: 'h1',
         text: user.nickName,
         classes: 'messages__title text_title',
       }),
-      actionsChat: new ButtonIcon({ variant: 'transparent' }),
-      listMessages: new ListMessages(messages),
-      actionAttach: new ButtonAttach({ onClick: () => {} }),
-      formMessage: new FormMessage(),
+
+      actionsChat: new ButtonIcon({
+        variant: 'transparent',
+        onClick: () => {
+          this.callMenuChat();
+        },
+      }),
+      actionAttach: new ButtonAttach({
+        onClick: () => {
+          this.callMenuAttach();
+        },
+      }),
+
+      menuAttach: new Menu({
+        position: { left: 20, bottom: 4 },
+        itemsProps: [
+          {
+            label: 'Photo or Video',
+            icon: IconMedia,
+            onClick: () => {},
+          },
+          {
+            label: 'File',
+            icon: IconFile,
+            onClick: () => {},
+          },
+          {
+            label: 'Location',
+            icon: IconLoc,
+            onClick: () => {},
+          },
+        ],
+      }),
+
+      menuChat: new Menu({
+        position: { right: 0.5, top: 4 },
+        itemsProps: [
+          {
+            label: 'Add user',
+            icon: IconAdd,
+            onClick: () => {},
+          },
+          {
+            classes: 'menu-item__remove-user-img',
+            label: 'Remove user',
+            icon: IconAdd,
+            onClick: () => {},
+          },
+        ],
+      }),
     } as LayoutChatsChildren & LayoutChatsProps);
+  }
+
+  callMenuAttach() {
+    this.children.menuAttach.showMenu();
+  }
+
+  callMenuChat() {
+    this.children.menuChat.showMenu();
   }
 
   render() {

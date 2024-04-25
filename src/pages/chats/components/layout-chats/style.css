@@ -60,3 +60,9 @@
 .messages__title {
     flex-grow: 1;
 }
+
+/** SPECIAL */
+
+.menu-item__remove-user-img > img {
+    rotate: 45deg;
+}

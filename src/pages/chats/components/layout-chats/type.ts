@@ -1,4 +1,4 @@
-import type { Avatar, Button, ButtonIcon, Text } from 'ui';
+import type { Avatar, Button, ButtonIcon, Menu, Text } from 'ui';
 
 import type { ChatType, MessageType, UserType } from 'entities/index';
 import type { Children, Props } from 'core';
@@ -25,4 +25,6 @@ export interface LayoutChatsChildren extends Children {
   listMessages: ListMessages,
   actionAttach: ButtonAttach,
   formMessage: FormMessage,
+  menuAttach: Menu,
+  menuChat: Menu,
 }
