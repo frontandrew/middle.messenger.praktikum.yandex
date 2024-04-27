@@ -119,7 +119,7 @@ export abstract class Component <C extends Children, P extends Props> {
   }
 
   createDOMElement() {
-    const stubs = Object.entries<Child>(this.children).reduce(
+    const stubs = Object.entries(this.children).reduce(
       (acc, [key, child]) => ({
         ...acc,
         [key]: `<div data-id='${child.id}'></div>`,
@@ -134,9 +134,7 @@ export abstract class Component <C extends Children, P extends Props> {
 
     const tempElement = document.createElement('div');
     tempElement.insertAdjacentHTML('afterbegin', elementString.trim());
-
     const resultElement = tempElement.firstElementChild;
-    // resultElement!.setAttribute('data-id', this.id);
 
     return resultElement;
   }
@@ -146,7 +144,10 @@ export abstract class Component <C extends Children, P extends Props> {
   }
 
   // Может переопределять пользователь, необязательно трогать. Не используется
-  componentDidMount(props: P) {}
+  componentDidMount(props: P) {
+    if (props) return true;
+    return false;
+  }
 
   dispatchComponentDidMount() {
     this.eventBus().emit(Component.EVENTS.FLOW_CDM);
@@ -225,12 +226,5 @@ export abstract class Component <C extends Children, P extends Props> {
 
   hide() {
     (this.getContent() as HTMLElement).style.display = 'none';
-  }
-
-  public getPropsChildren() {
-    return Object.entries(this.children).reduce(
-      (acc, [key, child]) => ({ ...acc, [key]: (child as Child).props }),
-      {},
-    );
   }
 }
