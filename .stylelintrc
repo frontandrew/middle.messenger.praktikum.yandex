@@ -1,8 +1,8 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "custom-property-empty-line-before": "off",
-    "declaration-empty-line-before": "off",
+    "custom-property-empty-line-before": "always",
+    "declaration-empty-line-before": "always",
     "import-notation": "string"
   },
   "ignoreFiles": ["build/*", "dist/*", "node_modules/*"]
