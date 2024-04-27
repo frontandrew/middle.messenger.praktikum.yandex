@@ -12,6 +12,7 @@ import { Templates } from 'ui';
 import { registerPartials } from 'tools';
 
 import type { PagesContext, PagesType } from 'pages';
+import { PageChatsContext } from 'pages/chats';
 
 registerPartials(Templates);
 
@@ -139,7 +140,7 @@ const pages: { [key: string]: [PagesType, PagesContext] } = {
         origin: 'outgoing',
       },
     ],
-  }],
+  } as PageChatsContext],
   400: [Pages.PageError, {
     title: '404',
     message: 'Amm... There is no such page ;(',
@@ -154,13 +155,14 @@ const pages: { [key: string]: [PagesType, PagesContext] } = {
 
 function navigate(page: string = 'unknown') {
   const [Page, context]: [PagesType, PagesContext] = pages[page];
+
   const content: HTMLElement = new Page(context).getContent()!;
   const container = document.querySelector('.main');
 
   container!.replaceChildren(content);
 }
 
-document.addEventListener('DOMContentLoaded', () => navigate('chats'));
+document.addEventListener('DOMContentLoaded', () => navigate('login'));
 
 document.addEventListener('click', (event: Event) => {
   const targetElement = event.target as HTMLElement;
@@ -173,5 +175,3 @@ document.addEventListener('click', (event: Event) => {
     event.stopImmediatePropagation();
   }
 });
-
-window.navigate = navigate;

@@ -8,7 +8,7 @@ import './style.css';
 
 export class Text extends Component<Children, TextProps> {
   constructor({ classes = '', tag = 'span', ...rest }: TextProps) {
-    super({ classes, tag, ...rest } as TextProps);
+    super({ classes, tag, ...rest } as TextProps & Children);
   }
 
   render() {

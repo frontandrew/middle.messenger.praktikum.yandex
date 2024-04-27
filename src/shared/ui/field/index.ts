@@ -4,7 +4,7 @@ import { Component } from 'core';
 import type { ValidationState } from 'tools';
 import { validators } from 'tools';
 
-import type { FieldArgs, FieldChildren, FieldProps } from './type';
+import type { FieldChildren, FieldProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
@@ -44,7 +44,7 @@ export class Field extends Component<FieldChildren, FieldProps> {
         : new InputField({
           name,
           type,
-          label,
+          label: label ?? 'Label',
           disabled,
           textHelp,
           hasError,
@@ -52,20 +52,12 @@ export class Field extends Component<FieldChildren, FieldProps> {
           inline,
           onBlur: () => this.handleValidation(),
         }),
-  }: FieldArgs) {
+  }: FieldProps) {
     super({
-      // name,
-
       classes,
-      // disabled,
       hasError,
-      // inline,
       required,
-      // type,
-      // textError,
-      // textHelp,
       validator,
-      // value,
 
       input,
     } as FieldProps & FieldChildren);

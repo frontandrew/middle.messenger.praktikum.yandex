@@ -1,12 +1,10 @@
-import { Button, ButtonIcon, Field, Text } from 'ui';
+import { Button, ButtonIcon } from 'ui';
 
 import { Children, Props } from 'core';
 
 export interface FormData {
-  [key: string]: string,
+  [key: string]: unknown,
 }
-
-export interface FormArgs extends FormProps, MakeOptional<FormChildren> {}
 
 export interface FormProps extends Props {
   data?: FormData,
@@ -18,8 +16,7 @@ export interface FormProps extends Props {
   onInput?: ({}: Event) => Event,
 }
 
-export interface FormChildren extends MakeOptional<Children> {
-  [key: string]: Field | Button | ButtonIcon | Text | undefined
-  submit?: Button | ButtonIcon,
-  reset?: Button | ButtonIcon,
+export interface FormChildren extends Children {
+  submit: Button | ButtonIcon,
+  reset: Button | ButtonIcon,
 }

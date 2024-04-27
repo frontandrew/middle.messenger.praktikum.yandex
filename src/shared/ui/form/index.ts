@@ -1,4 +1,4 @@
-import { Button, Field } from 'ui';
+import { Button, ButtonIcon, Field } from 'ui';
 import { Component } from 'core';
 
 import type { FormChildren, FormProps } from './type';
@@ -25,7 +25,7 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
     },
 
     ...rest
-  }) {
+  }: C & P) {
     super({
       disabled,
       hasError,
@@ -50,9 +50,11 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
 
   reset() {
     Object.values(this.children)
-      .filter((child) => child instanceof Button || child instanceof Field)
+      .filter((child) => child instanceof Button
+      || child instanceof ButtonIcon
+      || child instanceof Field)
       .forEach((child) => {
-        child?.reset();
+        child.reset();
       });
 
     this.updateErrorState(false);
