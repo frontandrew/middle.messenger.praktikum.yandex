@@ -14,13 +14,15 @@ export function deepEqual(obj1: unknown, obj2: unknown) {
     return false;
   }
 
-  return keys1.forEach((key) => {
-    if (!(key in obj2) || !deepEqual(
-      (obj1 as {[key: string]: unknown})[key],
-      (obj2 as {[key: string]: unknown})[key],
-    )) {
-      return false;
-    }
-    return true;
-  });
+  return keys1
+    .map((key) => {
+      if (!(key in obj2) || !deepEqual(
+        (obj1 as {[key: string]: unknown})[key],
+        (obj2 as {[key: string]: unknown})[key],
+      )) {
+        return false;
+      }
+      return true;
+    })
+    .some(Boolean);
 }
