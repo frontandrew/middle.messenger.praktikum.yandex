@@ -49,7 +49,7 @@ export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
       }),
       avatarDialog: new Dialog({
         isOpen: false,
-        content: new FormAvatar({}),
+        content: new FormAvatar(),
       }),
     } as LayoutUserChildren & LayoutUserProps);
   }

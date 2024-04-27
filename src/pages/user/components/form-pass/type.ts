@@ -7,8 +7,8 @@ export interface FormPassArgs extends FormPassChildren, FormPassProps {}
 export interface FormPassProps extends FormProps {}
 
 export interface FormPassChildren extends FormChildren {
-  passCurr?: Field,
-  passNew?: Field,
-  passNewMore?: Field,
+  passCurr: Field,
+  passNew: Field,
+  passNewMore: Field,
   submit: Button,
 }

@@ -8,7 +8,7 @@ import { FormPass } from '../form-pass';
 
 import type { FormInfoData } from '../form-info/type';
 
-export interface LayoutUserArgs extends LayoutUserProps, MakeOptional<LayoutUserChildren> {
+export interface LayoutUserArgs {
   data: FormInfoData,
   image: string,
 }

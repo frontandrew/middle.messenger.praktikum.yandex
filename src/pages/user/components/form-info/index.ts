@@ -12,7 +12,7 @@ export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
 
       email: new Field({
         name: 'email',
-        type: 'email',
+        type: 'text',
         label: 'Email',
         inline: true,
         value: data?.email,
@@ -52,7 +52,7 @@ export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
       }),
       phone: new Field({
         name: 'phone',
-        type: 'tel',
+        type: 'text',
         label: 'Phone',
         inline: true,
         value: data?.phone,
@@ -62,7 +62,7 @@ export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
         label: 'Save',
         type: 'submit',
       }),
-    });
+    } as FormInfoChildren & FormInfoProps);
   }
 
   setEditMode(mode: boolean) {
