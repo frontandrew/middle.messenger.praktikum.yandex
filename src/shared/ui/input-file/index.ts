@@ -42,8 +42,9 @@ export class InputFile extends Input<InputFileChildren, InputFileProps> {
     } as InputFileProps & InputFileChildren);
   }
 
-  handleFileSelect(event: InputEvent) {
-    this.setProps({ value: event.target?.files[0].name });
+  handleFileSelect({ target }: InputEvent) {
+    if (!(target instanceof HTMLInputElement)) return;
+    this.setProps({ value: target.files![0].name });
     this.children.fileName.setProps({ text: this.props.value });
   }
 
