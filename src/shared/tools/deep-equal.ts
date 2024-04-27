@@ -24,5 +24,5 @@ export function deepEqual(obj1: unknown, obj2: unknown) {
       }
       return true;
     })
-    .some(Boolean);
+    .every(Boolean);
 }

@@ -60,7 +60,7 @@ export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
 
   handleEditInfo() {
     this.setProps({ showActions: false });
-    this.children.formInfo?.setEditMode(true);
+    this.children.formInfo.setEditMode(true);
   }
 
   render() {
