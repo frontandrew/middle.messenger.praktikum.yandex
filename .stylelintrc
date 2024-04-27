@@ -1,5 +1,7 @@
 {
   "extends": "stylelint-config-standard",
-  "rules": {},
+  "rules": {
+    "import-notation": "string"
+  },
   "ignoreFiles": ["build/*", "dist/*", "node_modules/*"]
 }
