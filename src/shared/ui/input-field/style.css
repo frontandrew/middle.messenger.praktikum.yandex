@@ -13,7 +13,6 @@
 }
 
 .input-field_error {
-
     .divider {
         background-color: var(--error-color);
     }
@@ -37,20 +36,20 @@
 }
 
 .input-field .input-field__label {
-    height: 0px;
+    height: 0;
 
     font-size: 0.5625em;
     color: var(--text-color-light);
 }
 
-.input-field__label:has(+ .input:not(:focus):placeholder-shown) {
-    transform: translateY(1.3em);
-    font-size: 0.8125em;
+.input-field__label:has(+ .input:focus) {
+    transform: translateY(0px);
     transition: font-size 0.2s, transform 0.2s;
 }
 
-.input-field__label:has(+ .input:focus) {
-    transform: translateY(0px);
+.input-field__label:has(+ .input:not(:focus):placeholder-shown) {
+    transform: translateY(1.3em);
+    font-size: 0.8125em;
     transition: font-size 0.2s, transform 0.2s;
 }
 

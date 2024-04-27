@@ -80,9 +80,6 @@
 }
 
 .item-chat__message {
-    /* max-height: 30px; */
-    /* max-width: 100%; */
-
     align-self: flex-start;
     overflow: hidden;
 

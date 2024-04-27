@@ -5,8 +5,11 @@
     position: relative;
 }
 
-.control-avatar:disabled > .control-avatar__trigger {
+.control-avatar__label {
     display: none;
+
+    line-height: 1.1rem;
+    word-spacing: 100vw;
 }
 
 .control-avatar__trigger {
@@ -28,9 +31,6 @@
     }
 }
 
-.control-avatar__label {
+.control-avatar:disabled > .control-avatar__trigger {
     display: none;
-
-    line-height: 1.1rem;
-    word-spacing: 100vw;
 }

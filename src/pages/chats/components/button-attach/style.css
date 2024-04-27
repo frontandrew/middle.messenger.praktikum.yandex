@@ -9,6 +9,10 @@
     cursor: pointer;
 }
 
+.button-attach__image {
+    object-fit: contain;
+}
+
 .button-attach > .button-attach__image {
     filter: grayscale(1) opacity(0.6);
 }
@@ -20,8 +24,4 @@
 .button-attach:hover > .button-attach__image,
 .button-attach:focus > .button-attach__image {
     filter: brightness(1.2);
-}
-
-.button-attach__image {
-    object-fit: contain;
 }

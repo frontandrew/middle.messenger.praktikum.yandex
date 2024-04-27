@@ -39,12 +39,15 @@
 .avatar__stub {
     object-fit: contain;
 }
+
 .avatar__stub_large {
     width: 2.5em;
 }
+
 .avatar__stub_medium {
     width: 1.5em;
 }
+
 .avatar__stub_small {
     width: 1.125em;
 }

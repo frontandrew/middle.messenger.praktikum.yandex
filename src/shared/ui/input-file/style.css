@@ -1,17 +1,12 @@
 .input-file {
-    /* height: auto; */
-    /* width: 100%; */
-    text-align: center;
-
     display: flex;
-    flex-direction: column;
+    text-align: center;
 }
 
 .input-file__label {
     height: 1em;
     width: 100%;
 
-    color: var(--text-hided-color);
     text-decoration: underline;
 }
 
