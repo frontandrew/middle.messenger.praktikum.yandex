@@ -1,7 +1,4 @@
-/**
- * TODO: для исполнения этой функции типы аргументов в массиве не имеют значения
- */
-export function first(list: any[]): any[] | undefined {
+export function first(list: unknown[]): unknown | undefined {
   if (!Array.isArray(list)) return undefined;
 
   const { length } = list;
