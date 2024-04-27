@@ -8,7 +8,7 @@ export class PageError extends LayoutError {
     message = 'An unexpected error has occurred. Try restarting or come back later.',
     target = 'login',
   }: PageErrorContext) {
-    super({ data: { title, message, target } });
+    super({ title, message, target });
   }
 }
 
