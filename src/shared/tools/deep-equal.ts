@@ -1,4 +1,4 @@
-export function deepEqual(obj1, obj2) {
+export function deepEqual(obj1: unknown, obj2: unknown) {
   if (obj1 === obj2) {
     return true;
   }
@@ -14,11 +14,13 @@ export function deepEqual(obj1, obj2) {
     return false;
   }
 
-  for (const key of keys1) {
-    if (!obj2.hasOwnProperty(key) || !deepEqual(obj1[key], obj2[key])) {
+  return keys1.forEach((key) => {
+    if (!(key in obj2) || !deepEqual(
+      (obj1 as {[key: string]: unknown})[key],
+      (obj2 as {[key: string]: unknown})[key],
+    )) {
       return false;
     }
-  }
-
-  return true;
+    return true;
+  });
 }
