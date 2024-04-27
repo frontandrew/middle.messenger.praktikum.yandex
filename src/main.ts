@@ -156,6 +156,7 @@ const pages: { [key: string]: [PagesType, PagesContext] } = {
 function navigate(page: string = 'unknown') {
   const [Page, context]: [PagesType, PagesContext] = pages[page];
 
+  /** TODO: временное решение в отсутствии роутинга */
   const content: HTMLElement = new Page(context).getContent()!;
   const container = document.querySelector('.main');
 
