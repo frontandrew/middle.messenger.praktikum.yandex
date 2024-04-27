@@ -1,16 +1,18 @@
 import { Button, Field, Form } from 'ui';
 
-import type { FormRegArgs, FormRegChildren, FormRegProps } from './type';
+import type { FormRegChildren, FormRegData, FormRegProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
+export type { FormRegChildren, FormRegData, FormRegProps };
+
 export class FormReg extends Form<FormRegChildren, FormRegProps> {
-  constructor({ data }: FormRegArgs) {
+  constructor(data: FormRegData) {
     super({
       data,
       email: new Field({
         name: 'email',
-        type: 'email',
+        type: 'text',
         label: 'Email',
         required: true,
         value: data?.email,
@@ -38,7 +40,7 @@ export class FormReg extends Form<FormRegChildren, FormRegProps> {
       }),
       phone: new Field({
         name: 'phone',
-        type: 'tel',
+        type: 'text',
         label: 'Phone',
         required: true,
         value: data?.phone,
@@ -66,7 +68,7 @@ export class FormReg extends Form<FormRegChildren, FormRegProps> {
         page: 'login',
         variant: 'link',
       }),
-    });
+    } as FormRegChildren & FormRegProps);
   }
 
   render() {
