@@ -1,20 +1,12 @@
-export function deepCopy(obj: any) {
+export function deepCopy(obj: unknown) {
   if (typeof obj !== 'object' || obj === null || obj === undefined) {
     return obj;
   }
 
-  const copy: Record<string, any> = Array.isArray(obj) ? [] : {};
-
-  // for (const key in obj) {
-  //   if (Object.prototype.hasOwnProperty.call(obj, key)) {
-  //     copy[key] = deepCopy(obj[key]);
-  //   }
-  // }
+  const copy = Array.isArray(obj) ? [] : {};
 
   Object.keys(obj).forEach((key) => {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      copy[key] = deepCopy(obj[key]);
-    }
+    (copy as {[key: string]: unknown})[key] = deepCopy((obj as {[key: string]: unknown})[key]);
   });
 
   return copy;
