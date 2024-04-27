@@ -43,7 +43,7 @@
 }
 
 .input-field__label:has(+ .input:focus) {
-    transform: translateY(0px);
+    transform: translateY(0);
     transition: font-size 0.2s, transform 0.2s;
 }
 
