@@ -157,7 +157,8 @@ function navigate(page: string) {
   const [Page, context]: [PagesType, PagesContext] = pages[pageKey];
 
   /** TODO: временное решение в отсутствии роутинга */
-  //@ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   const content: HTMLElement = new Page(context).getContent() as HTMLElement;
   const container = document.querySelector('.main');
 
