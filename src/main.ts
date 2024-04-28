@@ -157,13 +157,14 @@ function navigate(page: string) {
   const [Page, context]: [PagesType, PagesContext] = pages[pageKey];
 
   /** TODO: временное решение в отсутствии роутинга */
+  //@ts-ignore
   const content: HTMLElement = new Page(context).getContent() as HTMLElement;
   const container = document.querySelector('.main');
 
   container!.replaceChildren(content);
 }
 
-document.addEventListener('DOMContentLoaded', () => navigate('login'));
+document.addEventListener('DOMContentLoaded', () => navigate('user'));
 
 document.addEventListener('click', (event: Event) => {
   const targetElement = event.target as HTMLElement;

@@ -14,7 +14,13 @@ export class Field extends Component<FieldChildren, FieldProps> {
   constructor({
     name,
     type,
-    onBlur = () => this.handleValidation(),
+
+    onBlur = type === 'file'
+      ? () => {}
+      : () => this.handleValidation(),
+    onChange = type !== 'file'
+      ? () => {}
+      : () => this.handleValidation(),
 
     classes,
     inline,
@@ -23,6 +29,7 @@ export class Field extends Component<FieldChildren, FieldProps> {
     hasError = false,
     textError = '',
     textHelp,
+    value,
     validator = validators[name] || validators.isRequired,
 
     ...rest
@@ -35,6 +42,7 @@ export class Field extends Component<FieldChildren, FieldProps> {
       required,
       textError,
       textHelp,
+      value,
       validator,
 
       name,
@@ -43,6 +51,8 @@ export class Field extends Component<FieldChildren, FieldProps> {
         name,
         type,
         onBlur,
+        onChange,
+        value,
         ...rest,
       }),
     } as FieldProps & FieldChildren);
@@ -50,7 +60,7 @@ export class Field extends Component<FieldChildren, FieldProps> {
 
   handleValidation() {
     const { hasError, textError, value } = this.validate();
-    this.setProps({ hasError, textError });
+    this.setProps({ hasError, textError, value });
     this.children.input.props.value = value;
   }
 

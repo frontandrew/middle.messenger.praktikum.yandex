@@ -150,6 +150,17 @@ function phone({ value = '', required = false }: ValidatorParams): ValidationSta
   return { hasError: status, textError: status ? message.trim() : '', value };
 }
 
+function file({ value = '', required = false }: ValidatorParams): ValidationState {
+  let { textError: message, hasError: status } = isRequired({ value, required });
+
+  if (!(/^.*\.(jpg|jpeg|png|svg|gif|mpeg|mpg4|mkv|avi|webp)$/).test(value)) {
+    message = message.concat(' File type isnt acceptable.');
+    status = true;
+  }
+
+  return { hasError: status, textError: status ? message.trim() : '', value };
+}
+
 function isRequired({ value = '', required = false }: ValidatorParams): ValidationState {
   const requiredStatus = { hasError: true, textError: 'This field is required.', value };
 
@@ -165,6 +176,8 @@ export const validators: Validators = {
   name,
   first_name: name,
   second_name: name,
+  file,
+  avatar: file,
   email,
   phone,
   isRequired,

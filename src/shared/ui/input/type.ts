@@ -16,6 +16,7 @@ export interface InputProps extends Props {
   placeholder?: string;
   value?: string;
 
+  onChange?: () => void;
   onBlur?: () => void;
   onInput?: ({}: InputEvent) => InputEvent;
 }

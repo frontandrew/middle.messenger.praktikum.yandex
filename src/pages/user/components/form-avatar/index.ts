@@ -7,11 +7,13 @@ import './style.css';
 export class FormAvatar extends Form<FormAvatarChildren, FormAvatarProps> {
   constructor() {
     super({
+      hasError: false,
       title: new Text({ text: 'Load image', tag: 'h2', classes: 'form__title' }),
       file: new Field({
         name: 'avatar',
         label: 'Select image from your computer',
         type: 'file',
+        accept: 'image/*',
       }),
       submit: new Button({
         type: 'submit',
