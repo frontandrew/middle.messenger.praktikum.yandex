@@ -1,0 +1,17 @@
+<label for="{{name}}" class="{{#if classes}}{{classes}} {{/if}}input-file">
+    {{#if value}}
+    <span class="input-file__name text text_disabled-color">{{value}}</span>
+    {{else}}
+    <span class="input-file__label text text_main-color">{{label}}</span>
+    {{/if}}
+    <input
+        class="input-file__input text"
+        type="{{type}}"
+        name="{{name}}"
+        id="{{name}}"
+        value="{{value}}"
+        placeholder="{{placeholder}}"
+        {{#if disabled}}disabled{{/if}}
+        {{#if accept}}accept="{{accept}}"{{/if}}
+    />
+</label>

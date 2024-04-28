@@ -1,25 +1,12 @@
-import { Input, InputField, InputFile } from 'ui';
-
-import type { Children, Props } from 'core';
-import type { InputChildren, InputFieldProps, InputType } from 'ui';
+import type { Input, InputProps } from 'ui';
 import type { ValidationState, ValidatorParams } from 'tools';
+import type { Children } from 'core';
 
-export interface FieldProps extends Props {
-  name: string,
-  type: InputType | 'simple',
-
-  label?: string,
-  placeholder?: string,
-  classes?: string,
-  disabled?: boolean,
-  inline?: boolean,
-  hasError?: boolean,
-  textHelp?: string,
-  required?: boolean,
-  value?: string,
+export interface FieldProps extends InputProps {
   validator?: ({}: ValidatorParams) => ValidationState,
+  required?: boolean;
 }
 
 export interface FieldChildren extends Children {
-  input: Input<InputChildren, InputFieldProps> | InputField | InputFile
+  input: Input;
 }
