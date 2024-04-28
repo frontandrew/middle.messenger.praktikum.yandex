@@ -1,6 +1,6 @@
 import { Button, Field, Form } from 'ui';
 
-import type { FormInfoChildren, FormInfoProps } from './type';
+import type { FormInfoChildren, FormInfoData, FormInfoProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
@@ -79,3 +79,5 @@ export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
     return template;
   }
 }
+
+export type { FormInfoChildren, FormInfoProps, FormInfoData };

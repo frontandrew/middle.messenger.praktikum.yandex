@@ -1,6 +1,6 @@
 export interface ChatType {
   id: number,
-  name?: string,
+  name: string,
   avatar?: string,
   lastMessage?: string,
   date?: string,

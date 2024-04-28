@@ -2,8 +2,6 @@ import { Button, Field } from 'ui';
 
 import type { FormChildren, FormData, FormProps } from 'ui';
 
-export interface FormInfoArgs extends FormInfoChildren, MakeOptional<FormInfoProps> {}
-
 export interface FormInfoData extends FormData {
   email: string,
   login: string,

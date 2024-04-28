@@ -2,7 +2,7 @@ import { Button, Text } from 'ui';
 
 import type { Children, Props } from 'core';
 
-export interface LayoutErrorData {
+export interface LayoutErrorProps extends Props {
   title: string,
   message: string,
   target: string,
@@ -13,5 +13,3 @@ export interface LayoutErrorChildren extends Children {
   message: Text,
   redirect: Button,
 }
-
-export interface LayoutErrorProps extends Props {}

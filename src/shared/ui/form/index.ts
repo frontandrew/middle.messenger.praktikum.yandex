@@ -54,7 +54,7 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
       || child instanceof ButtonIcon
       || child instanceof Field)
       .forEach((child) => {
-        child.reset();
+        (child as Button | ButtonIcon | Field).reset();
       });
 
     this.updateErrorState(false);

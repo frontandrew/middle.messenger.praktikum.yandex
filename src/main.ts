@@ -12,7 +12,6 @@ import { Templates } from 'ui';
 import { registerPartials } from 'tools';
 
 import type { PagesContext, PagesType } from 'pages';
-import { PageChatsContext } from 'pages/chats';
 
 registerPartials(Templates);
 
@@ -140,7 +139,7 @@ const pages: { [key: string]: [PagesType, PagesContext] } = {
         origin: 'outgoing',
       },
     ],
-  } as PageChatsContext],
+  }],
   400: [Pages.PageError, {
     title: '404',
     message: 'Amm... There is no such page ;(',
@@ -157,7 +156,7 @@ function navigate(page: string = 'unknown') {
   const [Page, context]: [PagesType, PagesContext] = pages[page];
 
   /** TODO: временное решение в отсутствии роутинга */
-  const content: HTMLElement = new Page(context as unknown).getContent()!;
+  const content: HTMLElement = new Page(context).getContent() as HTMLElement;
   const container = document.querySelector('.main');
 
   container!.replaceChildren(content);
