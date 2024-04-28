@@ -2,9 +2,7 @@ import { Component } from 'core';
 
 import type { InputChildren, InputProps, InputType } from './type';
 
-import templateField from './template-field.hbs?raw';
-import templateFile from './template-file.hbs?raw';
-import templateSimple from './template-simple.hbs?raw';
+import template from './template.hbs?raw';
 import './style.css';
 
 export type { InputChildren, InputProps, InputType };
@@ -47,8 +45,6 @@ export class Input extends Component<InputChildren, InputProps> {
   }
 
   render() {
-    if (this.props.type === 'simple') return templateSimple;
-    if (this.props.type === 'file') return templateFile;
-    return templateField;
+    return template;
   }
 }

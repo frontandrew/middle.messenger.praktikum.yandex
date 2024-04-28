@@ -21,7 +21,7 @@ export class Field extends Component<FieldChildren, FieldProps> {
       classes,
       validator,
 
-      input: new Input({ name, onBlur: () => this.handleValidation(), ...rest }),
+      input: new Input({ name, onBlur, ...rest }),
     } as FieldProps & FieldChildren);
   }
 
