@@ -16,7 +16,6 @@ import type { PagesContext, PagesType } from 'pages';
 registerPartials(Templates);
 
 const pages: { [key: string]: [PagesType, PagesContext] } = {
-  unknown: [Pages.PageError, {}],
   login: [Pages.PageLogin, {
     login: 'And',
     password: '!Q1gsdgr',
@@ -150,10 +149,12 @@ const pages: { [key: string]: [PagesType, PagesContext] } = {
     message: 'Ooops. Unavalible now, try later.',
     target: 'login',
   }],
+  unknown: [Pages.PageError, {}],
 };
 
-function navigate(page: string = 'unknown') {
-  const [Page, context]: [PagesType, PagesContext] = pages[page];
+function navigate(page: string) {
+  const pageKey = Object.keys(pages).includes(page) ? page : 'unknown';
+  const [Page, context]: [PagesType, PagesContext] = pages[pageKey];
 
   /** TODO: временное решение в отсутствии роутинга */
   const content: HTMLElement = new Page(context).getContent() as HTMLElement;
