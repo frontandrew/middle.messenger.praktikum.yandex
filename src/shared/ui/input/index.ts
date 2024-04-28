@@ -7,11 +7,6 @@ import './style.css';
 
 export type { InputChildren, InputProps, InputType };
 
-/**
- * Can used like base input componet in more complex inputs, or like independed
- * text input in cases without validation state
- */
-
 export class Input extends Component<InputChildren, InputProps> {
   public value: string;
 
@@ -32,6 +27,7 @@ export class Input extends Component<InputChildren, InputProps> {
 
     if (target.files?.length) {
       this.value = target.files[0].name;
+      this.setProps({ value: target.files[0].name });
       return;
     }
 
