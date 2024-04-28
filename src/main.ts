@@ -157,7 +157,7 @@ function navigate(page: string = 'unknown') {
   const [Page, context]: [PagesType, PagesContext] = pages[page];
 
   /** TODO: временное решение в отсутствии роутинга */
-  const content: HTMLElement = new Page(context).getContent()!;
+  const content: HTMLElement = new Page(context as unknown).getContent()!;
   const container = document.querySelector('.main');
 
   container!.replaceChildren(content);
