@@ -111,7 +111,7 @@ export abstract class Component <C extends Children, P extends Props> {
       events: { ...this.events },
     };
 
-    console.warn(`RNDR{${this.count += 1}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
+    // console.warn(`RNDR{${this.count += 1}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
   }
 
   render() {
@@ -169,11 +169,11 @@ export abstract class Component <C extends Children, P extends Props> {
   // Может переопределять пользователь, необязательно трогать
   componentDidUpdate(oldProps: P, newProps: P) {
     const isEqual = deepEqual(newProps, oldProps);
-    console.warn(`EQUA{${this.count}}:[${this.instance}:${this.id}]:`, {
-      eql: isEqual,
-      new: newProps,
-      old: oldProps,
-    });
+    // console.warn(`EQUA{${this.count}}:[${this.instance}:${this.id}]:`, {
+    //   eql: isEqual,
+    //   new: newProps,
+    //   old: oldProps,
+    // });
     return isEqual;
   }
 
