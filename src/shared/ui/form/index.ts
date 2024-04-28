@@ -81,7 +81,7 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
   submitForm() {
     const submitted = Object.entries(this.children).reduce(
       (acc, [key, child]) => {
-        if (child instanceof Field) return ({ ...acc, [key]: child.children.input.value });
+        if (child instanceof Field) return ({ ...acc, [key]: child.children.input.props.value });
         return acc;
       },
       {},
