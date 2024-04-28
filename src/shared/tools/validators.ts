@@ -11,8 +11,39 @@ type ValidationState = {
 
 type Validators = Record<string, ({}: ValidatorParams) => ValidationState>
 
+function name({ value = '', required = false }: ValidatorParams): ValidationState {
+  let { textError: message, hasError: status } = isRequired({ value, required });
+
+  if (!(/^[A-ZА-ЯЁ]{1}[a-zа-яё]+((-[A-ZА-ЯЁ]{1})?[a-zа-яё]+)?$/.test(value))) {
+    message = message.concat(` Incorrect format.`);
+    status = true;
+  }
+
+  let atLeastCheckResult = '';
+  if (hasWitespaces(value)) {
+    atLeastCheckResult = atLeastCheckResult.concat(' spases,');
+    status = true;
+  }
+  if (hasNumbers(value)) {
+    atLeastCheckResult = atLeastCheckResult.concat(' numbers,');
+    status = true;
+  }
+  if (hasSpetialCharacter(value)) {
+    atLeastCheckResult = atLeastCheckResult.concat(' special symbol,');
+    status = true;
+  }
+  if (atLeastCheckResult.length > 0) {
+    message = message.concat(`Cant contain ${atLeastCheckResult}`);
+  }
+
+  if (message.trim().endsWith(',')) message = message.slice(0, -1).concat('.');
+
+  return { hasError: status, textError: status ? message : '', value };
+}
+
 function password({ value = '', required = false }: ValidatorParams): ValidationState {
   const MIN_PASS_LENGTH = 8;
+  const MAX_PASS_LENGTH = 40;
 
   let { textError: message, hasError: status } = isRequired({ value, required });
 
@@ -20,27 +51,31 @@ function password({ value = '', required = false }: ValidatorParams): Validation
     message = message.concat(` Minimum of ${MIN_PASS_LENGTH} characters.`);
     status = true;
   }
+  if (value.length > MAX_PASS_LENGTH) {
+    message = message.concat(` Maximum of ${MAX_PASS_LENGTH} characters.`);
+    status = true;
+  }
   if (hasWitespaces(value)) {
     message = message.concat(' Cant contain spases.');
     status = true;
   }
 
-  let atLeastCheckResult = ' Must contain at least one more';
-
+  let atLeastCheckResult = '';
   if (!hasCapitalLetters(value)) {
     atLeastCheckResult = atLeastCheckResult.concat(' capital letter,');
     status = true;
   }
-  if (!hasSpetialCharacter(value)) {
-    atLeastCheckResult = atLeastCheckResult.concat(' special symbol,');
-    status = true;
-  }
+  /** TODO: изначально планировалось требовать хотябы один спецсимвол */
+  // if (!hasSpetialCharacter(value)) {
+  //   atLeastCheckResult = atLeastCheckResult.concat(' special symbol,');
+  //   status = true;
+  // }
   if (!hasNumbers(value)) {
     atLeastCheckResult = atLeastCheckResult.concat(' digit.');
     status = true;
   }
   if (atLeastCheckResult.length > 0) {
-    message = message.concat(atLeastCheckResult);
+    message = message.concat(`Must contain at least one more ${atLeastCheckResult}`);
   }
 
   if (message.trim().endsWith(',')) message = message.slice(0, -1).concat('.');
@@ -54,8 +89,16 @@ function login({ value = '', required = false }: ValidatorParams): ValidationSta
 
   let { textError: message, hasError: status } = isRequired({ value, required });
 
+  if (!(/\D/.test(value))) {
+    message = message.concat(' Cant contain only numbers.');
+    status = true;
+  }
   if (hasWitespaces(value)) {
     message = message.concat(' Cant contain spases.');
+    status = true;
+  }
+  if (hasSpetialCharacter(value)) {
+    message = message.concat(' Cant contain spetial simbols.');
     status = true;
   }
   if (value.length < MIN_LOGIN_LENGTH) {
@@ -73,7 +116,7 @@ function login({ value = '', required = false }: ValidatorParams): ValidationSta
 function email({ value = '', required = false }: ValidatorParams): ValidationState {
   let { textError: message, hasError: status } = isRequired({ value, required });
 
-  if (!(value.match(/^[\da-z_.-]+@[a-z]+.[a-z]{2,}$/i))) {
+  if (!(value.match(/^[\da-z_.-]+@[a-z]+\.[a-z]{2,}$/i))) {
     message = message.concat(' Incorrect email format.');
     status = true;
   }
@@ -82,19 +125,25 @@ function email({ value = '', required = false }: ValidatorParams): ValidationSta
 }
 
 function phone({ value = '', required = false }: ValidatorParams): ValidationState {
-  const MIN_PHONE_LENGTH = 11;
+  const MIN_PHONE_LENGTH = 10;
+  const MAX_PHONE_LENGTH = 15;
 
   let { textError: message, hasError: status } = isRequired({ value, required });
 
   const lengthMatcher = (value).match(/\d/g);
 
-  if (!value.match(/^\+?\s?(\d{1,16}\s?)?(\d{1,4}\s?){1,6}$/)) {
+  if (!value.match(/^\+?\s?([\d\s])*$/)) {
     message = message.concat(' Incorrect phone format.');
     status = true;
   }
 
   if (!Array.isArray(lengthMatcher) || (lengthMatcher.length < MIN_PHONE_LENGTH)) {
-    message = message.concat(' Not enough numbers.');
+    message = message.concat(' There are not enough numbers.');
+    status = true;
+  }
+
+  if (!Array.isArray(lengthMatcher) || (lengthMatcher.length > MAX_PHONE_LENGTH)) {
+    message = message.concat(' There are too many numbers.');
     status = true;
   }
 
@@ -113,6 +162,9 @@ export const validators: Validators = {
   password,
   password_more: password,
   password_new: password,
+  name,
+  first_name: name,
+  second_name: name,
   email,
   phone,
   isRequired,
@@ -123,7 +175,7 @@ export type { ValidatorParams, ValidationState };
 /* VALID FUNCTION */
 
 function hasSpetialCharacter(value: string): boolean {
-  return /[`~!:;@#№$%^&?*()\-_+={}[\]|/\\<>,.]/.test(value);
+  return /[`~!:;@#№$%^&?*()+={}[\]|/\\<>,.]/.test(value);
 }
 
 function hasWitespaces(value: string): boolean {

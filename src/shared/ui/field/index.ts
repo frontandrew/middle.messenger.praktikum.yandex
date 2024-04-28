@@ -17,11 +17,11 @@ export class Field extends Component<FieldChildren, FieldProps> {
     onBlur = () => this.handleValidation(),
 
     classes,
-    hasError,
     inline,
     label,
     required,
-    textError,
+    hasError = false,
+    textError = '',
     textHelp,
     validator = validators[name] || validators.isRequired,
 
