@@ -71,7 +71,7 @@ function password({ value = '', required = false }: ValidatorParams): Validation
   //   status = true;
   // }
   if (!hasNumbers(value)) {
-    atLeastCheckResult = atLeastCheckResult.concat(' digit.');
+    atLeastCheckResult = atLeastCheckResult.concat(' number.');
     status = true;
   }
   if (atLeastCheckResult.length > 0) {
@@ -172,7 +172,8 @@ export const validators: Validators = {
   login,
   password,
   password_more: password,
-  password_new: password,
+  newPassword: password,
+  oldPassword: password,
   name,
   first_name: name,
   second_name: name,
