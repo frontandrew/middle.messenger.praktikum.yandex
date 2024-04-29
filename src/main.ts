@@ -180,11 +180,11 @@ document.addEventListener('click', (event: Event) => {
 });
 
 /* TODO: remove after routing implementation */
-console.error('WELCOME TO GigaCHAT!!');
-console.error('----------------------');
+console.warn('WELCOME TO GigaCHAT!!');
+console.warn('----------------------');
 console.warn(`To navigate between pages, call the navigate('page')function in the console.`);
 console.warn(`Available Pages: 'login' | 'reg' | 'user' | 'chats' | '400' | '500' | 'unknown'`);
-console.error('----------------------');
+console.warn('----------------------');
 
 interface WindowNavigate extends Window {
   navigate?: (page: string) => void;
