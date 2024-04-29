@@ -43,7 +43,7 @@ export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
         disabled: !isEdit,
       }),
       nickName: new Field({
-        name: 'nick_name',
+        name: 'display_name',
         type: 'text',
         label: 'Nickname',
         inline: true,

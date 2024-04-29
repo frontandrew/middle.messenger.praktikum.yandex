@@ -25,14 +25,14 @@ export class FormReg extends Form<FormRegChildren, FormRegProps> {
         required: true,
         value: data?.login,
       }),
-      first_name: new Field({
+      firstName: new Field({
         name: 'first_name',
         type: 'text',
         label: 'Name',
         required: true,
         value: data?.firstName,
       }),
-      second_name: new Field({
+      secondName: new Field({
         name: 'second_name',
         type: 'text',
         label: 'Surname',
@@ -52,7 +52,7 @@ export class FormReg extends Form<FormRegChildren, FormRegProps> {
         required: true,
         value: data?.password,
       }),
-      password_more: new Field({
+      passwordMore: new Field({
         name: 'password_more',
         type: 'password',
         label: 'Repeat password',

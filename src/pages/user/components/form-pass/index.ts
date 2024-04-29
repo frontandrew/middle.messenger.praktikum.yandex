@@ -8,14 +8,14 @@ export class FormPass extends Form<FormPassChildren, FormPassProps> {
   constructor() {
     super({
       passCurr: new Field({
-        name: 'password',
+        name: 'oldPassword',
         type: 'password',
         label: 'Current password',
         inline: true,
         required: true,
       }),
       passNew: new Field({
-        name: 'password_new',
+        name: 'newPassword',
         type: 'password',
         label: 'New password',
         inline: true,

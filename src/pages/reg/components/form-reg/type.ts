@@ -19,11 +19,11 @@ export interface FormRegProps extends FormProps {
 export interface FormRegChildren extends FormChildren {
   email: Field,
   login: Field,
-  first_name: Field,
-  second_name: Field,
+  firstName: Field,
+  secondName: Field,
   phone: Field,
   password: Field,
-  password_more: Field,
+  passwordMore: Field,
   submit: Button,
   redirect: Button,
 }
