@@ -30,7 +30,6 @@ export class Field extends Component<FieldChildren, FieldProps> {
     textError = '',
     textHelp,
     value,
-    validator = validators[name] || validators.isRequired,
 
     ...rest
   }: FieldProps) {
@@ -43,7 +42,6 @@ export class Field extends Component<FieldChildren, FieldProps> {
       textError,
       textHelp,
       value,
-      validator,
 
       name,
       type,
@@ -65,10 +63,16 @@ export class Field extends Component<FieldChildren, FieldProps> {
   }
 
   validate(): ValidationState {
-    return this.props.validator!({
-      required: this.props.required,
-      value: this.children.input.value,
-    });
+    const { name, required, hasError = false, textError = '' } = this.props;
+    const { value } = this.children.input;
+
+    if (validators[name]) {
+      return validators[name]({ value, required });
+    }
+    if (required) {
+      return validators.isRequired({ value, required });
+    }
+    return { value, hasError, textError };
   }
 
   reset() {
