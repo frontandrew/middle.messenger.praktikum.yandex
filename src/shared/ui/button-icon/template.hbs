@@ -1,0 +1,8 @@
+<button
+    type="{{type}}"
+    class="{{#if classes}}{{classes}} {{/if}}button-icon button-icon__{{#if variant}}{{variant}}{{else}}filled{{/if}}"
+    {{#if page}}page={{page}}{{/if}}
+    {{#if disabled}}disabled{{/if}}
+>
+    <img class="button-icon__image" src="{{pic}}" {{#if page}}page={{page}}{{/if}}>
+</button>

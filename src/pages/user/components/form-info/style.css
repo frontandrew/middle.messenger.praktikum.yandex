@@ -1,0 +1,10 @@
+.form-info {
+    .form-actions {
+        align-items: center;
+        height: 4.66em;
+
+        .button {
+            width: 21.5385em;
+        }
+    }
+}

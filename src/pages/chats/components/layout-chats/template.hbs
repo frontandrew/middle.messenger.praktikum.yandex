@@ -1,0 +1,26 @@
+<div class="chat__layout">
+    <nav class="chat__nav">
+        <div class="chat__nav-panel">
+            {{{redirect}}}
+            {{{formSearch}}}
+        </div>
+        {{> Divider}}
+        {{{listChats}}}
+    </nav>
+    <div class="messages__container">
+        <header class="messages__row">
+            {{{imageChat}}}
+            {{{titleChat}}}
+            {{{actionsChat}}}
+        </header>
+        {{> Divider}}
+        {{{listMessages}}}
+        {{> Divider}}
+        <footer class="messages__row">
+            {{{actionAttach}}}
+            {{{formMessage}}}
+        </footer>
+    </div>
+    {{{menuChat}}}
+    {{{menuAttach}}}
+</div>

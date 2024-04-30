@@ -1,0 +1,34 @@
+.form-search {
+    background: var(--background-color-contrast);
+    border-radius: 0.3125em;
+}
+
+.form-search__container {
+    width: 100%;
+    height: 2em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    padding: 0 0.625em;
+    gap: 0.25em;
+}
+
+.form-search__field {
+    width: 2.35em;
+    transition: all 0.2s;
+}
+
+.form-search__field > .input {
+    font-size: 0.75em;
+}
+
+.form-search__field:has(.input:focus) {
+    width: 100%;
+}
+
+.form-search__field:has(.input:not(:placeholder-shown)) {
+    width: 100%;
+}

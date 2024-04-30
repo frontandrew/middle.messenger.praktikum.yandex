@@ -1,5 +1,12 @@
-export { default as User } from './user.hbs?raw';
+import { LayoutUser } from './components';
 
-export { default as UserForm } from './user-form.hbs?raw';
-export { default as UserAvatar } from './user-avatar.hbs?raw';
-export { default as UserPassword } from './user-password.hbs?raw';
+import type { LayoutUserArgs } from './components/layout-user/type';
+import type { FormInfoData as PageUserContext } from './components/form-info/type';
+
+export class PageUser extends LayoutUser {
+  constructor({ image, ...rest }: PageUserContext) {
+    super({ image, data: { ...rest } } as LayoutUserArgs);
+  }
+}
+
+export type { PageUserContext };

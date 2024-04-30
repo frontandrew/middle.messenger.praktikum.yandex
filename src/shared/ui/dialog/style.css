@@ -1,0 +1,23 @@
+.dialog {
+    width: fit-content;
+    height: fit-content;
+
+    margin: auto;
+    z-index: var(--z-index-modal);
+}
+
+.dialog__container {
+    width: 100vw;
+    height: 100vh;
+
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--shading-color);
+}
+
+.dialog__container_visible {
+    display: flex;
+}

@@ -1,0 +1,11 @@
+<li class="message message_{{origin}} message_{{type}}" key="{{id}}">
+    {{#if isMediaType}}
+        <img
+            src={{content}}
+            alt={{content}}
+        >
+    {{else}}
+        <span class="text">{{content}}</span>
+    {{/if}}
+    <time class="text text_label">{{date}}</time>
+</li>

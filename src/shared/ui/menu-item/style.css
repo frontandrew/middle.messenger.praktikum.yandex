@@ -1,0 +1,25 @@
+.menu-item {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+
+    gap: 1em;
+    padding: 0.5em 1em;
+
+    background-color: unset;
+}
+
+.menu-item:hover {
+    background-color: var(--item-hover-color);
+}
+
+.menu-item__icon {
+    width: min-content;
+    height: min-content;
+}
+
+.menu-item__label {
+    width: 100%;
+    white-space: nowrap;
+}

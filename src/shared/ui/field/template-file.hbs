@@ -1,0 +1,10 @@
+<div class="{{#if classes}}{{classes}} {{/if}}field">
+    <label for="{{name}}" class="input-file">
+        {{#if value}}
+            <span class="input-file__name text text_disabled-color">{{value}}</span>
+        {{else}}
+            <span class="input-file__label text text_main-color">{{label}}</span>
+        {{/if}}
+        {{{input}}}
+    </label>
+</div>

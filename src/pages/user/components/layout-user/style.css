@@ -1,0 +1,56 @@
+.user-layout {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+    .dialog {
+        padding: 2.5em 1.875em 1.875em;
+    }
+}
+
+.user-container {
+    justify-content: center;
+
+    .control-avatar {
+        margin-bottom: 1.3125em;
+    }
+
+    input {
+        color: var(--disabled-color);
+    }
+}
+
+.user-nick {
+    margin-bottom: 4.15385em;
+    height: 1em;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.user-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 31.875em;
+    height: 38em;
+}
+
+.user-actions {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    width: 100%;
+    height: 9.511em;
+
+    .button:last-child {
+        color: var(--error-color);
+    }
+}
+
+.user-actions_edit {
+    display: none;
+}

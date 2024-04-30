@@ -1,0 +1,8 @@
+.form-reg {
+    height: 29.6875em;
+    width: 17.5em;
+
+    .button__link {
+        font-size: 0.6875em;
+    }
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "color-hex-length": "long",
+    "custom-property-empty-line-before": ["never", {"ignore": ["after-comment", "first-nested", "inside-single-line-block"]}],
+    "declaration-empty-line-before": ["never", {"ignore": ["after-comment", "after-declaration", "first-nested", "inside-single-line-block"]}],
+    "import-notation": "string",
+    "number-max-precision": 8,
+    "selector-class-pattern": ["^([a-z-]*)?(__([a-z-]*))?(_([a-z-]*))?$", { "message": "Expected BEM notation" }]
+  },
+  "ignoreFiles": ["build/*", "dist/*", "node_modules/*"]
+}

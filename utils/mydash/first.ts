@@ -1,7 +1,7 @@
-export function first(list: any[]): any[] | undefined {
-    if (!Array.isArray(list)) return undefined
+export function first(list: unknown[]): unknown | undefined {
+  if (!Array.isArray(list)) return undefined;
 
-    const length = list.length
+  const { length } = list;
 
-    return length ? list[0] : undefined
+  return length ? list[0] : undefined;
 }

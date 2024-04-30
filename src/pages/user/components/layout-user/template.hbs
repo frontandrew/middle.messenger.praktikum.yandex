@@ -1,0 +1,26 @@
+<div class="user-layout">
+    {{#> SidePanel}}
+        {{{back}}}
+    {{/SidePanel}}
+    {{#> BaseLayout classes="user-container"}}
+        <div class="user-content">
+            {{{avatar}}}
+            {{{nick}}}
+            {{#if showInfo}}
+                {{{formInfo}}}
+            {{else}}
+                {{{formPass}}}
+            {{/if}}
+            {{#if showActions}}
+                <div class="user-actions">
+                    {{{changeInfo}}}
+                    {{> Divider}}
+                    {{{changePass}}}
+                    {{> Divider}}
+                    {{{signOut}}}
+                </div>
+            {{/if}}
+        </div>
+    {{/BaseLayout}}
+    {{{avatarDialog}}}
+</div>

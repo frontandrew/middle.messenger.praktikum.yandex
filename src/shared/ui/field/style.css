@@ -1,0 +1,114 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+/** FILE TYPE */
+.input-file {
+    display: flex;
+    text-align: center;
+
+    .input {
+        height: 0;
+        width: 0;
+        visibility: hidden;
+    }
+}
+
+.input-file__label {
+    height: 1em;
+    width: 100%;
+
+    text-decoration: underline;
+}
+
+.input-file__name {
+    height: 1em;
+    width: 100%;
+
+    color: red;
+}
+
+/** OTHER TYPES */
+.input-field {
+    display: flex;
+    flex-direction: column;
+    border: none;
+
+    input::placeholder {
+        visibility: hidden;
+    }
+}
+
+.input-field .divider {
+    background-color: var(--main-color);
+}
+
+.input-field_error {
+    .divider {
+        background-color: var(--error-color);
+    }
+
+    .input {
+        color: var(--error-color);
+    }
+}
+
+.input-field_disabled .divider {
+    background-color: var(--background-color-contrast);
+}
+
+.input-field__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field__container > .input {
+    margin-top: 0.69231em;
+}
+
+.input-field .input-field__label {
+    height: 0;
+
+    font-size: 0.5625em;
+    color: var(--text-color-light);
+}
+
+.input-field__label:has(+ .input:focus) {
+    transform: translateY(0);
+    transition: font-size 0.2s, transform 0.2s;
+}
+
+.input-field__label:has(+ .input:not(:focus):placeholder-shown) {
+    transform: translateY(1.3em);
+    font-size: 0.8125em;
+    transition: font-size 0.2s, transform 0.2s;
+}
+
+.input-field__text {
+    padding: 0.5em 0 0;
+    height: 1em;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* INLINE RULES */
+
+.input-field__label_inline {
+    white-space: nowrap;
+}
+
+.input-field__container_inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 0.5em;
+}
+
+.input-field__container_inline > .input {
+    text-align: right;
+}

@@ -1,0 +1,8 @@
+.form-auth {
+    height: 19.375em;
+    width: 17.5em;
+
+    .button__link {
+        font-size: 0.6875em;
+    }
+}

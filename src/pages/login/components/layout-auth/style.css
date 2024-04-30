@@ -1,0 +1,9 @@
+.layout-auth {
+    padding: 3.125em 1.875em 1.875em;
+}
+
+.layout-auth .layout-auth__title {
+    padding-bottom: 2em;
+    text-align: center;
+    font-size: 1.25em;
+}
