@@ -15,7 +15,7 @@ type Options = {
   timeout?: number;
 };
 
-class HTTPTransport {
+export class HTTPTransport {
   public get = (url: string, options: Options) => {
     let urlAddon = '';
 
