@@ -1,8 +1,8 @@
 import { Component } from 'core';
 import { Input } from 'ui';
-import { validators } from 'tools';
+import { validators } from 'validation';
 
-import type { ValidationState } from 'tools';
+import type { ValidationState } from 'validation';
 
 import type { FieldChildren, FieldProps } from './type';
 import field from './template-field.hbs?raw';
