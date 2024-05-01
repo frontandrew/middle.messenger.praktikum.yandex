@@ -31,6 +31,7 @@ export abstract class Component <C extends Children, P extends Props> {
   public children;
   public events;
 
+  protected parentNode: Node | null = null;
   protected _element: HTMLElement | null = null;
   protected count;
 
@@ -221,10 +222,21 @@ export abstract class Component <C extends Children, P extends Props> {
   }
 
   show() {
-    (this.getContent() as HTMLElement).style.display = 'block';
+    if (this.parentNode) {
+      this.parentNode.appendChild(this.getContent() as Node);
+    }
+    console.warn(
+      `SHOW{${this.count}}:[${this.instance}:${this.id}]:`,
+      { ...this.meta, elem: this._element },
+    );
   }
 
   hide() {
-    (this.getContent() as HTMLElement).style.display = 'none';
+    this.parentNode = this._element?.parentNode as Node;
+    this._element?.remove();
+    console.warn(
+      `HIDE{${this.count}}:[${this.instance}:${this.id}]:`,
+      { ...this.meta, elem: this._element },
+    );
   }
 }
