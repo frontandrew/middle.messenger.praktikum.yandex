@@ -35,11 +35,12 @@ export class Route {
   }
 
   render() {
+    const { rootQuery, ...props } = this.props;
     if (!this.instance) {
       // eslint-disable-next-line new-cap
-      this.instance = new this.component();
+      this.instance = new this.component({ ...props });
 
-      const root = document.querySelector(this.props.rootQuery);
+      const root = document.querySelector(rootQuery);
       root?.appendChild(this.instance.getContent() as Node);
 
       return;

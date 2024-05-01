@@ -5,11 +5,11 @@ import type { RouteView } from '../route';
 export class Router {
   private static instance: Router;
   private currentRoute: Route | null = null;
-  private rootQuery: string = '';
+  private rootQuery: string | undefined = 'main';
   public routes: Route[] = [];
   public history: History = window.history;
 
-  constructor(rootQuery: string) {
+  constructor(rootQuery?: string) {
     if (Router.instance) {
       // eslint-disable-next-line no-constructor-return
       return Router.instance;
@@ -19,16 +19,19 @@ export class Router {
     Router.instance = this;
   }
 
-  use(pathname: string, component: RouteView) {
-    const route = new Route({ pathname, component, props: { rootQuery: this.rootQuery } });
+  use({ pathname, component }: { pathname: string, component: RouteView }) {
+    const route = new Route({ pathname, component, props: { rootQuery: this.rootQuery! } });
     this.routes.push(route);
     return this;
   }
 
   start() {
-    window.onpopstate = (event) => {
-      console.log('PopState Event:', event);
-      this.onRoute(event.currentTarget?.location.pathname);
+    window.onpopstate = ({ currentTarget }) => {
+      if (
+        currentTarget
+        && 'location' in currentTarget
+        && currentTarget.location instanceof Location
+      ) this.onRoute(currentTarget.location.pathname);
     };
 
     this.onRoute(window.location.pathname);
