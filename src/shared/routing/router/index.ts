@@ -20,7 +20,7 @@ export class Router {
   }
 
   use(pathname: string, component: RouteView) {
-    const route = new Route({ pathname, view: component, props: { rootQuery: this.rootQuery } });
+    const route = new Route({ pathname, component, props: { rootQuery: this.rootQuery } });
     this.routes.push(route);
     return this;
   }
