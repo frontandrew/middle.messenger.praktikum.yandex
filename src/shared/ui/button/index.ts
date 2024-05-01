@@ -8,7 +8,6 @@ export class Button extends Component<ButtonChildren, ButtonProps> {
   constructor({
     classes = '',
     disabled = false,
-    page = '',
     type = 'button',
     variant = 'filled',
 
@@ -19,7 +18,6 @@ export class Button extends Component<ButtonChildren, ButtonProps> {
     super({
       classes,
       disabled,
-      page,
       type,
       variant,
       onClick,

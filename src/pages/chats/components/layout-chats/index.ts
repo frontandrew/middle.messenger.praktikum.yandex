@@ -20,7 +20,7 @@ export class LayoutChats extends Component<LayoutChatsChildren, LayoutChatsProps
       redirect: new Button({
         type: 'button',
         variant: 'text',
-        page: 'user',
+        // TODO: routing
         label: 'Profile ❯',
         classes: 'text_light-color',
       }),

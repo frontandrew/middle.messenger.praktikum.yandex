@@ -65,7 +65,7 @@ export class FormReg extends Form<FormRegChildren, FormRegProps> {
       }),
       redirect: new Button({
         label: 'Sign in',
-        page: 'login',
+        // TODO: routing
         variant: 'link',
       }),
     } as FormRegChildren & FormRegProps);

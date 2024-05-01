@@ -26,7 +26,7 @@ export class LayoutError extends Component<LayoutErrorChildren, LayoutErrorProps
       redirect: new Button({
         label: `Return to ${target} page`,
         type: 'button',
-        page: target,
+        // TODO: routing
         variant: 'link',
       }),
     } as LayoutErrorChildren & LayoutErrorProps);

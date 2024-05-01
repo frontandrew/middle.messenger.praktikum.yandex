@@ -34,7 +34,7 @@ export class FormAuth extends Form<FormAuthChildren, FormAuthProps> {
       }),
       redirect: new Button({
         label: 'Sign up',
-        page: 'reg',
+        // TODO: routing
         variant: 'link',
       }),
     } as FormAuthChildren & FormAuthProps);

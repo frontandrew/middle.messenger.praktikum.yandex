@@ -10,7 +10,6 @@ export interface ButtonProps extends Props {
 
   classes?: string,
   disabled?: boolean,
-  page?: string,
   type?: ButtonTypes,
   variant?: ButtonVariants,
 

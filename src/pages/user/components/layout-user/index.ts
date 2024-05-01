@@ -18,7 +18,7 @@ export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
       showInfo: true,
       back: new ButtonIcon({
         pic: Arrow,
-        page: 'chats',
+        // TODO: routing
       }),
       avatar: new ControlAvatar({
         image,
@@ -45,7 +45,7 @@ export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
       signOut: new Button({
         variant: 'link',
         label: 'Sign out',
-        page: 'login',
+        // TODO: routing
       }),
       avatarDialog: new Dialog({
         isOpen: false,
