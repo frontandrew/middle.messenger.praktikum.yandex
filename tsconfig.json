@@ -20,9 +20,10 @@
     "baseUrl": "./src",
     "paths": {
       "core": ["./shared/core/index"],
-      "entities": ["./shared/entities/index"],
+      "entities": ["./entities/index"],
       "images": ["./assets/images/index"],
       "pages": ["./pages/index"],
+      "routing": ["./shared/routing/index"],
       "tools": ["./shared/tools/index"],
       "ui": ["./shared/ui/index"]
     }
