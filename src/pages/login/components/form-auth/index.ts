@@ -1,4 +1,5 @@
 import { Button, Field, Form } from 'ui';
+import { Router } from 'routing';
 
 import type { FormAuthChildren, FormAuthData, FormAuthProps } from './type';
 import template from './template.hbs?raw';
@@ -8,6 +9,11 @@ export class FormAuth extends Form<FormAuthChildren, FormAuthProps> {
   constructor(data: FormAuthData) {
     super({
       data,
+      onSubmit: (event: Event) => {
+        event.stopPropagation();
+        this.handleLogin();
+        return event;
+      },
       login: new Field({
         name: 'login',
         type: 'text',
@@ -32,6 +38,14 @@ export class FormAuth extends Form<FormAuthChildren, FormAuthProps> {
         variant: 'link',
       }),
     } as FormAuthChildren & FormAuthProps);
+  }
+
+  handleLogin(): void {
+    this.handleSubmit();
+    if (!this.props.hasError) {
+      const router = new Router();
+      router.go('/chats');
+    }
   }
 
   render() {

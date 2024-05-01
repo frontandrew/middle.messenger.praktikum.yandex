@@ -10,9 +10,9 @@ import type { ListChats } from '../list-chats';
 import type { ListMessages } from '../list-messages';
 
 export interface LayoutChatsProps extends Props {
-  user: Pick<UserType, 'id' | 'image' | 'nickName'>,
-  chats: ChatType[],
-  messages: MessageType[],
+  user: UserType,
+  chats: ChatType[] | [],
+  messages: MessageType[] | [],
 }
 
 export interface LayoutChatsChildren extends Children {

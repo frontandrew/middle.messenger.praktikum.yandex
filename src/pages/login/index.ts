@@ -2,9 +2,14 @@ import { LayoutAuth } from './components';
 
 import type { FormAuthData as PageLoginContext } from './components/form-auth/type';
 
+const data = {
+  login: 'And',
+  password: '!Q1gsdgr',
+};
+
 export class PageLogin extends LayoutAuth {
-  constructor(data: PageLoginContext) {
-    super({ ...data });
+  constructor() {
+    super(data);
   }
 }
 
