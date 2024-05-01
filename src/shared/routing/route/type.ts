@@ -1,5 +1,7 @@
 import { Component } from 'core';
 
+export type RouteView = new (...args: unknown[]) => InstanceType<typeof Component>
+
 export type RouteProps = {
   [key: string]: unknown;
   rootQuery: string;
@@ -7,6 +9,6 @@ export type RouteProps = {
 
 export interface RouteType {
   pathname: string;
-  view: new (...args: unknown[]) => InstanceType<typeof Component>;
+  component: RouteView;
   props: RouteProps;
 }

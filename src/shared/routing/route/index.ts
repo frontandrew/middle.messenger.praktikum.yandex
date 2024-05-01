@@ -1,20 +1,19 @@
 import { Component } from 'core';
 import { deepEqual } from 'tools';
 
-import { RouteProps, RouteType } from './type';
+import { RouteProps, RouteType, RouteView } from './type';
 
-export type { RouteProps, RouteType };
+export type { RouteProps, RouteType, RouteView };
 
 export class Route {
   private pathname: string;
-  private component: new (...args: unknown[]) => InstanceType<typeof Component>;
-  private instance: InstanceType<typeof Component> | null;
+  private component: RouteView;
+  private instance: InstanceType<typeof Component> | null = null;
   private props: RouteProps;
 
-  constructor({ pathname, view, props }: RouteType) {
+  constructor({ pathname, component, props }: RouteType) {
     this.pathname = pathname;
-    this.component = view;
-    this.instance = null;
+    this.component = component;
     this.props = props;
   }
 
