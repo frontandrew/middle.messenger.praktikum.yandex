@@ -1,4 +1,7 @@
 .layout-auth {
+    display: flex;
+    flex-direction: column;
+
     padding: 3.125em 1.875em 1.875em;
 }
 
@@ -6,4 +9,9 @@
     padding-bottom: 2em;
     text-align: center;
     font-size: 1.25em;
+}
+
+.layout-auth .button__link {
+    font-size: 0.6875em;
+    margin-top: 1.272728em;
 }

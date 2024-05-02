@@ -36,11 +36,6 @@ export class FormAuth extends FormWithRouter<FormAuthChildren, FormAuthProps> {
         label: 'Sign in',
         type: 'submit',
       }),
-      redirect: new Button({
-        label: 'Sign up',
-        variant: 'link',
-        onClick: () => this.router.go('/registration'),
-      }),
     } as FormAuthChildren & FormAuthProps);
   }
 

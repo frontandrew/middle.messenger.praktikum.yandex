@@ -17,7 +17,7 @@ export type Children = { [key: string]: Child };
 export type Prop = unknown;
 export type Props = { [key: string]: Prop };
 
-export abstract class Component <C extends Children, P extends Props> {
+export class Component <C extends Children, P extends Props> {
   static EVENTS = {
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',

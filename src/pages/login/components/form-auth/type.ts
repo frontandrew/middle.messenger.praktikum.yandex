@@ -15,5 +15,4 @@ export interface FormAuthChildren extends FormChildren {
   login: Field,
   password: Field,
   submit: Button,
-  redirect: Button,
 }
