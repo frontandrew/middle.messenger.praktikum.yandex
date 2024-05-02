@@ -1,5 +1,7 @@
 import { Component } from 'core';
 
+export type RoutePaths = '/login' | '/registration' | '/settings' | '/chats' | '/error';
+
 export type RouteView = new (...args: unknown[]) => InstanceType<typeof Component>
 
 export type RouteProps = {
@@ -8,7 +10,7 @@ export type RouteProps = {
 }
 
 export interface RouteType {
-  pathname: string;
+  pathname: RoutePaths;
   component: RouteView;
   props: RouteProps;
 }

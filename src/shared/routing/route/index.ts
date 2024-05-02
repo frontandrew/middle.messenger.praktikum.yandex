@@ -1,12 +1,12 @@
 import { Component } from 'core';
 import { deepEqual } from 'tools';
 
-import { RouteProps, RouteType, RouteView } from './type';
+import { RoutePaths, RouteProps, RouteType, RouteView } from './type';
 
-export type { RouteProps, RouteType, RouteView };
+export type { RoutePaths, RouteProps, RouteType, RouteView };
 
 export class Route {
-  private pathname: string;
+  private pathname: RoutePaths;
   private component: RouteView;
   private instance: InstanceType<typeof Component> | null = null;
   private props: RouteProps;
@@ -17,7 +17,7 @@ export class Route {
     this.props = props;
   }
 
-  navigate(pathname: string) {
+  navigate(pathname: RoutePaths) {
     if (this.match(pathname)) {
       this.pathname = pathname;
       this.render();
@@ -30,7 +30,7 @@ export class Route {
     }
   }
 
-  match(pathname: string) {
+  match(pathname: RoutePaths) {
     return deepEqual(pathname, this.pathname);
   }
 

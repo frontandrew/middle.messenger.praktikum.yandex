@@ -1,11 +1,11 @@
 import { Route } from '../route';
 
-import type { RouteView } from '../route';
+import type { RoutePaths, RouteView } from '../route';
 
 export class Router {
   private static instance: Router;
   private currentRoute: Route | null = null;
-  private rootQuery: string | undefined = 'main';
+  private rootQuery: string | undefined = '.main';
   public routes: Route[] = [];
   public history: History = window.history;
 
@@ -19,7 +19,7 @@ export class Router {
     Router.instance = this;
   }
 
-  use({ pathname, component }: { pathname: string, component: RouteView }) {
+  use({ pathname, component }: { pathname: RoutePaths, component: RouteView }) {
     const route = new Route({ pathname, component, props: { rootQuery: this.rootQuery! } });
     this.routes.push(route);
     return this;
@@ -31,13 +31,13 @@ export class Router {
         currentTarget
         && 'location' in currentTarget
         && currentTarget.location instanceof Location
-      ) this.onRoute(currentTarget.location.pathname);
+      ) this.onRoute(currentTarget.location.pathname as RoutePaths);
     };
 
-    this.onRoute(window.location.pathname);
+    this.onRoute(window.location.pathname as RoutePaths);
   }
 
-  onRoute(pathname: string) {
+  onRoute(pathname: RoutePaths) {
     const route = this.getRoute(pathname);
     if (!route) return;
 
@@ -49,7 +49,7 @@ export class Router {
     route.render();
   }
 
-  go(pathname: string) {
+  go(pathname: RoutePaths) {
     this.history.pushState({}, '', pathname);
     this.onRoute(pathname);
   }
@@ -62,7 +62,7 @@ export class Router {
     this.history.go(1);
   }
 
-  getRoute(pathname: string): Route | undefined {
+  getRoute(pathname: RoutePaths): Route | undefined {
     return this.routes.find((route) => route.match(pathname));
   }
 }
