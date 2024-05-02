@@ -1,6 +1,7 @@
 import { Button, ButtonIcon, Dialog, Text } from 'ui';
 import { Arrow } from 'images';
 import { Component } from 'core';
+import { withRouter } from 'routing';
 
 import { ControlAvatar } from '../control-avatar';
 import { FormAvatar } from '../form-avatar';
@@ -11,14 +12,16 @@ import type { LayoutUserArgs, LayoutUserChildren, LayoutUserProps } from './type
 import template from './template.hbs?raw';
 import './style.css';
 
-export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
+const ComponentWithRouter = withRouter(Component);
+
+export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUserProps> {
   constructor({ image, data }: LayoutUserArgs) {
     super({
       showActions: true,
       showInfo: true,
       back: new ButtonIcon({
         pic: Arrow,
-        // TODO: routing
+        onClick: () => this.router.go('/chats'),
       }),
       avatar: new ControlAvatar({
         image,
@@ -45,7 +48,7 @@ export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
       signOut: new Button({
         variant: 'link',
         label: 'Sign out',
-        // TODO: routing
+        onClick: () => this.router.go('/login'),
       }),
       avatarDialog: new Dialog({
         isOpen: false,
