@@ -10,5 +10,5 @@ export interface ListChatsChildren extends Children {
 export interface ListChatsProps extends Props {
   itemKeys: string,
   onClick: ({}: Event) => Event,
-  active: string | number | null,
+  active: number | null,
 }
