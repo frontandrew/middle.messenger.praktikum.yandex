@@ -1,5 +1,6 @@
+import { Button, Text } from 'ui';
 import { Component } from 'core';
-import { Text } from 'ui';
+import { withRouter } from 'routing';
 
 import { FormReg } from '../form-reg';
 import type { FormRegData } from '../form-reg';
@@ -8,7 +9,9 @@ import type { LayoutRegChildren, LayoutRegProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class LayoutReg extends Component<LayoutRegChildren, LayoutRegProps> {
+const ComponentWithRouter = withRouter(Component);
+
+export class LayoutReg extends ComponentWithRouter<LayoutRegChildren, LayoutRegProps> {
   constructor(data: FormRegData) {
     super({
       title: new Text({
@@ -17,6 +20,11 @@ export class LayoutReg extends Component<LayoutRegChildren, LayoutRegProps> {
         text: 'Registration',
       }),
       form: new FormReg(data),
+      redirect: new Button({
+        label: 'Sign in',
+        variant: 'link',
+        onClick: () => this.router.go('/login'),
+      }),
     } as LayoutRegChildren & LayoutRegProps);
   }
 

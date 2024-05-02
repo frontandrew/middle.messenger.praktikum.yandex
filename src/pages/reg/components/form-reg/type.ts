@@ -25,5 +25,4 @@ export interface FormRegChildren extends FormChildren {
   password: Field,
   passwordMore: Field,
   submit: Button,
-  redirect: Button,
 }

@@ -1,4 +1,5 @@
 import { Button, Field, Form } from 'ui';
+import { withRouter } from 'routing';
 
 import type { FormRegChildren, FormRegData, FormRegProps } from './type';
 import template from './template.hbs?raw';
@@ -6,10 +7,18 @@ import './style.css';
 
 export type { FormRegChildren, FormRegData, FormRegProps };
 
-export class FormReg extends Form<FormRegChildren, FormRegProps> {
+const FormWithRouter = withRouter(Form);
+
+export class FormReg extends FormWithRouter<FormRegChildren, FormRegProps> {
   constructor(data: FormRegData) {
     super({
       data,
+      onSubmit: (event: Event) => {
+        event.preventDefault();
+        this.handleRegistration();
+        return event;
+      },
+
       email: new Field({
         name: 'email',
         type: 'text',
@@ -63,12 +72,14 @@ export class FormReg extends Form<FormRegChildren, FormRegProps> {
         label: 'Register',
         type: 'submit',
       }),
-      redirect: new Button({
-        label: 'Sign in',
-        // TODO: routing
-        variant: 'link',
-      }),
     } as FormRegChildren & FormRegProps);
+  }
+
+  handleRegistration(): void {
+    this.handleSubmit();
+    if (!this.props.hasError) {
+      this.router.go('/settings');
+    }
   }
 
   render() {
