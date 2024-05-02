@@ -12,11 +12,14 @@ import type { LayoutChatsChildren, LayoutChatsProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export { LayoutChatsProps };
+type PageChatsContext = Pick<LayoutChatsProps, 'user' | 'chats' | 'messages'>
+
+export type { LayoutChatsProps, PageChatsContext };
 
 export class LayoutChats extends Component<LayoutChatsChildren, LayoutChatsProps> {
-  constructor({ user, chats, messages }: LayoutChatsProps) {
+  constructor({ user, chats, messages }: PageChatsContext) {
     super({
+      selectedChat: 50,
       redirect: new Button({
         type: 'button',
         variant: 'text',
@@ -84,7 +87,7 @@ export class LayoutChats extends Component<LayoutChatsChildren, LayoutChatsProps
             onClick: () => {},
           },
           {
-            classes: 'menu-item__remove-user-img',
+            classes: 'menu-item__icon',
             label: 'Remove user',
             icon: IconAdd,
             onClick: () => {},

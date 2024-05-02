@@ -7,20 +7,26 @@
         {{> Divider}}
         {{{listChats}}}
     </nav>
-    <div class="messages__container">
-        <header class="messages__row">
-            {{{imageChat}}}
-            {{{titleChat}}}
-            {{{actionsChat}}}
-        </header>
-        {{> Divider}}
-        {{{listMessages}}}
-        {{> Divider}}
-        <footer class="messages__row">
-            {{{actionAttach}}}
-            {{{formMessage}}}
-        </footer>
-    </div>
+    {{#if selectedChat}}
+        <div class="messages__container">
+            <header class="messages__row">
+                {{{imageChat}}}
+                {{{titleChat}}}
+                {{{actionsChat}}}
+            </header>
+            {{> Divider}}
+            {{{listMessages}}}
+            {{> Divider}}
+            <footer class="messages__row">
+                {{{actionAttach}}}
+                {{{formMessage}}}
+            </footer>
+        </div>
+    {{else}}
+        {{#> BaseLayout}}
+            <p class="text text_light-color">Please select chat from list to start massaging</p>
+        {{/BaseLayout}}
+    {{/if}}
     {{{menuChat}}}
     {{{menuAttach}}}
 </div>

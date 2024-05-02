@@ -63,6 +63,6 @@
 
 /** SPECIAL */
 
-.menu-item__remove-user-img > img {
+.menu-item__icon > img {
     rotate: 45deg;
 }

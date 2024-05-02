@@ -3,7 +3,7 @@ import {
 } from 'images';
 import { LayoutChats } from './components';
 
-import type { LayoutChatsProps as PageChatsContext } from './components';
+import type { PageChatsContext } from './components';
 
 const data: PageChatsContext = {
   user: {

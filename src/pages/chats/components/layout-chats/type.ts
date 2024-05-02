@@ -13,6 +13,7 @@ export interface LayoutChatsProps extends Props {
   user: UserType,
   chats: ChatType[] | [],
   messages: MessageType[] | [],
+  selectedChat: number | null,
 }
 
 export interface LayoutChatsChildren extends Children {
