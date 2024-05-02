@@ -1,7 +1,8 @@
 import { Avatar, Button, ButtonIcon, Menu, Text } from 'ui';
-import { Component } from 'core';
-
 import { IconAdd, IconFile, IconLoc, IconMedia } from 'images';
+import { Component } from 'core';
+import { withRouter } from 'routing';
+
 import { ButtonAttach } from '../button-attach';
 import { FormMessage } from '../form-message';
 import { FormSearch } from '../form-search';
@@ -13,19 +14,20 @@ import template from './template.hbs?raw';
 import './style.css';
 
 type PageChatsContext = Pick<LayoutChatsProps, 'user' | 'chats' | 'messages'>
+const ComponentWithRouter = withRouter(Component);
 
 export type { LayoutChatsProps, PageChatsContext };
 
-export class LayoutChats extends Component<LayoutChatsChildren, LayoutChatsProps> {
+export class LayoutChats extends ComponentWithRouter<LayoutChatsChildren, LayoutChatsProps> {
   constructor({ user, chats, messages }: PageChatsContext) {
     super({
       selectedChat: 50,
       redirect: new Button({
         type: 'button',
         variant: 'text',
-        // TODO: routing
         label: 'Profile ❯',
         classes: 'text_light-color',
+        onClick: () => this.router.go('/settings'),
       }),
 
       listChats: new ListChats(chats),
