@@ -4,7 +4,7 @@ import { Component } from 'core';
 import type { FormChildren, FormProps } from './type';
 import './style.css';
 
-export abstract class Form<C extends FormChildren, P extends FormProps>
+export class Form<C extends FormChildren, P extends FormProps>
   extends Component<C, P> {
   constructor({
     disabled = false,

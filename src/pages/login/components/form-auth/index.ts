@@ -1,16 +1,20 @@
 import { Button, Field, Form } from 'ui';
-import { Router } from 'routing';
+import { withRouter } from 'routing';
 
 import type { FormAuthChildren, FormAuthData, FormAuthProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class FormAuth extends Form<FormAuthChildren, FormAuthProps> {
+const FormWithRouter = withRouter(Form);
+
+export type { FormAuthChildren, FormAuthData, FormAuthProps };
+
+export class FormAuth extends FormWithRouter<FormAuthChildren, FormAuthProps> {
   constructor(data: FormAuthData) {
     super({
       data,
       onSubmit: (event: Event) => {
-        event.stopPropagation();
+        event.preventDefault();
         this.handleLogin();
         return event;
       },
@@ -34,8 +38,8 @@ export class FormAuth extends Form<FormAuthChildren, FormAuthProps> {
       }),
       redirect: new Button({
         label: 'Sign up',
-        // TODO: routing
         variant: 'link',
+        onClick: () => this.router.go('/registration'),
       }),
     } as FormAuthChildren & FormAuthProps);
   }
@@ -43,8 +47,7 @@ export class FormAuth extends Form<FormAuthChildren, FormAuthProps> {
   handleLogin(): void {
     this.handleSubmit();
     if (!this.props.hasError) {
-      const router = new Router();
-      router.go('/chats');
+      this.router.go('/chats');
     }
   }
 
@@ -52,5 +55,3 @@ export class FormAuth extends Form<FormAuthChildren, FormAuthProps> {
     return template;
   }
 }
-
-export type { FormAuthChildren, FormAuthData, FormAuthProps };
