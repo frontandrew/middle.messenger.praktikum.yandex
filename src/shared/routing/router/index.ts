@@ -38,8 +38,18 @@ export class Router {
   }
 
   onRoute(pathname: RoutePaths) {
+    if (['', '/'].includes(pathname)) {
+      // TODO: check auth and go(/chats) if true
+      this.go('/login');
+      return;
+    }
+
     const route = this.getRoute(pathname);
-    if (!route) return;
+    if (!route) {
+      // TODO: need error page context
+      this.go('/error');
+      return;
+    }
 
     if (this.currentRoute) {
       this.currentRoute.leave();
