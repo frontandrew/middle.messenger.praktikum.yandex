@@ -14,8 +14,9 @@
   "license": "MIT",
   "scripts": {
     "start": "vite",
-    "build": "eslint && vite build",
-    "preview": "vite preview"
+    "build": "pnpm lint:code && pnpm lint:style && rm -rf ./dist && vite build",
+    "lint:code": "eslint --ext .js,.ts,.tsx ./src/**/*.{js,ts,tsx}",
+    "lint:style": "stylelint \"**/*.css\" -c ./.stylelintrc"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
