@@ -1,18 +1,14 @@
-function queryStringify(data: Record<string, unknown>) {
+import { URLSearchParams } from 'url';
+
+export function queryStringify(data: Record<string, unknown>): string {
   if (typeof data !== 'object') {
-    throw new Error('Props data is not object');
+    throw new Error('Unxepected data format must be an object');
   }
 
-  let result = '?';
-
-  Object.keys(data).forEach((key, i, arr) => {
-    result += `${key}=${data[key]}`;
-    if (arr.length > 1 && i !== arr.length - 1) {
-      result += `&`;
-    }
+  const searchParams = new URLSearchParams();
+  Object.entries(data).forEach(([key, value]) => {
+    searchParams.append(key, String(value));
   });
 
-  return result;
+  return searchParams.toString();
 }
-
-export default queryStringify;
