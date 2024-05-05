@@ -4,6 +4,7 @@ export { first } from './first';
 export { identity } from './identity';
 export { isEmpty } from './is-empty';
 export { last } from './last';
+export { merge } from './merge';
 export { range } from './range';
 export { registerPartials } from './register-partials';
 export { trim } from './trim';
