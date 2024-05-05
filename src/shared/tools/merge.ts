@@ -1,25 +1,15 @@
 export function merge(lhs: Indexed, rhs: Indexed): Indexed {
-  // TODO: perhaps need more intense values check
-  // if (typeof lhs !== 'object' || typeof rhs !== 'object') {
-  //   if (typeof lhs !== 'object' && typeof rhs === 'object') return rhs;
-  //   if (typeof rhs !== 'object' && typeof lhs === 'object') return lhs;
-  //   if (rhs) return rhs;
-  //   return lhs;
-  // }
+  if ((typeof lhs !== 'object' || lhs === null) && rhs) return rhs;
+  if (!rhs) return lhs;
 
-  const result = {
-    ...lhs,
-    ...Object.entries(rhs).reduce((acc, [key, value]) => {
-      if (key in lhs) {
-        acc[key] = typeof lhs[key] === 'object' && typeof value === 'object'
-          ? merge(lhs[key] as Indexed, value as Indexed)
-          : value;
-      } else {
-        acc[key] = value;
+  return Object.entries(rhs)
+    .reduce((result, [key, value]) => {
+      if (key in result) {
+        return {
+          ...result,
+          [key]: merge(lhs[key] as Indexed, rhs[key] as Indexed),
+        };
       }
-      return acc;
-    }, {} as Indexed),
-  };
-
-  return result;
+      return { ...result, [key]: value };
+    }, lhs);
 }
