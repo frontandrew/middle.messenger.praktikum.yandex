@@ -7,4 +7,5 @@ export { last } from './last';
 export { merge } from './merge';
 export { range } from './range';
 export { registerPartials } from './register-partials';
+export { set } from './set';
 export { trim } from './trim';
