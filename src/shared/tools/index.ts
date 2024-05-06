@@ -3,6 +3,8 @@ export { deepEqual } from './deep-equal';
 export { first } from './first';
 export { identity } from './identity';
 export { isEmpty } from './is-empty';
+export { isArray } from './isArray';
+export { isPlainObject } from './isPlainObject';
 export { last } from './last';
 export { merge } from './merge';
 export { range } from './range';

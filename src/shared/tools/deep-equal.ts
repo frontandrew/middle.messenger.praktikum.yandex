@@ -1,7 +1,10 @@
+import { isArray } from './isArray';
+import { isPlainObject } from './isPlainObject';
+
 export function deepEqual(lhs: unknown, rhs: unknown): boolean {
   if (lhs === rhs) return true;
 
-  if (typeof lhs !== 'object' || lhs === null || typeof rhs !== 'object' || rhs === null) {
+  if (!isArrOrObj(lhs) || !isArrOrObj(rhs)) {
     return false;
   }
 
@@ -19,4 +22,8 @@ export function deepEqual(lhs: unknown, rhs: unknown): boolean {
       );
     })
     .every(Boolean);
+}
+
+function isArrOrObj(value: unknown):value is PlainObject | [] {
+  return isPlainObject(value) || isArray(value);
 }
