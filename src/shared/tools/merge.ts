@@ -1,4 +1,4 @@
-export function merge(lhs: Indexed, rhs: Indexed): Indexed {
+export function merge(lhs: PlainObject, rhs: PlainObject): PlainObject {
   if ((typeof lhs !== 'object' || lhs === null) && rhs) return rhs;
   if (!rhs) return lhs;
 
@@ -7,7 +7,7 @@ export function merge(lhs: Indexed, rhs: Indexed): Indexed {
       if (key in result) {
         return {
           ...result,
-          [key]: merge(lhs[key] as Indexed, rhs[key] as Indexed),
+          [key]: merge(lhs[key] as PlainObject, rhs[key] as PlainObject),
         };
       }
       return { ...result, [key]: value };
