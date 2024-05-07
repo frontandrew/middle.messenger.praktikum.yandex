@@ -1,14 +1,41 @@
-import { URLSearchParams } from 'url';
+/* eslint-disable no-shadow */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StringIndexed = Record<string, any>;
 
-export function queryStringify(data: Record<string, unknown>): string {
+export function queryStringify(data: StringIndexed): string | never {
   if (typeof data !== 'object') {
-    throw new Error('Unxepected data format must be an object');
+    throw new Error('Data must be object');
   }
 
-  const searchParams = new URLSearchParams();
-  Object.entries(data).forEach(([key, value]) => {
-    searchParams.append(key, String(value));
-  });
+  const keys = Object.keys(data);
+  return keys.reduce((result, key, index) => {
+    const value = data[key];
+    const endLine = index < keys.length - 1 ? '&' : '';
 
-  return searchParams.toString();
+    if (Array.isArray(value)) {
+      const arrayValue = value.reduce<StringIndexed>(
+        (result, arrData, index) => ({
+          ...result,
+          [`${key}[${index}]`]: arrData,
+        }),
+        {},
+      );
+
+      return `${result}${queryStringify(arrayValue)}${endLine}`;
+    }
+
+    if (typeof value === 'object') {
+      const objValue = Object.keys(value || {}).reduce<StringIndexed>(
+        (result, objKey) => ({
+          ...result,
+          [`${key}[${objKey}]`]: value[objKey],
+        }),
+        {},
+      );
+
+      return `${result}${queryStringify(objValue)}${endLine}`;
+    }
+
+    return `${result}${key}=${value}${endLine}`;
+  }, '');
 }

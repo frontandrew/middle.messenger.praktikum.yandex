@@ -1,6 +1,8 @@
 /* eslint-disable implicit-arrow-linebreak */
 import { queryStringify } from './queryStringify';
 
+const API_URL = 'https://ya-praktikum.tech/api/v2';
+
 // eslint-disable-next-line no-shadow
 enum METHODS {
   GET = 'GET',
@@ -45,7 +47,7 @@ export class HTTPTransport {
         return;
       }
 
-      let requestUrl = url;
+      let requestUrl = API_URL + url;
       if (method === METHODS.GET && Object.keys(data).length) {
         requestUrl += `?${queryStringify(data)}`;
       }
