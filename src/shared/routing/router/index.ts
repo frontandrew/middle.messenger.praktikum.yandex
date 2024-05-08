@@ -44,7 +44,7 @@ export class Router {
 
   onRoute(pathname: RoutePaths) {
     if (!pathname || !this.authState) {
-      this.go('/login');
+      this.go('/');
       return;
     }
 

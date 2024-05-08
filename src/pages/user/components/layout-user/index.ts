@@ -21,7 +21,7 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
       showInfo: true,
       back: new ButtonIcon({
         pic: Arrow,
-        onClick: () => this.router.go('/chats'),
+        onClick: () => this.router.go('/messenger'),
       }),
       avatar: new ControlAvatar({
         image,
@@ -48,7 +48,7 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
       signOut: new Button({
         variant: 'link',
         label: 'Sign out',
-        onClick: () => this.router.go('/login'),
+        onClick: () => this.router.go('/'),
       }),
       avatarDialog: new Dialog({
         isOpen: false,

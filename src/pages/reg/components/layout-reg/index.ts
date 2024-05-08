@@ -23,7 +23,7 @@ export class LayoutReg extends ComponentWithRouter<LayoutRegChildren, LayoutRegP
       redirect: new Button({
         label: 'Sign in',
         variant: 'link',
-        onClick: () => this.router.go('/login'),
+        onClick: () => this.router.go('/'),
       }),
     } as LayoutRegChildren & LayoutRegProps);
   }

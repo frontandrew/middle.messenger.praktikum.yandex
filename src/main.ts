@@ -8,9 +8,9 @@ registerPartials(Templates);
 const router = new Router('.main');
 
 router
-  .use({ pathname: '/login', component: Pages.PageLogin })
-  .use({ pathname: '/registration', component: Pages.PageReg })
+  .use({ pathname: '/', component: Pages.PageLogin })
+  .use({ pathname: '/sing-up', component: Pages.PageReg })
   .use({ pathname: '/settings', component: Pages.PageUser })
-  .use({ pathname: '/chats', component: Pages.PageChats })
+  .use({ pathname: '/messenger', component: Pages.PageChats })
   .use({ pathname: '/error', component: Pages.PageError })
   .start();

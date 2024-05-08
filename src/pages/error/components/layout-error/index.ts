@@ -28,7 +28,7 @@ export class LayoutError extends ComponentWithRouter<LayoutErrorChildren, Layout
       redirect: new Button({
         label: `Return to chats page`,
         type: 'button',
-        onClick: () => this.router.go('/chats'),
+        onClick: () => this.router.go('/messenger'),
         variant: 'link',
       }),
     } as LayoutErrorChildren & LayoutErrorProps);

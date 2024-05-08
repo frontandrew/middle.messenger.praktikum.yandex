@@ -42,7 +42,7 @@ export class FormAuth extends FormWithRouter<FormAuthChildren, FormAuthProps> {
   handleLogin(): void {
     this.handleSubmit();
     if (!this.props.hasError) {
-      this.router.go('/chats');
+      this.router.go('/messenger');
     }
   }
 

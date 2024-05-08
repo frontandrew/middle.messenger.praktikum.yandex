@@ -23,7 +23,7 @@ export class LayoutAuth extends ComponentWithRouter<LayoutAuthChildren, Props> {
       redirect: new Button({
         label: 'Sign up',
         variant: 'link',
-        onClick: () => this.router.go('/registration'),
+        onClick: () => this.router.go('/sing-up'),
       }),
       form: new FormAuth(data),
     } as LayoutAuthChildren);

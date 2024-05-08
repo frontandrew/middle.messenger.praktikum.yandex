@@ -1,6 +1,6 @@
 import { Component } from 'core';
 
-export type RoutePaths = '/login' | '/registration' | '/settings' | '/chats' | '/error';
+export type RoutePaths = '/' | '/sing-up' | '/settings' | '/messenger' | '/error';
 
 export type RouteView = new (...args: unknown[]) => InstanceType<typeof Component>
 
