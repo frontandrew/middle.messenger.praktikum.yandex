@@ -6,6 +6,7 @@ export class Router {
   private static instance: Router;
   private currentRoute: Route | null = null;
   private rootQuery: string | undefined = '.main';
+  private authState: boolean = false;
   public routes: Route[] = [];
   public history: History = window.history;
 
@@ -17,6 +18,10 @@ export class Router {
 
     this.rootQuery = rootQuery;
     Router.instance = this;
+  }
+
+  setAuthState(state: boolean) {
+    this.authState = state;
   }
 
   use({ pathname, component }: { pathname: RoutePaths, component: RouteView }) {
@@ -38,8 +43,7 @@ export class Router {
   }
 
   onRoute(pathname: RoutePaths) {
-    if (['', '/'].includes(pathname)) {
-      // TODO: check auth and go(/chats) if true
+    if (!pathname || !this.authState) {
       this.go('/login');
       return;
     }
