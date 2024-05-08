@@ -53,29 +53,29 @@ export class HTTPTransport {
       }
 
       const xhr = new XMLHttpRequest();
-
-      xhr.open(method, requestUrl);
-
-      Object.keys(headers).forEach((key) => {
-        xhr.setRequestHeader(key, headers[key]);
+      xhr.withCredentials = true;
+      xhr.timeout = timeout;
+      Object.values(headers).forEach(([key, value]) => {
+        xhr.setRequestHeader(key, value);
       });
 
-      xhr.timeout = timeout;
-      xhr.onload = function () {
-        resolve(xhr);
+      xhr.onload = () => {
+        const { status = 0, response } = xhr;
+        if (status >= 200 && status < 300) resolve(response);
+        else reject(new Error(`${response}`));
       };
 
+      xhr.open(method, requestUrl);
       xhr.onerror = () => reject(new Error(`Error requesting ${url}: ${xhr.statusText}`));
       xhr.onabort = () => reject(new Error('Request was aborted'));
       xhr.ontimeout = () => reject(new Error(`Timeout while requesting ${url}`));
 
-      if (method === METHODS.GET) {
-        xhr.send();
-        return;
+      if (method === METHODS.GET) xhr.send();
+      else if (data instanceof FormData) xhr.send(data);
+      else {
+        xhr.setRequestHeader('Content-Type', 'applcation/json');
+        xhr.send(JSON.stringify(data));
       }
-      // TODO: process form data
-      const body = JSON.stringify(data);
-      xhr.send(body);
     });
   };
 }
