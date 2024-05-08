@@ -1,3 +1,5 @@
+import { deepEqual } from 'tools';
+
 import { Route } from '../route';
 
 import type { RoutePaths, RouteView } from '../route';
@@ -6,7 +8,7 @@ export class Router {
   private static instance: Router;
   private currentRoute: Route | null = null;
   private rootQuery: string | undefined = '.main';
-  private authState: boolean = false;
+  private authState: boolean = true; // TODO: false
   public routes: Route[] = [];
   public history: History = window.history;
 
@@ -42,29 +44,23 @@ export class Router {
     this.onRoute(window.location.pathname as RoutePaths);
   }
 
-  onRoute(pathname: RoutePaths) {
-    if (!pathname || !this.authState) {
-      this.go('/');
-      return;
-    }
+  private onRoute(pathname: RoutePaths) {
+    let nextPath = pathname;
+    let nextRoute = this.getRoute(pathname);
 
-    const route = this.getRoute(pathname);
-    if (!route) {
-      // TODO: need error page context
-      this.go('/error');
-      return;
-    }
+    if (!nextRoute) nextPath = '/error';
+    if (!this.authState) nextPath = '/';
 
-    if (this.currentRoute) {
-      this.currentRoute.leave();
-    }
+    nextRoute = this.getRoute(nextPath);
+    if (deepEqual(this.currentRoute, nextRoute)) return;
 
-    this.currentRoute = route;
-    route.render();
+    if (this.currentRoute) this.currentRoute.leave();
+    this.currentRoute = nextRoute;
+    this.currentRoute!.render();
+    this.history.pushState({}, '', nextPath);
   }
 
   go(pathname: RoutePaths) {
-    this.history.pushState({}, '', pathname);
     this.onRoute(pathname);
   }
 
@@ -76,7 +72,7 @@ export class Router {
     this.history.go(1);
   }
 
-  getRoute(pathname: RoutePaths): Route | undefined {
-    return this.routes.find((route) => route.match(pathname));
+  getRoute(pathname: RoutePaths): Route | null {
+    return this.routes.find((route) => route.match(pathname)) ?? null;
   }
 }
