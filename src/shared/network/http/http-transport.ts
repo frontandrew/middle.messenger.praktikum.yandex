@@ -1,9 +1,10 @@
-/* eslint-disable implicit-arrow-linebreak */
+/* TODO: need format document */
+/* eslint-disable max-len */
 import { queryStringify } from './queryStringify';
 
 const API_URL = 'https://ya-praktikum.tech/api/v2';
 
-// eslint-disable-next-line no-shadow
+/* eslint-disable-next-line no-shadow */
 enum METHODS {
   GET = 'GET',
   POST = 'POST',
@@ -11,34 +12,40 @@ enum METHODS {
   DELETE = 'DELETE',
 }
 
-type RequestParams = {
-  method: string;
-  headers?: Record<string, string>;
-  data?: Record<string, unknown>;
+interface Options<PayloadType> {
+  data?: PayloadType extends PlainObject ? PlainObject : FormData;
   timeout?: number;
-};
+  headers?: Record<string, string>;
+}
 
-type Method = (url: string, options: Omit<RequestParams, 'method'>) => Promise<unknown>;
-type Request = (
-  url: string,
-  options: RequestParams,
-  timeout?: number
-) => Promise<unknown>;
+interface RequestOptions extends Options<PlainObject> {
+  method: METHODS;
+}
+
+/* TODO: need typing request error */
+interface RequestError {
+  status: number;
+  reason: string;
+}
 
 export class HTTPTransport {
-  get: Method = (url, options = {}) =>
-    this.request(url, { ...options, method: METHODS.GET }, options.timeout);
+  get<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}): Promise<ResponseType | RequestError> {
+    return this.request<ResponseType>(url, { ...options, method: METHODS.GET }, options.timeout);
+  }
 
-  post: Method = (url, options = {}) =>
-    this.request(url, { ...options, method: METHODS.POST }, options.timeout);
+  post<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}): Promise<ResponseType | RequestError> {
+    return this.request<ResponseType>(url, { ...options, method: METHODS.POST }, options.timeout);
+  }
 
-  put: Method = (url, options = {}) =>
-    this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
+  put<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}): Promise<ResponseType | RequestError> {
+    return this.request<ResponseType>(url, { ...options, method: METHODS.PUT }, options.timeout);
+  }
 
-  delete: Method = (url, options = {}) =>
-    this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
+  delete<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}): Promise<ResponseType | RequestError> {
+    return this.request<ResponseType>(url, { ...options, method: METHODS.DELETE }, options.timeout);
+  }
 
-  request: Request = (url, options, timeout = 10000) => {
+  request<ResponseType>(url: string, options: RequestOptions, timeout = 10000): Promise<ResponseType | RequestError> {
     const { headers = {}, method, data = {} } = options;
 
     return new Promise((resolve, reject) => {
@@ -77,5 +84,5 @@ export class HTTPTransport {
         xhr.send(JSON.stringify(data));
       }
     });
-  };
+  }
 }
