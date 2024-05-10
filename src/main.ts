@@ -1,11 +1,9 @@
 import * as Pages from 'pages';
-import { Router } from 'routing';
+import { router } from 'routing';
 import { Templates } from 'ui';
 import { registerPartials } from 'tools';
 
 registerPartials(Templates);
-
-const router = new Router('.main');
 
 router
   .use({ pathname: '/', component: Pages.PageLogin })

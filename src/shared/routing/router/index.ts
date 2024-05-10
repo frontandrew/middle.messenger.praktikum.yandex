@@ -4,23 +4,12 @@ import { Route } from '../route';
 
 import type { RoutePaths, RouteView } from '../route';
 
-export class Router {
-  private static instance: Router;
+class Router {
   private currentRoute: Route | null = null;
   private rootQuery: string | undefined = '.main';
   private authState: boolean = true; // TODO: false
   public routes: Route[] = [];
   public history: History = window.history;
-
-  constructor(rootQuery?: string) {
-    if (Router.instance) {
-      // eslint-disable-next-line no-constructor-return
-      return Router.instance;
-    }
-
-    this.rootQuery = rootQuery;
-    Router.instance = this;
-  }
 
   setAuthState(state: boolean) {
     this.authState = state;
@@ -76,3 +65,5 @@ export class Router {
     return this.routes.find((route) => route.match(pathname)) ?? null;
   }
 }
+
+export const router = new Router();
