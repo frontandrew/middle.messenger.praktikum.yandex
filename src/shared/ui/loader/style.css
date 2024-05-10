@@ -1,0 +1,50 @@
+.loader__container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    top: 0;
+    left: 0;
+    z-index: var(--z-index-loader);
+}
+.loader__backdrop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background: var(--background-color-default);
+    opacity: 0.6;
+}
+
+.loader {
+    width: 1.5rem;
+    height: 1.5rem;
+
+    border: solid 0.24em var(--background-color-contrast);
+    border-top: solid 0.24em var(--main-color);
+    border-radius: 50%;
+
+    animation-name: rotation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rotation {
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
