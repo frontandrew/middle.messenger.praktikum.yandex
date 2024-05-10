@@ -30,6 +30,8 @@
     }],
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "no-use-before-define": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
     "object-curly-newline": ["warn", {
         "ObjectExpression": { "multiline": true, "minProperties": 8 },
         "ObjectPattern": { "multiline": true, "minProperties": 8 },
