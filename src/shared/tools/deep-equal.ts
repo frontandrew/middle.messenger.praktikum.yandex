@@ -1,5 +1,5 @@
-import { isArray } from './isArray';
-import { isPlainObject } from './isPlainObject';
+import { isArray } from './is-array';
+import { isPlainObject } from './is-plain-object';
 
 export function deepEqual(lhs: unknown, rhs: unknown): boolean {
   if (lhs === rhs) return true;
