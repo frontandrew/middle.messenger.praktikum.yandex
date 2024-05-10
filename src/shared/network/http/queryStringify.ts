@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type StringIndexed = Record<string, any>;
 
@@ -14,9 +13,9 @@ export function queryStringify(data: StringIndexed): string | never {
 
     if (Array.isArray(value)) {
       const arrayValue = value.reduce<StringIndexed>(
-        (result, arrData, index) => ({
-          ...result,
-          [`${key}[${index}]`]: arrData,
+        (resultArr, arrData, itemIndex) => ({
+          ...resultArr,
+          [`${key}[${itemIndex}]`]: arrData,
         }),
         {},
       );
@@ -26,8 +25,8 @@ export function queryStringify(data: StringIndexed): string | never {
 
     if (typeof value === 'object') {
       const objValue = Object.keys(value || {}).reduce<StringIndexed>(
-        (result, objKey) => ({
-          ...result,
+        (resultObj, objKey) => ({
+          ...resultObj,
           [`${key}[${objKey}]`]: value[objKey],
         }),
         {},
