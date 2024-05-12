@@ -1,10 +1,8 @@
 /* TODO: need format document */
-/* eslint-disable max-len */
 import { queryStringify } from './queryStringify';
 
 const API_URL = 'https://ya-praktikum.tech/api/v2';
 
-/* eslint-disable-next-line no-shadow */
 enum METHODS {
   GET = 'GET',
   POST = 'POST',
@@ -23,29 +21,33 @@ interface RequestOptions extends Options<PlainObject> {
 }
 
 /* TODO: need typing request error */
-interface RequestError {
+interface Response<T> {
   status: number;
-  reason: string;
+  response: T
 }
 
 export class HTTPTransport {
-  get<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}): Promise<ResponseType | RequestError> {
+  get<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}) {
     return this.request<ResponseType>(url, { ...options, method: METHODS.GET }, options.timeout);
   }
 
-  post<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}): Promise<ResponseType | RequestError> {
+  post<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}) {
     return this.request<ResponseType>(url, { ...options, method: METHODS.POST }, options.timeout);
   }
 
-  put<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}): Promise<ResponseType | RequestError> {
+  put<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}) {
     return this.request<ResponseType>(url, { ...options, method: METHODS.PUT }, options.timeout);
   }
 
-  delete<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}): Promise<ResponseType | RequestError> {
+  delete<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}) {
     return this.request<ResponseType>(url, { ...options, method: METHODS.DELETE }, options.timeout);
   }
 
-  request<ResponseType>(url: string, options: RequestOptions, timeout = 10000): Promise<ResponseType | RequestError> {
+  request<ResponseType>(
+    url: string,
+    options:RequestOptions,
+    timeout = 10000,
+  ): Promise<Response<ResponseType>> {
     const { headers = {}, method, data = {} } = options;
 
     return new Promise((resolve, reject) => {
@@ -68,7 +70,7 @@ export class HTTPTransport {
 
       xhr.onload = () => {
         const { status = 0, response } = xhr;
-        if (status >= 200 && status < 300) resolve(response);
+        if (status >= 200 && status < 300) resolve({ status, response: JSON.parse(response) });
         else reject(new Error(`${response}`));
       };
 
