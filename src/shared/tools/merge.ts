@@ -1,15 +1,17 @@
 export function merge(lhs: PlainObject, rhs: PlainObject): PlainObject {
-  if ((typeof lhs !== 'object' || lhs === null) && rhs) return rhs;
-  if (!rhs) return lhs;
+  if ((typeof lhs !== 'object' || lhs === null) && rhs !== undefined) return rhs;
+  if (typeof lhs !== 'object') return lhs;
 
-  return Object.entries(rhs)
+  const res = Object.entries(rhs)
     .reduce((result, [key, value]) => {
       if (key in result) {
         return {
           ...result,
-          [key]: merge(lhs[key] as PlainObject, rhs[key] as PlainObject),
+          [key]: merge(lhs[key], rhs[key]),
         };
       }
       return { ...result, [key]: value };
     }, lhs);
+
+  return res;
 }
