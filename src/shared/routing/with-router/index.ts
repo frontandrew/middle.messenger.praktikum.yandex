@@ -1,4 +1,4 @@
-import { router } from 'routing';
+import { router } from '../router';
 
 export function withRouter
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
