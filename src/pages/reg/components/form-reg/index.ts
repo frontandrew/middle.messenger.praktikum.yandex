@@ -1,5 +1,8 @@
 import { Button, Field, Form } from 'ui';
 import { withRouter } from 'routing';
+import { withStore } from 'store';
+
+import { RegController } from '../../controller';
 
 import type { FormRegChildren, FormRegData, FormRegProps } from './type';
 import template from './template.hbs?raw';
@@ -7,12 +10,23 @@ import './style.css';
 
 export type { FormRegChildren, FormRegData, FormRegProps };
 
-const FormWithRouter = withRouter(Form);
+const FormWithStore = withStore((state) => ({ data: state.regData }))(withRouter(Form));
 
-export class FormReg extends FormWithRouter<FormRegChildren, FormRegProps> {
-  constructor(data: FormRegData) {
+// const data = {
+//   email: 'jackblack@email.com',
+//   login: 'JackBlack',
+//   firstName: 'Jack',
+//   secondName: 'Black',
+//   phone: '+9 999 999 99 99',
+//   password: '1!Qwerty',
+//   passwordMore: '1!Qwerty',
+// };
+
+export class FormReg extends FormWithStore<FormRegChildren, FormRegProps> {
+  private controller = new RegController();
+  constructor() {
     super({
-      data,
+      // data: {},
       onSubmit: (event: Event) => {
         event.preventDefault();
         this.handleRegistration();
@@ -24,7 +38,6 @@ export class FormReg extends FormWithRouter<FormRegChildren, FormRegProps> {
         type: 'text',
         label: 'Email',
         required: true,
-        value: data?.email,
       }),
       login: new Field({
         name: 'login',
@@ -32,41 +45,36 @@ export class FormReg extends FormWithRouter<FormRegChildren, FormRegProps> {
         label: 'Login',
         textHelp: 'Only letters and numbers accepted.',
         required: true,
-        value: data?.login,
       }),
       firstName: new Field({
         name: 'first_name',
         type: 'text',
         label: 'Name',
         required: true,
-        value: data?.firstName,
       }),
       secondName: new Field({
         name: 'second_name',
         type: 'text',
         label: 'Surname',
-        value: data?.secondName,
+        required: true,
       }),
       phone: new Field({
         name: 'phone',
         type: 'text',
         label: 'Phone',
         required: true,
-        value: data?.phone,
       }),
       password: new Field({
         name: 'password',
         type: 'password',
         label: 'Password',
         required: true,
-        value: data?.password,
       }),
       passwordMore: new Field({
         name: 'password_more',
         type: 'password',
         label: 'Repeat password',
         required: true,
-        value: data?.passwordMore,
       }),
       submit: new Button({
         label: 'Register',
@@ -75,11 +83,29 @@ export class FormReg extends FormWithRouter<FormRegChildren, FormRegProps> {
     } as FormRegChildren & FormRegProps);
   }
 
-  handleRegistration(): void {
-    this.handleSubmit();
-    if (!this.props.hasError) {
-      this.router.go('/settings');
+  async handleRegistration(): Promise<void> {
+    const regData = this.handleSubmit() as FormRegData;
+    // console.log(`FORMREG DATA:`, regData);
+    if (regData) {
+      this.validatePasswordRepeate(regData);
     }
+    if (!this.props.hasError) {
+      const isRegistered = await this.controller.regUser(regData);
+      // console.log(`IS REGISTR:`, isRegistered);
+
+      if (isRegistered) {
+        this.router.go('/');
+      }
+    }
+  }
+
+  validatePasswordRepeate(data: FormRegData) {
+    if (data.passwordMore !== data.password) {
+      this.children.passwordMore.setProps({ hasError: true, textError: `Passwords don't match` });
+      this.setProps({ hasError: true });
+    }
+
+    this.updateErrorState(this.props.hasError!);
   }
 
   render() {
