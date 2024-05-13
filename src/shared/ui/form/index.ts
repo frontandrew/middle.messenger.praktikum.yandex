@@ -37,15 +37,16 @@ export class Form<C extends FormChildren, P extends FormProps>
     } as C & P);
   }
 
-  handleSubmit() {
+  handleSubmit(): PlainObject | undefined {
     this.validate();
     this.props.hasError = this.getErrorState();
 
     if (!this.props.hasError) {
-      this.submitForm();
+      return this.submitForm();
     }
 
     this.updateErrorState(this.props.hasError);
+    return undefined;
   }
 
   reset() {
@@ -69,7 +70,7 @@ export class Form<C extends FormChildren, P extends FormProps>
   }
 
   updateErrorState(state: boolean) {
-    this.children.submit?.setDisabled(state);
+    this.children.submit.setDisabled(state);
   }
 
   validate() {
@@ -78,7 +79,7 @@ export class Form<C extends FormChildren, P extends FormProps>
     });
   }
 
-  submitForm() {
+  submitForm(): PlainObject {
     const submitted = Object.entries(this.children).reduce(
       (acc, [key, child]) => {
         if (child instanceof Field) return ({ ...acc, [key]: child.children.input.props.value });
@@ -88,5 +89,6 @@ export class Form<C extends FormChildren, P extends FormProps>
     );
 
     console.warn(`SBMT{${this.count}}:[${this.instance}:${this.id}]:`, submitted);
+    return submitted;
   }
 }
