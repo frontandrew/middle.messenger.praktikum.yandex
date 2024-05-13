@@ -1,9 +1,16 @@
 import * as Pages from 'pages';
-import { router } from 'routing';
 import { Templates } from 'ui';
 import { registerPartials } from 'tools';
+import { router } from 'routing';
+import { store } from 'store';
 
 registerPartials(Templates);
+
+const defaultSatate = {
+  isLoading: false,
+};
+
+store.init(defaultSatate);
 
 router
   .use({ pathname: '/', component: Pages.PageLogin })
