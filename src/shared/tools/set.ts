@@ -1,10 +1,10 @@
 import { merge } from './merge';
 
 export function set(
-  object: PlainObject | unknown,
+  object: PlainObject,
   path: string,
   value: unknown,
-): PlainObject | unknown {
+): PlainObject {
   if (typeof object !== 'object' || object === null) return object;
   if (typeof path !== 'string') {
     throw new Error(`Type error: path parametr must be type 'string', but have ${typeof path}.`);
@@ -20,5 +20,6 @@ export function set(
       value,
     );
 
-  return merge(object as PlainObject, structure as PlainObject);
+  const res = merge(object, structure as PlainObject);
+  return res;
 }
