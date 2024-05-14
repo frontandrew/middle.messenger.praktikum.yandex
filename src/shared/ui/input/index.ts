@@ -27,11 +27,10 @@ export class Input extends Component<InputChildren, InputProps> {
 
     if (target.files?.length) {
       this.value = target.files[0].name;
-      // this.setProps({ value: target.files[0].name });
       return;
     }
 
-    if (target.value) {
+    if (target.value || target.value === '') {
       this.value = target.value;
     }
   }
