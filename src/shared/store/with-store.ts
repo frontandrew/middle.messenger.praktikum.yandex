@@ -1,11 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Children, Component, Props } from 'core';
+
 import { StoreEvents, store } from './store';
 
 export function withStore(mapFn: (state: PlainObject) => PlainObject) {
-  // eslint-disable-next-line func-names
-  return function<T extends { new (...args: any[]): Record<string, any> }>(constructor: T) {
+  return function<T extends {new (args: Children & Props): InstanceType<typeof Component>}>
+  (constructor: T) {
+    // @ts-expect-error-next-line
     return class extends constructor {
-      constructor(...args: any[]) {
+      constructor(args: Children & Props) {
         super({ ...args, ...mapFn(store.get()) });
 
         store.on(StoreEvents.UPD, () => {
