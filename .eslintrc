@@ -16,6 +16,7 @@
     "import/prefer-default-export": "off",
     "import/extensions": ["error", "never", { "ts": "alvays" }],
     "class-methods-use-this": "off",
+    "func-names": "off",
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "max-len": [2, 100],
     "sort-imports": ["warn", {
