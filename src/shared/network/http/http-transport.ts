@@ -82,7 +82,7 @@ export class HTTPTransport {
       if (method === METHODS.GET) xhr.send();
       else if (data instanceof FormData) xhr.send(data);
       else {
-        xhr.setRequestHeader('Content-Type', 'applcation/json');
+        xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data));
       }
     });
