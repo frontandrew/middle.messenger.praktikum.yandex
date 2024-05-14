@@ -12,21 +12,10 @@ export type { FormRegChildren, FormRegData, FormRegProps };
 
 const FormWithStore = withStore((state) => ({ data: state.regData }))(withRouter(Form));
 
-// const data = {
-//   email: 'jackblack@email.com',
-//   login: 'JackBlack',
-//   firstName: 'Jack',
-//   secondName: 'Black',
-//   phone: '+9 999 999 99 99',
-//   password: '1!Qwerty',
-//   passwordMore: '1!Qwerty',
-// };
-
 export class FormReg extends FormWithStore<FormRegChildren, FormRegProps> {
   private controller = new RegController();
   constructor() {
     super({
-      // data: {},
       onSubmit: (event: Event) => {
         event.preventDefault();
         this.handleRegistration();
@@ -85,13 +74,12 @@ export class FormReg extends FormWithStore<FormRegChildren, FormRegProps> {
 
   async handleRegistration(): Promise<void> {
     const regData = this.handleSubmit() as FormRegData;
-    // console.log(`FORMREG DATA:`, regData);
+
     if (regData) {
       this.validatePasswordRepeate(regData);
     }
     if (!this.props.hasError) {
       const isRegistered = await this.controller.regUser(regData);
-      // console.log(`IS REGISTR:`, isRegistered);
 
       if (isRegistered) {
         this.router.go('/');

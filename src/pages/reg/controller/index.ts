@@ -1,37 +1,47 @@
 import { store } from 'store';
+
 import { RegAPI } from '../components/form-reg/api';
-import type { RegPayload } from '../components/form-reg/api';
 
 import type { FormRegData } from '../components/form-reg/type';
+import type { RegPayload } from '../components/form-reg/api';
 
 export class RegController {
-  // private api = new RegAPI();
+  private api = new RegAPI();
 
   public async regUser(data: FormRegData) {
-    // console.log(`REG USER CALL:`, data);
-    // const payload = this.formatData(data);
+    const payload = this.formatData(data);
 
-    // const isRegistered = await this.api.registration(payload)
-    //   .then(({ response }) => Boolean(response.id))
-    //   .catch(() => false);
-
-    store.set('isLoading', true);
-
-    const isRegistered = await new Promise((resolve) => {
-      // console.log(`REG USER REQUEST:`, data);
-      setTimeout(() => resolve('done!'), 2000);
-    })
-      .then(() => true)
+    const isRegistered = await this.api.registration(payload)
+      .then(({ response }) => Boolean(response.id))
+      .catch(() => false)
       .finally(() => {
         store.set('isLoading', false);
       });
-    // console.log(`REG USER CALL IS REG:`, isRegistered);
+
+    store.set('isLoading', true);
     return isRegistered;
   }
 
   formatData(data: FormRegData): RegPayload {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { firstName, passwordMore, secondName, ...rest } = data;
-    return { first_name: firstName, second_name: secondName, ...rest };
+    const { firstName, passwordMore, secondName, phone, ...rest } = data;
+    return {
+      first_name: firstName,
+      second_name: secondName,
+      phone: phone.split(' ').join(''),
+      ...rest,
+    };
   }
 }
+
+/*
+const user1 = {
+  email: 'jackblack@email.com',
+  login: 'JackBlack',
+  firstName: 'Jack',
+  secondName: 'Black',
+  phone: '+7 999 999 99 99',
+  password: '1!Qwerty',
+  passwordMore: '1!Qwerty',
+};
+*/
