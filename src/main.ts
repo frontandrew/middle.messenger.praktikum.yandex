@@ -4,10 +4,16 @@ import { registerPartials } from 'tools';
 import { router } from 'routing';
 import { store } from 'store';
 
+import type { State } from 'store';
+
 registerPartials(Templates);
 
-const defaultSatate = {
+const defaultSatate: State = {
   isLoading: false,
+  isAuth: false,
+  user: null,
+  chats: null,
+  messages: null,
 };
 
 store.init(defaultSatate);
