@@ -4,6 +4,8 @@ import { registerPartials } from 'tools';
 import { router } from 'routing';
 import { store } from 'store';
 
+import { App } from 'app';
+
 import type { State } from 'store';
 
 registerPartials(Templates);
@@ -17,6 +19,12 @@ const defaultSatate: State = {
 };
 
 store.init(defaultSatate);
+
+const root = document.querySelector('.main');
+const app = new App();
+root?.appendChild(app.getContent()!);
+
+/* IMPORTANT: init router after App render */
 
 router
   .use({ pathname: '/', component: Pages.PageLogin })
