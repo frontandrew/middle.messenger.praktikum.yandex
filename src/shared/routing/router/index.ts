@@ -67,3 +67,7 @@ class Router {
 }
 
 export const router = new Router();
+
+// TODO: remove after debug
+// @ts-expect-error-next-line
+window.router = router;
