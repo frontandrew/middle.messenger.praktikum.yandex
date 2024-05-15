@@ -8,10 +8,10 @@ export function withStore(mapFn: (state: PlainObject) => PlainObject) {
     // @ts-expect-error-next-line
     return class extends constructor {
       constructor(args: Children & Props) {
-        super({ ...args, ...mapFn(store.get()) });
+        super({ ...args, ...mapFn(store.get()!) as Children & Props });
 
         store.on(StoreEvents.UPD, () => {
-          this.setProps({ ...mapFn(store.get()) });
+          this.setProps({ ...mapFn(store.get()!) as Props });
         });
       }
     };
