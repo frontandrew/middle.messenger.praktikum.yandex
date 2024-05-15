@@ -1,6 +1,8 @@
 import { Button, Field, Form } from 'ui';
 import { withRouter } from 'routing';
 
+import { AuthController } from '../../controller';
+
 import type { FormAuthChildren, FormAuthData, FormAuthProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
@@ -10,9 +12,9 @@ const FormWithRouter = withRouter(Form);
 export type { FormAuthChildren, FormAuthData, FormAuthProps };
 
 export class FormAuth extends FormWithRouter<FormAuthChildren, FormAuthProps> {
-  constructor(data: FormAuthData) {
+  control = new AuthController();
+  constructor() {
     super({
-      data,
       onSubmit: (event: Event) => {
         event.preventDefault();
         this.handleLogin();
@@ -23,14 +25,12 @@ export class FormAuth extends FormWithRouter<FormAuthChildren, FormAuthProps> {
         type: 'text',
         label: 'Login',
         required: true,
-        value: data.login,
       }),
       password: new Field({
         name: 'password',
         type: 'password',
         label: 'Password',
         required: true,
-        value: data.password,
       }),
       submit: new Button({
         label: 'Sign in',
@@ -39,10 +39,11 @@ export class FormAuth extends FormWithRouter<FormAuthChildren, FormAuthProps> {
     } as FormAuthChildren & FormAuthProps);
   }
 
-  handleLogin(): void {
-    this.handleSubmit();
+  async handleLogin(): Promise<void> {
+    const credantials = this.handleSubmit() as FormAuthData;
     if (!this.props.hasError) {
-      this.router.go('/messenger');
+      const isAuth = await this.control.singIn(credantials);
+      if (isAuth) this.router.go('/messenger');
     }
   }
 
