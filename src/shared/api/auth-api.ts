@@ -3,22 +3,16 @@ import { HTTPTransport } from 'network';
 const authTransport = new HTTPTransport();
 
 interface AuthenticationPayload {
-  login: string,
-  password: string
+  login: string;
+  password: string;
 }
 
-interface AuthenticationResponse {
-  status: number
-}
+type AuthenticationResponse = 'OK';
 
 export class AuthAPI {
-  authentication(data: AuthenticationPayload) {
+  login(payload: AuthenticationPayload) {
     return authTransport
-      .post<AuthenticationPayload, AuthenticationResponse>('/auth/signin', { data });
-  }
-
-  authorization() {
-    return authTransport.get('/auth/user');
+      .post<AuthenticationPayload, AuthenticationResponse>('/auth/signin', { data: payload });
   }
 
   logout() {
