@@ -5,7 +5,7 @@ export function deepEqual(lhs: unknown, rhs: unknown): boolean {
   if (lhs === rhs) return true;
 
   if (!isArrOrObj(lhs) || !isArrOrObj(rhs)) {
-    return false;
+    return lhs === rhs;
   }
 
   const keys1 = Object.keys(lhs);
