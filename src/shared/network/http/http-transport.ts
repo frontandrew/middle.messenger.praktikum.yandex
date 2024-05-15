@@ -70,8 +70,12 @@ export class HTTPTransport {
 
       xhr.onload = () => {
         const { status = 0, response } = xhr;
-        if (status >= 200 && status < 300) resolve({ status, response: JSON.parse(response) });
-        else reject(new Error(`${response}`));
+        if (status >= 200 && status < 300) {
+          const respHeads = xhr.getAllResponseHeaders();
+          const isJSON = respHeads.includes('content-type: application/json');
+
+          resolve({ status, response: isJSON ? JSON.parse(response) : response });
+        } else reject(new Error(`${response}`));
       };
 
       xhr.open(method, requestUrl);
