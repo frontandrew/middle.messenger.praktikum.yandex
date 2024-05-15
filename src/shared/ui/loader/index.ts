@@ -7,8 +7,9 @@ import './style.css';
 export type { LoaderChildren, LoaderProps };
 
 export class Loader extends Component<LoaderChildren, LoaderProps> {
-  constructor() {
-    super({ classes: '' } as LoaderChildren & LoaderProps);
+  constructor();
+  constructor(args: LoaderProps = {}) {
+    super(args as LoaderChildren & LoaderProps);
   }
 
   render() {
