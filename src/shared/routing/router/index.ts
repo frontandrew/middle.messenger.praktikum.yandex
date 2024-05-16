@@ -6,8 +6,8 @@ import type { RoutePaths, RouteView } from '../route';
 
 class Router {
   private currentRoute: Route | null = null;
-  private rootQuery: string | undefined = '.main__container';
-  private authState: boolean = true; // TODO: false
+  private rootQuery: string | undefined = '.main';
+  public authState: boolean = false;
   public routes: Route[] = [];
   public history: History = window.history;
 
