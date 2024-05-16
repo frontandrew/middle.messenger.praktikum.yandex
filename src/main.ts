@@ -21,19 +21,20 @@ const defaultSatate: State = {
 
 store.init(defaultSatate);
 
-const root = document.querySelector('.main');
-const app = new App();
-root?.appendChild(app.getContent()!);
-
-/* IMPORTANT: init router after App render */
-
 router
   .use({ pathname: '/', component: Pages.PageLogin })
   .use({ pathname: '/sing-up', component: Pages.PageReg })
   .use({ pathname: '/settings', component: Pages.PageUser })
   .use({ pathname: '/messenger', component: Pages.PageChats })
-  .use({ pathname: '/error', component: Pages.PageError })
-  .start();
+  .use({ pathname: '/error', component: Pages.PageError });
+
+const root = document.querySelector('.main');
+const app = new App();
+root?.appendChild(app.getContent()!);
 
 const controller = new AppController();
-controller.start();
+await controller.start();
+
+/* IMPORTANT: start router after App render */
+
+router.start();
