@@ -1,18 +1,15 @@
 import { Button, Field, Form } from 'ui';
-import { withRouter } from 'routing';
-
 import { AuthController } from '../../controller';
 
 import type { FormAuthChildren, FormAuthData, FormAuthProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-const FormWithRouter = withRouter(Form);
-
 export type { FormAuthChildren, FormAuthData, FormAuthProps };
 
-export class FormAuth extends FormWithRouter<FormAuthChildren, FormAuthProps> {
-  control = new AuthController();
+const control = new AuthController();
+
+export class FormAuth extends Form<FormAuthChildren, FormAuthProps> {
   constructor() {
     super({
       onSubmit: (event: Event) => {
@@ -42,8 +39,7 @@ export class FormAuth extends FormWithRouter<FormAuthChildren, FormAuthProps> {
   async handleLogin(): Promise<void> {
     const credantials = this.handleSubmit() as FormAuthData;
     if (!this.props.hasError) {
-      const isAuth = await this.control.singIn(credantials);
-      if (isAuth) this.router.go('/messenger');
+      control.singIn(credantials);
     }
   }
 

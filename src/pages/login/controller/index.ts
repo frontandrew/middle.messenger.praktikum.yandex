@@ -1,17 +1,17 @@
-import { store } from 'store';
-// import { router } from 'routing';
-
 import { AuthAPI } from 'api/auth-api';
-import { UserApi } from 'entities/user/api';
+import { router } from 'routing';
+import { store } from 'store';
 
-import { UserResponse, UserType } from 'entities/user/type';
+import { UserController } from 'entities/user';
+import type { UserType } from 'entities/user';
+
 import type { FormAuthData } from '../components/form-auth/type';
 
 const authApi = new AuthAPI();
-const userApi = new UserApi();
+const userController = new UserController();
 
 export class AuthController {
-  public async singIn(data: FormAuthData): Promise<boolean> {
+  public async singIn(data: FormAuthData): Promise<void> {
     store.set('isLoading', true);
 
     const isAuth = await authApi.login(data)
@@ -24,32 +24,15 @@ export class AuthController {
       store.set('user', user);
     }
     if (store.get()?.user?.id) {
-      store.set('isAuth', isAuth);
+      router.authState = isAuth;
+      router.go('/messenger');
     }
 
     store.set('isLoading', false);
-    return isAuth;
   }
 
   public async getUser(): Promise<UserType | null> {
-    const user = await userApi.getUserData()
-      .then(({ response }) => this.formatUserResponse(response))
-      // .cathch(error) // TODO: catch error
-      .catch(() => null);
-
+    const user = await userController.getUser();
     return user;
-  }
-
-  formatUserResponse(data: UserResponse): UserType | null {
-    if (!data.id) return null;
-    /* eslint-disable camelcase */
-    const { first_name, second_name, display_name, avatar, ...rest } = data;
-    return {
-      firstName: first_name,
-      secondName: second_name,
-      nickName: display_name,
-      image: avatar,
-      ...rest,
-    };
   }
 }
