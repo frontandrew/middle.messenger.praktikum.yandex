@@ -4,7 +4,8 @@ import { registerPartials } from 'tools';
 import { router } from 'routing';
 import { store } from 'store';
 
-import { App } from 'app';
+import { App } from 'app/components';
+import { AppController } from 'app';
 
 import type { State } from 'store';
 
@@ -33,3 +34,6 @@ router
   .use({ pathname: '/messenger', component: Pages.PageChats })
   .use({ pathname: '/error', component: Pages.PageError })
   .start();
+
+const controller = new AppController();
+controller.start();
