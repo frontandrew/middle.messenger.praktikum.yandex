@@ -7,5 +7,7 @@
 
 .main__container {
     position: absolute;
-    z-index: var(--z-index-common);
+
+    width: 0;
+    height: 0;
 }

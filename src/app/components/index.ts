@@ -11,7 +11,7 @@ const AppWithState = withStore((state) => ({ isLoading: state.isLoading }))(Comp
 export class App extends AppWithState<AppChildren, AppProps> {
   constructor() {
     super({
-      isLoading: false,
+      isLoading: true,
       loader: new Loader(),
       // TODO: error component
       // TODO: notification component
