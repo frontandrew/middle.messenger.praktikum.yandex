@@ -33,6 +33,10 @@ const app = new App();
 root?.appendChild(app.getContent()!);
 
 const controller = new AppController();
+/**
+ * TODO: Top-level await is not available in the configuredtarget environment
+ * ("chrome87", "edge88", "es2020", "firefox78", "safari14" + 2 overrides)
+ */
 await controller.start();
 
 /* IMPORTANT: start router after App render */

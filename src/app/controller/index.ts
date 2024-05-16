@@ -15,7 +15,7 @@ export class AppController {
   }
 
   async start() {
-    store.set('isLoading', true);
+    // store.set('isLoading', true);
     await this.setAuthState();
     if (!router.authState) {
       router.go('/');
