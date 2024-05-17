@@ -2,6 +2,7 @@ import { Button, ButtonIcon, Dialog, Text } from 'ui';
 import { Arrow } from 'images';
 import { Component } from 'core';
 import { withRouter } from 'routing';
+import { withStore } from 'store';
 
 import { userPageController as controller } from '../../controller';
 
@@ -17,6 +18,7 @@ import template from './template.hbs?raw';
 import './style.css';
 
 const ComponentWithRouter = withRouter(Component);
+const UserNick = withStore((state) => ({ text: state.user?.nickName }))(Text);
 
 export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUserProps> {
   constructor() {
@@ -31,7 +33,7 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
         disabled: false,
         onClick: () => this.children.avatarDialog?.open(),
       }),
-      nick: new Text({
+      nick: new UserNick({
         classes: 'user-nick',
         text: '',
         tag: 'h1',
