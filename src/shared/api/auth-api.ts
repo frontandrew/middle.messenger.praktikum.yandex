@@ -16,6 +16,6 @@ export class AuthAPI {
   }
 
   logout() {
-    return authTransport.get('auth/logout');
+    return authTransport.post<void, AuthenticationResponse>('/auth/logout');
   }
 }

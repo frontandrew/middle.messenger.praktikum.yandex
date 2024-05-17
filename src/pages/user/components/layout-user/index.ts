@@ -60,7 +60,7 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
       signOut: new Button({
         variant: 'link',
         label: 'Sign out',
-        onClick: () => this.router.go('/'),
+        onClick: () => controller.singOut(),
       }),
       avatarDialog: new Dialog({
         isOpen: false,

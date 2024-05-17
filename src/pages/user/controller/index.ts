@@ -1,4 +1,6 @@
+import { AuthAPI } from 'api/auth-api';
 import { UserController } from 'entities/user';
+import { router } from 'routing';
 import { store } from 'store';
 
 import type { UserProfilePayload } from 'entities/user';
@@ -6,6 +8,7 @@ import type { UserProfilePayload } from 'entities/user';
 import type { FormInfoData } from '../components';
 
 const userController = new UserController();
+const authApi = new AuthAPI();
 
 class UserPageController {
   async changeUserInfo(data: FormInfoData) {
@@ -23,6 +26,22 @@ class UserPageController {
     store.set('isLoading', false);
 
     return responseState;
+  }
+
+  async singOut() {
+    store.set('isLoading', true);
+    const logoutState = await authApi.logout()
+      .then(({ response }) => response === 'OK')
+      .catch(() => false);
+
+    /* TODO: need to setup default appConfig */
+    store.set('messages', null);
+    store.set('chats', null);
+    store.set('user', null);
+    store.set('isLoading', false);
+
+    router.authState = !logoutState;
+    router.go('/');
   }
 
   formatUserInfoPayload(user: FormInfoData): UserProfilePayload {
