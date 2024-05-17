@@ -11,15 +11,14 @@ import type { State } from 'store';
 
 registerPartials(Templates);
 
-const defaultSatate: State = {
+const defaultState: State = {
   isLoading: false,
-  isAuth: false,
   user: null,
   chats: null,
   messages: null,
 };
 
-store.init(defaultSatate);
+store.init(defaultState);
 
 router
   .use({ pathname: '/', component: Pages.PageLogin })
