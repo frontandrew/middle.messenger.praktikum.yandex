@@ -6,7 +6,9 @@ import type { AppChildren, AppProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-const AppWithState = withStore((state) => ({ isLoading: state.isLoading }))(Component);
+const AppWithState = withStore<AppChildren, AppProps>(
+  (state) => ({ isLoading: state.isLoading }),
+)(Component);
 
 export class App extends AppWithState<AppChildren, AppProps> {
   constructor() {

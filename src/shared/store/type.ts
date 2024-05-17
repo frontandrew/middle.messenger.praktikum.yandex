@@ -1,6 +1,6 @@
 import { ChatType, MessageType, UserType } from 'entities';
 
-export interface State extends PlainObject {
+export interface State {
   isAuth: boolean;
   isLoading: boolean;
   user: Nullable<UserType>;

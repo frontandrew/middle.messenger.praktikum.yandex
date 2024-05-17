@@ -3,7 +3,7 @@ import { Component, Props } from 'core';
 import { StoreEvents, store } from './store';
 import type { State } from './type';
 
-export function withStore<C, P>(mapFn: (state: State) => MakeOptional<State>) {
+export function withStore<C, P>(mapFn: (state: State) => MakeOptional<P>) {
   return function<T extends {new (args: C & P): InstanceType<typeof Component>}>
   (constructor: T) {
     // @ts-expect-error-next-line

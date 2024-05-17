@@ -9,16 +9,15 @@ export enum StoreEvents {
 }
 
 export class Store extends EventBus {
-  private state: Nullable<State> = null;
+  private state: State | null = null;
 
   public get() {
     return this.state;
   }
 
-  public set(path: string, value: unknown) {
-    this.state = set(this.state as PlainObject, path, value) as State;
+  public set(path: keyof State, value: unknown) {
+    this.state = set(this.state as PlainObject, path as string, value) as State;
     this.emit(StoreEvents.UPD);
-    // console.log(`EMIT:`, { state: this.state, path, value });
   }
 
   public init(state: State) {
