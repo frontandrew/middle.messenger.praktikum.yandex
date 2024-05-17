@@ -1,3 +1,4 @@
+import { router } from 'routing';
 import { store } from 'store';
 
 import { RegAPI } from '../components/form-reg/api';
@@ -9,20 +10,20 @@ export class RegController {
   private api = new RegAPI();
 
   public async regUser(data: FormRegData) {
-    const payload = this.formatData(data);
-
-    const isRegistered = await this.api.registration(payload)
-      .then(({ response }) => Boolean(response.id))
-      .catch(() => false)
-      .finally(() => {
-        store.set('isLoading', false);
-      });
-
     store.set('isLoading', true);
-    return isRegistered;
+
+    const isRegistered = await this.api
+      .registration(this.formatRegUserPayload(data))
+      .then(({ response }) => Boolean(response.id))
+      .catch(() => false);
+    if (isRegistered) {
+      router.go('/');
+    }
+
+    store.set('isLoading', false);
   }
 
-  formatData(data: FormRegData): RegPayload {
+  private formatRegUserPayload(data: FormRegData): RegPayload {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { firstName, passwordMore, secondName, phone, ...rest } = data;
     return {

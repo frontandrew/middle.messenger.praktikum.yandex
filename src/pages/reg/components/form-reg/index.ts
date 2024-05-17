@@ -1,6 +1,4 @@
 import { Button, Field, Form } from 'ui';
-import { withRouter } from 'routing';
-import { withStore } from 'store';
 
 import { RegController } from '../../controller';
 
@@ -10,9 +8,7 @@ import './style.css';
 
 export type { FormRegChildren, FormRegData, FormRegProps };
 
-const FormWithStore = withStore((state) => ({ data: state.regData }))(withRouter(Form));
-
-export class FormReg extends FormWithStore<FormRegChildren, FormRegProps> {
+export class FormReg extends Form<FormRegChildren, FormRegProps> {
   private controller = new RegController();
   constructor() {
     super({
@@ -72,18 +68,14 @@ export class FormReg extends FormWithStore<FormRegChildren, FormRegProps> {
     } as FormRegChildren & FormRegProps);
   }
 
-  async handleRegistration(): Promise<void> {
+  handleRegistration() {
     const regData = this.handleSubmit() as FormRegData;
 
     if (regData) {
       this.validatePasswordRepeate(regData);
     }
     if (!this.props.hasError) {
-      const isRegistered = await this.controller.regUser(regData);
-
-      if (isRegistered) {
-        this.router.go('/');
-      }
+      this.controller.regUser(regData);
     }
   }
 
