@@ -23,6 +23,7 @@ export class Field extends Component<FieldChildren, FieldProps> {
       : () => this.handleValidation(),
 
     classes,
+    disabled,
     inline,
     label,
     required,
@@ -45,9 +46,11 @@ export class Field extends Component<FieldChildren, FieldProps> {
 
       name,
       type,
+      disabled,
       input: new Input({
         name,
         type,
+        disabled,
         onBlur,
         onChange,
         value,
