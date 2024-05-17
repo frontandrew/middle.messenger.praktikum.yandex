@@ -3,19 +3,23 @@ import { Arrow } from 'images';
 import { Component } from 'core';
 import { withRouter } from 'routing';
 
+import { userPageController as controller } from '../../controller';
+
 import { ControlAvatar } from '../control-avatar';
 import { FormAvatar } from '../form-avatar';
 import { FormInfo } from '../form-info';
 import { FormPass } from '../form-pass';
 
-import type { LayoutUserArgs, LayoutUserChildren, LayoutUserProps } from './type';
+import type { FormInfoData } from '../form-info';
+
+import type { LayoutUserChildren, LayoutUserProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
 const ComponentWithRouter = withRouter(Component);
 
 export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUserProps> {
-  constructor({ image, data }: LayoutUserArgs) {
+  constructor() {
     super({
       showActions: true,
       showInfo: true,
@@ -24,16 +28,22 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
         onClick: () => this.router.go('/messenger'),
       }),
       avatar: new ControlAvatar({
-        image,
         disabled: false,
         onClick: () => this.children.avatarDialog?.open(),
       }),
       nick: new Text({
         classes: 'user-nick',
-        text: data.nickName,
+        text: '',
         tag: 'h1',
       }),
-      formInfo: new FormInfo({ data, isEdit: false }),
+      formInfo: new FormInfo({
+        isEdit: false,
+        onSubmit: (event: Event) => {
+          event.preventDefault();
+          this.handleUserInfoChange();
+          return event;
+        },
+      }),
       formPass: new FormPass(),
       changeInfo: new Button({
         variant: 'link',
@@ -64,6 +74,18 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
   handleEditInfo() {
     this.setProps({ showActions: false });
     this.children.formInfo.setEditMode(true);
+  }
+
+  private async handleUserInfoChange() {
+    const userInfo = this.children.formInfo.handleSubmit();
+    if (!this.children.formInfo.props.hasError && userInfo) {
+      const isUpdated = await controller.changeUserInfo(userInfo as FormInfoData);
+
+      if (isUpdated) {
+        this.children.formInfo.setEditMode(false);
+        this.setProps({ showActions: true, showInfo: true });
+      }
+    }
   }
 
   render() {

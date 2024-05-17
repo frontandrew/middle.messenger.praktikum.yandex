@@ -1,66 +1,76 @@
-import { Button, Field, Form } from 'ui';
+import { Button, Field, FieldChildren, FieldProps, Form } from 'ui';
+import { withStore } from 'store';
 
 import type { FormInfoChildren, FormInfoData, FormInfoProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
 export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
-  constructor({ data, isEdit }: FormInfoProps) {
-    super({
-      data,
-      isEdit,
-
-      email: new Field({
+  constructor({ isEdit, onSubmit }: FormInfoProps) {
+    const fieldsProps = {
+      email: {
         name: 'email',
         type: 'text',
         label: 'Email',
         inline: true,
-        value: data?.email,
-        disabled: !isEdit,
-      }),
-      login: new Field({
+        disabled: true,
+      },
+      login: {
         name: 'login',
         type: 'text',
         label: 'Login',
-        value: data?.login,
         inline: true,
-        disabled: !isEdit,
-      }),
-      firstName: new Field({
+        disabled: true,
+      },
+      firstName: {
         name: 'first_name',
         type: 'text',
         label: 'Name',
         inline: true,
-        value: data?.firstName,
-        disabled: !isEdit,
-      }),
-      secondName: new Field({
+        disabled: true,
+      },
+      secondName: {
         name: 'second_name',
         type: 'text',
         label: 'Surname',
         inline: true,
-        value: data?.secondName,
-        disabled: !isEdit,
-      }),
-      nickName: new Field({
+        disabled: true,
+      },
+      nickName: {
         name: 'display_name',
         type: 'text',
         label: 'Nickname',
         inline: true,
-        value: data?.nickName,
-        disabled: !isEdit,
-      }),
-      phone: new Field({
+        disabled: true,
+      },
+      phone: {
         name: 'phone',
         type: 'text',
         label: 'Phone',
         inline: true,
-        value: data?.phone,
-        disabled: !isEdit,
-      }),
+        disabled: true,
+      },
+    };
+
+    const fieldComponentsWithState = Object
+      .entries(fieldsProps)
+      .reduce((components, [key, props]) => {
+        const FieldWithState = withStore<FieldChildren, FieldProps>(
+          (state) => ({ value: state?.user?.[key as keyof typeof fieldsProps] ?? '' }),
+        )(Field);
+
+        return ({ ...components, [key]: new FieldWithState(props as FieldProps) });
+      }, {});
+
+    super({
+      isEdit: isEdit ?? false,
+      onSubmit,
+
+      ...fieldComponentsWithState,
       submit: new Button({
         label: 'Save',
         type: 'submit',
+
       }),
     } as FormInfoChildren & FormInfoProps);
   }

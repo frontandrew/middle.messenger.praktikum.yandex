@@ -1,2 +1,2 @@
 export { UserController } from './controller';
-export type { UserType } from './type';
+export type { UserType, UserProfilePayload, UserSearchPayload } from './type';
