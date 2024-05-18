@@ -5,6 +5,8 @@ import type { FormInfoChildren, FormInfoData, FormInfoProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
+export type { FormInfoChildren, FormInfoProps, FormInfoData };
+
 export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
   constructor({ isEdit, onSubmit }: FormInfoProps) {
     const fieldsProps = {
@@ -89,5 +91,3 @@ export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
     return template;
   }
 }
-
-export type { FormInfoChildren, FormInfoProps, FormInfoData };

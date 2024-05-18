@@ -12,6 +12,7 @@ import { FormInfo } from '../form-info';
 import { FormPass } from '../form-pass';
 
 import type { FormInfoData } from '../form-info';
+import type { FormPassData } from '../form-pass';
 
 import type { LayoutUserChildren, LayoutUserProps } from './type';
 import template from './template.hbs?raw';
@@ -46,7 +47,13 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
           return event;
         },
       }),
-      formPass: new FormPass(),
+      formPass: new FormPass({
+        onSubmit: (event: Event) => {
+          event.preventDefault();
+          this.handleUserPassChange();
+          return event;
+        },
+      }),
       changeInfo: new Button({
         variant: 'link',
         label: 'Change user data',
@@ -88,6 +95,29 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
         this.setProps({ showActions: true, showInfo: true });
       }
     }
+  }
+
+  private async handleUserPassChange() {
+    const passData = this.children.formPass.handleSubmit() as FormPassData;
+    this.validatePasswordRepeate(passData);
+
+    if (!this.children.formPass.props.hasError && passData) {
+      const isPassChanged = await controller.changeUserPass(passData);
+
+      if (isPassChanged) {
+        this.setProps({ showActions: true, showInfo: true });
+      }
+    }
+  }
+
+  private validatePasswordRepeate(data: FormPassData) {
+    if (data.passNew !== data.passNewMore) {
+      this.children.formPass.children.passNewMore
+        .setProps({ hasError: true, textError: `Passwords don't match` });
+      this.children.formPass.setProps({ hasError: true });
+    }
+
+    this.children.formPass.updateErrorState(this.children.formPass.props.hasError!);
   }
 
   render() {
