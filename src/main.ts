@@ -22,7 +22,7 @@ store.init(defaultState);
 
 router
   .use({ pathname: '/', component: Pages.PageLogin })
-  .use({ pathname: '/sing-up', component: Pages.PageReg })
+  .use({ pathname: '/sign-up', component: Pages.PageReg })
   .use({ pathname: '/settings', component: Pages.PageUser })
   .use({ pathname: '/messenger', component: Pages.PageChats })
   .use({ pathname: '/error', component: Pages.PageError });

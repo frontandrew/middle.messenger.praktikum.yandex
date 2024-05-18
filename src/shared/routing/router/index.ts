@@ -7,6 +7,7 @@ import type { RoutePaths, RouteView } from '../route';
 class Router {
   private currentRoute: Route | null = null;
   private rootQuery: string | undefined = '.main';
+  private pathsWithOutAuth: RoutePaths[] = ['/', '/sign-up'];
   public authState: boolean = false;
   public routes: Route[] = [];
   public history: History = window.history;
@@ -38,7 +39,9 @@ class Router {
     let nextRoute = this.getRoute(pathname);
 
     if (!nextRoute) nextPath = '/error';
-    if (!this.authState) nextPath = '/';
+    if (!this.authState && this.pathsWithOutAuth.includes(pathname)) {
+      nextPath = pathname;
+    }
 
     nextRoute = this.getRoute(nextPath);
     if (deepEqual(this.currentRoute, nextRoute)) return;
