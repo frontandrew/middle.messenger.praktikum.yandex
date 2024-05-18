@@ -25,3 +25,10 @@ export type UserProfilePayload = Omit<UserResponse, 'id' | 'avatar'>
 export interface UserSearchPayload {
   login: string;
 }
+
+export interface UserPassPayload {
+  oldPassword: string;
+  newPassword: string;
+}
+
+export type UserPassResponse = 'OK';

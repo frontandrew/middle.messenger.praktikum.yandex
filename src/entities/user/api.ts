@@ -1,6 +1,12 @@
 import { HTTPTransport } from 'network';
 
-import type { UserProfilePayload, UserResponse, UserSearchPayload } from './type';
+import type {
+  UserPassPayload,
+  UserPassResponse,
+  UserProfilePayload,
+  UserResponse,
+  UserSearchPayload,
+} from './type';
 
 const userTransport = new HTTPTransport();
 
@@ -15,6 +21,13 @@ export class UserApi {
 
   public setUserAvatar(payload: FormData) {
     return userTransport.put<FormData, UserResponse>('/user/profile/avatar', { data: payload });
+  }
+
+  public setUserPass(payload: UserPassPayload) {
+    return userTransport.put<UserPassPayload, UserPassResponse>(
+      '/user/password',
+      { data: payload },
+    );
   }
 
   public searchUserByLogin(payload: UserSearchPayload) {

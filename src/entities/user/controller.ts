@@ -1,8 +1,12 @@
-import { store } from 'store';
-
 import { UserApi } from './api';
 
-import type { UserProfilePayload, UserResponse, UserSearchPayload, UserType } from './type';
+import type {
+  UserPassPayload,
+  UserProfilePayload,
+  UserResponse,
+  UserSearchPayload,
+  UserType,
+} from './type';
 
 const userApi = new UserApi();
 
@@ -32,16 +36,20 @@ export class UserController {
     return user;
   }
 
+  async updatePass(data: UserPassPayload): Promise<boolean> {
+    const result = await userApi.setUserPass(data)
+      .then(({ response }) => response === 'OK')
+      // .cathch(error) // TODO: catch error
+      .catch(() => false);
+    return result;
+  }
+
   async searchUser(login: UserSearchPayload): Promise<UserType[]> {
     const users = await userApi.searchUserByLogin(login)
       .then(({ response }) => response.map(this.formatUserResponse))
       // .cathch(error) // TODO: catch error
       .catch(() => []);
     return users;
-  }
-
-  setUser(user: UserType | null) {
-    store.set('user', user);
   }
 
   formatUserResponse(data: UserResponse): UserType {
