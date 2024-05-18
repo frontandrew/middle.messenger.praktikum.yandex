@@ -1,9 +1,9 @@
 import { UserApi } from './api';
+import { formatUserResponse } from './tools';
 
 import type {
   UserPassPayload,
   UserProfilePayload,
-  UserResponse,
   UserSearchPayload,
   UserType,
 } from './type';
@@ -21,7 +21,7 @@ export class UserController {
 
   async getUser(): Promise<UserType | null> {
     const user = await userApi.getUserData()
-      .then(({ response }) => this.formatUserResponse(response))
+      .then(({ response }) => formatUserResponse(response))
       // .cathch(error) // TODO: catch error
       .catch(() => null);
 
@@ -30,7 +30,7 @@ export class UserController {
 
   async updateUser(data: UserProfilePayload): Promise<UserType | null> {
     const user = await userApi.setUserData(data)
-      .then(({ response }) => this.formatUserResponse(response))
+      .then(({ response }) => formatUserResponse(response))
       // .cathch(error) // TODO: catch error
       .catch(() => null);
     return user;
@@ -45,30 +45,18 @@ export class UserController {
   }
 
   async updateAvatar(data: FormData): Promise<UserType | null> {
-    const result = await userApi.setUserAvatar(data)
-      .then(({ response }) => this.formatUserResponse(response))
+    const user = await userApi.setUserAvatar(data)
+      .then(({ response }) => formatUserResponse(response))
       // .cathch(error) // TODO: catch error
       .catch(() => null);
-    return result;
+    return user;
   }
 
   async searchUser(login: UserSearchPayload): Promise<UserType[]> {
     const users = await userApi.searchUserByLogin(login)
-      .then(({ response }) => response.map(this.formatUserResponse))
+      .then(({ response }) => response.map(formatUserResponse))
       // .cathch(error) // TODO: catch error
       .catch(() => []);
     return users;
-  }
-
-  formatUserResponse(data: UserResponse): UserType {
-    /* eslint-disable camelcase */
-    const { first_name, second_name, display_name, avatar, ...rest } = data;
-    return {
-      firstName: first_name,
-      secondName: second_name,
-      nickName: display_name,
-      image: avatar,
-      ...rest,
-    };
   }
 }

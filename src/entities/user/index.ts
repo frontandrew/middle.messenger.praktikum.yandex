@@ -1,3 +1,4 @@
+export { formatUserPayload, formatUserResponse } from './tools';
 export { UserController } from './controller';
 
 export type {
