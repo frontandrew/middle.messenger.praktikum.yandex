@@ -5,7 +5,7 @@ import type { ValidationState, ValidatorParams } from '../type';
 export function file({ value = '', required = false }: ValidatorParams): ValidationState {
   let { textError: message, hasError: status } = isRequired({ value, required });
 
-  if (!(/^.*\.(jpg|jpeg|png|svg|gif|mpeg|mpg4|mkv|avi|webp)$/).test(value)) {
+  if (!(/^.*\.(jpg|jpeg|png|svg|gif|mpeg|mpg4|mkv|avi|webp)$/i).test(value)) {
     message = message.concat(' File type isnt acceptable.');
     status = true;
   }
