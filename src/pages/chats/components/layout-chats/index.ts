@@ -3,10 +3,11 @@ import { IconAdd, IconFile, IconLoc, IconMedia } from 'images';
 import { Component } from 'core';
 import { withRouter } from 'routing';
 
+import { ListChats } from 'entities/chat';
+
 import { ButtonAttach } from '../button-attach';
 import { FormMessage } from '../form-message';
 import { FormSearch } from '../form-search';
-import { ListChats } from '../list-chats';
 import { ListMessages } from '../list-messages';
 
 import type { LayoutChatsChildren, LayoutChatsProps } from './type';
