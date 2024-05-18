@@ -44,6 +44,14 @@ export class UserController {
     return result;
   }
 
+  async updateAvatar(data: FormData): Promise<UserType | null> {
+    const result = await userApi.setUserAvatar(data)
+      .then(({ response }) => this.formatUserResponse(response))
+      // .cathch(error) // TODO: catch error
+      .catch(() => null);
+    return result;
+  }
+
   async searchUser(login: UserSearchPayload): Promise<UserType[]> {
     const users = await userApi.searchUserByLogin(login)
       .then(({ response }) => response.map(this.formatUserResponse))
