@@ -82,7 +82,22 @@ export class Form<C extends FormChildren, P extends FormProps>
   submitForm(): PlainObject {
     const submitted = Object.entries(this.children).reduce(
       (acc, [key, child]) => {
-        if (child instanceof Field) return ({ ...acc, [key]: child.children.input.props.value });
+        if (child instanceof Field && child.props.type !== 'file') {
+          return ({ ...acc, [key]: child.children.input.props.value });
+        }
+
+        if (child instanceof Field && child.props.type === 'file') {
+          const input = child.children.input.getContent() as HTMLInputElement;
+          const file = input.files?.[0];
+
+          if (file) {
+            const formdata = new FormData();
+            formdata.append('avatar', file, file.name);
+
+            return { ...acc, [key]: formdata };
+          }
+        }
+
         return acc;
       },
       {},
