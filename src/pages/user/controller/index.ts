@@ -34,6 +34,18 @@ class UserPageController {
     return result;
   }
 
+  async changeUserAvatar(data: FormData) {
+    store.set('isLoading', true);
+    const user = await userController.updateAvatar(data);
+
+    if (user?.id) {
+      store.set('user', user);
+    }
+    store.set('isLoading', false);
+
+    return Boolean(user?.id);
+  }
+
   async singOut() {
     store.set('isLoading', true);
     const logoutState = await authApi.logout()

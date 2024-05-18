@@ -71,7 +71,13 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
       }),
       avatarDialog: new Dialog({
         isOpen: false,
-        content: new FormAvatar(),
+        content: new FormAvatar({
+          onSubmit: (event) => {
+            event.preventDefault();
+            this.handleUserAvatarChange();
+            return event;
+          },
+        }),
       }),
     } as LayoutUserChildren & LayoutUserProps);
   }
@@ -118,6 +124,20 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
     }
 
     this.children.formPass.updateErrorState(this.children.formPass.props.hasError!);
+  }
+
+  private async handleUserAvatarChange() {
+    const avatarForm = this.children.avatarDialog.children.content;
+    const data = avatarForm.handleSubmit();
+
+    if (data?.avatar instanceof FormData) {
+      const isChanged = await controller.changeUserAvatar(data.avatar);
+
+      if (isChanged) {
+        this.children.avatarDialog.setProps({ isOpen: false });
+        avatarForm.reset();
+      }
+    }
   }
 
   render() {
