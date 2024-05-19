@@ -1,3 +1,5 @@
+export { listChatsController } from './controller';
+
 export type { ChatType } from './type';
 
 export type {

@@ -3,17 +3,17 @@
             {{{avatar}}}
             <div class="item-chat__info">
                     <div class="item-chat__info-title">
-                            <p class="item-chat__name text text_title">{{name}}</p>
-                            {{#if date}}
-                                <date class="item-chat__date text text_label text_light-color">{{date}}</date>
+                            <p class="item-chat__name text text_title">{{title}}</p>
+                            {{#if time}}
+                                <date class="item-chat__date text text_label text_light-color">{{time}}</date>
                             {{/if}}
                     </div>
                     {{#if lastMessage}}
                         <div class="item-chat__info-subtitle">
                                 <span class="item-chat__message text text_light-color">{{lastMessage}}</span>
-                                {{#if count}}
+                                {{#if unreadCount}}
                                         <div class="item-chat__count">
-                                                <span class="text text text_contrast-color">{{count}}</span>
+                                                <span class="text text text_contrast-color">{{unreadCount}}</span>
                                         </div>
                                 {{/if}}
                         </div>

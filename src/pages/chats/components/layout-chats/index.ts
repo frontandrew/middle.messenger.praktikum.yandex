@@ -20,7 +20,7 @@ const ComponentWithRouter = withRouter(Component);
 export type { LayoutChatsProps, PageChatsContext };
 
 export class LayoutChats extends ComponentWithRouter<LayoutChatsChildren, LayoutChatsProps> {
-  constructor({ user, chats, messages }: PageChatsContext) {
+  constructor({ user, messages }: PageChatsContext) {
     super({
       selectedChat: null,
       redirect: new Button({
@@ -31,20 +31,14 @@ export class LayoutChats extends ComponentWithRouter<LayoutChatsChildren, Layout
         onClick: () => this.router.go('/settings'),
       }),
 
-      listChats: new ListChats({
-        chats,
-        onClick: (event: Event) => {
-          this.updeteSelectedChatId();
-          return event;
-        },
-      }),
+      listChats: new ListChats(),
       listMessages: new ListMessages(messages),
 
       formSearch: new FormSearch({}),
       formMessage: new FormMessage(),
 
       imageChat: new Avatar({
-        pic: user.image,
+        pic: user.avatar,
         size: 'small',
       }),
 
@@ -105,26 +99,6 @@ export class LayoutChats extends ComponentWithRouter<LayoutChatsChildren, Layout
       }),
     } as LayoutChatsChildren & LayoutChatsProps);
   }
-
-  updeteSelectedChatId() {
-    const id = this.children.listChats.props.active;
-
-    this.setProps({ selectedChat: id });
-    // this.redirectByChatId(this.props.selectedChat);
-  }
-
-  /**
-   * TODO: в будущем можно реализовать вызов конкретного чата с проверкой
-   * существует ли такой чат
-   */
-  // redirectByChatId(id: typeof this.props.selectedChat) {
-  //   if (!id) {
-  //     this.router.history.pushState({ ...this.props }, '', `/chats`);
-  //     return;
-  //   }
-
-  //   this.router.history.pushState({}, '', `/chats/${id}`);
-  // }
 
   callMenuAttach() {
     this.children.menuAttach.showMenu();

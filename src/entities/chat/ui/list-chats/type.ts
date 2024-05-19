@@ -1,12 +1,14 @@
+import type { ChatType, ItemChat } from 'entities/chat';
 import type { Children, Props } from 'core';
-import type { ItemChat } from 'entities/chat';
 
 export interface ListChatsChildren extends Children {
-  [key: string]: ItemChat,
+  [key: string]: ItemChat;
 }
 
 export interface ListChatsProps extends Props {
-  itemKeys: string,
-  onClick: ({}: Event) => Event,
-  active: number | null,
+  chatItems: ChatType[] | [],
+  chatKeys: string;
+  onClick: ({}: MouseEvent) => MouseEvent;
+  hasItems: boolean;
+  hasActive: number | null;
 }
