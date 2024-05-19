@@ -8,4 +8,8 @@ export class ChatAPI {
   public getChats(payload: ListChatsPayload) {
     return chatTransport.get<ListChatsPayload, ListChatsResponse>('/chats', { data: payload });
   }
+
+  public getChatToken(payload: number) {
+    return chatTransport.post<number, { token: string }>(`/chats/token/${payload}`);
+  }
 }
