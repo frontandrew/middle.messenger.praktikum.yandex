@@ -85,13 +85,11 @@ export class Component <C extends Children, P extends Props> {
   _init() {
     this.instance = Object.getPrototypeOf(this).constructor.name;
     this.init();
-    this.createChildren();
-    this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
+    // this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
+    this.dispatchComponentDidMount();
   }
 
   init() {}
-
-  createChildren() {}
 
   _render() {
     const element = this.createDOMElement();
@@ -106,13 +104,14 @@ export class Component <C extends Children, P extends Props> {
 
     this._attachEvents();
 
+    this.count += 1;
     this.meta = {
       props: { ...this.props },
       children: { ...this.children },
       events: { ...this.events },
+      count: this.count,
     };
-
-    // console.warn(`RNDR{${this.count += 1}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
+    console.warn(`RNDR{${this.count}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
   }
 
   render() {
@@ -141,13 +140,15 @@ export class Component <C extends Children, P extends Props> {
   }
 
   _componentDidMount(props: P) {
-    this.componentDidMount(props);
+    // console.warn(`CDM{${this.count}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
+    if (this.componentDidMount(props)) {
+      this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
+    }
   }
 
-  // Может переопределять пользователь, необязательно трогать. Не используется
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   componentDidMount(props: P) {
-    if (props) return true;
-    return false;
+    return true;
   }
 
   dispatchComponentDidMount() {
