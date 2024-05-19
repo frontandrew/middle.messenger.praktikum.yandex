@@ -2,14 +2,13 @@ import { Component } from 'core';
 import { deepEqual } from 'tools';
 import { withStore } from 'store';
 
-import { ItemChat, chatsController } from 'entities/chat';
+import { ItemChat, chatsController as control } from 'entities/chat';
 
 import type { ItemChatKeyAttr } from 'entities/chat';
 
 import type { ListChatsChildren, ListChatsProps } from './type';
 import './style.css';
 
-const controller = chatsController;
 const ListChatsWithState = withStore((state) => ({ chatItems: state.chats }))(Component);
 
 export class ListChats extends ListChatsWithState<ListChatsChildren, ListChatsProps> {
@@ -27,7 +26,7 @@ export class ListChats extends ListChatsWithState<ListChatsChildren, ListChatsPr
   }
 
   init() {
-    controller.getListChats();
+    control.getListChats();
   }
 
   componentDidUpdate(oldProps: ListChatsProps, newProps: ListChatsProps): boolean {
