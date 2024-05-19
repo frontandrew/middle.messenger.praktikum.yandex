@@ -70,7 +70,9 @@ export class Form<C extends FormChildren, P extends FormProps>
   }
 
   updateErrorState(state: boolean) {
-    this.children.submit.setDisabled(state);
+    if (this.children.submit) {
+      this.children.submit.setDisabled(state);
+    }
   }
 
   validate() {

@@ -2,12 +2,10 @@ import { Button } from 'ui';
 import { Component } from 'core';
 import { withRouter } from 'routing';
 
+import { FormMessage, FormSearch, ListChats, ListMessages, MenuAttach } from 'features';
 import { HeaderChat } from 'entities/chat';
 
-import { FormMessage, ListChats, ListMessages, MenuAttach } from 'features';
-
 import { ButtonAttach } from '../button-attach';
-import { FormSearch } from '../form-search';
 
 import type { LayoutChatsChildren, LayoutChatsProps } from './type';
 import template from './template.hbs?raw';
@@ -29,7 +27,7 @@ export class LayoutChats extends ComponentWithRouter<LayoutChatsChildren, Layout
 
       listChats: new ListChats(),
       listMessages: new ListMessages(),
-      formSearch: new FormSearch({}),
+      formSearch: new FormSearch(),
       formMessage: new FormMessage(),
       headerChat: new HeaderChat(),
       menuAttach: new MenuAttach(),

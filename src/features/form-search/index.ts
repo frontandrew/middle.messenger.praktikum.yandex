@@ -7,12 +7,11 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class FormSearch extends Form<FormSearchChildren, FormSearchProps> {
-  constructor({ search = '' }: Pick<FormSearchProps, 'search'>) {
+  constructor() {
     super({
       img: Lens,
       fieldSearch: new Field({
         type: 'simple',
-        value: search,
         name: 'search',
         placeholder: 'Search',
         classes: 'form-search__field',
