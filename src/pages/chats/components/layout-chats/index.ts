@@ -3,12 +3,11 @@ import { IconAdd, IconFile, IconLoc, IconMedia } from 'images';
 import { Component } from 'core';
 import { withRouter } from 'routing';
 
-import { ListChats } from 'entities/chat';
+import { ListChats, ListMessages } from 'features';
 
 import { ButtonAttach } from '../button-attach';
 import { FormMessage } from '../form-message';
 import { FormSearch } from '../form-search';
-import { ListMessages } from '../list-messages';
 
 import type { LayoutChatsChildren, LayoutChatsProps } from './type';
 import template from './template.hbs?raw';
@@ -29,7 +28,7 @@ export class LayoutChats extends ComponentWithRouter<LayoutChatsChildren, Layout
       }),
 
       listChats: new ListChats(),
-      listMessages: new ListMessages([]),
+      listMessages: new ListMessages(),
 
       formSearch: new FormSearch({}),
       formMessage: new FormMessage(),

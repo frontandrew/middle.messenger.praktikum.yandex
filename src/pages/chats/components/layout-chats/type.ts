@@ -1,14 +1,15 @@
 import type { Avatar, Button, ButtonIcon, Menu, Text } from 'ui';
 import type { Children, Props } from 'core';
 
-import type { ChatType, ListChats } from 'entities/chat';
+import type { ListChats, ListMessages } from 'features';
+
+import type { ChatType } from 'entities/chat';
 import type { MessageType } from 'entities/message';
 import type { UserType } from 'entities/user';
 
 import type { ButtonAttach } from '../button-attach';
 import type { FormMessage } from '../form-message';
 import type { FormSearch } from '../form-search';
-import type { ListMessages } from '../list-messages';
 
 export interface LayoutChatsProps extends Props {
   user: UserType,
