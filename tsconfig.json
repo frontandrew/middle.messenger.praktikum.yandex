@@ -23,6 +23,7 @@
       "config": ["./shared/config/index"],
       "core": ["./shared/core/index"],
       "entities/*": ["./entities/*"],
+      "feetures": ["./features/index"],
       "images": ["./assets/images/index"],
       "network": ["./shared/network/index"],
       "pages": ["./pages/index"],
