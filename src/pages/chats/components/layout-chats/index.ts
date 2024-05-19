@@ -5,10 +5,9 @@ import { withRouter } from 'routing';
 
 import { HeaderChat } from 'entities/chat';
 
-import { ListChats, ListMessages } from 'features';
+import { FormMessage, ListChats, ListMessages } from 'features';
 
 import { ButtonAttach } from '../button-attach';
-import { FormMessage } from '../form-message';
 import { FormSearch } from '../form-search';
 
 import type { LayoutChatsChildren, LayoutChatsProps } from './type';
