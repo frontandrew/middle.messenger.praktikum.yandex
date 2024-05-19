@@ -148,6 +148,7 @@ export class Component <C extends Children, P extends Props> {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   componentDidMount(props: P) {
+    if (props) return true;
     return true;
   }
 
