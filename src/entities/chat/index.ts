@@ -1,4 +1,4 @@
-export { listChatsController } from './controller';
+export { chatsController } from './controller';
 
 export type { ChatType } from './type';
 

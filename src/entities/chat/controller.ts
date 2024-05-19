@@ -7,7 +7,7 @@ import { formatChatResponse } from './tools';
 
 const apiChats = new ChatAPI();
 
-class ListChatsController {
+class ChatsController {
   async getListChats(params: ListChatsPayload = {}) {
     store.set('isLoading', true);
 
@@ -20,4 +20,4 @@ class ListChatsController {
   }
 }
 
-export const listChatsController = new ListChatsController();
+export const chatsController = new ChatsController();
