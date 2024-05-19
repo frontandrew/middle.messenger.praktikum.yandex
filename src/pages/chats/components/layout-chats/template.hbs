@@ -10,9 +10,7 @@
     {{#if selectedChat}}
         <div class="messages__container">
             <header class="messages__row">
-                {{{imageChat}}}
-                {{{titleChat}}}
-                {{{actionsChat}}}
+                {{{headerChat}}}
             </header>
             {{> Divider}}
             {{{listMessages}}}
@@ -27,6 +25,5 @@
             <p class="text text_light-color">Please select chat from list to start massaging</p>
         {{/BaseLayout}}
     {{/if}}
-    {{{menuChat}}}
     {{{menuAttach}}}
 </div>

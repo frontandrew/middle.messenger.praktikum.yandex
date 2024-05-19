@@ -1,5 +1,6 @@
 .menu-container {
     position: absolute;
+    inset: 0;
 
     visibility: hidden;
     width: 100vw;

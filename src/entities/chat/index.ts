@@ -6,6 +6,9 @@ export type {
   ItemChatChildren,
   ItemChatKeyAttr,
   ItemChatProps,
+
+  HeaderChatChildren,
+  HeaderChatProps,
 } from './ui';
 
-export { ItemChat } from './ui';
+export { ItemChat, HeaderChat } from './ui';

@@ -1,7 +1,9 @@
-import { Avatar, Button, ButtonIcon, Menu, Text } from 'ui';
-import { IconAdd, IconFile, IconLoc, IconMedia } from 'images';
+import { Button, Menu } from 'ui';
+import { IconFile, IconLoc, IconMedia } from 'images';
 import { Component } from 'core';
 import { withRouter } from 'routing';
+
+import { HeaderChat } from 'entities/chat';
 
 import { ListChats, ListMessages } from 'features';
 
@@ -32,24 +34,8 @@ export class LayoutChats extends ComponentWithRouter<LayoutChatsChildren, Layout
 
       formSearch: new FormSearch({}),
       formMessage: new FormMessage(),
+      headerChat: new HeaderChat(),
 
-      imageChat: new Avatar({
-        pic: '',
-        size: 'small',
-      }),
-
-      titleChat: new Text({
-        tag: 'h1',
-        text: '',
-        classes: 'messages__title text_title',
-      }),
-
-      actionsChat: new ButtonIcon({
-        variant: 'transparent',
-        onClick: () => {
-          this.callMenuChat();
-        },
-      }),
       actionAttach: new ButtonAttach({
         onClick: () => {
           this.callMenuAttach();
@@ -76,32 +62,11 @@ export class LayoutChats extends ComponentWithRouter<LayoutChatsChildren, Layout
           },
         ],
       }),
-
-      menuChat: new Menu({
-        position: { right: 0.5, top: 4 },
-        itemsProps: [
-          {
-            label: 'Add user',
-            icon: IconAdd,
-            onClick: () => {},
-          },
-          {
-            classes: 'menu-item__icon',
-            label: 'Remove user',
-            icon: IconAdd,
-            onClick: () => {},
-          },
-        ],
-      }),
     } as LayoutChatsChildren & LayoutChatsProps);
   }
 
   callMenuAttach() {
     this.children.menuAttach.showMenu();
-  }
-
-  callMenuChat() {
-    this.children.menuChat.showMenu();
   }
 
   render() {
