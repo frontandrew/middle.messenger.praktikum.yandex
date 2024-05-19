@@ -5,7 +5,7 @@ type SizeType = 'large' | 'medium' | 'small';
 export interface AvatarArgs extends AvatarProps {}
 
 export interface AvatarProps extends Props {
-  pic?: string,
+  pic: string | null,
 
   classes?: string,
   size?: SizeType,

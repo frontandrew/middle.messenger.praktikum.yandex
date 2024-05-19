@@ -1,7 +1,5 @@
-/* TODO: need format document */
+import { REST_API } from 'config';
 import { queryStringify } from './queryStringify';
-
-const API_URL = 'https://ya-praktikum.tech/api/v2';
 
 enum METHODS {
   GET = 'GET',
@@ -56,7 +54,7 @@ export class HTTPTransport {
         return;
       }
 
-      let requestUrl = API_URL + url;
+      let requestUrl = REST_API + url;
       if (method === METHODS.GET && Object.keys(data).length) {
         requestUrl += `?${queryStringify(data)}`;
       }

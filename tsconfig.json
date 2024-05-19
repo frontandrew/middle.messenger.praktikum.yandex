@@ -20,6 +20,7 @@
     "baseUrl": "./src",
     "paths": {
       "api/*": ["./shared/api/*"],
+      "config": ["./shared/config/index"],
       "core": ["./shared/core/index"],
       "entities/*": ["./entities/*"],
       "images": ["./assets/images/index"],
