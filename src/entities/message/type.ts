@@ -5,7 +5,7 @@ export interface MessageType {
 
   content?: string | null,
   userId?: number,
-  date?: string,
+  time?: string,
 }
 
 export interface MessageResponse {

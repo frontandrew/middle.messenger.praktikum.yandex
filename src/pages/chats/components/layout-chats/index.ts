@@ -14,13 +14,10 @@ import type { LayoutChatsChildren, LayoutChatsProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-type PageChatsContext = Pick<LayoutChatsProps, 'user' | 'chats' | 'messages'>
 const ComponentWithRouter = withRouter(Component);
 
-export type { LayoutChatsProps, PageChatsContext };
-
 export class LayoutChats extends ComponentWithRouter<LayoutChatsChildren, LayoutChatsProps> {
-  constructor({ user, messages }: PageChatsContext) {
+  constructor() {
     super({
       selectedChat: null,
       redirect: new Button({
@@ -32,19 +29,19 @@ export class LayoutChats extends ComponentWithRouter<LayoutChatsChildren, Layout
       }),
 
       listChats: new ListChats(),
-      listMessages: new ListMessages(messages),
+      listMessages: new ListMessages([]),
 
       formSearch: new FormSearch({}),
       formMessage: new FormMessage(),
 
       imageChat: new Avatar({
-        pic: user.avatar,
+        pic: '',
         size: 'small',
       }),
 
       titleChat: new Text({
         tag: 'h1',
-        text: user.nickName,
+        text: '',
         classes: 'messages__title text_title',
       }),
 
