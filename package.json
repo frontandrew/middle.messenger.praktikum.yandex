@@ -15,7 +15,7 @@
   "scripts": {
     "start": "vite",
     "build": "pnpm lint:code && pnpm lint:style && rm -rf ./dist && vite build",
-    "lint:code": "eslint --ext .js,.ts,.tsx ./src/**/*.{js,ts,tsx}",
+    "lint:code": "eslint ./src/**/*.{js,ts,tsx}",
     "lint:style": "stylelint \"**/*.css\" -c ./.stylelintrc"
   },
   "devDependencies": {
