@@ -1,4 +1,6 @@
 import * as Pages from 'pages';
+
+import { INIT_STATE } from 'config';
 import { Templates } from 'ui';
 import { registerPartials } from 'tools';
 import { router } from 'routing';
@@ -7,18 +9,8 @@ import { store } from 'store';
 import { App } from 'app/components';
 import { AppController } from 'app';
 
-import type { State } from 'store';
-
 registerPartials(Templates);
-
-const defaultState: State = {
-  isLoading: false,
-  user: null,
-  chats: null,
-  messages: null,
-};
-
-store.init(defaultState);
+store.init(INIT_STATE);
 
 router
   .use({ pathname: '/', component: Pages.PageLogin })
