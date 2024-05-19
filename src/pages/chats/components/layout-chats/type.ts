@@ -1,14 +1,13 @@
-import type { Button, Menu } from 'ui';
 import type { Children, Props } from 'core';
+import type { Button } from 'ui';
 
-import type { ListChats, ListMessages } from 'features';
+import type { FormMessage, ListChats, ListMessages, MenuAttach } from 'features';
 
 import type { ChatType, HeaderChat } from 'entities/chat';
 import type { MessageType } from 'entities/message';
 import type { UserType } from 'entities/user';
 
 import type { ButtonAttach } from '../button-attach';
-import type { FormMessage } from '../form-message';
 import type { FormSearch } from '../form-search';
 
 export interface LayoutChatsProps extends Props {
@@ -26,5 +25,5 @@ export interface LayoutChatsChildren extends Children {
   listMessages: ListMessages,
   actionAttach: ButtonAttach,
   formMessage: FormMessage,
-  menuAttach: Menu,
+  menuAttach: MenuAttach,
 }
