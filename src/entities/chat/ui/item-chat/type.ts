@@ -4,8 +4,6 @@ import type { Avatar } from 'ui';
 import type { ChatType } from '../../type';
 
 export interface ItemChatProps extends Props, ChatType {
-  currChat: number | null;
-  isActive: boolean;
   onClick: () => void;
 }
 

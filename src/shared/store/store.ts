@@ -15,8 +15,8 @@ export class Store extends EventBus {
     return this.state;
   }
 
-  public set(path: keyof State, value: unknown) {
-    this.state = set(this.state as PlainObject, path as string, value) as State;
+  public set(path: string, value: unknown) {
+    this.state = set(this.state as PlainObject, path, value) as State;
     this.emit(StoreEvents.UPD);
   }
 

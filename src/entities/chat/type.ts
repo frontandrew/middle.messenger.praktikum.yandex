@@ -6,6 +6,7 @@ export interface ChatType {
   authorId: number
   lastMessage: string | null;
   time: string | null;
+  isCurrent: boolean;
 }
 
 export interface ListChatsPayload {

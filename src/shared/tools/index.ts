@@ -5,6 +5,7 @@ export { identity } from './identity';
 export { isEmpty } from './is-empty';
 export { isArray } from './is-array';
 export { isPlainObject } from './is-plain-object';
+export { keying } from './keying';
 export { last } from './last';
 export { merge } from './merge';
 export { range } from './range';

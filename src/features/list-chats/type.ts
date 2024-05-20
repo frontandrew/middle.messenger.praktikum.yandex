@@ -6,7 +6,7 @@ export interface ListChatsChildren extends Children {
 }
 
 export interface ListChatsProps extends Props {
-  chatItems: ChatType[] | [],
+  chatItems: Record<string, ChatType> | null,
   chatKeys: string;
   onClick: ({}: MouseEvent) => MouseEvent;
   hasItems: boolean;

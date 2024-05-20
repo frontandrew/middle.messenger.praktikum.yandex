@@ -1,6 +1,6 @@
 import { HTTPTransport } from 'network';
 
-import type { ListChatsPayload, ListChatsResponse } from './type';
+import type { ListChatsPayload, ListChatsResponse } from 'entities/chat';
 
 const chatTransport = new HTTPTransport();
 

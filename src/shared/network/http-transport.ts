@@ -1,4 +1,4 @@
-import { REST_API } from 'config';
+import { REST_HOST } from 'config';
 import { queryStringify } from './tools';
 
 enum METHODS {
@@ -54,7 +54,7 @@ export class HTTPTransport {
         return;
       }
 
-      let requestUrl = REST_API + url;
+      let requestUrl = REST_HOST + url;
       if (method === METHODS.GET && Object.keys(data).length) {
         requestUrl += `?${queryStringify(data)}`;
       }

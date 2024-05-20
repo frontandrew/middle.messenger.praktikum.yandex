@@ -1,12 +1,12 @@
 import { Component } from 'core';
+import { ItemChat } from 'entities/chat';
 import { deepEqual } from 'tools';
 import { withStore } from 'store';
-
-import { ItemChat, chatsController as control } from 'entities/chat';
 
 import type { ItemChatKeyAttr } from 'entities/chat';
 
 import type { ListChatsChildren, ListChatsProps } from './type';
+import { chatsController as control } from './controller';
 import './style.css';
 
 const ListChatsWithState = withStore((state) => ({ chatItems: state.chats }))(Component);
@@ -14,7 +14,7 @@ const ListChatsWithState = withStore((state) => ({ chatItems: state.chats }))(Co
 export class ListChats extends ListChatsWithState<ListChatsChildren, ListChatsProps> {
   constructor() {
     super({
-      chatItems: [],
+      chatItems: null,
       chatKeys: '',
       hasItems: false,
       hasActive: null,
@@ -59,14 +59,14 @@ export class ListChats extends ListChatsWithState<ListChatsChildren, ListChatsPr
     */
 
     const isChatsEqual = deepEqual(oldChatItems, newChatItems);
-    if (!isChatsEqual) {
-      const newChatComponents = newChatItems.reduce((acc, chatData) => {
-        const chatItem = new ItemChat(chatData);
-        return { ...acc, [chatItem.id.toString()]: chatItem };
-      }, {});
+    if (!isChatsEqual && newChatItems !== null) {
+      const newChatComponents = Object
+        .entries(newChatItems)
+        .reduce((acc, [key, props]) => ({ ...acc, [key]: new ItemChat(props) }), {});
 
-      const hasItems = Boolean(newChatItems.length);
-      const newKeys = Object.keys(newChatComponents)
+      const hasItems = Object.keys(newChatItems).length > 0;
+      const newKeys = Object
+        .keys(newChatItems)
         .map((key) => `{{{${key}}}}`)
         .join(' ')
         .toString();
@@ -91,6 +91,8 @@ export class ListChats extends ListChatsWithState<ListChatsChildren, ListChatsPr
     const { key } = attributes as ItemChatKeyAttr;
     const id = Number(key.value);
     this.toggleActiveItem(id);
+
+    control.storeSelectedtedChatParams(id);
   }
 
   toggleActiveItem(id: number) {

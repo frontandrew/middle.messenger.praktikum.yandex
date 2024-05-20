@@ -1,15 +1,17 @@
 import { PING_INTERVAL } from 'config';
 
-type MessageHandler = (message: string) => void;
-type ErrorHandler = (error: Event) => void;
-
-const { setInterval } = window;
+export type CloseHandler = (error: CloseEvent) => void;
+export type ConnectHandler = (event: Event) => void;
+export type ErrorHandler = (error: Event) => void;
+export type MessageHandler = (message: string) => void;
 
 export class WSTransport {
   private url: string;
-  private websocket: WebSocket | null = null;
+  private socket: WebSocket | null = null;
+  private connectHandler: ConnectHandler | null = null;
   private messageHandler: MessageHandler | null = null;
   private errorHandler: ErrorHandler | null = null;
+  private closeHandler: CloseHandler | null = null;
   private pingInterval: number = PING_INTERVAL ?? 180000;
   private pingTimer: number | null = null;
 
@@ -18,49 +20,60 @@ export class WSTransport {
   }
 
   public connect(): void {
-    this.websocket = new WebSocket(this.url);
+    this.socket = new WebSocket(this.url);
 
-    this.websocket.onopen = () => {
-      // console.log('Connected to the websocket server.');
+    this.socket.onopen = (event) => {
+      if (this.connectHandler) this.connectHandler(event);
       this.startPing();
     };
 
-    this.websocket.onmessage = (event: MessageEvent) => {
+    this.socket.onmessage = (event: MessageEvent) => {
       if (this.messageHandler) this.messageHandler(event.data);
     };
 
-    this.websocket.onerror = (event: Event) => {
+    this.socket.onerror = (event: Event) => {
       if (this.errorHandler) this.errorHandler(event);
     };
 
-    this.websocket.onclose = () => {
-      // console.log('Disconnected from the websocket server.');
+    this.socket.onclose = (event) => {
+      const { code, reason, wasClean } = event;
+      if (!wasClean) console.error(`Connection was broken with code: ${code}`);
+      else console.warn(`Connection was closed by reason: ${reason}, code: ${code}`);
+      if (this.closeHandler) this.closeHandler(event);
       this.stopPing();
     };
   }
 
   public disconnect(): void {
-    if (this.websocket) this.websocket.close();
+    if (this.socket) this.socket.close();
   }
 
   public sendMessage(message: string): void {
-    if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
-      this.websocket.send(message);
+    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+      this.socket.send(message);
     } else {
-      console.error('WebSocket is not open. Ready state: ', this.websocket?.readyState);
+      console.error('WebSocket is not open. Ready state: ', this.socket?.readyState);
     }
-  }
-
-  public onMessage(handler: MessageHandler): void {
-    this.messageHandler = handler;
   }
 
   public onError(handler: ErrorHandler): void {
     this.errorHandler = handler;
   }
 
+  public onConnect(handler: ConnectHandler): void {
+    this.connectHandler = handler;
+  }
+
+  public onClose(handler: CloseHandler): void {
+    this.closeHandler = handler;
+  }
+
+  public onMessage(handler: MessageHandler): void {
+    this.messageHandler = handler;
+  }
+
   private startPing(): void {
-    this.pingTimer = setInterval(() => { this.sendPing(); }, this.pingInterval);
+    this.pingTimer = window.setInterval(() => { this.sendPing(); }, this.pingInterval);
   }
 
   private stopPing(): void {
@@ -71,8 +84,8 @@ export class WSTransport {
   }
 
   private sendPing(): void {
-    if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
-      this.websocket.send('ping');
+    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+      this.socket.send('ping');
     }
   }
 }

@@ -1,22 +1,21 @@
 import { Component } from 'core';
 import { deepEqual } from 'tools';
+import { withStore } from 'store';
 
 import { ItemMessage } from 'entities/message';
 
 import type { ListMessagesChildren, ListMessagesProps } from './type';
 import './style.css';
 
-export class ListMessages extends Component<ListMessagesChildren, ListMessagesProps> {
+const ListMessagesWithState = withStore((state) => ({ items: state.messages }))(Component);
+
+export class ListMessages extends ListMessagesWithState<ListMessagesChildren, ListMessagesProps> {
   constructor() {
     super({
       items: [],
       keys: '',
       hasItems: false,
     } as ListMessagesProps & ListMessagesChildren);
-  }
-
-  init() {
-    // control.getListMessages();
   }
 
   componentDidUpdate(oldProps: ListMessagesProps, newProps: ListMessagesProps): boolean {
