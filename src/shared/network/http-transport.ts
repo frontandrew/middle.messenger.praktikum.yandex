@@ -1,5 +1,5 @@
 import { REST_API } from 'config';
-import { queryStringify } from './queryStringify';
+import { queryStringify } from './tools';
 
 enum METHODS {
   GET = 'GET',

@@ -1,1 +1,2 @@
-export { HTTPTransport } from './http/http-transport';
+export { HTTPTransport } from './http-transport';
+export { WSTransport } from './ws-transport';

@@ -1,9 +1,19 @@
 import { Component } from 'core';
 import { deepEqual } from 'tools';
 
-import { RoutePaths, RouteProps, RouteType, RouteView } from './type';
+type RouteProps = {
+  [key: string]: unknown;
+  rootQuery: string;
+}
 
-export type { RoutePaths, RouteProps, RouteType, RouteView };
+interface RouteType {
+  pathname: RoutePaths;
+  component: RouteView;
+  props: RouteProps;
+}
+
+export type RoutePaths = '/' | '/sign-up' | '/settings' | '/messenger' | '/error';
+export type RouteView = new (...args: unknown[]) => InstanceType<typeof Component>
 
 export class Route {
   private pathname: RoutePaths;

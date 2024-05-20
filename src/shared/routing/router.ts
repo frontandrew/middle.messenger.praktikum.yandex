@@ -1,8 +1,7 @@
 import { deepEqual } from 'tools';
 
-import { Route } from '../route';
-
-import type { RoutePaths, RouteView } from '../route';
+import type { RoutePaths, RouteView } from './route';
+import { Route } from './route';
 
 class Router {
   private currentRoute: Route | null = null;
