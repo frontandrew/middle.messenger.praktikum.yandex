@@ -1,4 +1,4 @@
-import { AuthAPI } from 'api/auth-api';
+import { AuthAPI } from 'api';
 import { router } from 'routing';
 import { store } from 'store';
 
