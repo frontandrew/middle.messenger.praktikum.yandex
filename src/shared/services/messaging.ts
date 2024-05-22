@@ -1,5 +1,5 @@
-import { MessagePayload, MessagingAPI } from 'api';
 import { StoreEvents, store } from 'store';
+import { MessagingAPI } from 'api';
 import { WS_HOST } from 'config';
 
 class MssgControl {
@@ -10,7 +10,7 @@ class MssgControl {
   private host = WS_HOST;
 
   private getListMessages() {
-    this.api?.sendMessage({ type: 'get old', content: '10' });
+    this.api?.getMessages(10);
   }
 
   public init() {
@@ -55,8 +55,10 @@ class MssgControl {
     console.log('ws:controller', { chat, user, api: this.api });
   }
 
-  public sendMessage(payload: MessagePayload) {
-    this.api?.sendMessage(payload);
+  public sendMessage(data: string) {
+    // TODO: xss protect
+    // TODO: processing files
+    this.api?.sendMessage(data);
   }
 
   private onError(event: Event) {

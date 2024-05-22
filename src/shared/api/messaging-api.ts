@@ -1,8 +1,6 @@
-import { WSTransport } from 'network';
+import { MssgTypes, WSTransport } from 'network';
 
 import type { WSTransportArgs } from 'network';
-
-export type MessagePayload = { type: 'file' | 'message' | 'get old'; content: string | number }
 
 export class MessagingAPI {
   private transport: WSTransport | null = null;
@@ -19,11 +17,14 @@ export class MessagingAPI {
     this.transport?.disconnect();
   }
 
+  public getMessages(count: number) {
+    return this.transport?.sendMessage({ content: String(count), type: MssgTypes.OLD });
+  }
   public getConnectState() {
     return this.transport?.connectionState();
   }
 
-  public sendMessage({ content, type }: MessagePayload): void {
-    if (content && type) this.transport?.sendMessage(JSON.stringify({ content, type }));
+  public sendMessage(content: string): void {
+    if (content) this.transport?.sendMessage({ content, type: MssgTypes.MSSG });
   }
 }
