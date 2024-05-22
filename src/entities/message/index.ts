@@ -1,3 +1,3 @@
-export type { MessageType, MessageResponse } from './type';
+export type { MessageType } from './type';
 
 export { ItemMessage } from './ui';

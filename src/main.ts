@@ -1,16 +1,13 @@
 import * as Pages from 'pages';
 
-import { INIT_STATE } from 'config';
 import { Templates } from 'ui';
 import { registerPartials } from 'tools';
 import { router } from 'routing';
-import { store } from 'store';
 
 import { App } from 'app/components';
 import { AppController } from 'app';
 
 registerPartials(Templates);
-store.init(INIT_STATE);
 
 router
   .use({ pathname: '/', component: Pages.PageLogin })
