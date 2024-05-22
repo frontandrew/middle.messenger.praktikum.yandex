@@ -18,9 +18,8 @@ export class ListChats extends ListChatsWithState<ListChatsChildren, ListChatsPr
       chatKeys: '',
       hasItems: false,
       hasActive: null,
-      onClick: (event) => {
-        this.handleSelectItem(event.target as HTMLElement);
-        return event;
+      onClick: ({ target }) => {
+        if (target instanceof HTMLElement) this.handleSelectItem(target);
       },
     } as ListChatsProps & ListChatsChildren);
   }
@@ -90,9 +89,9 @@ export class ListChats extends ListChatsWithState<ListChatsChildren, ListChatsPr
 
     const { key } = attributes as ItemChatKeyAttr;
     const id = Number(key.value);
-    this.toggleActiveItem(id);
+    // this.toggleActiveItem(id);
 
-    control.storeSelectedtedChatParams(id);
+    control.handleChatSelection(id);
   }
 
   toggleActiveItem(id: number) {

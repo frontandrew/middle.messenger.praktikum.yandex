@@ -6,4 +6,5 @@ export type {
   ErrorHandler,
   MessageHandler,
   ConnectHandler,
+  WSTransportArgs,
 } from './ws-transport';

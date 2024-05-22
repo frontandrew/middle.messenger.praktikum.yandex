@@ -1,6 +1,7 @@
 import { Button } from 'ui';
 import { Component } from 'core';
 import { withRouter } from 'routing';
+import { withStore } from 'store';
 
 import { FormMessage, FormSearch, ListChats, ListMessages, MenuAttach } from 'features';
 import { HeaderChat } from 'entities/chat';
@@ -11,9 +12,11 @@ import type { LayoutChatsChildren, LayoutChatsProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-const ComponentWithRouter = withRouter(Component);
+const ComponentRS = withStore(
+  (state) => ({ selectedChat: Boolean(state.chat) }),
+)(withRouter(Component));
 
-export class LayoutChats extends ComponentWithRouter<LayoutChatsChildren, LayoutChatsProps> {
+export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsProps> {
   constructor() {
     super({
       selectedChat: null,

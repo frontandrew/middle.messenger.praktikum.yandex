@@ -1,75 +1,113 @@
 import { PING_INTERVAL } from 'config';
 
-export type CloseHandler = (error: CloseEvent) => void;
-export type ConnectHandler = (event: Event) => void;
-export type ErrorHandler = (error: Event) => void;
-export type MessageHandler = (message: string) => void;
+export type CloseHandler = (event: CloseEvent) => CloseEvent;
+export type ConnectHandler = (event: Event) => Event;
+export type ErrorHandler = (event: Event) => Event;
+export type MessageHandler = (event: MessageEvent) => MessageEvent;
+
+export type WSTransportArgs = {
+  url: string;
+  closeHandler?: CloseHandler;
+  connectHandler?: ConnectHandler;
+  errorHandler?: ErrorHandler;
+  messageHandler?: MessageHandler;
+}
 
 export class WSTransport {
   private url: string;
-  private socket: WebSocket | null = null;
-  private connectHandler: ConnectHandler | null = null;
-  private messageHandler: MessageHandler | null = null;
-  private errorHandler: ErrorHandler | null = null;
-  private closeHandler: CloseHandler | null = null;
-  private pingInterval: number = PING_INTERVAL ?? 180000;
-  private pingTimer: number | null = null;
 
-  constructor(url: string) {
-    this.url = url;
+  private socket: WebSocket | null = null;
+  private pingTimer: number | null = null;
+  private pingInterval: number = PING_INTERVAL;
+
+  public connectHandler?: ConnectHandler;
+  public messageHandler?: MessageHandler;
+  public errorHandler?: ErrorHandler;
+  public closeHandler?: CloseHandler;
+
+  constructor(args: WSTransportArgs) {
+    this.url = args.url;
+    this.closeHandler = args.closeHandler;
+    this.connectHandler = args.connectHandler;
+    this.errorHandler = args.errorHandler;
+    this.messageHandler = args.messageHandler;
   }
 
-  public connect(): void {
-    this.socket = new WebSocket(this.url);
+  public async connect(): Promise<void> {
+    const socket = await new Promise<WebSocket>((resolve, reject) => {
+      const ws = new WebSocket(this.url);
+      ws.onopen = (event) => {
+        this.onOpen(event);
+        resolve(ws);
+      };
 
-    this.socket.onopen = (event) => {
-      if (this.connectHandler) this.connectHandler(event);
-      this.startPing();
-    };
+      ws.onerror = (event: Event) => {
+        console.error(`Connection error.`, event);
+        reject(event);
+      };
+    })
+      .then((result) => result)
+      .catch(() => null);
 
-    this.socket.onmessage = (event: MessageEvent) => {
-      if (this.messageHandler) this.messageHandler(event.data);
-    };
+    if (socket) {
+      this.socket = socket;
+      this.socket.onmessage = (event: MessageEvent) => {
+        if (this.messageHandler) this.messageHandler(event);
+      };
 
-    this.socket.onerror = (event: Event) => {
-      if (this.errorHandler) this.errorHandler(event);
-    };
+      this.socket.onerror = (event: Event) => {
+        console.error(`Service was return error.`, event);
+        if (this.errorHandler) this.errorHandler(event);
+      };
 
-    this.socket.onclose = (event) => {
-      const { code, reason, wasClean } = event;
-      if (!wasClean) console.error(`Connection was broken with code: ${code}`);
-      else console.warn(`Connection was closed by reason: ${reason}, code: ${code}`);
-      if (this.closeHandler) this.closeHandler(event);
-      this.stopPing();
-    };
+      this.socket.onclose = (event) => {
+        const { code, reason, wasClean } = event;
+        if (!wasClean) console.error(`Connection was broken with code: ${code}`);
+        else console.warn(`Connection was closed by reason: ${reason}, code: ${code}`);
+        this.onClose(event);
+      };
+
+      // this.startPing();
+    }
   }
 
   public disconnect(): void {
     if (this.socket) this.socket.close();
   }
 
-  public sendMessage(message: string): void {
+  public sendMessage(payload: string): void {
+    console.log('ws:onsend', payload);
     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-      this.socket.send(message);
+      this.socket.send(payload);
     } else {
       console.error('WebSocket is not open. Ready state: ', this.socket?.readyState);
     }
   }
 
-  public onError(handler: ErrorHandler): void {
-    this.errorHandler = handler;
+  public onError(event: Event): void {
+    console.log('ws:onerror', { ...event });
+    if (this.errorHandler) this.errorHandler(event);
   }
 
-  public onConnect(handler: ConnectHandler): void {
-    this.connectHandler = handler;
+  public onOpen(event: Event): void {
+    console.log('ws:onopen', { ...event });
+    if (this.connectHandler) this.connectHandler(event);
+    this.startPing();
   }
 
-  public onClose(handler: CloseHandler): void {
-    this.closeHandler = handler;
+  public onClose(event: CloseEvent): void {
+    console.log('ws:onclose', { ...event });
+    if (this.closeHandler) this.closeHandler(event);
+    this.stopPing();
   }
 
-  public onMessage(handler: MessageHandler): void {
-    this.messageHandler = handler;
+  public onMessage(event: MessageEvent): void {
+    console.log('ws:onmessage', { ...event });
+    if (this.messageHandler) this.messageHandler(event);
+  }
+
+  public connectionState() {
+    return this.socket?.readyState;
   }
 
   private startPing(): void {
@@ -84,8 +122,9 @@ export class WSTransport {
   }
 
   private sendPing(): void {
+    console.log('SendPing', this);
     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-      this.socket.send('ping');
+      this.socket.send(JSON.stringify({ type: 'ping' }));
     }
   }
 }

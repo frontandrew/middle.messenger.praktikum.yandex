@@ -111,7 +111,7 @@ export class Component <C extends Children, P extends Props> {
       events: { ...this.events },
       count: this.count,
     };
-    console.warn(`RNDR{${this.count}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
+    // console.warn(`RNDR{${this.count}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
   }
 
   render() {

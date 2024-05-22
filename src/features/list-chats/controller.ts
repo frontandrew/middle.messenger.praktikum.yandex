@@ -20,19 +20,20 @@ class ChatsController {
     store.set('isLoading', false);
   }
 
-  public async storeSelectedtedChatParams(chatId: number) {
-    store.set('isLoading', true);
+  public async handleChatSelection(nextChatId: number) {
+    const currChatId = store.get()?.chat?.id ?? null;
 
-    const currentChat = store.get()?.chats?.[chatId];
-    if (currentChat?.id === chatId) {
-      const token = await this.getChatToken(currentChat.id);
+    if (nextChatId !== currChatId) {
+      store.set('isLoading', true);
+      const token = await this.getChatToken(nextChatId);
+
       if (token?.length) {
-        store.set('chat', { id: chatId, token });
-        store.set(`chats.${chatId}.isCurrent`, true);
+        store.set('chat', { id: nextChatId, token });
+        this.updeteChatsList(nextChatId, currChatId);
       }
-    }
 
-    store.set('isLoading', false);
+      store.set('isLoading', false);
+    }
   }
 
   private async getChatToken(id: number) {
@@ -41,6 +42,14 @@ class ChatsController {
       .catch(() => null);
 
     return token;
+  }
+
+  private updeteChatsList(nextId: number, currId: number | null) {
+    const chats = store.get()?.chats;
+    chats![nextId].isCurrent = true;
+    if (currId) chats![currId].isCurrent = false;
+
+    store.set(`chats`, chats);
   }
 }
 

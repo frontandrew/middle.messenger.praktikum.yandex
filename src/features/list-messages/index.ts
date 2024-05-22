@@ -4,6 +4,8 @@ import { withStore } from 'store';
 
 import { ItemMessage } from 'entities/message';
 
+import { messagingController as control } from './controller';
+
 import type { ListMessagesChildren, ListMessagesProps } from './type';
 import './style.css';
 
@@ -18,21 +20,15 @@ export class ListMessages extends ListMessagesWithState<ListMessagesChildren, Li
     } as ListMessagesProps & ListMessagesChildren);
   }
 
+  init() {
+    control.init();
+  }
+
   componentDidUpdate(oldProps: ListMessagesProps, newProps: ListMessagesProps): boolean {
-    const {
-      items: newItems,
-      // eslint-disable-next-line
-      keys: newKeys,
-      // eslint-disable-next-line
-      hasItems: newHasItems,
-      ...newRestProps
-    } = newProps;
-    const {
-      items: oldItems,
-      keys: oldKeys,
-      hasItems: oldHasItems,
-      ...oldRestProps
-    } = oldProps;
+    // eslint-disable-next-line
+    const { items: newItems, keys: newKeys, hasItems: newHasItems, ...newRestProps } = newProps;
+    const { items: oldItems, keys: oldKeys, hasItems: oldHasItems, ...oldRestProps } = oldProps;
+
     let newItemsAndKeysProps:Pick<ListMessagesProps, 'items' | 'keys' | 'hasItems'> = {
       items: oldItems,
       keys: oldKeys,
@@ -75,6 +71,18 @@ export class ListMessages extends ListMessagesWithState<ListMessagesChildren, Li
   }
 
   render() {
-    return `<ul class="list-messages">${this.props.keys}</ul>`;
+    return (
+      `<ul class="list-messages">
+        {{#if ${this.props.items.length}}}
+          ${this.props.keys}
+        {{else}}
+          {{#> BaseLayout}}
+            <p class="text text_light-color">
+              There is no any messages. You can type first!
+            </p>
+          {{/BaseLayout}}
+        {{/if}}
+      </ul>`
+    );
   }
 }
