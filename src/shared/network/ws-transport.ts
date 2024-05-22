@@ -12,13 +12,22 @@ export type WSTransportArgs = {
   errorHandler?: ErrorHandler;
   messageHandler?: MessageHandler;
 }
+export enum MssgTypes {
+  FILE = 'file',
+  MSSG = 'message',
+  OLD = 'get old'
+}
+export type SendPayload = {
+  type: MssgTypes;
+  content: string | number;
+}
 
 export class WSTransport {
   private url: string;
 
   private socket: WebSocket | null = null;
   private pingTimer: number | null = null;
-  private pingInterval: number = PING_INTERVAL;
+  private pingInterval = PING_INTERVAL;
 
   public connectHandler?: ConnectHandler;
   public messageHandler?: MessageHandler;
@@ -75,10 +84,10 @@ export class WSTransport {
     if (this.socket) this.socket.close();
   }
 
-  public sendMessage(payload: string): void {
+  public sendMessage(payload: SendPayload): void {
     console.log('ws:onsend', payload);
     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-      this.socket.send(payload);
+      this.socket.send(JSON.stringify(payload));
     } else {
       console.error('WebSocket is not open. Ready state: ', this.socket?.readyState);
     }
