@@ -7,8 +7,8 @@ export interface CurrentChatState {
 
 export interface State {
   isLoading: boolean;
-  user: Nullable<UserType>;
-  chats: Nullable<Record<string, ChatType>>;
+  user: UserType | null;
+  chats: Record<string, ChatType> | null;
   messages: MessageType[] | [];
   chat: CurrentChatState | null;
 }

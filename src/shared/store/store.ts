@@ -1,3 +1,4 @@
+import { INIT_STATE } from 'config';
 import { set } from 'tools';
 
 import { EventBus } from '../core/event-bus';
@@ -9,7 +10,7 @@ export enum StoreEvents {
 }
 
 export class Store extends EventBus {
-  private state: State | null = null;
+  private state = INIT_STATE;
 
   public get() {
     return this.state;

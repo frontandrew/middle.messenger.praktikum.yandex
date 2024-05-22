@@ -9,7 +9,7 @@ export const WS_HOST = 'wss://ya-praktikum.tech/ws/chats';
 
 /* NETWORK */
 
-export const PING_INTERVAL = 90000;
+export const PING_INTERVAL = 60000;
 
 /* APP STATE */
 
