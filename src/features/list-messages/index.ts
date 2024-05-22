@@ -4,7 +4,7 @@ import { withStore } from 'store';
 
 import { ItemMessage } from 'entities/message';
 
-import { messagingController as control } from './controller';
+import { mssgControl as control } from 'services/messaging';
 
 import type { ListMessagesChildren, ListMessagesProps } from './type';
 import './style.css';

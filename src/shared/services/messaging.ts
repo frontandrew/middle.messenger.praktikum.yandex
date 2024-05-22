@@ -2,7 +2,7 @@ import { MessagePayload, MessagingAPI } from 'api';
 import { StoreEvents, store } from 'store';
 import { WS_HOST } from 'config';
 
-class MessagingController {
+class MssgControl {
   private api: MessagingAPI | null = null;
   private token: string | null = null;
   private chatId: number | null = null;
@@ -60,6 +60,7 @@ class MessagingController {
   }
 
   private onError(event: Event) {
+    // TODO: handle error
     console.log('ws:err', event);
     return event;
   }
@@ -71,4 +72,4 @@ class MessagingController {
   }
 }
 
-export const messagingController = new MessagingController();
+export const mssgControl = new MssgControl();

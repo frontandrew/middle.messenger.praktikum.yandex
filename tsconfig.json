@@ -28,6 +28,7 @@
       "network": ["./shared/network/index"],
       "pages": ["./pages/index"],
       "routing": ["./shared/routing/index"],
+      "services/*": ["./shared/services/*"],
       "store": ["./shared/store/index"],
       "tools": ["./shared/tools/index"],
       "ui": ["./shared/ui/index"],
