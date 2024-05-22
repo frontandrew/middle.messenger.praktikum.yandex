@@ -71,12 +71,10 @@ export class WSTransport {
 
       this.socket.onclose = (event) => {
         const { code, reason, wasClean } = event;
-        if (!wasClean) console.error(`Connection was broken with code: ${code}`);
+        if (!wasClean) console.error(`Connection was closed by reason: ${reason}, code: ${code}`);
         else console.warn(`Connection was closed by reason: ${reason}, code: ${code}`);
         this.onClose(event);
       };
-
-      // this.startPing();
     }
   }
 
