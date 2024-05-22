@@ -1,10 +1,10 @@
 export { HTTPTransport } from './http-transport';
-export { WSTransport } from './ws-transport';
+export { WSTransport, MssgTypes } from './ws-transport';
 
 export type {
   CloseHandler,
+  ConnectHandler,
   ErrorHandler,
   MessageHandler,
-  ConnectHandler,
   WSTransportArgs,
 } from './ws-transport';
