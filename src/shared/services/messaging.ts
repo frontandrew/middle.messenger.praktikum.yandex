@@ -77,7 +77,7 @@ class MssgControl {
     });
   }
 
-  collectMessages(event: MessageEvent) {
+  private collectMessages(event: MessageEvent) {
     const { data/* , type */ } = event;
 
     if (isArray(data)) {
@@ -118,8 +118,8 @@ class MssgControl {
       this.api = new MessagingAPI(
         {
           url: `${this.host}/${this.userId}/${this.chatId}/${this.token}`,
-          errorHandler: this.onError,
-          messageHandler: this.onMssg,
+          errorHandler: this.onError.bind(this),
+          messageHandler: this.onMssg.bind(this),
         },
       );
     }
