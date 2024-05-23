@@ -4,10 +4,11 @@ import { FormAvatar } from 'features/form-avatar';
 import type { DialogFileSelectChildren, DialogFileSelectProps } from './type';
 
 export class DialogSelectFile extends Dialog<DialogFileSelectChildren, DialogFileSelectProps> {
-  constructor(props: DialogFileSelectProps) {
+  constructor({ isOpen = false, ...rest }: DialogFileSelectProps) {
     super({
       content: new FormAvatar(),
-      ...props,
+      isOpen,
+      ...rest,
     } as DialogFileSelectChildren & DialogFileSelectProps);
   }
 }
