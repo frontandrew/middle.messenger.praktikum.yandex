@@ -2,13 +2,13 @@ import { AuthAPI } from 'api';
 import { router } from 'routing';
 import { store } from 'store';
 
-import { UserController } from 'entities/user';
 import type { UserType } from 'entities/user';
+import { UsersController } from 'services/users';
 
 import type { FormAuthData } from '../components/form-auth/type';
 
 const authApi = new AuthAPI();
-const userController = new UserController();
+const userController = new UsersController();
 
 export class AuthController {
   public async singIn(data: FormAuthData): Promise<void> {

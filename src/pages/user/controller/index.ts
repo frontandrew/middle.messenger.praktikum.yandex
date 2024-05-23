@@ -1,14 +1,14 @@
 import { AuthAPI } from 'api';
-import { UserController } from 'entities/user';
 import { router } from 'routing';
 import { store } from 'store';
 
-import type { UserPassPayload, UserProfilePayload } from 'entities/user';
+import type { UserPassPayload, UserProfilePayload } from 'services/users';
+import { UsersController } from 'services/users';
 
 import type { FormInfoData } from '../components/form-info';
 import { FormPassData } from '../components/form-pass';
 
-const userController = new UserController();
+const userController = new UsersController();
 const authApi = new AuthAPI();
 
 class UserPageController {

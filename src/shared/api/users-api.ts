@@ -6,11 +6,11 @@ import type {
   UserProfilePayload,
   UserResponse,
   UserSearchPayload,
-} from './type';
+} from 'services/users';
 
 const userTransport = new HTTPTransport();
 
-export class UserApi {
+export class UsersAPI {
   public getUserData() {
     return userTransport.get<void, UserResponse>('/auth/user');
   }

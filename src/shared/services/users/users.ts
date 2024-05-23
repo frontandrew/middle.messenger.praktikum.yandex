@@ -1,24 +1,16 @@
-import { UserApi } from './api';
+import { UserType } from 'entities/user';
+import { UsersAPI } from 'api';
 import { formatUserResponse } from './tools';
 
 import type {
   UserPassPayload,
   UserProfilePayload,
   UserSearchPayload,
-  UserType,
 } from './type';
 
-const userApi = new UserApi();
+const userApi = new UsersAPI();
 
-export class UserController {
-  // async createUser() {
-  //   return user;
-  // }
-
-  // async deleteUser() {
-  //   return user;
-  // }
-
+export class UsersController {
   async getUser(): Promise<UserType | null> {
     const user = await userApi.getUserData()
       .then(({ response }) => formatUserResponse(response))

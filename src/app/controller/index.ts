@@ -1,8 +1,8 @@
-import { UserController } from 'entities';
+import { UsersController } from 'services/users';
 import { router } from 'routing';
 import { store } from 'store';
 
-const userConttoller = new UserController();
+const userConttoller = new UsersController();
 
 export class AppController {
   /* IMPORTANT: router and store mus be init before setAuthState() call */

@@ -1,4 +1,6 @@
-import { UserResponse, UserType } from '../type';
+import { UserType } from 'entities/user';
+
+import type { UserResponse } from '../type';
 
 export function formatUserPayload(user: UserType): UserResponse {
   const { firstName, secondName, nickName, phone, ...rest } = user;
