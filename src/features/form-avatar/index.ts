@@ -5,9 +5,8 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class FormAvatar extends Form<FormAvatarChildren, FormAvatarProps> {
-  constructor({ onSubmit }: FormAvatarProps) {
+  constructor() {
     super({
-      onSubmit,
       hasError: false,
       title: new Text({ text: 'Load image', tag: 'h2', classes: 'form__title' }),
       avatar: new Field({
