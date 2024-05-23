@@ -1,0 +1,11 @@
+.user-chats {
+    height: 100%;
+    width: 100%;
+    min-width: 20em;
+
+    overflow-x: hidden auto;
+}
+
+.user-chats__message {
+    transform: translateY(-4em);
+}
