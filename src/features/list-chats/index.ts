@@ -6,7 +6,7 @@ import { withStore } from 'store';
 import type { ItemChatKeyAttr } from 'entities/chat';
 
 import type { ListChatsChildren, ListChatsProps } from './type';
-import { chatsController as control } from './controller';
+import { chatsController as ctrl } from './controller';
 import './style.css';
 
 const ListChatsWithState = withStore((state) => ({ chatItems: state.chats }))(Component);
@@ -25,7 +25,7 @@ export class ListChats extends ListChatsWithState<ListChatsChildren, ListChatsPr
   }
 
   init() {
-    control.getListChats();
+    ctrl.getListChats();
   }
 
   componentDidUpdate(oldProps: ListChatsProps, newProps: ListChatsProps): boolean {
@@ -91,7 +91,7 @@ export class ListChats extends ListChatsWithState<ListChatsChildren, ListChatsPr
     const id = Number(key.value);
     // this.toggleActiveItem(id);
 
-    control.handleChatSelection(id);
+    ctrl.handleChatSelection(id);
   }
 
   toggleActiveItem(id: number) {
