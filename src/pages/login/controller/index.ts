@@ -3,12 +3,11 @@ import { router } from 'routing';
 import { store } from 'store';
 
 import type { UserType } from 'entities/user';
-import { UsersController } from 'services/users';
+import { usersController as ctrl } from 'services/users';
 
 import type { FormAuthData } from '../components/form-auth/type';
 
 const authApi = new AuthAPI();
-const userController = new UsersController();
 
 export class AuthController {
   public async singIn(data: FormAuthData): Promise<void> {
@@ -32,7 +31,7 @@ export class AuthController {
   }
 
   public async getUser(): Promise<UserType | null> {
-    const user = await userController.getUser();
+    const user = await ctrl.getUser();
     return user;
   }
 }

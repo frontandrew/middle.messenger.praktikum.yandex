@@ -1,15 +1,15 @@
-import { Button, ButtonIcon, Dialog, Text } from 'ui';
+import { Button, ButtonIcon, Text } from 'ui';
 import { Arrow } from 'images';
 import { Component } from 'core';
 import { withRouter } from 'routing';
 import { withStore } from 'store';
 
-import { userPageController as controller } from '../../controller';
+import { DialogSelectFile } from 'widgets/dialog-file-select';
 
 import { ControlAvatar } from '../control-avatar';
-import { FormAvatar } from '../form-avatar';
 import { FormInfo } from '../form-info';
 import { FormPass } from '../form-pass';
+import { userPageController as controller } from '../../controller';
 
 import type { FormInfoData } from '../form-info';
 import type { FormPassData } from '../form-pass';
@@ -32,7 +32,7 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
       }),
       avatar: new ControlAvatar({
         disabled: false,
-        onClick: () => this.children.avatarDialog?.open(),
+        onClick: () => this.children.avatarDialog.open(),
       }),
       nick: new UserNick({
         classes: 'user-nick',
@@ -41,14 +41,14 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
       }),
       formInfo: new FormInfo({
         isEdit: false,
-        onSubmit: (event: Event) => {
+        onSubmit: (event: SubmitEvent) => {
           event.preventDefault();
           this.handleUserInfoChange();
           return event;
         },
       }),
       formPass: new FormPass({
-        onSubmit: (event: Event) => {
+        onSubmit: (event: SubmitEvent) => {
           event.preventDefault();
           this.handleUserPassChange();
           return event;
@@ -69,16 +69,7 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
         label: 'Sign out',
         onClick: () => controller.singOut(),
       }),
-      avatarDialog: new Dialog({
-        isOpen: false,
-        content: new FormAvatar({
-          onSubmit: (event) => {
-            event.preventDefault();
-            this.handleUserAvatarChange();
-            return event;
-          },
-        }),
-      }),
+      avatarDialog: new DialogSelectFile({ isOpen: false }),
     } as LayoutUserChildren & LayoutUserProps);
   }
 
@@ -124,20 +115,6 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
     }
 
     this.children.formPass.updateErrorState(this.children.formPass.props.hasError!);
-  }
-
-  private async handleUserAvatarChange() {
-    const avatarForm = this.children.avatarDialog.children.content;
-    const data = avatarForm.handleSubmit();
-
-    if (data?.avatar instanceof FormData) {
-      const isChanged = await controller.changeUserAvatar(data.avatar);
-
-      if (isChanged) {
-        this.children.avatarDialog.setProps({ isOpen: false });
-        avatarForm.reset();
-      }
-    }
   }
 
   render() {

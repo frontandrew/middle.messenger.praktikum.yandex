@@ -18,7 +18,7 @@ export class Form<C extends FormChildren, P extends FormProps>
       this.reset();
       return event;
     },
-    onSubmit = (event: Event) => {
+    onSubmit = (event: SubmitEvent) => {
       event.preventDefault();
       this.handleSubmit();
       return event;
@@ -94,7 +94,7 @@ export class Form<C extends FormChildren, P extends FormProps>
 
           if (file) {
             const formdata = new FormData();
-            formdata.append('avatar', file, file.name);
+            formdata.append(`${key}`, file, file.name);
 
             return { ...acc, [key]: formdata };
           }

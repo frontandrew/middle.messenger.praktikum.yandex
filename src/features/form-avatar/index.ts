@@ -5,7 +5,7 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class FormAvatar extends Form<FormAvatarChildren, FormAvatarProps> {
-  constructor() {
+  constructor(props: FormAvatarProps) {
     super({
       hasError: false,
       title: new Text({ text: 'Load image', tag: 'h2', classes: 'form__title' }),
@@ -23,6 +23,7 @@ export class FormAvatar extends Form<FormAvatarChildren, FormAvatarProps> {
         text: 'You need to select a file',
         classes: 'form__error text_error-color',
       }),
+      ...props,
     } as FormAvatarChildren & FormAvatarProps);
   }
 

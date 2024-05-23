@@ -1,16 +1,15 @@
-import { UserType } from 'entities/user';
 import { UsersAPI } from 'api';
-import { formatUserResponse } from './tools';
+import { identity } from 'tools';
+import { store } from 'store';
 
-import type {
-  UserPassPayload,
-  UserProfilePayload,
-  UserSearchPayload,
-} from './type';
+import type { UserType } from 'entities/user';
+
+import type { UserPassPayload, UserProfilePayload, UserSearchPayload } from './type';
+import { formatUserResponse } from './tools';
 
 const userApi = new UsersAPI();
 
-export class UsersController {
+class UsersController {
   async getUser(): Promise<UserType | null> {
     const user = await userApi.getUserData()
       .then(({ response }) => formatUserResponse(response))
@@ -36,12 +35,24 @@ export class UsersController {
     return result;
   }
 
-  async updateAvatar(data: FormData): Promise<UserType | null> {
-    const user = await userApi.setUserAvatar(data)
-      .then(({ response }) => formatUserResponse(response))
+  async updateAvatar(data: PlainObject): Promise<boolean> {
+    store.set('isLoading', true);
+
+    if ('avatar' in data && data.avatar instanceof FormData) {
+      const result = await userApi.setUserAvatar(data.avatar)
+        .then(({ response }) => formatUserResponse(response))
       // .cathch(error) // TODO: catch error
-      .catch(() => null);
-    return user;
+        .catch(() => null);
+      const user = identity<UserType>(result);
+
+      if (typeof user?.id === 'number') {
+        store.set('user', user);
+        store.set('isLoading', false);
+        return true;
+      }
+    }
+    store.set('isLoading', false);
+    return false;
   }
 
   async searchUser(login: UserSearchPayload): Promise<UserType[]> {
@@ -52,3 +63,5 @@ export class UsersController {
     return users;
   }
 }
+
+export const usersController = new UsersController();

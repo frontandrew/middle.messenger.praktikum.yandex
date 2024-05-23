@@ -11,7 +11,7 @@ export interface FormProps extends Props {
   disabled?: boolean,
   hasError?: boolean,
 
-  onSubmit?: ({}: Event) => Event,
+  onSubmit?: ({}: SubmitEvent) => SubmitEvent,
   onReset?: ({}: Event) => Event,
   onInput?: ({}: Event) => Event,
 }

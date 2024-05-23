@@ -3,19 +3,18 @@ import { router } from 'routing';
 import { store } from 'store';
 
 import type { UserPassPayload, UserProfilePayload } from 'services/users';
-import { UsersController } from 'services/users';
+import { usersController as ctrl } from 'services/users';
 
 import type { FormInfoData } from '../components/form-info';
-import { FormPassData } from '../components/form-pass';
+import type { FormPassData } from '../components/form-pass';
 
-const userController = new UsersController();
 const authApi = new AuthAPI();
 
 class UserPageController {
   async changeUserInfo(data: FormInfoData) {
     store.set('isLoading', true);
 
-    const userInfo = await userController.updateUser(this.formatUserInfoPayload(data));
+    const userInfo = await ctrl.updateUser(this.formatUserInfoPayload(data));
     const responseState = Boolean(userInfo?.id);
 
     if (responseState) {
@@ -28,22 +27,10 @@ class UserPageController {
 
   async changeUserPass(data: FormPassData) {
     store.set('isLoading', true);
-    const result = await userController.updatePass(this.formatUserPassPayload(data));
+    const result = await ctrl.updatePass(this.formatUserPassPayload(data));
 
     store.set('isLoading', false);
     return result;
-  }
-
-  async changeUserAvatar(data: FormData) {
-    store.set('isLoading', true);
-    const user = await userController.updateAvatar(data);
-
-    if (user?.id) {
-      store.set('user', user);
-    }
-    store.set('isLoading', false);
-
-    return Boolean(user?.id);
   }
 
   async singOut() {

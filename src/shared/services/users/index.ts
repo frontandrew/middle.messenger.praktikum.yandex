@@ -7,4 +7,4 @@ export type {
 } from './type';
 
 export { formatUserPayload, formatUserResponse } from './tools';
-export { UsersController } from './users';
+export { usersController } from './users';
