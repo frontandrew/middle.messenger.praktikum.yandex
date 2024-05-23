@@ -1,56 +1,12 @@
 import { StoreEvents, store } from 'store';
-import { identity, isArray, isPlainObject } from 'tools';
+import { identity, isArray } from 'tools';
 import { MessagingAPI } from 'api';
 import { WS_HOST } from 'config';
 
 import { MessageType } from 'entities/message';
 
-// TODO: separate to type and tools
-
-export type MessageResponseType = 'message' | 'file';
-export interface MessageResponse {
-  chat_id: number;
-  time: string;
-  type: MessageResponseType;
-  user_id: number;
-  content: string;
-  file?: {
-    id: number;
-    user_id: number;
-    path: string;
-    filename: string;
-    content_type: string;
-    content_size: number;
-    upload_date: string;
-  }
-}
-
-export function isMessageResponse(value: unknown): value is MessageResponse {
-  return (
-    isPlainObject(value)
-    && typeof value.chat_id === 'number'
-    && typeof value.user_id === 'number'
-    && typeof value.content === 'string'
-    && Boolean(value.type)
-  );
-}
-
-export function formatMssgResponse(data: MessageResponse): MessageType {
-  const { user_id, time, content, type } = data;
-  const date = new Date(time);
-  const hour = date.getHours();
-  const minute = date.getMinutes();
-
-  const { user } = store.get();
-
-  return {
-    type,
-    content,
-    userId: user_id,
-    time: `${hour}:${minute}`,
-    origin: user?.id === user_id ? 'outgoing' : 'incoming',
-  };
-}
+import { formatMssgResponse, isMessageResponse } from './tools';
+import { MessageResponse } from './type';
 
 class MssgControl {
   private api: MessagingAPI | null = null;
@@ -77,11 +33,9 @@ class MssgControl {
     });
   }
 
-  private collectMessages(event: MessageEvent) {
-    const { data/* , type */ } = event;
-
+  private collectMessages(data: unknown) {
     if (isArray(data)) {
-      const newMssgs = data.reduceRight((res, mssg) => {
+      const newMssgs = data.reduce((res, mssg) => {
         if (isMessageResponse(mssg)) {
           return [...res, formatMssgResponse(identity<MessageResponse>(mssg))];
         }
@@ -125,7 +79,6 @@ class MssgControl {
     }
     await this.api?.openConnection();
     this.getListMessages();
-    console.log('ws:controller', { chat, user, api: this.api });
   }
 
   public sendMessage(data: string) {
@@ -136,13 +89,13 @@ class MssgControl {
 
   private onError(event: Event) {
     // TODO: handle error
-    console.log('ws:err', event);
     return event;
   }
 
   private onMssg(event: MessageEvent) {
-    console.log('ws:mssg', event);
-    this.collectMessages(event);
+    if (typeof event.data === 'string' && ['message', 'file'].includes(event.type)) {
+      this.collectMessages(JSON.parse(event.data));
+    }
     return event;
   }
 }
