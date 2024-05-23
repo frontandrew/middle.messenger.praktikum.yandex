@@ -23,7 +23,7 @@
       "config": ["./shared/config/index"],
       "core": ["./shared/core/index"],
       "entities/*": ["./entities/*"],
-      "feetures": ["./features/index"],
+      "features": ["./features/index"],
       "images": ["./assets/images/index"],
       "network": ["./shared/network/index"],
       "pages": ["./pages/index"],
@@ -32,7 +32,8 @@
       "store": ["./shared/store/index"],
       "tools": ["./shared/tools/index"],
       "ui": ["./shared/ui/index"],
-      "validation": ["./shared/validation/index"]
+      "validation": ["./shared/validation/index"],
+      "widgets/*": ["./widgets/*"]
     }
   },
   "include": ["src"]
