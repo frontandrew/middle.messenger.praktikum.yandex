@@ -1,4 +1,4 @@
-.item-chat {
+.item-user {
     position: relative;
 
     display: flex;
@@ -6,26 +6,26 @@
     margin-top: 0.125em;
 }
 
-.item-chat > .divider {
+.item-user > .divider {
     margin: 0.125em 0.625em 0;
 }
 
-.item-chat:last-child > .divider {
+.item-user:last-child > .divider {
     display: none;
 }
 
-.item-chat__touch-layer {
+.item-user__touch-layer {
     position: absolute;
 
     height: 100%;
     width: 100%;
 }
 
-.item-chat__touch-layer:hover {
+.item-user__touch-layer:hover {
     cursor: pointer;
 }
 
-.item-chat__container {
+.item-user__container {
     display: flex;
     flex-direction: row;
 
@@ -35,71 +35,19 @@
     padding: 0.625em;
 }
 
-.item-chat__container:has(~ .item-chat__touch-layer:hover) {
+.item-user__container:has(~ .item-user__touch-layer:hover) {
     background-color: var(--item-hover-color);
 }
 
-.item-chat__container_active {
+.item-user__container_active {
     background-color: var(--item-hover-color);
 }
 
-.item-chat__info {
+.item-user__info {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     gap: 0.25em;
 
     width: 14.5625em;
-}
-
-.item-chat__info-title {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1em;
-}
-
-.item-chat__info-subtitle {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-    flex-grow: 1;
-    gap: 1em;
-}
-
-.item-chat__name {
-    text-wrap: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.item-chat__date {
-    text-wrap: nowrap;
-}
-
-.item-chat__message {
-    align-self: flex-start;
-    overflow: hidden;
-
-    /* durty hack: https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-
-    line-height: 1.15385em;
-}
-
-.item-chat__count {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    min-height: 1.25em;
-    min-width: 1.25em;
-    align-self: flex-end;
-
-    border-radius: 50%;
-    background-color: var(--main-color);
 }

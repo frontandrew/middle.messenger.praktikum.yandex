@@ -10,7 +10,7 @@ export interface ItemUserProps extends Props, UserType {
 export interface ItemUserChildren extends Children {
   avatarUser: Avatar;
   nameUser: Text;
-  nickName: Text;
+  nickUser: Text;
 }
 
 export interface ItemUserKeyAttr { key: { value: string } }

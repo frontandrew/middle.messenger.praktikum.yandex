@@ -16,7 +16,7 @@ export class ItemUser extends Component<ItemUserChildren, ItemUserProps> {
         tag: 'h3',
         classes: '',
       }),
-      nickName: new Text({
+      nickUser: new Text({
         text: nickName ?? '',
         classes: '',
       }),
