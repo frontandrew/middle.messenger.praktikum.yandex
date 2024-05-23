@@ -5,13 +5,14 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class Dialog<C extends DialogChildren, P extends DialogProps> extends Component<C, P> {
-  constructor({ isOpen = false, onClick }: DialogProps) {
+  constructor({ isOpen = false, onClick, ...rest }: DialogProps) {
     super({
       isOpen,
       onClick: () => {
         if (onClick) onClick();
         this.close();
       },
+      ...rest,
     } as C & P);
   }
 
