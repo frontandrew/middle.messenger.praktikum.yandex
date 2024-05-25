@@ -7,7 +7,7 @@ class Router {
   private currentRoute: Route | null = null;
   private rootQuery: string | undefined = '.main';
   private pathsWithOutAuth: RoutePaths[] = ['/', '/sign-up'];
-  public authState: boolean = false;
+  private authState: boolean = false;
   public routes: Route[] = [];
   public history: History = window.history;
 
