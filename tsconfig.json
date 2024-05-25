@@ -19,7 +19,7 @@
     "noImplicitAny": true,
     "baseUrl": "./src",
     "paths": {
-      "api/*": ["./shared/api/*"],
+      "apis/*": ["./shared/apis/*"],
       "config": ["./shared/config/index"],
       "core": ["./shared/core/index"],
       "entities/*": ["./entities/*"],
