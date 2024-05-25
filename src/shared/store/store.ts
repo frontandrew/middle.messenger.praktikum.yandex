@@ -1,5 +1,5 @@
+import { deepCopy, set } from 'tools';
 import { INIT_STATE } from 'config';
-import { set } from 'tools';
 
 import { EventBus } from '../core/event-bus';
 
@@ -10,7 +10,8 @@ export enum StoreEvents {
 }
 
 export class Store extends EventBus {
-  private state = INIT_STATE;
+  private state: State | null = null;
+  private initState: State = INIT_STATE;
 
   public get() {
     return this.state;
@@ -21,8 +22,14 @@ export class Store extends EventBus {
     this.emit(StoreEvents.UPD);
   }
 
-  public init(state: State) {
-    this.state = state;
+  public init() {
+    const state = deepCopy(this.initState);
+    this.state = state as State;
+  }
+
+  public reset() {
+    this.init();
+    this.emit(StoreEvents.UPD);
   }
 }
 
