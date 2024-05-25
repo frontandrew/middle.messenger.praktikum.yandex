@@ -1,8 +1,7 @@
 import { MssgTypes, WSTransport } from 'network';
-
 import type { WSTransportArgs } from 'network';
 
-export class MessagingAPI {
+export class MssgAPI {
   private transport: WSTransport | null = null;
 
   constructor(args: WSTransportArgs) {
