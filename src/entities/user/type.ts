@@ -8,3 +8,7 @@ export interface UserType {
     nickName: string;
     phone: string;
 }
+
+export interface RegUserType extends Omit<UserType, 'id' | 'nickName'> {
+  password: string;
+}
