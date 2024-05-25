@@ -1,13 +1,11 @@
-import { UserType } from 'entities/user';
+import { RegUserType } from 'entities/user';
+import { UserProfilePayload } from 'apis/user';
 
-import type { UserResponse } from '../type';
-
-export function formatUserPayload(user: UserType): UserResponse {
-  const { firstName, secondName, nickName, phone, ...rest } = user;
+export function formatUserPayload(user: RegUserType): UserProfilePayload {
+  const { firstName, secondName, phone, ...rest } = user;
   return {
     first_name: firstName,
     second_name: secondName,
-    display_name: nickName,
     phone: phone.split(' ').join(''),
     ...rest,
   };

@@ -1,6 +1,7 @@
 import { RESOURCES } from 'config';
 
-import type { UserResponse, UserType } from '../type';
+import type { UserResponse } from 'apis/user';
+import type { UserType } from 'entities/user';
 
 export function formatUserResponse(data: UserResponse): UserType {
   /* eslint-disable camelcase */
