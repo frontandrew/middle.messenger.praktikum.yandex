@@ -1,6 +1,6 @@
 import { StoreEvents, store } from 'store';
 import { identity, isArray } from 'tools';
-import { MessagingAPI } from 'api';
+import { MssgAPI } from 'apis/mssg';
 import { WS_HOST } from 'config';
 
 import { MessageType } from 'entities/message';
@@ -9,7 +9,7 @@ import { formatMssgResponse, isMessageResponse } from './tools';
 import { MessageResponse } from './type';
 
 class MssgControl {
-  private api: MessagingAPI | null = null;
+  private api: MssgAPI | null = null;
   private token: string | null = null;
   private chatId: number | null = null;
   private userId: number | null = null;
@@ -43,14 +43,14 @@ class MssgControl {
       }, [] as MessageType[]);
 
       if (newMssgs.length) {
-        const { messages: prevMssgs } = store.get();
-        store.set('messages', [...prevMssgs, ...newMssgs]);
+        const prevMssgs = store.get()?.messages;
+        store.set('messages', [...prevMssgs!, ...newMssgs]);
       }
     }
 
     if (isMessageResponse(data)) {
-      const { messages: prevMssgs } = store.get();
-      store.set('messages', [...prevMssgs, formatMssgResponse(data)]);
+      const prevMssgs = store.get()?.messages;
+      store.set('messages', [...prevMssgs!, formatMssgResponse(data)]);
     }
   }
 
@@ -69,7 +69,7 @@ class MssgControl {
       this.userId = user.id;
       this.chatId = chat.id;
       this.token = chat.token;
-      this.api = new MessagingAPI(
+      this.api = new MssgAPI(
         {
           url: `${this.host}/${this.userId}/${this.chatId}/${this.token}`,
           errorHandler: this.onError.bind(this),
