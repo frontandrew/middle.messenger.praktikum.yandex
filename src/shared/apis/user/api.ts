@@ -8,8 +8,12 @@ import type {
   UserSearchPayload,
 } from './type';
 
-export class UsersAPI {
+export class UserAPI {
   private http = new HTTPTransport();
+
+  public getUserData() {
+    return this.http.get<void, UserResponse>('/auth/user');
+  }
 
   public setUserData(payload: UserProfilePayload) {
     return this.http.put<UserProfilePayload, UserResponse>('/user/profile', { data: payload });

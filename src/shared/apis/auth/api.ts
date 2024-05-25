@@ -1,5 +1,4 @@
 import { HTTPTransport } from 'network';
-import type{ UserResponse } from 'api/user';
 
 import type { AuthPayload, AuthResponse, RegPayload, RegResponse } from './type';
 
@@ -12,10 +11,6 @@ export class AuthAPI {
 
   public logout() {
     return this.http.post<void, AuthResponse>('/auth/logout');
-  }
-
-  public getUserData() {
-    return this.http.get<void, UserResponse>('/auth/user');
   }
 
   public registration(data: RegPayload) {

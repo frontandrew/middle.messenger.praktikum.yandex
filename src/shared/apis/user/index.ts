@@ -1,4 +1,4 @@
-export { UsersAPI } from './api';
+export { UserAPI } from './api';
 
 export type {
   UserPassPayload,
