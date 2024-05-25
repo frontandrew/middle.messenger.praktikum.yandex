@@ -2,28 +2,28 @@ import { MssgTypes, WSTransport } from 'network';
 import type { WSTransportArgs } from 'network';
 
 export class MssgAPI {
-  private transport: WSTransport | null = null;
+  private ws: WSTransport | null = null;
 
   constructor(args: WSTransportArgs) {
-    this.transport = new WSTransport({ ...args });
+    this.ws = new WSTransport({ ...args });
   }
 
   public async openConnection(): Promise<void> {
-    await this.transport?.connect();
+    await this.ws?.connect();
   }
 
   public disconnect(): void {
-    this.transport?.disconnect();
+    this.ws?.disconnect();
   }
 
   public getMessages(count: number) {
-    return this.transport?.sendMessage({ content: String(count), type: MssgTypes.OLD });
+    return this.ws?.sendMessage({ content: String(count), type: MssgTypes.OLD });
   }
   public getConnectState() {
-    return this.transport?.connectionState();
+    return this.ws?.connectionState();
   }
 
   public sendMessage(content: string): void {
-    if (content) this.transport?.sendMessage({ content, type: MssgTypes.MSSG });
+    if (content) this.ws?.sendMessage({ content, type: MssgTypes.MSSG });
   }
 }
