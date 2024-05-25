@@ -4,12 +4,18 @@ import type {
   UserPassPayload,
   UserPassResponse,
   UserProfilePayload,
+  UserRegPayload,
+  UserRegResponse,
   UserResponse,
   UserSearchPayload,
 } from './type';
 
 export class UserAPI {
   private http = new HTTPTransport();
+
+  public registration(data: UserRegPayload) {
+    return this.http.post<UserRegPayload, UserRegResponse>('/auth/signup', { data });
+  }
 
   public getUserData() {
     return this.http.get<void, UserResponse>('/auth/user');

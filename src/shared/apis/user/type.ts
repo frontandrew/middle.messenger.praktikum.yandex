@@ -9,7 +9,7 @@ export interface UserResponse {
   email: string;
 }
 
-export type UserProfilePayload = Omit<UserResponse, 'id' | 'avatar'>
+export type UserProfilePayload = Omit<UserResponse, 'id' | 'avatar' | 'display_name'>
 
 export interface UserSearchPayload {
   login: string;
@@ -21,3 +21,16 @@ export interface UserPassPayload {
 }
 
 export type UserPassResponse = 'OK';
+
+export interface UserRegPayload {
+  first_name: string;
+  second_name: string;
+  login: string;
+  email: string;
+  password: string;
+  phone: string;
+}
+
+export interface UserRegResponse {
+  id: number
+}
