@@ -19,10 +19,7 @@
     "func-names": "off",
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "max-len": [2, 100],
-    "sort-imports": ["warn", {
-      "allowSeparatedGroups": true,
-      "memberSyntaxSortOrder": ["all", "multiple", "single", "none"]
-    }],
+    "sort-imports": "off",
     "lines-between-class-members": "off",
     "no-empty-pattern": "off",
     "no-underscore-dangle": ["warn", {
