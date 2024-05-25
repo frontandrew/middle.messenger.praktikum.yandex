@@ -1,1 +1,2 @@
-export { AppController } from './controller';
+export { appController } from './controller';
+export { App } from './components';

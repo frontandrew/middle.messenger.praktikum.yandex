@@ -4,8 +4,7 @@ import { Templates } from 'ui';
 import { registerPartials } from 'tools';
 import { router } from 'routing';
 
-import { App } from 'app/components';
-import { AppController } from 'app';
+import { App, appController } from 'app';
 
 registerPartials(Templates);
 
@@ -16,13 +15,12 @@ router
   .use({ pathname: '/messenger', component: Pages.PageChats })
   .use({ pathname: '/error', component: Pages.PageError });
 
+(async () => { await appController.appInit(); })();
+
 const root = document.querySelector('.main');
 const app = new App();
 root?.appendChild(app.getContent()!);
 
-const controller = new AppController();
-(async () => { await controller.start(); })();
-
-/* IMPORTANT: start router after App render */
-
-router.start();
+window.addEventListener('unload', () => {
+  appController.appStop();
+});
