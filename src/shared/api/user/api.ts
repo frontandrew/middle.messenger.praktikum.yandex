@@ -6,15 +6,11 @@ import type {
   UserProfilePayload,
   UserResponse,
   UserSearchPayload,
-} from 'services/users';
+} from './type';
 
 const userTransport = new HTTPTransport();
 
 export class UsersAPI {
-  public getUserData() {
-    return userTransport.get<void, UserResponse>('/auth/user');
-  }
-
   public setUserData(payload: UserProfilePayload) {
     return userTransport.put<UserProfilePayload, UserResponse>('/user/profile', { data: payload });
   }
