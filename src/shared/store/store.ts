@@ -1,8 +1,6 @@
 import { deepCopy, set } from 'tools';
-import { INIT_STATE } from 'config';
 
 import { EventBus } from '../core/event-bus';
-
 import type { State } from './type';
 
 export enum StoreEvents {
@@ -10,8 +8,8 @@ export enum StoreEvents {
 }
 
 export class Store extends EventBus {
+  private initState: State | null = null;
   private state: State | null = null;
-  private initState: State = INIT_STATE;
 
   public get() {
     return this.state;
@@ -22,13 +20,16 @@ export class Store extends EventBus {
     this.emit(StoreEvents.UPD);
   }
 
-  public init() {
-    const state = deepCopy(this.initState);
-    this.state = state as State;
+  public init(state: State) {
+    this.initState = state;
+    this.state = deepCopy(state) as State;
   }
 
   public reset() {
-    this.init();
+    if (!this.initState) {
+      throw (new Error('Application initial state is missing'));
+    }
+    this.state = deepCopy(this.initState) as State;
     this.emit(StoreEvents.UPD);
   }
 }
