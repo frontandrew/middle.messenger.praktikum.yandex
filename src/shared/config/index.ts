@@ -20,3 +20,13 @@ export const INIT_STATE: State = {
   messages: [],
   chat: null,
 };
+
+/* TODO: meke this usefull - PAGES CONF */
+
+export const PAGES = {
+  '/': 'PageLogin',
+  '/sign-up': 'PageReg',
+  '/settings': 'PageUser',
+  '/messenger': 'PageChats',
+  '/error': 'PageError',
+} as const;
