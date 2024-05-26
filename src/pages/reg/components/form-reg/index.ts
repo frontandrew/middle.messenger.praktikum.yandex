@@ -1,6 +1,6 @@
 import { Button, Field, Form } from 'ui';
 
-import { RegController } from '../../controller';
+import { usersServ as serv } from 'services/users';
 
 import type { FormRegChildren, FormRegData, FormRegProps } from './type';
 import template from './template.hbs?raw';
@@ -9,8 +9,7 @@ import './style.css';
 export type { FormRegChildren, FormRegData, FormRegProps };
 
 export class FormReg extends Form<FormRegChildren, FormRegProps> {
-  private controller = new RegController();
-  constructor() {
+  constructor(props: FormRegProps) {
     super({
       onSubmit: (event: Event) => {
         event.preventDefault();
@@ -65,6 +64,7 @@ export class FormReg extends Form<FormRegChildren, FormRegProps> {
         label: 'Register',
         type: 'submit',
       }),
+      ...props,
     } as FormRegChildren & FormRegProps);
   }
 
@@ -75,7 +75,7 @@ export class FormReg extends Form<FormRegChildren, FormRegProps> {
       this.validatePasswordRepeate(regData);
     }
     if (!this.props.hasError) {
-      this.controller.regUser(regData);
+      serv.regUser(regData);
     }
   }
 
