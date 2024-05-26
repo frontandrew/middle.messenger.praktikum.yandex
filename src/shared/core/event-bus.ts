@@ -32,7 +32,7 @@ export class EventBus {
     }
 
     this.listeners[event].forEach((listener) => {
-      listener(...args);
+      if (listener) listener(...args);
     });
   }
 }
