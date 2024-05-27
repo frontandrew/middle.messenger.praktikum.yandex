@@ -5,25 +5,8 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class Button extends Component<ButtonChildren, ButtonProps> {
-  constructor({
-    classes = '',
-    disabled = false,
-    type = 'button',
-    variant = 'filled',
-
-    onClick = (event: Event) => event,
-
-    ...rest
-  }: ButtonProps) {
-    super({
-      classes,
-      disabled,
-      type,
-      variant,
-      onClick,
-
-      ...rest,
-    } as ButtonChildren & ButtonProps);
+  constructor({ disabled = false, type = 'button', variant = 'filled', ...rest }: ButtonProps) {
+    super({ disabled, type, variant, ...rest } as ButtonChildren & ButtonProps);
   }
 
   setDisabled(state: boolean) {

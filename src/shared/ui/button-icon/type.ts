@@ -6,11 +6,14 @@ type ButtonIconVariants = 'filled' | 'transparent';
 export interface ButtonIconChildren extends Children {}
 
 export interface ButtonIconProps extends Props {
-  pic?: string,
-  classes?: string,
-  variant?: ButtonIconVariants,
-  disabled?: boolean,
-  type?: ButtonTypes,
+  tabindex: number;
 
-  onClick?: (({}: Event) => Event) | (() => void),
+  autofocus?: boolean;
+  pic?: string;
+  classes?: string;
+  variant?: ButtonIconVariants;
+  disabled?: boolean;
+  type?: ButtonTypes;
+
+  onClick?: (({}: Event) => Event) | (() => void);
 }

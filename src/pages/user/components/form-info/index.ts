@@ -16,6 +16,8 @@ export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
         label: 'Email',
         inline: true,
         disabled: true,
+        autofocus: true,
+        tabindex: 1,
       },
       login: {
         name: 'login',
@@ -23,6 +25,7 @@ export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
         label: 'Login',
         inline: true,
         disabled: true,
+        tabindex: 2,
       },
       firstName: {
         name: 'first_name',
@@ -30,6 +33,7 @@ export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
         label: 'Name',
         inline: true,
         disabled: true,
+        tabindex: 3,
       },
       secondName: {
         name: 'second_name',
@@ -37,6 +41,7 @@ export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
         label: 'Surname',
         inline: true,
         disabled: true,
+        tabindex: 4,
       },
       nickName: {
         name: 'display_name',
@@ -44,6 +49,7 @@ export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
         label: 'Nickname',
         inline: true,
         disabled: true,
+        tabindex: 5,
       },
       phone: {
         name: 'phone',
@@ -51,6 +57,7 @@ export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
         label: 'Phone',
         inline: true,
         disabled: true,
+        tabindex: 6,
       },
     };
 
@@ -72,7 +79,7 @@ export class FormInfo extends Form<FormInfoChildren, FormInfoProps> {
       submit: new Button({
         label: 'Save',
         type: 'submit',
-
+        tabindex: 7,
       }),
     } as FormInfoChildren & FormInfoProps);
   }

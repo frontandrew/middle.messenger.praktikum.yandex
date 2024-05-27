@@ -6,10 +6,9 @@ export type InputType = 'text' | 'password' | 'file' | 'simple';
 export interface InputProps extends Props {
   name: string;
   type: InputType;
+  tabindex: number;
 
-  // label?: string;
-  // inline?: string;
-  // textHelp?: string;
+  autofocus?: boolean;
   accept?: InputAccept;
   classes?: string;
   disabled?: boolean;

@@ -6,12 +6,14 @@ type ButtonVariants = 'filled' | 'link' | 'text';
 export interface ButtonChildren extends Children {}
 
 export interface ButtonProps extends Props {
-  readonly label: string,
+  readonly label: string;
+  tabindex: number;
 
-  classes?: string,
-  disabled?: boolean,
-  type?: ButtonTypes,
-  variant?: ButtonVariants,
+  autofocus?: boolean;
+  classes?: string;
+  disabled?: boolean;
+  type?: ButtonTypes;
+  variant?: ButtonVariants;
 
-  onClick?: (({}: Event) => Event) | (() => void),
+  onClick?: (({}: Event) => Event) | (() => void);
 }
