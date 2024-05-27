@@ -21,12 +21,12 @@ export const INIT_STATE: State = {
   chat: null,
 };
 
-/* TODO: meke this usefull - PAGES CONF */
+/* ROUTER CONF */
 
-export const PAGES = {
-  '/': 'PageLogin',
-  '/sign-up': 'PageReg',
-  '/settings': 'PageUser',
-  '/messenger': 'PageChats',
-  '/error': 'PageError',
+export const ROUTES = {
+  '/': { page: 'PageLogin', needAuth: false },
+  '/sign-up': { page: 'PageReg', needAuth: false },
+  '/settings': { page: 'PageUser', needAuth: true },
+  '/messenger': { page: 'PageChats', needAuth: true },
+  '/error': { page: 'PageError', needAuth: true },
 } as const;
