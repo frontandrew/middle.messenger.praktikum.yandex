@@ -11,17 +11,13 @@ class UsersService {
   private api = new UserAPI();
 
   async getUser(): Promise<void> {
-    store.set('isLoading', true);
-
-    const result = await this.api.getUserData()
+    const user = await this.api.getUserData()
       .then(({ response }) => formatUserResponse(response))
       // .cathch(error) // TODO: catch error
       .catch(() => null);
 
-    if (result?.id) {
-      store.set('user', result);
-    }
-    store.set('isLoading', false);
+    store.set('user', user);
+    router.setAuthState(Boolean(user));
   }
 
   public async regUser(data: RegUserType) {
