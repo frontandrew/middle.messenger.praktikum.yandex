@@ -7,27 +7,29 @@ type RouteProps = {
 }
 
 interface RouteType {
-  pathname: RoutePaths;
+  pathname: string;
   component: RouteView;
   props: RouteProps;
+  needAuth: boolean;
 }
 
-export type RoutePaths = '/' | '/sign-up' | '/settings' | '/messenger' | '/error';
 export type RouteView = new (...args: unknown[]) => InstanceType<typeof Component>
 
 export class Route {
-  private pathname: RoutePaths;
+  private pathname: string;
   private component: RouteView;
   private instance: InstanceType<typeof Component> | null = null;
   private props: RouteProps;
+  public needAuth: boolean;
 
-  constructor({ pathname, component, props }: RouteType) {
+  constructor({ pathname, component, props, needAuth }: RouteType) {
     this.pathname = pathname;
     this.component = component;
     this.props = props;
+    this.needAuth = needAuth;
   }
 
-  navigate(pathname: RoutePaths) {
+  navigate(pathname: string) {
     if (this.match(pathname)) {
       this.pathname = pathname;
       this.render();
@@ -40,7 +42,7 @@ export class Route {
     }
   }
 
-  match(pathname: RoutePaths) {
+  match(pathname: string) {
     return deepEqual(pathname, this.pathname);
   }
 

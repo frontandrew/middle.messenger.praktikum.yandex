@@ -1,12 +1,11 @@
 import { deepEqual } from 'tools';
 
-import type { RoutePaths, RouteView } from './route';
+import type { RouteView } from './route';
 import { Route } from './route';
 
 class Router {
   private currentRoute: Route | null = null;
   private rootQuery: string | undefined = '.main';
-  private pathsWithOutAuth: RoutePaths[] = ['/', '/sign-up'];
   private authState: boolean = false;
   public routes: Route[] = [];
   public history: History = window.history;
@@ -15,8 +14,17 @@ class Router {
     this.authState = state;
   }
 
-  use({ pathname, component }: { pathname: RoutePaths, component: RouteView }) {
-    const route = new Route({ pathname, component, props: { rootQuery: this.rootQuery! } });
+  use({ pathname, component, needAuth }: {
+    pathname: string,
+    component: RouteView,
+    needAuth: boolean
+  }) {
+    const route = new Route({
+      pathname,
+      needAuth,
+      component,
+      props: { rootQuery: this.rootQuery! },
+    });
     this.routes.push(route);
     return this;
   }
@@ -27,31 +35,37 @@ class Router {
         currentTarget
         && 'location' in currentTarget
         && currentTarget.location instanceof Location
-      ) this.onRoute(currentTarget.location.pathname as RoutePaths);
+      ) this.onRoute(currentTarget.location.pathname as string);
     };
 
-    this.onRoute(window.location.pathname as RoutePaths);
+    this.onRoute(window.location.pathname as string);
   }
 
-  private onRoute(pathname: RoutePaths) {
-    let nextPath = pathname;
-    let nextRoute = this.getRoute(pathname);
+  private onRoute(pathname: string) {
+    const nextRoute = this.getRoute(pathname);
 
-    if (!nextRoute) nextPath = '/error';
-    if (!this.authState && this.pathsWithOutAuth.includes(pathname)) {
-      nextPath = pathname;
+    if (nextRoute === null) {
+      this.go('/messenger');
+      return;
+    }
+    if (nextRoute?.needAuth && !this.authState) {
+      this.go('/');
+      return;
+    }
+    if (!nextRoute?.needAuth && this.authState) {
+      this.go('/messenger');
+      return;
     }
 
-    nextRoute = this.getRoute(nextPath);
     if (deepEqual(this.currentRoute, nextRoute)) return;
 
+    this.history.pushState({}, '', pathname);
     if (this.currentRoute) this.currentRoute.leave();
     this.currentRoute = nextRoute;
     this.currentRoute!.render();
-    this.history.pushState({}, '', nextPath);
   }
 
-  go(pathname: RoutePaths) {
+  go(pathname: string) {
     this.onRoute(pathname);
   }
 
@@ -60,10 +74,10 @@ class Router {
   }
 
   forward() {
-    this.history.go(1);
+    this.history.forward();
   }
 
-  getRoute(pathname: RoutePaths): Route | null {
+  getRoute(pathname: string): Route | null {
     return this.routes.find((route) => route.match(pathname)) ?? null;
   }
 }
