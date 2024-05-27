@@ -1,2 +1,3 @@
 export { formatUserResponse } from './formar-user-response';
-export { formatUserPayload } from './format-user-payload';
+export { formatUserProfilePayload } from './format-user-profile-payload';
+export { formatUserRegPayload } from './format-user-reg-payload';

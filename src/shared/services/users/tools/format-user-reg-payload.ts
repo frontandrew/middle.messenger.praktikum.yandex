@@ -1,7 +1,7 @@
 import { UserRegPayload } from 'apis/user/type';
 import { RegUserType } from 'entities/user';
 
-export function formatUserPayload(user: RegUserType): UserRegPayload {
+export function formatUserRegPayload(user: RegUserType): UserRegPayload {
   const { firstName, secondName, phone, ...rest } = user;
   return {
     first_name: firstName,

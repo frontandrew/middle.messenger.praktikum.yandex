@@ -1,2 +1,2 @@
-export { formatUserPayload, formatUserResponse } from './tools';
+export { formatUserProfilePayload, formatUserResponse, formatUserRegPayload } from './tools';
 export { usersServ } from './service';
