@@ -2,14 +2,15 @@ import { store } from 'store';
 import { UserAPI } from 'apis/user';
 import { router } from 'routing';
 
-import type { UserPassPayload, UserProfilePayload, UserSearchPayload } from 'apis/user';
-import type { RegUserType, UserType } from 'entities/user';
+import type { ProfileUserType, RegUserType, UserType } from 'entities/user';
+import type { UserPassPayload, UserSearchPayload } from 'apis/user';
 
-import { formatUserPayload, formatUserResponse } from './tools';
+import { formatUserProfilePayload, formatUserRegPayload, formatUserResponse } from './tools';
 
 class UsersService {
   private api = new UserAPI();
 
+  /* Method `getUser` do not trigger loading state! */
   async getUser(): Promise<void> {
     const user = await this.api.getUserData()
       .then(({ response }) => formatUserResponse(response))
@@ -24,56 +25,64 @@ class UsersService {
     store.set('isLoading', true);
 
     const isRegistered = await this.api
-      .registration(formatUserPayload(data))
+      .registration(formatUserRegPayload(data))
       .then(({ response }) => Boolean(response.id))
+      // .cathch(error) // TODO: catch error
       .catch(() => false);
-    if (isRegistered) {
-      router.go('/');
-    }
+    if (isRegistered) router.go('/');
 
     store.set('isLoading', false);
   }
 
-  async updateUser(data: UserProfilePayload): Promise<UserType | null> {
-    const user = await this.api.setUserData(data)
+  async updateUser(data: ProfileUserType): Promise<boolean> {
+    store.set('isLoading', true);
+
+    const user = await this.api.setUserData(formatUserProfilePayload(data))
       .then(({ response }) => formatUserResponse(response))
       // .cathch(error) // TODO: catch error
       .catch(() => null);
-    return user;
+
+    if (user?.id) store.set('user', user);
+    store.set('isLoading', false);
+
+    return Boolean(user);
   }
 
   async updatePass(data: UserPassPayload): Promise<boolean> {
+    store.set('isLoading', true);
+
     const result = await this.api.setUserPass(data)
       .then(({ response }) => response === 'OK')
       // .cathch(error) // TODO: catch error
       .catch(() => false);
+
+    store.set('isLoading', false);
     return result;
   }
 
-  async updateAvatar(data: PlainObject): Promise<boolean> {
+  async updateAvatar({ avatar = null }: PlainObject): Promise<boolean> {
+    if (!(avatar instanceof FormData)) return false;
     store.set('isLoading', true);
 
-    if ('avatar' in data && data.avatar instanceof FormData) {
-      const user = await this.api.setUserAvatar(data.avatar)
-        .then(({ response }) => formatUserResponse(response))
+    const user = await this.api.setUserAvatar(avatar)
+      .then(({ response }) => formatUserResponse(response))
       // .cathch(error) // TODO: catch error
-        .catch(() => null);
+      .catch(() => null);
 
-      if (user?.id) {
-        store.set('user', user);
-        store.set('isLoading', false);
-        return true;
-      }
-    }
+    if (user?.avatar) store.set('user.avatar', user.avatar);
     store.set('isLoading', false);
-    return false;
+    return Boolean(user?.avatar);
   }
 
   async searchUser(login: UserSearchPayload): Promise<UserType[]> {
+    store.set('isLoading', true);
+
     const users = await this.api.searchUserByLogin(login)
       .then(({ response }) => response.map(formatUserResponse))
       // .cathch(error) // TODO: catch error
       .catch(() => []);
+
+    store.set('isLoading', false);
     return users;
   }
 }
