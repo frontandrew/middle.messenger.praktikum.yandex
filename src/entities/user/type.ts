@@ -12,3 +12,5 @@ export interface UserType {
 export interface RegUserType extends Omit<UserType, 'id' | 'nickName' | 'avatar'> {
   password: string;
 }
+
+export interface ProfileUserType extends Omit<UserType, 'id' | 'avatar'> {}
