@@ -14,3 +14,9 @@ export interface RegUserType extends Omit<UserType, 'id' | 'nickName' | 'avatar'
 }
 
 export interface ProfileUserType extends Omit<UserType, 'id' | 'avatar'> {}
+
+export interface PassUserType {
+  passCurr: string;
+  passNew: string;
+  passNewMore: string;
+}
