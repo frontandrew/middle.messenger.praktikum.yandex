@@ -25,7 +25,7 @@ export class FormSearch extends Form<FormSearchChildren, FormSearchProps> {
   }
 
   handleSearchSubmit() {
-    if (!this.children.fieldSearch.children.input.value) return;
+    if (!this.children.fieldSearch.value) return;
     this.handleSubmit();
   }
 

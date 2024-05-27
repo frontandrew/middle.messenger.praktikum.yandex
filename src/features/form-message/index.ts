@@ -29,7 +29,7 @@ export class FormMessage extends Form<FormMessageChildren, FormMessageProps> {
   }
 
   handleMessageSubmit() {
-    if (!this.children.message.children.input.value) return;
+    if (!this.children.message.value) return;
 
     const data = this.handleSubmit();
     if (typeof data?.message === 'string') {

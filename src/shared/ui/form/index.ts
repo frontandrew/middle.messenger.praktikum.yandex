@@ -85,16 +85,13 @@ export class Form<C extends FormChildren, P extends FormProps>
     const submitted = Object.entries(this.children).reduce(
       (acc, [key, child]) => {
         if (child instanceof Field && child.props.type !== 'file') {
-          return ({ ...acc, [key]: child.children.input.props.value });
+          return ({ ...acc, [key]: child.value });
         }
 
         if (child instanceof Field && child.props.type === 'file') {
-          const input = child.children.input.getContent() as HTMLInputElement;
-          const file = input.files?.[0];
-
-          if (file) {
+          if (child.file) {
             const formdata = new FormData();
-            formdata.append(`${key}`, file, file.name);
+            formdata.append(`${key}`, child.file, child.file.name);
 
             return { ...acc, [key]: formdata };
           }
@@ -105,7 +102,7 @@ export class Form<C extends FormChildren, P extends FormProps>
       {},
     );
 
-    console.warn(`SBMT{${this.count}}:[${this.instance}:${this.id}]:`, submitted);
+    // console.warn(`SBMT{${this.count}}:[${this.instance}:${this.id}]:`, submitted);
     return submitted;
   }
 }
