@@ -4,12 +4,14 @@ import { Component } from 'core';
 import { withRouter } from 'routing';
 import { withStore } from 'store';
 
+import { formatUserPassPayload, usersServ } from 'services/users';
+import { authServ } from 'services/auth';
+
 import { DialogSelectFile } from 'widgets/dialog-file-select';
 
 import { ControlAvatar } from '../control-avatar';
 import { FormInfo } from '../form-info';
 import { FormPass } from '../form-pass';
-import { userPageController as controller } from '../../controller';
 
 import type { FormInfoData } from '../form-info';
 import type { FormPassData } from '../form-pass';
@@ -67,30 +69,35 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
       signOut: new Button({
         variant: 'link',
         label: 'Sign out',
-        onClick: () => controller.singOut(),
+        onClick: () => authServ.signOut(),
       }),
       avatarDialog: new DialogSelectFile({ isOpen: false }),
     } as LayoutUserChildren & LayoutUserProps);
   }
 
   handleEditPass() {
+    this.children.avatar.setProps({ disabled: true });
     this.setProps({ showActions: false, showInfo: false });
   }
 
   handleEditInfo() {
     this.setProps({ showActions: false });
+    this.children.avatar.setProps({ disabled: true });
     this.children.formInfo.setEditMode(true);
   }
 
   private async handleUserInfoChange() {
     const userInfo = this.children.formInfo.handleSubmit();
     if (!this.children.formInfo.props.hasError && userInfo) {
-      const isUpdated = await controller.changeUserInfo(userInfo as FormInfoData);
+      const isUpdated = await usersServ.updateUser(userInfo as FormInfoData);
 
       if (isUpdated) {
         this.children.formInfo.setEditMode(false);
         this.setProps({ showActions: true, showInfo: true });
       }
+
+      // TODO: form info error state
+      // if (!isUpdated) {}
     }
   }
 
@@ -99,11 +106,14 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
     this.validatePasswordRepeate(passData);
 
     if (!this.children.formPass.props.hasError && passData) {
-      const isPassChanged = await controller.changeUserPass(passData);
+      const isPassChanged = await usersServ.updatePass(formatUserPassPayload(passData));
 
       if (isPassChanged) {
         this.setProps({ showActions: true, showInfo: true });
       }
+
+      // TODO: form pass error state
+      // if (isPassChanged) {}
     }
   }
 
