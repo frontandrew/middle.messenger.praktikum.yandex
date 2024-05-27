@@ -62,7 +62,6 @@ export class Field extends Component<FieldChildren, FieldProps> {
   handleValidation() {
     const { hasError, textError, value } = this.validate();
     this.setProps({ hasError, textError, value });
-    this.children.input.props.value = value;
   }
 
   validate(): ValidationState {
