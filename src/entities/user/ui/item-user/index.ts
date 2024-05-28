@@ -6,9 +6,8 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class ItemUser extends Component<ItemUserChildren, ItemUserProps> {
-  constructor({ avatar, nickName, firstName, secondName, isSelected = false }: ItemUserProps) {
+  constructor({ avatar, nickName, firstName, secondName, ...rest }: ItemUserProps) {
     super({
-      isSelected,
       avatarUser: new Avatar({ pic: avatar || '' }),
       nameUser: new Text({
         text: `${firstName ?? ''} ${secondName ?? ''}`,
@@ -19,6 +18,7 @@ export class ItemUser extends Component<ItemUserChildren, ItemUserProps> {
         text: nickName || '',
         classes: 'text_label text_light-color',
       }),
+      ...rest,
     } as ItemUserChildren & ItemUserProps);
   }
 

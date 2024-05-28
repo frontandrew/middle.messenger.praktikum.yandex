@@ -1,3 +1,4 @@
+{{log 'item:' this}}
 <li class="item-user"{{#if id}} key={{id}}{{/if}}>
     <div class="item-user__container{{#if isSelected}} item-user__container_active{{/if}}">
         {{{avatarUser}}}
@@ -7,5 +8,5 @@
         </div>
     </div>
     {{>Divider}}
-    <div class="item-user__touch-layer" {{#if id}} key={{id}}{{/if}}></div>
+    <div class="item-user__touch-layer" {{#if id}}key="{{id}}"{{/if}}></div>
 </li>
