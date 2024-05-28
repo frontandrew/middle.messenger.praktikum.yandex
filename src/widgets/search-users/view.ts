@@ -2,8 +2,9 @@ import { Button, Text } from 'ui';
 import { Component } from 'core';
 
 import { FormSearch, ListUsers } from 'features';
-import { UserType } from 'entities/user';
+import { ItemUserProps } from 'entities/user';
 import { usersServ } from 'services/users';
+import { chatsServ } from 'services/chats';
 
 import type { SearchUsersChildren, SearchUsersProps } from './type';
 import template from './template.hbs?raw';
@@ -28,6 +29,7 @@ export class SearchUsers extends Component<SearchUsersChildren, SearchUsersProps
         label: 'Add users',
         tabindex: 50,
         disabled: true,
+        onClick: () => this.addUsersToChat(),
       }),
       message: new Text({
         text: 'There is no users found, try another request',
@@ -52,13 +54,31 @@ export class SearchUsers extends Component<SearchUsersChildren, SearchUsersProps
 
       const items = result.reduce((res, item) => ({
         ...res,
-        [item.id]: item,
-      }), {} as Record<string, UserType>);
+        [item.id]: { ...item, isSelected: false },
+      }), {} as Record<string, ItemUserProps>);
 
       this.children.list.setProps({ items });
       this.children.action.setProps({ disabled: false });
       this.setProps({ hasntUsers: false });
     }
+  }
+
+  async addUsersToChat() {
+    const { items } = this.children.list.props;
+    if (!items) {
+      /* TODO: add status message */
+      return;
+    }
+
+    const ids = Object.values(items).filter((item) => item.isSelected).map(({ id }) => id);
+    const result = await chatsServ.addUsersToChat(ids);
+
+    if (!result) {
+      /* TODO: add status message */
+      return;
+    }
+
+    this.reset();
   }
 
   reset() {
