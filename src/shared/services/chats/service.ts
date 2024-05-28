@@ -1,18 +1,18 @@
 import { keying } from 'tools';
 import { store } from 'store';
 
-import type { ListChatsPayload } from 'entities/chat';
-import { formatChatResponse } from 'entities/chat';
+import { ChatAPI } from 'apis/chat';
+import type { ListChatsPayload } from 'apis/chat';
 
-import { ChatAPI } from './api';
+import { formatChatResponse, updeteChatsList } from './tools';
 
-const apiChats = new ChatAPI();
+class ChatsService {
+  private api = new ChatAPI();
 
-class ChatsController {
   public async getListChats(params: ListChatsPayload = {}) {
     store.set('isLoading', true);
 
-    const list = await apiChats.getChats(params)
+    const list = await this.api.getChats(params)
       .then(({ response }) => response.map(formatChatResponse))
       .catch(() => []);
 
@@ -29,28 +29,35 @@ class ChatsController {
 
       if (token?.length) {
         store.set('chat', { id: nextChatId, token });
-        this.updeteChatsList(nextChatId, currChatId);
+        updeteChatsList(nextChatId, currChatId);
       }
 
       store.set('isLoading', false);
     }
   }
 
+  public async addUsersToChat(data: number[]): Promise<boolean> {
+    const chatId = store.get()?.chat?.id;
+    if (!chatId || !data.length) return false;
+
+    store.set('isLoading', true);
+
+    const result = await this.api
+      .addUsers({ chatId, users: data })
+      .then(({ response }) => response === 'OK')
+      .catch(() => false);
+
+    store.set('isLoading', false);
+    return result;
+  }
+
   private async getChatToken(id: number) {
-    const token = await apiChats.getChatToken(id)
+    const token = await this.api.getChatToken(id)
       .then(({ response }) => response.token)
       .catch(() => null);
 
     return token;
   }
-
-  private updeteChatsList(nextId: number, currId: number | null) {
-    const chats = store.get()?.chats;
-    chats![nextId].isCurrent = true;
-    if (currId) chats![currId].isCurrent = false;
-
-    store.set(`chats`, chats);
-  }
 }
 
-export const chatsController = new ChatsController();
+export const chatsServ = new ChatsService();
