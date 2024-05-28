@@ -2,13 +2,10 @@
     display: flex;
     align-items: center;
 
+    width: 100%;
     gap: 0.625em;
 }
 
 .header-chat__title {
     flex-grow: 1;
-}
-
-.menu-item__icon > img {
-    rotate: 45deg;
 }

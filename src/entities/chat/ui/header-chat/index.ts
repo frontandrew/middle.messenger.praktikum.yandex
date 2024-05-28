@@ -1,7 +1,6 @@
-import { Avatar, ButtonIcon, Menu, Text } from 'ui';
+import { Avatar, Text } from 'ui';
 import { State, withStore } from 'store';
 import { Component } from 'core';
-import { IconAdd } from 'images';
 
 import { ChatType } from 'entities/chat';
 
@@ -28,31 +27,7 @@ export class HeaderChat extends HeaderWithState<HeaderChatChildren, HeaderChatPr
         text: '',
         classes: 'header-chat__title text_title',
       }),
-      actionsChat: new ButtonIcon({
-        variant: 'transparent',
-        onClick: () => this.callMenuChat(),
-      }),
-      menuChat: new Menu({
-        position: { right: 0.5, top: 4 },
-        itemsProps: [
-          {
-            label: 'Add user',
-            icon: IconAdd,
-            onClick: () => {},
-          },
-          {
-            classes: 'menu-item__icon',
-            label: 'Remove user',
-            icon: IconAdd,
-            onClick: () => {},
-          },
-        ],
-      }),
     } as HeaderChatChildren & HeaderChatProps);
-  }
-
-  callMenuChat() {
-    this.children.menuChat.showMenu();
   }
 
   render() {

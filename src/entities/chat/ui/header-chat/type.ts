@@ -1,4 +1,4 @@
-import type { Avatar, ButtonIcon, Menu, Text } from 'ui';
+import type { Avatar, Text } from 'ui';
 import type { Children, Props } from 'core';
 
 import type { ChatType } from '../../type';
@@ -10,6 +10,4 @@ export interface HeaderChatProps extends Props, ChatType {
 export interface HeaderChatChildren extends Children {
   avatarChat: Avatar;
   titleChat: Text;
-  actionsChat: ButtonIcon;
-  menuChat: Menu;
 }
