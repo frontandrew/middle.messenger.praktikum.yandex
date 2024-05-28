@@ -1,0 +1,33 @@
+.search-users {
+    display: flex;
+    flex-direction: column;
+
+    width: 20em;
+    height: 50vh;
+    max-height: 80vh;
+
+    padding: 2.5em 1.875em 1.875em;
+    gap: 0.625em;
+}
+
+.search-user__search {
+    width: 100%;
+}
+
+.search-user__users {
+    max-height: 40vh;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.search-user__actions {
+    margin-bottom: 0.769231em;
+}
+
+.search-user__message {
+    width: 100%;
+    text-align: center;
+
+    margin-top: 0.363636em;
+    font-size: 0.6875em;
+}
