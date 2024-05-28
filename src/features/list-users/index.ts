@@ -5,10 +5,7 @@ import type { ItemUserKeyAttr, ItemUserProps, UserType } from 'entities/user';
 import { ItemUser } from 'entities/user';
 
 import type { ItemsUser, ListUsersChildren, ListUsersProps } from './type';
-// import { chatsController as control } from './controller';
 import './style.css';
-
-// const ListUsersWithState = withStore((state) => ({ chatItems: state.chats }))(Component);
 
 export class ListUsers extends Component<ListUsersChildren, ListUsersProps> {
   constructor(items: ItemsUser = null) {

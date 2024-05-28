@@ -10,7 +10,7 @@ export function formatUserResponse(data: UserResponse): UserType {
     firstName: first_name,
     secondName: second_name,
     nickName: display_name,
-    avatar: RESOURCES + avatar,
+    avatar: avatar ? RESOURCES + avatar : '',
     ...rest,
   };
 }
