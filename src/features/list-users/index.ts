@@ -100,7 +100,7 @@ export class ListUsers extends Component<ListUsersChildren, ListUsersProps> {
 
   render() {
     return (
-      `<ul class="list-chats">
+      `<ul class="list-users">
         {{#if ${this.props.hasItems}}}
           ${this.props.keys}
         {{else}}

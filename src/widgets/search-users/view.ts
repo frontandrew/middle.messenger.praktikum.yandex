@@ -31,7 +31,7 @@ export class SearchUsers extends Component<SearchUsersChildren, SearchUsersProps
       }),
       message: new Text({
         text: 'There is no users found, try another request',
-        classes: 'search-user__message',
+        classes: 'search-user__message text_error-color text_label',
       }),
       ...props,
     } as SearchUsersChildren & SearchUsersProps);

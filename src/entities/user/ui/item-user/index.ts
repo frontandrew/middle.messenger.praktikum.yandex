@@ -13,11 +13,11 @@ export class ItemUser extends Component<ItemUserChildren, ItemUserProps> {
       nameUser: new Text({
         text: `${firstName ?? ''} ${secondName ?? ''}`,
         tag: 'h3',
-        classes: '',
+        classes: 'text_title',
       }),
       nickUser: new Text({
-        text: nickName ?? '',
-        classes: '',
+        text: nickName || '',
+        classes: 'text_label text_light-color',
       }),
     } as ItemUserChildren & ItemUserProps);
   }
