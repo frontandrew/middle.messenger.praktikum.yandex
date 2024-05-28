@@ -61,6 +61,13 @@ export class SearchUsers extends Component<SearchUsersChildren, SearchUsersProps
     }
   }
 
+  reset() {
+    this.children.form.children.search.setProps({ value: '' });
+    this.children.action.setProps({ disabled: true });
+    this.children.list.setProps({ items: {} });
+    this.setProps({ hasntUsers: false });
+  }
+
   render(): string {
     return template;
   }
