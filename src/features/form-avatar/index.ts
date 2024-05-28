@@ -4,6 +4,7 @@ import type { FormAvatarChildren, FormAvatarProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
+// TODO: make this file form
 export class FormAvatar extends Form<FormAvatarChildren, FormAvatarProps> {
   constructor(props: FormAvatarProps) {
     super({
@@ -14,10 +15,13 @@ export class FormAvatar extends Form<FormAvatarChildren, FormAvatarProps> {
         label: 'Select image from your computer',
         type: 'file',
         accept: 'image/*',
+        tabindex: 1,
+        autofocus: true,
       }),
       submit: new Button({
         type: 'submit',
         label: 'Change',
+        tabindex: 2,
       }),
       error: new Text({
         text: 'You need to select a file',

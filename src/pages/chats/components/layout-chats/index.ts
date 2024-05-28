@@ -26,6 +26,7 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
         label: 'Profile ❯',
         classes: 'text_light-color',
         onClick: () => this.router.go('/settings'),
+        tabindex: 100,
       }),
 
       listChats: new ListChats(),

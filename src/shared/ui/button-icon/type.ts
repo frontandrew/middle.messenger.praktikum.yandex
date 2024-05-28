@@ -6,8 +6,7 @@ type ButtonIconVariants = 'filled' | 'transparent';
 export interface ButtonIconChildren extends Children {}
 
 export interface ButtonIconProps extends Props {
-  tabindex: number;
-
+  tabindex?: number;
   autofocus?: boolean;
   pic?: string;
   classes?: string;

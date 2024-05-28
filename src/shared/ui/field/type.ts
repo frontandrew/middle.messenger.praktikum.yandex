@@ -2,9 +2,6 @@ import type { Input, InputProps } from 'ui';
 import type { Children } from 'core';
 
 export interface FieldProps extends InputProps {
-  tabindex: number;
-
-  autofocus?: boolean;
   required?: boolean;
   hasError?: boolean;
   textError?: string;

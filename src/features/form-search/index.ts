@@ -7,25 +7,31 @@ import template from './template.hbs?raw';
 import './style.css';
 
 export class FormSearch extends Form<FormSearchChildren, FormSearchProps> {
-  constructor() {
+  constructor(props?: FormSearchProps) {
     super({
       img: Lens,
-      fieldSearch: new Field({
+      search: new Field({
         type: 'simple',
         name: 'search',
         placeholder: 'Search',
         classes: 'form-search__field',
+        autofocus: props?.autofocus,
+        tabindex: props?.tabindex,
+        value: props?.searchValue,
       }),
       onSubmit: (event) => {
         event.preventDefault();
         this.handleSearchSubmit();
         return event;
       },
+      ...props,
     } as FormSearchChildren & FormSearchProps);
+
+    if (this.props.searchValue) this.handleSearchSubmit();
   }
 
   handleSearchSubmit() {
-    if (!this.children.fieldSearch.value) return;
+    if (!this.children.search.value) return;
     this.handleSubmit();
   }
 
