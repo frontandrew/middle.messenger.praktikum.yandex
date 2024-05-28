@@ -1,8 +1,9 @@
-import { Button, ButtonIcon, Menu } from 'ui';
+import { Button, ButtonIcon, Dialog, Menu } from 'ui';
 import { Component } from 'core';
 import { withRouter } from 'routing';
 import { withStore } from 'store';
 
+import { SearchUsers } from 'widgets/search-users';
 import { FormMessage, FormSearch, ListChats, ListMessages, MenuAttach } from 'features';
 import { HeaderChat } from 'entities/chat';
 
@@ -32,7 +33,7 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
 
       listChats: new ListChats(),
       listMessages: new ListMessages(),
-      formSearch: new FormSearch(),
+      formSearch: new FormSearch({ fieldName: 'chats-search' }),
       formMessage: new FormMessage(),
       headerChat: new HeaderChat(),
       menuAttach: new MenuAttach(),
@@ -52,7 +53,7 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
           {
             label: 'Add user',
             icon: IconAdd,
-            onClick: () => {},
+            onClick: () => this.callUserSearch(),
           },
           {
             classes: 'menu-item__icon',
@@ -61,6 +62,10 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
             onClick: () => {},
           },
         ],
+      }),
+      usersSearch: new Dialog({
+        isOpen: false,
+        content: new SearchUsers(),
       }),
     } as LayoutChatsChildren & LayoutChatsProps);
   }
@@ -71,6 +76,10 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
 
   callMenuChat() {
     this.children.menuChat.showMenu();
+  }
+
+  callUserSearch() {
+    this.children.usersSearch.open();
   }
 
   render() {

@@ -3,30 +3,42 @@
     flex-direction: column;
 
     width: 20em;
-    height: 50vh;
-    max-height: 80vh;
+    height: 60vh;
 
     padding: 2.5em 1.875em 1.875em;
-    gap: 0.625em;
 }
 
 .search-user__search {
     width: 100%;
+
+    .divider {
+        margin-top: 0.625em;
+    }
 }
 
 .search-user__users {
-    max-height: 40vh;
+    height: 100%;
     width: 100%;
     flex-grow: 1;
+
+    ul {
+        padding: 0.125em 0;
+    }
 }
 
 .search-user__actions {
     margin-bottom: 0.769231em;
+
+    .divider {
+        margin-bottom: 0.625em;
+    }
 }
 
 .search-user__message {
     width: 100%;
     text-align: center;
+
+    color: var(--error-color);
 
     margin-top: 0.363636em;
     font-size: 0.6875em;

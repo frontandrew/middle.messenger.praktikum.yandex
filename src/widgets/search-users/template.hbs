@@ -1,16 +1,16 @@
 <section class="search-users">
     <header class="search-user__search">
         {{{form}}}
+        {{>Divider}}
     </header>
-    {{>Divider}}
     <section class="search-user__users">
         {{{list}}}
     </section>
-    {{>Divider}}
     <footer class="search-user__actions">
+        {{>Divider}}
         {{{action}}}
     </footer>
-    {{#if hasError}}
+    {{#if hasntUsers}}
         {{{message}}}
     {{/if}}
 </section>

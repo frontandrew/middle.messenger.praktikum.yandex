@@ -74,7 +74,7 @@ class UsersService {
     return Boolean(user?.avatar);
   }
 
-  async searchUser(login: UserSearchPayload): Promise<UserType[]> {
+  async searchUsers(login: UserSearchPayload): Promise<UserType[]> {
     store.set('isLoading', true);
 
     const users = await this.api.searchUserByLogin(login)

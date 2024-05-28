@@ -1,6 +1,7 @@
 import type { Children, Props } from 'core';
-import type { Button, ButtonIcon, Menu } from 'ui';
+import type { Button, ButtonIcon, Dialog, Menu } from 'ui';
 
+import { SearchUsersChildren, SearchUsersProps } from 'widgets/search-users';
 import type { FormMessage, FormSearch, ListChats, ListMessages, MenuAttach } from 'features';
 
 import type { ChatType, HeaderChat } from 'entities/chat';
@@ -22,6 +23,7 @@ export interface LayoutChatsChildren extends Children {
   listChats: ListChats,
   headerChat: HeaderChat,
   listMessages: ListMessages,
+  usersSearch: Dialog<SearchUsersChildren, SearchUsersProps>,
   actionAttach: ButtonAttach,
   formMessage: FormMessage,
   actionsChat: ButtonIcon;

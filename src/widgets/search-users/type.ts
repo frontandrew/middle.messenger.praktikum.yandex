@@ -9,4 +9,6 @@ export interface SearchUsersChildren extends Children{
   message: Text;
 }
 
-export interface SearchUsersProps extends Props {}
+export interface SearchUsersProps extends Props {
+  hasntUsers?: boolean;
+}
