@@ -1,16 +1,16 @@
 import { Component } from 'core';
 import { deepEqual } from 'tools';
 
-import type { ItemUserKeyAttr, ItemUserProps, UserType } from 'entities/user';
+import type { ItemUserKeyAttr } from 'entities/user';
 import { ItemUser } from 'entities/user';
 
-import type { ItemsUser, ListUsersChildren, ListUsersProps } from './type';
+import type { ListUsersChildren, ListUsersProps } from './type';
 import './style.css';
 
 export class ListUsers extends Component<ListUsersChildren, ListUsersProps> {
-  constructor(items: ItemsUser = null) {
+  constructor() {
     super({
-      items,
+      items: null,
       keys: '',
       hasItems: false,
       hasSelectedItems: false,
@@ -44,7 +44,7 @@ export class ListUsers extends Component<ListUsersChildren, ListUsersProps> {
         .entries(newItems)
         .reduce((acc, [key, props]) => ({
           ...acc,
-          [key]: new ItemUser({ ...props, isSelected: false }),
+          [key]: new ItemUser(props),
         }), {});
 
       const hasItems = Object.keys(newItems).length > 0;
@@ -68,35 +68,18 @@ export class ListUsers extends Component<ListUsersChildren, ListUsersProps> {
     return [isItemsEqual, isRestPropsEqual].every(Boolean);
   }
 
-  convertUsersToItem(user: UserType): ItemUserProps {
-    return { ...user, isSelected: false };
-  }
-
   handleSelectItem({ attributes }: HTMLElement) {
     if (!('key' in attributes)) return;
 
     const { key } = attributes as ItemUserKeyAttr;
     const id = Number(key.value);
-    this.children[id].toggleSelected();
 
-    // this.setProps({ items: this.props.items[id].toggleSelected() });
+    const { items } = this.props;
+    if (!items) throw new Error('There is no items.');
 
-    // this.toggleActiveItem(id);
-    // control.handleChatSelection(id);
+    const item = items[id];
+    this.setProps({ items: { ...items, [id]: { ...item, isSelected: !item.isSelected } } });
   }
-
-  // toggleActiveItem(id: number) {
-  //   if (!id || id === this.props.hasActive) return;
-  //   if (this.props.hasActive) {
-  //     this.children[this.props.hasActive].toggleActive();
-  //   }
-
-  //   this.props.hasActive = id;
-  //   this.children[this.props.hasActive].toggleActive();
-
-  //   const { instance, id: index } = this.children[this.props.hasActive];
-  //   console.warn(`SELECTED:[${instance}:${index}]`);
-  // }
 
   render() {
     return (
