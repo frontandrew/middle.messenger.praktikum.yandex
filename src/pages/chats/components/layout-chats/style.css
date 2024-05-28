@@ -43,14 +43,23 @@
 
     height: 100%;
     width: 100%;
+    padding: 0 1.25em;
 }
 
 /* TODO: refactor after messaging */
 
-.messages__container > .divider {
+/* .messages__container > .divider {
     margin: 0 1.25em;
-}
+} */
 
 .messages__row {
-    padding: 0.625em 1.25em;
+    display: flex;
+    align-items: center;
+
+    gap: 0.625em;
+    padding: 0.625em 0;
+}
+
+.menu-item__icon > img {
+    rotate: 45deg;
 }

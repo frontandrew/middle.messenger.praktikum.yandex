@@ -11,6 +11,7 @@
         <div class="messages__container">
             <header class="messages__row">
                 {{{headerChat}}}
+                {{{actionsChat}}}
             </header>
             {{> Divider}}
             {{{listMessages}}}
@@ -22,8 +23,11 @@
         </div>
     {{else}}
         {{#> BaseLayout}}
-            <p class="text text_light-color">Please select chat from list to start messaging</p>
+            <p class="text text_light-color">
+                Please select chat from list to start messaging
+            </p>
         {{/BaseLayout}}
     {{/if}}
     {{{menuAttach}}}
+    {{{menuChat}}}
 </div>

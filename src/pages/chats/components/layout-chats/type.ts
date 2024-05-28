@@ -1,5 +1,5 @@
 import type { Children, Props } from 'core';
-import type { Button } from 'ui';
+import type { Button, ButtonIcon, Menu } from 'ui';
 
 import type { FormMessage, FormSearch, ListChats, ListMessages, MenuAttach } from 'features';
 
@@ -24,5 +24,7 @@ export interface LayoutChatsChildren extends Children {
   listMessages: ListMessages,
   actionAttach: ButtonAttach,
   formMessage: FormMessage,
+  actionsChat: ButtonIcon;
   menuAttach: MenuAttach,
+  menuChat: Menu;
 }

@@ -1,4 +1,4 @@
-import { Button } from 'ui';
+import { Button, ButtonIcon, Menu } from 'ui';
 import { Component } from 'core';
 import { withRouter } from 'routing';
 import { withStore } from 'store';
@@ -6,6 +6,7 @@ import { withStore } from 'store';
 import { FormMessage, FormSearch, ListChats, ListMessages, MenuAttach } from 'features';
 import { HeaderChat } from 'entities/chat';
 
+import { IconAdd } from 'images';
 import { ButtonAttach } from '../button-attach';
 
 import type { LayoutChatsChildren, LayoutChatsProps } from './type';
@@ -41,11 +42,35 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
           this.callMenuAttach();
         },
       }),
+      actionsChat: new ButtonIcon({
+        variant: 'transparent',
+        onClick: () => this.callMenuChat(),
+      }),
+      menuChat: new Menu({
+        position: { right: 0.5, top: 4 },
+        itemsProps: [
+          {
+            label: 'Add user',
+            icon: IconAdd,
+            onClick: () => {},
+          },
+          {
+            classes: 'menu-item__icon',
+            label: 'Remove user',
+            icon: IconAdd,
+            onClick: () => {},
+          },
+        ],
+      }),
     } as LayoutChatsChildren & LayoutChatsProps);
   }
 
   callMenuAttach() {
     this.children.menuAttach.showMenu();
+  }
+
+  callMenuChat() {
+    this.children.menuChat.showMenu();
   }
 
   render() {
