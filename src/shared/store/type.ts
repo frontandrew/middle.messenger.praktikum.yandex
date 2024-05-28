@@ -1,4 +1,6 @@
-import { ChatType, MessageType, UserType } from 'entities';
+import type { ChatType } from 'entities/chat';
+import type { MessageType } from 'entities/message';
+import type { UserType } from 'entities/user';
 
 export interface CurrentChatState {
   id: number | null;
