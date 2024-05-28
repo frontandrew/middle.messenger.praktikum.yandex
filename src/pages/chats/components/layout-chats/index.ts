@@ -64,10 +64,15 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
         ],
       }),
       usersSearch: new Dialog({
+        closeHandler: (): void => this.resetUsersSearch(),
         isOpen: false,
         content: new SearchUsers(),
       }),
     } as LayoutChatsChildren & LayoutChatsProps);
+  }
+
+  resetUsersSearch() {
+    this.children.usersSearch.children.content.reset();
   }
 
   callMenuAttach() {
