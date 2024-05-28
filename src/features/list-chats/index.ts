@@ -3,10 +3,10 @@ import { ItemChat } from 'entities/chat';
 import { deepEqual } from 'tools';
 import { withStore } from 'store';
 
+import { chatsServ } from 'services/chats';
 import type { ItemChatKeyAttr } from 'entities/chat';
 
 import type { ListChatsChildren, ListChatsProps } from './type';
-import { chatsController as ctrl } from './controller';
 import './style.css';
 
 const ListChatsWithState = withStore((state) => ({ chatItems: state.chats }))(Component);
@@ -25,7 +25,7 @@ export class ListChats extends ListChatsWithState<ListChatsChildren, ListChatsPr
   }
 
   init() {
-    ctrl.getListChats();
+    chatsServ.getListChats();
   }
 
   componentDidUpdate(oldProps: ListChatsProps, newProps: ListChatsProps): boolean {
@@ -91,7 +91,7 @@ export class ListChats extends ListChatsWithState<ListChatsChildren, ListChatsPr
     const id = Number(key.value);
     // this.toggleActiveItem(id);
 
-    ctrl.handleChatSelection(id);
+    chatsServ.handleChatSelection(id);
   }
 
   toggleActiveItem(id: number) {
