@@ -1,10 +1,9 @@
 import type { Field, FormChildren, FormProps } from 'ui';
 
-export interface FormSearchProps extends FormProps{
-  searchValue?: string;
+export interface FormSearchProps extends FormProps {
   img?: string;
-  autofocus?: boolean;
-  tabindex?: number;
+  fieldName?: string,
+  value?: string;
 }
 
 export interface FormSearchChildren extends FormChildren {
