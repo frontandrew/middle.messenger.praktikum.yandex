@@ -5,7 +5,3 @@
 
     overflow-x: hidden auto;
 }
-
-.user-chats__message {
-    transform: translateY(-4em);
-}

@@ -108,7 +108,7 @@ export class ListUsers extends Component<ListUsersChildren, ListUsersProps> {
           ${this.props.keys}
         {{else}}
           {{#> BaseLayout}}
-            <p class="text text_light-color user-chats__message">
+            <p class="text text_light-color">
               Search users and select some
             </p>
           {{/BaseLayout}}
