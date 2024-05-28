@@ -21,10 +21,12 @@ export class Dialog<C extends DialogChildren, P extends DialogProps> extends Com
   }
 
   public close() {
+    if (this.props.closeHandler) this.props.closeHandler();
     this.setProps({ isOpen: false } as P);
   }
 
   public open() {
+    if (this.props.openHandler) this.props.openHandler();
     this.setProps({ isOpen: true } as P);
   }
 
