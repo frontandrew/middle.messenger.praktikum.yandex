@@ -25,3 +25,10 @@ export interface ChatResponse {
     content: string;
   } | null;
 }
+
+export interface ChatAddUsersPayload {
+  users: number[];
+  chatId: number;
+}
+
+export type ChatAddUsersResponse = 'OK'
