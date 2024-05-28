@@ -7,8 +7,8 @@ export interface ButtonChildren extends Children {}
 
 export interface ButtonProps extends Props {
   readonly label: string;
-  tabindex: number;
 
+  tabindex?: number;
   autofocus?: boolean;
   classes?: string;
   disabled?: boolean;

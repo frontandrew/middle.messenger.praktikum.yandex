@@ -10,7 +10,7 @@ export class Form<C extends FormChildren, P extends FormProps>
     disabled = false,
     hasError = false,
 
-    onInput = (event: Event) => {
+    onInput = (event: InputEvent) => {
       this.updateErrorState(false);
       return event;
     },
@@ -102,7 +102,7 @@ export class Form<C extends FormChildren, P extends FormProps>
       {},
     );
 
-    // console.warn(`SBMT{${this.count}}:[${this.instance}:${this.id}]:`, submitted);
+    console.warn(`SBMT{${this.count}}:[${this.instance}:${this.id}]:`, submitted);
     return submitted;
   }
 }
