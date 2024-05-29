@@ -8,7 +8,7 @@ import { MessageType } from 'entities/message';
 import { formatMssgResponse, isMessageResponse } from './tools';
 import { MessageResponse } from './type';
 
-class MssgControl {
+class MssgService {
   private api: MssgAPI | null = null;
   private token: string | null = null;
   private chatId: number | null = null;
@@ -100,4 +100,4 @@ class MssgControl {
   }
 }
 
-export const mssgControl = new MssgControl();
+export const mssgServ = new MssgService();

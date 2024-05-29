@@ -1,4 +1,4 @@
-import { MessageResponseType } from 'services/messaging';
+import { MessageResponseType } from 'services/mssg';
 
 export interface MessageType {
   id: number;

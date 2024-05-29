@@ -1,6 +1,7 @@
 import { ButtonIcon, Field, Form } from 'ui';
 import { Arrow } from 'images';
-import { mssgControl as control } from 'services/messaging';
+
+import { mssgServ } from 'services/mssg';
 
 import type { FormMessageChildren, FormMessageProps } from './type';
 import template from './template.hbs?raw';
@@ -33,7 +34,7 @@ export class FormMessage extends Form<FormMessageChildren, FormMessageProps> {
 
     const data = this.handleSubmit();
     if (typeof data?.message === 'string') {
-      control.sendMessage(data.message);
+      mssgServ.sendMessage(data.message);
     }
 
     this.children.message.reset();

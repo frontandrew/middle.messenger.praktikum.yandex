@@ -4,7 +4,7 @@ import { withStore } from 'store';
 
 import { ItemMessage } from 'entities/message';
 
-import { mssgControl as control } from 'services/messaging';
+import { mssgServ } from 'services/mssg';
 
 import type { ListMessagesChildren, ListMessagesProps } from './type';
 import './style.css';
@@ -21,7 +21,7 @@ export class ListMessages extends ListMessagesWithState<ListMessagesChildren, Li
   }
 
   init() {
-    control.init();
+    mssgServ.init();
   }
 
   componentDidUpdate(oldProps: ListMessagesProps, newProps: ListMessagesProps): boolean {
