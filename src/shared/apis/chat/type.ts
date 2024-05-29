@@ -41,8 +41,8 @@ export interface ChatUsersPayload {
   id: number;
   offset?: number;
   limit?: number;
-  name?: number;
-  email?: number;
+  name?: string;
+  email?: string;
 }
 
 export type ChatUsersResponse = ChatUser[]
