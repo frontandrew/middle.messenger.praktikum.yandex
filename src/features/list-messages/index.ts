@@ -45,14 +45,14 @@ export class ListMessages extends ListMessagesWithState<ListMessagesChildren, Li
 
     const isItemsEqual = deepEqual(oldItems, newItems);
     if (!isItemsEqual) {
-      const newComponents = newItems.reduce((acc, props) => {
+      const newComponents = newItems.reduceRight((acc, props) => {
         const item = new ItemMessage(props);
         return { ...acc, [item.id.toString()]: item };
       }, {});
 
       const hasItems = Boolean(newItems.length);
-      const newItemKeys = Object.keys(newComponents)
-        .map((key) => `{{{${key}}}}`)
+      const newItemKeys = Object.values(newItems).reverse()
+        .map(({ id }) => `{{{${id}}}}`)
         .join(' ')
         .toString();
 
