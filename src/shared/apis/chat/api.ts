@@ -3,6 +3,8 @@ import { HTTPTransport } from 'network';
 import type {
   ChatAddUsersPayload,
   ChatAddUsersResponse,
+  ChatUsersPayload,
+  ChatUsersResponse,
   ListChatsPayload,
   ListChatsResponse,
 } from './type';
@@ -16,6 +18,10 @@ export class ChatAPI {
 
   public getChatToken(payload: number) {
     return this.http.post<number, { token: string }>(`/chats/token/${payload}`);
+  }
+
+  public getChatUsers({ id, ...rest }: ChatUsersPayload) {
+    return this.http.get<ChatUsersPayload, ChatUsersResponse>(`/chats/${id}/users`, { data: rest });
   }
 
   public addUsers(payload: ChatAddUsersPayload) {

@@ -1,3 +1,5 @@
+import { UserResponse } from 'apis/user';
+
 export interface ListChatsPayload {
   offset?: number;
   limit?: number;
@@ -13,14 +15,7 @@ export interface ChatResponse {
   unread_count: number;
   created_by: number
   last_message: {
-    user: {
-      first_name: string;
-      second_name: string;
-      avatar: string;
-      email: string;
-      login: string;
-      phone: string;
-    },
+    user: Omit<UserResponse, 'id' | 'display_name'>,
     time: string;
     content: string;
   } | null;
@@ -32,3 +27,17 @@ export interface ChatAddUsersPayload {
 }
 
 export type ChatAddUsersResponse = 'OK'
+
+export interface ChatUser extends Omit<UserResponse, 'email' | 'phone'> {
+  role: string;
+}
+
+export interface ChatUsersPayload {
+  id: number;
+  offset?: number;
+  limit?: number;
+  name?: number;
+  email?: number;
+}
+
+export type ChatUsersResponse = ChatUser[]
