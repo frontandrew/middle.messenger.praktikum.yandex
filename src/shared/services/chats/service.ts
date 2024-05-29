@@ -2,9 +2,9 @@ import { keying } from 'tools';
 import { store } from 'store';
 
 import { ChatAPI } from 'apis/chat';
-import type { ListChatsPayload } from 'apis/chat';
+import type { ListChatsPayload, ChatUsersPayload } from 'apis/chat';
 
-import { formatChatResponse, updeteChatsList } from './tools';
+import { formatChatResponse, formatChatUserResponse, updeteChatsList } from './tools';
 
 class ChatsService {
   private api = new ChatAPI();
@@ -49,6 +49,20 @@ class ChatsService {
 
     store.set('isLoading', false);
     return result;
+  }
+
+  async getChatUsers(data: Omit<ChatUsersPayload, 'id'>) {
+    const chatId = store.get()?.chat?.id;
+    if (!chatId) return null;
+
+    store.set('isLoading', false);
+
+    const chatUsers = await this.api.getChatUsers({ id: chatId, ...data })
+      .then(({ response }) => response.map(formatChatUserResponse))
+      .catch(() => []);
+
+    store.set('isLoading', true);
+    return chatUsers;
   }
 
   private async getChatToken(id: number) {

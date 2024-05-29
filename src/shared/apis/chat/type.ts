@@ -1,4 +1,5 @@
 import { UserResponse } from 'apis/user';
+import { UserType } from 'entities/user';
 
 export interface ListChatsPayload {
   offset?: number;
@@ -29,6 +30,10 @@ export interface ChatAddUsersPayload {
 export type ChatAddUsersResponse = 'OK'
 
 export interface ChatUser extends Omit<UserResponse, 'email' | 'phone'> {
+  role: string;
+}
+
+export interface ChatUserType extends Omit<UserType, 'email' | 'phone'> {
   role: string;
 }
 
