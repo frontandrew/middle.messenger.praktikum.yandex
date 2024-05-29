@@ -82,25 +82,19 @@ export class Form<C extends FormChildren, P extends FormProps>
   }
 
   submitForm(): PlainObject {
-    const submitted = Object.entries(this.children).reduce(
-      (acc, [key, child]) => {
+    const submitted = Object
+      .entries(this.children)
+      .reduce((acc, [key, child]) => {
         if (child instanceof Field && child.props.type !== 'file') {
           return ({ ...acc, [key]: child.value });
         }
 
-        if (child instanceof Field && child.props.type === 'file') {
-          if (child.file) {
-            const formdata = new FormData();
-            formdata.append(`${key}`, child.file, child.file.name);
-
-            return { ...acc, [key]: formdata };
-          }
+        if (child instanceof Field && child.props.type === 'file' && child.file instanceof File) {
+          return { ...acc, [key]: child.file };
         }
 
         return acc;
-      },
-      {},
-    );
+      }, {});
 
     console.warn(`SBMT{${this.count}}:[${this.instance}:${this.id}]:`, submitted);
     return submitted;
