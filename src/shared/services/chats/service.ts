@@ -51,7 +51,22 @@ class ChatsService {
     return result;
   }
 
-  async getChatUsers(data: Omit<ChatUsersPayload, 'id'>) {
+  public async removeUsersFromChat(data: number[]): Promise<boolean> {
+    const chatId = store.get()?.chat?.id;
+    if (!chatId || !data.length) return false;
+
+    store.set('isLoading', true);
+
+    const result = await this.api
+      .removeUsers({ chatId, users: data })
+      .then(({ response }) => response === 'OK')
+      .catch(() => false);
+
+    store.set('isLoading', false);
+    return result;
+  }
+
+  public async getChatUsers(data: Omit<ChatUsersPayload, 'id'>) {
     const chatId = store.get()?.chat?.id;
     if (!chatId) return null;
 

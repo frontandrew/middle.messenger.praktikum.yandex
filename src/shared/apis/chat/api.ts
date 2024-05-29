@@ -1,8 +1,8 @@
 import { HTTPTransport } from 'network';
 
 import type {
-  ChatAddUsersPayload,
-  ChatAddUsersResponse,
+  ChatChangeUsersPayload,
+  ChatChangeUsersResponse,
   ChatUsersPayload,
   ChatUsersResponse,
   ListChatsPayload,
@@ -24,8 +24,13 @@ export class ChatAPI {
     return this.http.get<ChatUsersPayload, ChatUsersResponse>(`/chats/${id}/users`, { data: rest });
   }
 
-  public addUsers(payload: ChatAddUsersPayload) {
+  public addUsers(payload: ChatChangeUsersPayload) {
     return this.http
-      .put<ChatAddUsersPayload, ChatAddUsersResponse>(`/chats/users`, { data: payload });
+      .put<ChatChangeUsersPayload, ChatChangeUsersResponse>(`/chats/users`, { data: payload });
+  }
+
+  public removeUsers(payload: ChatChangeUsersPayload) {
+    return this.http
+      .delete<ChatChangeUsersPayload, ChatChangeUsersResponse>(`/chats/users`, { data: payload });
   }
 }

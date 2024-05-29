@@ -22,12 +22,12 @@ export interface ChatResponse {
   } | null;
 }
 
-export interface ChatAddUsersPayload {
+export interface ChatChangeUsersPayload {
   users: number[];
   chatId: number;
 }
 
-export type ChatAddUsersResponse = 'OK'
+export type ChatChangeUsersResponse = 'OK'
 
 export interface ChatUser extends Omit<UserResponse, 'email' | 'phone'> {
   role: string;
