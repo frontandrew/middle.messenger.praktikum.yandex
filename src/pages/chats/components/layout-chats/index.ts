@@ -1,13 +1,16 @@
 import { Button, ButtonIcon, Dialog, Menu } from 'ui';
 import { Component } from 'core';
+import { IconAdd } from 'images';
 import { withRouter } from 'routing';
 import { withStore } from 'store';
+
+import { usersServ } from 'services/users';
+import { chatsServ } from 'services/chats';
 
 import { SearchUsers } from 'widgets/search-users';
 import { FormMessage, FormSearch, ListChats, ListMessages, MenuAttach } from 'features';
 import { HeaderChat } from 'entities/chat';
 
-import { IconAdd } from 'images';
 import { ButtonAttach } from '../button-attach';
 
 import type { LayoutChatsChildren, LayoutChatsProps } from './type';
@@ -53,13 +56,13 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
           {
             label: 'Add user',
             icon: IconAdd,
-            onClick: () => this.callUserSearch(),
+            onClick: () => this.callAddUsersDialog(),
           },
           {
             classes: 'menu-item__icon',
             label: 'Remove user',
             icon: IconAdd,
-            onClick: () => {},
+            onClick: () => this.callRemoveUsersDialog(),
           },
         ],
       }),
@@ -83,7 +86,39 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
     this.children.menuChat.showMenu();
   }
 
-  callUserSearch() {
+  callAddUsersDialog() {
+    this.children.usersSearch.children.content.setProps({
+      searchHandler: async (search) => {
+        const users = await usersServ.searchUsers({ login: search });
+        return users;
+      },
+      submitHandler: async (ids) => {
+        const result = await chatsServ.addUsersToChat(ids);
+        return result;
+      },
+    });
+    this.children.usersSearch.children.content
+      .children.action.setProps({ label: 'Add selected users' });
+    this.children.usersSearch.open();
+  }
+
+  async callRemoveUsersDialog() {
+    this.children.usersSearch.children.content.setProps({
+      searchHandler: async (search) => {
+        const users = await chatsServ.getChatUsers({ name: search, offset: 0, limit: 100 });
+        return users;
+      },
+      submitHandler: async (ids) => {
+        const result = await chatsServ.removeUsersFromChat(ids);
+        return result;
+      },
+    });
+
+    /* Call userSearch submit to show current chat users on open dialog */
+    await this.children.usersSearch.children.content.handleUsersSearch();
+
+    this.children.usersSearch.children.content
+      .children.action.setProps({ label: 'Remove selected users' });
     this.children.usersSearch.open();
   }
 
