@@ -1,16 +1,16 @@
 import { Button, Field, Form, Text } from 'ui';
 
-import type { FormAvatarChildren, FormAvatarProps } from './type';
+import type { FormFileChildren, FormFileProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
 // TODO: make this file form
-export class FormAvatar extends Form<FormAvatarChildren, FormAvatarProps> {
-  constructor(props: FormAvatarProps) {
+export class FormFile extends Form<FormFileChildren, FormFileProps> {
+  constructor(props: FormFileProps) {
     super({
       hasError: false,
       title: new Text({ text: 'Load image', tag: 'h2', classes: 'form__title' }),
-      avatar: new Field({
+      file: new Field({
         name: 'avatar',
         label: 'Select image from your computer',
         type: 'file',
@@ -28,7 +28,7 @@ export class FormAvatar extends Form<FormAvatarChildren, FormAvatarProps> {
         classes: 'form__error text_error-color',
       }),
       ...props,
-    } as FormAvatarChildren & FormAvatarProps);
+    } as FormFileChildren & FormFileProps);
   }
 
   render() {
