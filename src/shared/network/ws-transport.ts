@@ -83,7 +83,6 @@ export class WSTransport {
   }
 
   public sendMessage(payload: SendPayload): void {
-    console.log('ws:onsend', payload);
     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
       this.socket.send(JSON.stringify(payload));
     } else {
@@ -92,24 +91,20 @@ export class WSTransport {
   }
 
   public onError(event: Event): void {
-    console.log('ws:onerror', { ...event });
     if (this.errorHandler) this.errorHandler(event);
   }
 
   public onOpen(event: Event): void {
-    console.log('ws:onopen', { ...event });
     if (this.connectHandler) this.connectHandler(event);
     this.startPing();
   }
 
   public onClose(event: CloseEvent): void {
-    console.log('ws:onclose', { ...event });
     if (this.closeHandler) this.closeHandler(event);
     this.stopPing();
   }
 
   public onMessage(event: MessageEvent): void {
-    console.log('ws:onmessage', { ...event });
     if (this.messageHandler) this.messageHandler(event);
   }
 
@@ -129,7 +124,6 @@ export class WSTransport {
   }
 
   private sendPing(): void {
-    console.log('SendPing', this);
     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
       this.socket.send(JSON.stringify({ type: 'ping' }));
     }
