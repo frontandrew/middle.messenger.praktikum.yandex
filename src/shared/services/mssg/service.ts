@@ -14,9 +14,11 @@ class MssgService {
   private chatId: number | null = null;
   private userId: number | null = null;
   private host = WS_HOST;
+  private offset = 0;
 
-  private getListMessages() {
-    this.api?.getMessages(10);
+  public getPreviosMssg(offset: number) {
+    this.offset += offset;
+    this.api?.getMessages(this.offset);
   }
 
   public init() {
@@ -78,7 +80,7 @@ class MssgService {
       );
     }
     await this.api?.openConnection();
-    this.getListMessages();
+    this.getPreviosMssg(this.offset);
   }
 
   public sendMessage(data: string) {

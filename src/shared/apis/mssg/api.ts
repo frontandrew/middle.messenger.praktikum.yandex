@@ -16,8 +16,8 @@ export class MssgAPI {
     this.ws?.disconnect();
   }
 
-  public getMessages(count: number) {
-    return this.ws?.sendMessage({ content: String(count), type: MssgTypes.OLD });
+  public getMessages(offset: number) {
+    return this.ws?.sendMessage({ content: String(offset), type: MssgTypes.OLD });
   }
   public getConnectState() {
     return this.ws?.connectionState();
