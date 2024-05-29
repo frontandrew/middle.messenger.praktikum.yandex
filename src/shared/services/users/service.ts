@@ -60,7 +60,7 @@ class UsersService {
     return result;
   }
 
-  async updateAvatar({ avatar = null }: PlainObject): Promise<boolean> {
+  async updateAvatar(avatar: FormData): Promise<boolean> {
     if (!(avatar instanceof FormData)) return false;
     store.set('isLoading', true);
 

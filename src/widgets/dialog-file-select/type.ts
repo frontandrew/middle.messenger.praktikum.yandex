@@ -1,8 +1,10 @@
 import { DialogChildren, DialogProps } from 'ui';
-import { FormAvatar } from 'features';
+import { FormFile } from 'features';
 
 export interface DialogFileSelectChildren extends DialogChildren {
-  content: FormAvatar;
+  content: FormFile;
 }
 
-export interface DialogFileSelectProps extends DialogProps {}
+export interface DialogFileSelectProps extends DialogProps {
+  fileSubmitHandler?: (file: File) => Promise<boolean>;
+}

@@ -71,7 +71,16 @@ export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUs
         label: 'Sign out',
         onClick: () => authServ.signOut(),
       }),
-      avatarDialog: new DialogSelectFile({ isOpen: false }),
+      avatarDialog: new DialogSelectFile({
+        fileSubmitHandler: async (file: File) => {
+          const avatar = new FormData();
+          avatar.append('avatar', file, file.name);
+
+          const result = await usersServ.updateAvatar(avatar);
+          return result;
+        },
+        isOpen: false,
+      }),
     } as LayoutUserChildren & LayoutUserProps);
   }
 

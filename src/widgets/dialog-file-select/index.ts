@@ -1,30 +1,29 @@
 import { Dialog } from 'ui';
-import { isPlainObject } from 'tools';
 
-import { FormAvatar } from 'features/form-avatar';
-import { usersController as ctrl } from 'services/users';
+import { FormFile } from 'features/form-file';
+// import { usersServ } from 'services/users';
 
 import type { DialogFileSelectChildren, DialogFileSelectProps } from './type';
 
 export class DialogSelectFile extends Dialog<DialogFileSelectChildren, DialogFileSelectProps> {
-  constructor({ isOpen = false, ...rest }: DialogFileSelectProps) {
+  constructor(props?: DialogFileSelectProps) {
     super({
-      content: new FormAvatar({
+      fileSubmitHandler: null,
+      content: new FormFile({
         onSubmit: (event: SubmitEvent) => {
           event.preventDefault();
           this.handleFileSubmit();
           return event;
         },
       }),
-      isOpen,
-      ...rest,
+      ...props,
     } as DialogFileSelectChildren & DialogFileSelectProps);
   }
   private async handleFileSubmit(): Promise<void> {
     const data = this.children.content.handleSubmit();
-    if (!isPlainObject(data)) return;
+    if (!(data?.file instanceof File) || !this.props.fileSubmitHandler) return;
 
-    const result = await ctrl.updateAvatar(data);
+    const result = await this.props.fileSubmitHandler(data.file);
     if (!result) {
       this.children.content.setProps({ hasError: true });
     }
