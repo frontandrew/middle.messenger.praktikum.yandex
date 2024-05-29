@@ -1,11 +1,9 @@
 import { StoreEvents, store } from 'store';
-import { identity, isArray } from 'tools';
+import { isArray } from 'tools';
 import { MssgAPI } from 'apis/mssg';
 import { WS_HOST } from 'config';
 
-import { MessageType } from 'entities/message';
-
-import { formatMssgResponse, isMessageResponse } from './tools';
+import { formatMssgResponse, isMessageResponse, sortMssgsByData } from './tools';
 import { MessageResponse } from './type';
 
 class MssgService {
@@ -37,16 +35,18 @@ class MssgService {
 
   private collectMessages(data: unknown) {
     if (isArray(data)) {
-      const newMssgs = data.reduce((res, mssg) => {
-        if (isMessageResponse(mssg)) {
-          return [...res, formatMssgResponse(identity<MessageResponse>(mssg))];
-        }
-        return res;
-      }, [] as MessageType[]);
+      const mssgs = data.reduce((res, mssg) => {
+        if (!isMessageResponse(mssg)) return res;
+        return [...res, mssg];
+      }, [] as MessageResponse[]);
 
-      if (newMssgs.length) {
+      if (mssgs.length) {
+        const newMssgs = sortMssgsByData(mssgs);
         const prevMssgs = store.get()?.messages;
-        store.set('messages', [...prevMssgs!, ...newMssgs]);
+        store.set('messages', [
+          ...newMssgs.map(formatMssgResponse),
+          ...prevMssgs!,
+        ]);
       }
     }
 
