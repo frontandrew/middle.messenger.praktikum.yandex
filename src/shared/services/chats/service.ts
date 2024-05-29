@@ -66,17 +66,18 @@ class ChatsService {
     return result;
   }
 
+  /* TODO: load more users thene by default */
   public async getChatUsers(data: Omit<ChatUsersPayload, 'id'>) {
     const chatId = store.get()?.chat?.id;
-    if (!chatId) return null;
+    if (!chatId) return [];
 
-    store.set('isLoading', false);
+    store.set('isLoading', true);
 
     const chatUsers = await this.api.getChatUsers({ id: chatId, ...data })
       .then(({ response }) => response.map(formatChatUserResponse))
       .catch(() => []);
 
-    store.set('isLoading', true);
+    store.set('isLoading', false);
     return chatUsers;
   }
 
