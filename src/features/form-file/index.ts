@@ -9,10 +9,10 @@ export class FormFile extends Form<FormFileChildren, FormFileProps> {
   constructor(props: FormFileProps) {
     super({
       hasError: false,
-      title: new Text({ text: 'Load image', tag: 'h2', classes: 'form__title' }),
+      title: new Text({ text: 'Load file', tag: 'h2', classes: 'form-file__title' }),
       file: new Field({
         name: 'avatar',
-        label: 'Select image from your computer',
+        label: 'Select file from your computer',
         type: 'file',
         accept: 'image/*',
         tabindex: 1,
@@ -24,8 +24,8 @@ export class FormFile extends Form<FormFileChildren, FormFileProps> {
         tabindex: 2,
       }),
       error: new Text({
-        text: 'You need to select a file',
-        classes: 'form__error text_error-color',
+        text: 'This file cant be loaded, try another one',
+        classes: 'form-file__error text_error-color text_label',
       }),
       ...props,
     } as FormFileChildren & FormFileProps);

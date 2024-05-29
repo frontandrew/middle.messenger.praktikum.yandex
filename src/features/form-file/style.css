@@ -1,4 +1,4 @@
-.form-avatar {
+.form-file {
     width: 17.5em;
 
     .input-file {
@@ -10,14 +10,14 @@
     }
 }
 
-.form__title {
+.form-file__title {
     width: 100%;
     text-align: center;
 
     font-size: .9375em;
 }
 
-.form__error {
+.form-file__error {
     width: 100%;
     text-align: center;
 
