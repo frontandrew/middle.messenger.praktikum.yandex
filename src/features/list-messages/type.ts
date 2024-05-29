@@ -6,6 +6,7 @@ export interface ListMessagesChildren extends Children {
 }
 
 export interface ListMessagesProps extends Props {
+  onScroll: () => void;
   keys: string;
   items: MessageType[] | [];
   hasItems: boolean;

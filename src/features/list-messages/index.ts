@@ -12,11 +12,15 @@ import './style.css';
 const ListMessagesWithState = withStore((state) => ({ items: state.messages }))(Component);
 
 export class ListMessages extends ListMessagesWithState<ListMessagesChildren, ListMessagesProps> {
+  private scrollTop = 0;
+  private ableToLoad = true;
+
   constructor() {
     super({
       items: [],
       keys: '',
       hasItems: false,
+      onScroll: () => this.loadOldestMssgsHandler(),
     } as ListMessagesProps & ListMessagesChildren);
   }
 
@@ -67,7 +71,28 @@ export class ListMessages extends ListMessagesWithState<ListMessagesChildren, Li
       this.props = { ...oldRestProps, ...newItemsAndKeysProps };
     }
 
+    this.ableToLoad = true;
+    window.setTimeout(this.handleOnLoad.bind(this), 0);
     return [isItemsEqual, isRestPropsEqual].every(Boolean);
+  }
+
+  handleOnLoad() {
+    if (this.element === null) return;
+    this.element.scrollTop = this.scrollTop;
+  }
+
+  loadOldestMssgsHandler() {
+    if (!this.element) return;
+    const { offsetHeight, offsetTop, scrollTop, scrollHeight } = this.element;
+    const border = 40;
+    const height = scrollHeight - offsetHeight - offsetTop;
+    const trigger = (height + scrollTop) < border;
+
+    if (trigger && this.ableToLoad) {
+      this.ableToLoad = false;
+      this.scrollTop = scrollTop;
+      mssgServ.getPreviosMssg(20);
+    }
   }
 
   render() {
