@@ -20,26 +20,24 @@ import type { UserType } from 'entities/user';
 import type { ButtonAttach } from '../button-attach';
 
 export interface LayoutChatsProps extends Props {
-  user: UserType,
-  chats: ChatType[] | [],
-  messages: MessageType[] | [],
-  selectedChat: number | null,
+  user: UserType;
+  chats: ChatType[] | [];
+  messages: MessageType[] | [];
+  selectedChat: number | null;
 }
 
 export interface LayoutChatsChildren extends Children {
-  redirect: Button,
-  formSearch: FormSearch,
-  listChats: ListChats,
-  headerChat: HeaderChat,
-  listMessages: ListMessages,
-  dialogChatAvatar: DialogSelectFile,
-  usersSearch: Dialog<
-    { content: SearchUsers } & DialogChildren,
-    DialogProps
-  >,
-  actionAttach: ButtonAttach,
-  formMessage: FormMessage,
+  redirect: Button;
+  formSearch: FormSearch;
+  listChats: ListChats;
+  headerChat: HeaderChat;
+  listMessages: ListMessages;
+  dialogChatAvatar: DialogSelectFile;
+  usersSearch: Dialog<{ content: SearchUsers } & DialogChildren, DialogProps>;
+  actionAttach: ButtonAttach;
+  formMessage: FormMessage;
   actionsChat: ButtonIcon;
-  menuAttach: MenuAttach,
+  actionCreateChat: ButtonIcon;
+  menuAttach: MenuAttach;
   menuChat: Menu;
 }

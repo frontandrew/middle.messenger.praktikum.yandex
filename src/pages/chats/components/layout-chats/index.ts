@@ -1,6 +1,6 @@
 import { Button, ButtonIcon, Dialog, Menu } from 'ui';
 import { Component } from 'core';
-import { IconAdd, IconMedia } from 'images';
+import { IconAdd, IconMedia, IconPlus } from 'images';
 import { withRouter } from 'routing';
 import { withStore } from 'store';
 
@@ -34,6 +34,10 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
         classes: 'text_light-color',
         onClick: () => this.router.go('/settings'),
         tabindex: 100,
+      }),
+      actionCreateChat: new ButtonIcon({
+        pic: IconPlus,
+        onClick: () => {},
       }),
 
       listChats: new ListChats(),

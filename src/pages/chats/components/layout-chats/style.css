@@ -13,9 +13,16 @@
 
     display: flex;
     flex-direction: column;
+    position: relative;
 
     border-right: 1px solid var(--background-color-contrast);
     background-color: var(--background-color-tint);
+
+    .button-icon {
+        position: absolute;
+        bottom: 0.625em;
+        right: 1.25em;
+    }
 }
 
 .chat__nav > .divider {
