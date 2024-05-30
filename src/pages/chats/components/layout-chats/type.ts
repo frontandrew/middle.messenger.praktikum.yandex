@@ -11,12 +11,18 @@ import type {
 import type { DialogSelectFile } from 'widgets/dialog-file-select';
 import type { SearchUsers } from 'widgets/search-users';
 
-import type { FormMessage, FormSearch, ListChats, ListMessages, MenuAttach } from 'features';
+import type {
+  FormChat,
+  FormMessage,
+  FormSearch,
+  ListChats,
+  ListMessages,
+  MenuAttach,
+} from 'features';
 
 import type { ChatType, HeaderChat } from 'entities/chat';
 import type { MessageType } from 'entities/message';
 import type { UserType } from 'entities/user';
-
 import type { ButtonAttach } from '../button-attach';
 
 export interface LayoutChatsProps extends Props {
@@ -34,6 +40,7 @@ export interface LayoutChatsChildren extends Children {
   listMessages: ListMessages;
   dialogChatAvatar: DialogSelectFile;
   usersSearch: Dialog<{ content: SearchUsers } & DialogChildren, DialogProps>;
+  createChat: Dialog<{ content: FormChat } & DialogChildren, DialogProps>;
   actionAttach: ButtonAttach;
   formMessage: FormMessage;
   actionsChat: ButtonIcon;

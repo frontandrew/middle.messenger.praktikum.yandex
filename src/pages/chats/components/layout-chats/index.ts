@@ -11,7 +11,14 @@ import { HeaderChat } from 'entities/chat';
 import { DialogSelectFile } from 'widgets/dialog-file-select';
 import { SearchUsers } from 'widgets/search-users';
 
-import { FormMessage, FormSearch, ListChats, ListMessages, MenuAttach } from 'features';
+import {
+  FormChat,
+  FormMessage,
+  FormSearch,
+  ListChats,
+  ListMessages,
+  MenuAttach,
+} from 'features';
 
 import { ButtonAttach } from '../button-attach';
 
@@ -37,7 +44,7 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
       }),
       actionCreateChat: new ButtonIcon({
         pic: IconPlus,
-        onClick: () => {},
+        onClick: () => this.callCreateChatForm(),
       }),
 
       listChats: new ListChats(),
@@ -89,6 +96,10 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
         isOpen: false,
         content: new SearchUsers(),
       }),
+      createChat: new Dialog({
+        isOpen: false,
+        content: new FormChat(),
+      }),
     } as LayoutChatsChildren & LayoutChatsProps);
   }
 
@@ -102,6 +113,10 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
 
   callMenuChat() {
     this.children.menuChat.showMenu();
+  }
+
+  callCreateChatForm() {
+    this.children.createChat.open();
   }
 
   callAddUsersDialog() {

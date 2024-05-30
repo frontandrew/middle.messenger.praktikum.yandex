@@ -4,6 +4,10 @@
     .button {
         margin-bottom: 0.769231em;
     }
+
+    .field {
+        padding: 4em 0 2.5em;
+    }
 }
 
 .form-chat__title {

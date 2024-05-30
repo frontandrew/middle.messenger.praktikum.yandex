@@ -7,7 +7,7 @@ import './style.css';
 export type { FormChatChildren, FormChatProps };
 
 export class FormChat extends Form<FormChatChildren, FormChatProps> {
-  constructor(props: FormChatProps) {
+  constructor(props?: FormChatProps) {
     super({
       title: new Text({
         text: 'Create new chat',
