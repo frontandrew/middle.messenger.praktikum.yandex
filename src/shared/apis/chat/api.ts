@@ -3,6 +3,8 @@ import { HTTPTransport } from 'network';
 import type {
   ChatChangeUsersPayload,
   ChatChangeUsersResponse,
+  ChatCreatePayload,
+  ChatCreateResponse,
   ChatResponse,
   ChatUsersPayload,
   ChatUsersResponse,
@@ -38,5 +40,10 @@ export class ChatAPI {
   public setChatAvatar(payload: FormData) {
     return this.http
       .put<FormData, ChatResponse>(`/chats/avatar`, { data: payload });
+  }
+
+  public createChat(payload: ChatCreatePayload) {
+    return this.http
+      .post<ChatCreatePayload, ChatCreateResponse>(`/chats`, { data: payload });
   }
 }

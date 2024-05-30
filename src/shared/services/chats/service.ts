@@ -2,8 +2,8 @@ import { keying } from 'tools';
 import { RESOURCES } from 'config';
 import { store } from 'store';
 
+import type { ListChatsPayload, ChatUsersPayload, ChatCreatePayload } from 'apis/chat';
 import { ChatAPI } from 'apis/chat';
-import type { ListChatsPayload, ChatUsersPayload } from 'apis/chat';
 
 import { formatChatResponse, formatChatUserResponse, updeteChatsList } from './tools';
 
@@ -19,6 +19,22 @@ class ChatsService {
 
     store.set('chats', keying(list, 'id'));
     store.set('isLoading', false);
+  }
+
+  public async createNewChat(data: ChatCreatePayload) {
+    store.set('isLoading', true);
+
+    const result = await this.api.createChat(data)
+      .then(({ response }) => Boolean(response.id))
+      .catch(() => false);
+
+    if (!result) {
+      store.set('isLoading', false);
+      return result;
+    }
+
+    await this.getListChats();
+    return result;
   }
 
   public async handleChatSelection(nextChatId: number) {

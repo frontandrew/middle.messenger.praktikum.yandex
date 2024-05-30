@@ -46,3 +46,11 @@ export interface ChatUsersPayload {
 }
 
 export type ChatUsersResponse = ChatUser[]
+
+export interface ChatCreatePayload {
+  title: string;
+}
+
+export interface ChatCreateResponse {
+  id: number;
+}
