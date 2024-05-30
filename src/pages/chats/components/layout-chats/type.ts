@@ -8,7 +8,9 @@ import type {
   Menu,
 } from 'ui';
 
+import type { DialogSelectFile } from 'widgets/dialog-file-select';
 import type { SearchUsers } from 'widgets/search-users';
+
 import type { FormMessage, FormSearch, ListChats, ListMessages, MenuAttach } from 'features';
 
 import type { ChatType, HeaderChat } from 'entities/chat';
@@ -30,6 +32,7 @@ export interface LayoutChatsChildren extends Children {
   listChats: ListChats,
   headerChat: HeaderChat,
   listMessages: ListMessages,
+  dialogChatAvatar: DialogSelectFile,
   usersSearch: Dialog<
     { content: SearchUsers } & DialogChildren,
     DialogProps

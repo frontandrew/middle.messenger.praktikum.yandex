@@ -1,15 +1,17 @@
 import { Button, ButtonIcon, Dialog, Menu } from 'ui';
 import { Component } from 'core';
-import { IconAdd } from 'images';
+import { IconAdd, IconMedia } from 'images';
 import { withRouter } from 'routing';
 import { withStore } from 'store';
 
 import { usersServ } from 'services/users';
 import { chatsServ } from 'services/chats';
-
-import { SearchUsers } from 'widgets/search-users';
-import { FormMessage, FormSearch, ListChats, ListMessages, MenuAttach } from 'features';
 import { HeaderChat } from 'entities/chat';
+
+import { DialogSelectFile } from 'widgets/dialog-file-select';
+import { SearchUsers } from 'widgets/search-users';
+
+import { FormMessage, FormSearch, ListChats, ListMessages, MenuAttach } from 'features';
 
 import { ButtonAttach } from '../button-attach';
 
@@ -40,6 +42,13 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
       formMessage: new FormMessage(),
       headerChat: new HeaderChat(),
       menuAttach: new MenuAttach(),
+      dialogChatAvatar: new DialogSelectFile({
+        fileSubmitHandler: async (file: File) => {
+          const result = await chatsServ.changeAvatar(file);
+          return result;
+        },
+        isOpen: false,
+      }),
 
       actionAttach: new ButtonAttach({
         onClick: () => {
@@ -63,6 +72,11 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
             label: 'Remove user',
             icon: IconAdd,
             onClick: () => this.callRemoveUsersDialog(),
+          },
+          {
+            label: 'Change avatar',
+            icon: IconMedia,
+            onClick: () => this.callChatAvatarDialog(),
           },
         ],
       }),
@@ -120,6 +134,10 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
     this.children.usersSearch.children.content
       .children.action.setProps({ label: 'Remove selected users' });
     this.children.usersSearch.open();
+  }
+
+  callChatAvatarDialog() {
+    this.children.dialogChatAvatar.open();
   }
 
   render() {
