@@ -98,7 +98,13 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
       }),
       createChat: new Dialog({
         isOpen: false,
-        content: new FormChat(),
+        content: new FormChat({
+          onSubmit: (event: SubmitEvent) => {
+            event.preventDefault();
+            this.handleUserInfoChange();
+            return event;
+          },
+        }),
       }),
     } as LayoutChatsChildren & LayoutChatsProps);
   }
@@ -157,6 +163,22 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
 
   callChatAvatarDialog() {
     this.children.dialogChatAvatar.open();
+  }
+
+  private async handleUserInfoChange() {
+    const chatForm = this.children.createChat.children.content;
+    const data = chatForm.handleSubmit();
+
+    if (!chatForm.props.hasError && typeof data?.chatTitle === 'string') {
+      const result = await chatsServ.createNewChat({ title: data.chatTitle as string });
+
+      if (!result) {
+        chatForm.setProps({ hasError: true });
+        return;
+      }
+
+      this.children.createChat.open();
+    }
   }
 
   render() {
