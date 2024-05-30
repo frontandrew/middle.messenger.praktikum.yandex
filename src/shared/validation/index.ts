@@ -1,3 +1,4 @@
+import { chatTitle } from './validators/chat-title';
 import { email } from './validators/email';
 import { file } from './validators/file';
 import { isRequired } from './validators/is-required';
@@ -23,5 +24,6 @@ export const validators: Validators = {
   avatar: file,
   email,
   phone,
+  chatTitle,
   isRequired,
 };

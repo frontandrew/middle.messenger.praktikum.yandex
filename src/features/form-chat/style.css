@@ -1,0 +1,22 @@
+.form-chat {
+    width: 17.5em;
+
+    .button {
+        margin-bottom: 0.769231em;
+    }
+}
+
+.form-chat__title {
+    width: 100%;
+    text-align: center;
+
+    font-size: .9375em;
+}
+
+.form-chat__error {
+    width: 100%;
+    text-align: center;
+
+    margin-top: 0.363636em;
+    font-size: 0.6875em;
+}
