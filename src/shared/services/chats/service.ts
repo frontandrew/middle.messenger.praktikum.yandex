@@ -1,4 +1,5 @@
 import { keying } from 'tools';
+import { RESOURCES } from 'config';
 import { store } from 'store';
 
 import { ChatAPI } from 'apis/chat';
@@ -64,6 +65,24 @@ class ChatsService {
 
     store.set('isLoading', false);
     return result;
+  }
+
+  public async changeAvatar(file: File) {
+    const chatId = store.get()?.chat?.id;
+    if (typeof chatId !== 'number') return false;
+
+    store.set('isLoading', true);
+    const data = new FormData();
+    data.append('avatar', file, file.name);
+    data.append('chatId', chatId.toString());
+
+    const image = await this.api.setChatAvatar(data)
+      .then(({ response }) => response.avatar)
+      .catch(() => null);
+
+    if (typeof image === 'string') store.set(`chats.${chatId}.avatar`, RESOURCES + image);
+    store.set('isLoading', false);
+    return typeof image === 'string';
   }
 
   /* TODO: load more users thene by default */

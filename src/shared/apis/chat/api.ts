@@ -3,6 +3,7 @@ import { HTTPTransport } from 'network';
 import type {
   ChatChangeUsersPayload,
   ChatChangeUsersResponse,
+  ChatResponse,
   ChatUsersPayload,
   ChatUsersResponse,
   ListChatsPayload,
@@ -32,5 +33,10 @@ export class ChatAPI {
   public removeUsers(payload: ChatChangeUsersPayload) {
     return this.http
       .delete<ChatChangeUsersPayload, ChatChangeUsersResponse>(`/chats/users`, { data: payload });
+  }
+
+  public setChatAvatar(payload: FormData) {
+    return this.http
+      .put<FormData, ChatResponse>(`/chats/avatar`, { data: payload });
   }
 }
