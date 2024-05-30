@@ -4,6 +4,7 @@ import { FormFile } from 'features/form-file';
 // import { usersServ } from 'services/users';
 
 import type { DialogFileSelectChildren, DialogFileSelectProps } from './type';
+import './style.css';
 
 export class DialogSelectFile extends Dialog<DialogFileSelectChildren, DialogFileSelectProps> {
   constructor(props?: DialogFileSelectProps) {
