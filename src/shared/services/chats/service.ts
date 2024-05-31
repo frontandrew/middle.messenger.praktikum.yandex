@@ -9,8 +9,10 @@ import { formatChatResponse, formatChatUserResponse, updeteChatsList } from './t
 
 class ChatsService {
   private api = new ChatAPI();
+  private lastSearch: ListChatsPayload | null = null;
 
   public async getListChats(params: ListChatsPayload = {}) {
+    this.lastSearch = params;
     store.set('isLoading', true);
 
     const list = await this.api.getChats(params)
@@ -33,7 +35,7 @@ class ChatsService {
       return Boolean(result);
     }
 
-    await this.getListChats();
+    await this.getListChats(this.lastSearch ?? {});
     await this.handleChatSelection(result);
     return Boolean(result);
   }
