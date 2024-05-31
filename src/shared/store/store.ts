@@ -17,7 +17,7 @@ export class Store extends EventBus {
 
   public set(path: string, value: unknown) {
     this.state = set(this.state as PlainObject, path, value) as State;
-    this.emit(StoreEvents.UPD);
+    this.emit(StoreEvents.UPD, this.state);
   }
 
   public init(state: State) {
@@ -30,7 +30,7 @@ export class Store extends EventBus {
       throw (new Error('Application initial state is missing'));
     }
     this.state = deepCopy(this.initState) as State;
-    this.emit(StoreEvents.UPD);
+    this.emit(StoreEvents.UPD, this.state);
   }
 }
 

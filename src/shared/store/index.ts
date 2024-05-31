@@ -1,3 +1,3 @@
 export { store, StoreEvents } from './store';
 export { withStore } from './tools';
-export type { State } from './type';
+export type { CurrentChatState, State } from './type';

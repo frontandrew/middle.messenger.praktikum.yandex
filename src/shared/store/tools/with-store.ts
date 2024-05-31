@@ -9,10 +9,10 @@ export function withStore<C, P>(mapFn: (state: State) => MakeOptional<P>) {
     // @ts-expect-error-next-line
     return class extends constructor {
       constructor(args: C & P) {
-        super({ ...args, ...mapFn(store.get()!) as C & P });
+        super({ ...args, ...mapFn(store.get() ?? ({} as State)) as C & P });
 
-        store.on(StoreEvents.UPD, () => {
-          this.setProps({ ...mapFn(store.get()!) as Props });
+        store.on(StoreEvents.UPD, (state: State) => {
+          this.setProps({ ...mapFn(state) as Props });
         });
       }
     };
