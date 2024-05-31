@@ -4,6 +4,7 @@ import { store } from 'store';
 import type { ChatType } from 'entities/chat';
 import { ChatResponse } from 'apis/chat';
 import { RESOURCES } from 'config';
+import { formatChatTime } from './format-chat-time';
 
 export function formatChatResponse(data: ChatResponse): ChatType {
   const { unread_count, created_by, last_message, id, avatar, ...rest } = data;
@@ -20,7 +21,9 @@ export function formatChatResponse(data: ChatResponse): ChatType {
 
   if (last_message) {
     const { content, time } = last_message;
-    return { time, lastMessage: content, ...result };
+    const dateTimeString = formatChatTime(new Date(time));
+
+    return { time: dateTimeString, lastMessage: content, ...result };
   }
 
   return { ...result, lastMessage: null, time: null };
