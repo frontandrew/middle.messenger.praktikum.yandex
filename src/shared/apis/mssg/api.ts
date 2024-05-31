@@ -12,8 +12,8 @@ export class MssgAPI {
     await this.ws?.connect();
   }
 
-  public disconnect(): void {
-    this.ws?.disconnect();
+  public async disconnect(): Promise<void> {
+    await this.ws?.disconnect();
   }
 
   public getMessages(offset: number) {

@@ -78,8 +78,22 @@ export class WSTransport {
     }
   }
 
-  public disconnect(): void {
-    if (this.socket) this.socket.close();
+  public async disconnect(): Promise<void> {
+    const ws = this.socket;
+    if (ws) {
+      await new Promise((resolve) => {
+        ws.close();
+
+        ws.onerror = (event: Event) => {
+          console.warn(`Connection closed with error.`, event);
+          resolve(true);
+        };
+
+        ws.onclose = () => {
+          resolve(true);
+        };
+      });
+    }
   }
 
   public sendMessage(payload: SendPayload): void {
