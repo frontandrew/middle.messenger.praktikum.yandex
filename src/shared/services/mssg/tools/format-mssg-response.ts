@@ -8,8 +8,11 @@ import { MessageResponse } from '../type';
 export function formatMssgResponse(data: MessageResponse): MessageType {
   const { id, is_read, user_id, time, content, type } = data;
   const date = new Date(time);
-  const hour = date.getHours();
-  const minute = date.getMinutes();
+  let hour = date.getHours().toString();
+  let minute = date.getMinutes().toString();
+
+  hour = hour.length < 2 ? 0 + hour : hour;
+  minute = minute.length < 2 ? 0 + minute : minute;
 
   const { user } = store.get();
 
