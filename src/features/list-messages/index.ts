@@ -12,8 +12,8 @@ import './style.css';
 const ListMessagesWithState = withStore((state) => ({ items: state.messages }))(Component);
 
 export class ListMessages extends ListMessagesWithState<ListMessagesChildren, ListMessagesProps> {
-  private scrollTop = 0;
   private ableToLoad = true;
+  private scrollTop = 0;
 
   constructor() {
     super({
@@ -24,8 +24,8 @@ export class ListMessages extends ListMessagesWithState<ListMessagesChildren, Li
     } as ListMessagesProps & ListMessagesChildren);
   }
 
-  init() {
-    mssgServ.init();
+  async init() {
+    await mssgServ.init();
   }
 
   componentDidUpdate(oldProps: ListMessagesProps, newProps: ListMessagesProps): boolean {
@@ -71,7 +71,6 @@ export class ListMessages extends ListMessagesWithState<ListMessagesChildren, Li
       this.props = { ...oldRestProps, ...newItemsAndKeysProps };
     }
 
-    this.ableToLoad = true;
     window.setTimeout(this.handleOnLoad.bind(this), 0);
     return [isItemsEqual, isRestPropsEqual].every(Boolean);
   }
@@ -79,6 +78,8 @@ export class ListMessages extends ListMessagesWithState<ListMessagesChildren, Li
   handleOnLoad() {
     if (this.element === null) return;
     this.element.scrollTop = this.scrollTop;
+    this.ableToLoad = true;
+    this.scrollTop = 0;
   }
 
   loadOldestMssgsHandler() {
@@ -89,8 +90,8 @@ export class ListMessages extends ListMessagesWithState<ListMessagesChildren, Li
     const trigger = (height + scrollTop) < border;
 
     if (trigger && this.ableToLoad) {
-      this.ableToLoad = false;
       this.scrollTop = scrollTop;
+      this.ableToLoad = false;
       mssgServ.getPreviosMssg(20);
     }
   }

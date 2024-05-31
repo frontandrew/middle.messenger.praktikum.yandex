@@ -3,6 +3,9 @@ import { isArray } from 'tools';
 import { MssgAPI } from 'apis/mssg';
 import { WS_HOST } from 'config';
 
+import type { CurrentChatState, State } from 'store';
+import type { UserType } from 'entities/user';
+
 import { formatMssgResponse, isMessageResponse, sortMssgsByData } from './tools';
 import { MessageResponse } from './type';
 
@@ -19,21 +22,55 @@ class MssgService {
     this.api?.getMessages(this.offset);
   }
 
-  public init() {
-    store.on(StoreEvents.UPD, () => {
-      const { chat } = (store.get()!);
-      const newChatId = chat?.id ? chat.id : null;
-
-      if (!newChatId) return;
-      if (newChatId === this.chatId) return;
-      if (typeof this.api?.getConnectState === 'number') {
-        this.closeConnection();
-      }
-      this.startMessaging();
+  public async init() {
+    store.on(StoreEvents.UPD, async ({ chat, user }: State) => {
+      this.userDispatcher(user);
+      await this.chatDispatcher(chat);
     });
   }
 
+  private userDispatcher(user: UserType | null) {
+    if (user?.id === this.userId) return;
+    this.userId = typeof user?.id === 'number' ? user.id : null;
+  }
+
+  private async chatDispatcher(chat: CurrentChatState | null) {
+    /* On a same chat like ative now do nothing */
+    if (chat?.id === this.chatId && chat.token === this.token) return;
+
+    /* On invalid params or on user do chat closing and reset chat params */
+    if (typeof chat?.id !== 'number' || typeof chat?.token !== 'string' || !chat?.token.length) {
+      this.setChatParams({ id: null, token: null });
+      if (this.isConnectionAlive()) await this.stopMessaging();
+      return;
+    }
+
+    /* Now can accept new chat params. Important do this before async open new connect! */
+    this.setChatParams({ id: chat.id, token: chat.token });
+
+    /* On user new chat open */
+    if (this.isConnectionAlive()) await this.stopMessaging();
+    if (this.userId) await this.startMessaging();
+  }
+
+  private async startMessaging() {
+    this.api = new MssgAPI({
+      url: `${this.host}/${this.userId}/${this.chatId}/${this.token}`,
+      errorHandler: this.onError.bind(this),
+      messageHandler: this.onMssg.bind(this),
+    });
+
+    await this.api?.openConnection();
+    if (this.api?.getConnectState() === 1) this.getPreviosMssg(this.offset);
+  }
+
+  private async stopMessaging() {
+    store.set('messages', []);
+    await this.api?.disconnect();
+  }
+
   private collectMessages(data: unknown) {
+    /* Collect an messages array */
     if (isArray(data)) {
       const mssgs = data.reduce((res, mssg) => {
         if (!isMessageResponse(mssg)) return res;
@@ -42,51 +79,25 @@ class MssgService {
 
       if (mssgs.length) {
         const newMssgs = sortMssgsByData(mssgs);
-        const prevMssgs = store.get()?.messages;
+        const prevMssgs = store.get()?.messages ?? [];
         store.set('messages', [
           ...newMssgs.map(formatMssgResponse),
-          ...prevMssgs!,
+          ...prevMssgs,
         ]);
       }
     }
 
+    /* Collect a single message */
     if (isMessageResponse(data)) {
-      const prevMssgs = store.get()?.messages;
-      store.set('messages', [...prevMssgs!, formatMssgResponse(data)]);
+      const prevMssgs = store.get()?.messages ?? [];
+      store.set('messages', [...prevMssgs, formatMssgResponse(data)]);
     }
-  }
-
-  public closeConnection() {
-    this.api?.disconnect();
-    this.api = null;
-    this.chatId = null;
-    this.token = null;
-  }
-
-  public async startMessaging() {
-    const { chat } = (store.get()!);
-    const { user } = (store.get()!);
-
-    if (chat?.id && chat.token && user?.id) {
-      this.userId = user.id;
-      this.chatId = chat.id;
-      this.token = chat.token;
-      this.api = new MssgAPI(
-        {
-          url: `${this.host}/${this.userId}/${this.chatId}/${this.token}`,
-          errorHandler: this.onError.bind(this),
-          messageHandler: this.onMssg.bind(this),
-        },
-      );
-    }
-    await this.api?.openConnection();
-    this.getPreviosMssg(this.offset);
   }
 
   public sendMessage(data: string) {
     // TODO: xss protect
     // TODO: processing files
-    this.api?.sendMessage(data);
+    if (this.isConnectionAlive()) this.api!.sendMessage(data);
   }
 
   private onError(event: Event) {
@@ -99,6 +110,16 @@ class MssgService {
       this.collectMessages(JSON.parse(event.data));
     }
     return event;
+  }
+
+  private isConnectionAlive() {
+    return (this.api?.getConnectState() ?? 3) < 2;
+  }
+
+  private setChatParams({ id, token }: CurrentChatState) {
+    this.chatId = id;
+    this.token = token;
+    this.offset = 0;
   }
 }
 
