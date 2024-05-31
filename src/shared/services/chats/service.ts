@@ -142,6 +142,8 @@ class ChatsService {
 
     //   store.set('chats', updatedChats);
     // }
+
+    /* TODO: TEMPORARY SOLUTION! need to rework!! */
     const list = await this.api.getChats(this.lastSearch ?? {})
       .then(({ response }) => response.map(formatChatResponse))
       .catch(() => []);

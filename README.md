@@ -21,6 +21,16 @@
 - [Stylelint](https://stylelint.io/) - a mighty CSS linter that helps you avoid errors and enforce conventions.
 - [Express](https://expressjs.com/) - fast, unopinionated, minimalist web framework for Node.js
 
+### Features:
+
+- Self made reactivenes with out any frameworks
+- Used vanilla Web Socket api
+- Self made state management with out frameworks
+- Separat buisness logic and view layer
+- Architecture with Feature Slised Design
+- Used event-bus pattern for one way data stream
+- Self made routing based on native browser history
+
 ---
 
 #### Templates: [Figma](https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1)
