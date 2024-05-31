@@ -14,7 +14,7 @@ export function formatMssgResponse(data: MessageResponse): MessageType {
   hour = hour.length < 2 ? 0 + hour : hour;
   minute = minute.length < 2 ? 0 + minute : minute;
 
-  const { user } = store.get();
+  const user = store.get()?.user;
 
   return {
     id,

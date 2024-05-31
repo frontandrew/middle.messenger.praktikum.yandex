@@ -16,7 +16,7 @@ export type { AvatarArgs, AvatarChildren, AvatarProps } from './avatar/type';
 export type { ButtonTypes, ButtonChildren, ButtonProps } from './button/type';
 export type { ButtonIconChildren, ButtonIconProps } from './button-icon/type';
 export type { DialogChildren, DialogProps } from './dialog/type';
-export type { FormChildren, FormData, FormProps } from './form/type';
+export type { FormChildren, FormProps } from './form/type';
 export type { FieldChildren, FieldProps } from './field/type';
 export type { InputChildren, InputProps, InputType } from './input';
 export type { LoaderChildren, LoaderProps } from './loader';

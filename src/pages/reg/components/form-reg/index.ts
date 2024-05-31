@@ -9,7 +9,7 @@ import './style.css';
 export type { FormRegChildren, FormRegData, FormRegProps };
 
 export class FormReg extends Form<FormRegChildren, FormRegProps> {
-  constructor(props: FormRegProps) {
+  constructor(props?: FormRegProps) {
     super({
       onSubmit: (event: Event) => {
         event.preventDefault();

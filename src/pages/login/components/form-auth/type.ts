@@ -1,11 +1,6 @@
 import { Button, Field } from 'ui';
 
-import type { FormChildren, FormData, FormProps } from 'ui';
-
-export interface FormAuthData extends FormData {
-  login: string,
-  password: string,
-}
+import type { FormChildren, FormProps } from 'ui';
 
 export interface FormAuthProps extends FormProps {}
 

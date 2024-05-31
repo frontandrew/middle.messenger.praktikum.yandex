@@ -1,8 +1,8 @@
 import { Button, Field } from 'ui';
 
-import type { FormChildren, FormData, FormProps } from 'ui';
+import type { FormChildren, FormProps } from 'ui';
 
-export interface FormRegData extends FormData {
+export interface FormRegData {
   email: string,
   login: string,
   firstName: string,
