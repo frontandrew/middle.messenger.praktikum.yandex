@@ -46,4 +46,8 @@ export class ChatAPI {
     return this.http
       .post<ChatCreatePayload, ChatCreateResponse>(`/chats`, { data: payload });
   }
+
+  public getUnreadCount(payload: number) {
+    return this.http.get<number, Pick<ChatResponse, 'unread_count'>>(`/chats/new/${payload}`);
+  }
 }

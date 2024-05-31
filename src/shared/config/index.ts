@@ -30,3 +30,7 @@ export const ROUTES = {
   '/messenger': { page: 'PageChats', needAuth: true },
   '/error': { page: 'PageError', needAuth: true },
 } as const;
+
+/* CHATS */
+
+export const UNREAD_TIMEOUT = 5000;

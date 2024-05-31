@@ -26,6 +26,7 @@ export class ListChats extends ListChatsWithState<ListChatsChildren, ListChatsPr
 
   init() {
     chatsServ.getListChats();
+    chatsServ.getUreadCount();
   }
 
   componentDidUpdate(oldProps: ListChatsProps, newProps: ListChatsProps): boolean {

@@ -1,5 +1,5 @@
+import { RESOURCES, UNREAD_TIMEOUT } from 'config';
 import { keying } from 'tools';
-import { RESOURCES } from 'config';
 import { store } from 'store';
 
 import type { ListChatsPayload, ChatUsersPayload, ChatCreatePayload } from 'apis/chat';
@@ -125,6 +125,29 @@ class ChatsService {
       .catch(() => null);
 
     return token;
+  }
+
+  public async getUreadCount() {
+    /* TODO: ITS NOT WORK propprly, need to debug */
+    // const chats = store.get()?.chats;
+
+    // console.log(`CALL`);
+    // if (chats && Object.values(chats).length) {
+    //   const updatedChats = await Object.entries(chats).reduce(async (updated, [id, chat]) => {
+    //     const count = await this.api.getUnreadCount(Number(id))
+    //       .then(({ response }) => response.unread_count);
+    //       // TODO: error handling
+    //     return { ...updated, [id]: { ...chat, unreadCount: count } };
+    //   }, {});
+
+    //   store.set('chats', updatedChats);
+    // }
+    const list = await this.api.getChats(this.lastSearch ?? {})
+      .then(({ response }) => response.map(formatChatResponse))
+      .catch(() => []);
+
+    store.set('chats', keying(list, 'id'));
+    window.setTimeout(() => this.getUreadCount(), UNREAD_TIMEOUT);
   }
 }
 
