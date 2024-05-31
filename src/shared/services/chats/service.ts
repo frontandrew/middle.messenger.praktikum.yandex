@@ -25,16 +25,17 @@ class ChatsService {
     store.set('isLoading', true);
 
     const result = await this.api.createChat(data)
-      .then(({ response }) => Boolean(response.id))
-      .catch(() => false);
+      .then(({ response }) => response.id)
+      .catch(() => null);
 
     if (!result) {
       store.set('isLoading', false);
-      return result;
+      return Boolean(result);
     }
 
     await this.getListChats();
-    return result;
+    await this.handleChatSelection(result);
+    return Boolean(result);
   }
 
   public async handleChatSelection(nextChatId: number) {

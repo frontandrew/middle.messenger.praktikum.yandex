@@ -101,7 +101,7 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
         content: new FormChat({
           onSubmit: (event: SubmitEvent) => {
             event.preventDefault();
-            this.handleUserInfoChange();
+            this.handleChatCreate();
             return event;
           },
         }),
@@ -165,7 +165,7 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
     this.children.dialogChatAvatar.open();
   }
 
-  private async handleUserInfoChange() {
+  private async handleChatCreate() {
     const chatForm = this.children.createChat.children.content;
     const data = chatForm.handleSubmit();
 
@@ -177,7 +177,8 @@ export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsPro
         return;
       }
 
-      this.children.createChat.open();
+      this.children.createChat.children.content.reset();
+      this.children.createChat.close();
     }
   }
 
