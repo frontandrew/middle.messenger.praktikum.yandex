@@ -1,9 +1,7 @@
 .search-users {
     display: flex;
     flex-direction: column;
-
     width: 20em;
-    padding: 2.5em 1.875em 1.875em;
 }
 
 .search-user__search {
