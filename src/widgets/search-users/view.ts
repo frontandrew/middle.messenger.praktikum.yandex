@@ -75,8 +75,7 @@ export class SearchUsers extends Component<SearchUsersChildren, SearchUsersProps
       return;
     }
 
-    /* TODO: create result behaviour, now only reset form */
-    this.reset();
+    await this.handleUsersSearch();
   }
 
   reset() {
