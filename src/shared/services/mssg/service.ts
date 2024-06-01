@@ -1,5 +1,5 @@
 import { StoreEvents, store } from 'store';
-import { isArray } from 'tools';
+import { isArray, isValidJSON } from 'tools';
 import { MssgAPI } from 'apis/mssg';
 import { WS_HOST } from 'config';
 
@@ -106,7 +106,11 @@ class MssgService {
   }
 
   private onMssg(event: MessageEvent) {
-    if (typeof event.data === 'string' && ['message', 'file'].includes(event.type)) {
+    if (
+      typeof event.data === 'string'
+      && ['message', 'file'].includes(event.type)
+      && isValidJSON(event.data)
+    ) {
       this.collectMessages(JSON.parse(event.data));
     }
     return event;

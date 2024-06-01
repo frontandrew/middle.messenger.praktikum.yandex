@@ -1,4 +1,5 @@
 import { REST_HOST } from 'config';
+import { isValidJSON } from 'tools';
 import { queryStringify } from './tools';
 
 enum METHODS {
@@ -70,7 +71,8 @@ export class HTTPTransport {
         const { status = 0, response } = xhr;
         if (status >= 200 && status < 300) {
           const respHeads = xhr.getAllResponseHeaders();
-          const isJSON = respHeads.includes('content-type: application/json');
+          const isJSON = respHeads
+            .includes('content-type: application/json') && isValidJSON(response);
 
           resolve({ status, response: isJSON ? JSON.parse(response) : response });
         } else reject(new Error(`${response}`));
