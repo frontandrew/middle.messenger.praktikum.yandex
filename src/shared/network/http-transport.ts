@@ -13,11 +13,11 @@ interface Options<PayloadType> {
   data?: PayloadType extends PlainObject ? PlainObject : FormData;
   timeout?: number;
   headers?: Record<string, string>;
-}
+  }
 
-interface RequestOptions extends Options<PlainObject> {
-  method: METHODS;
-}
+  interface RequestOptions extends Options<PlainObject> {
+    method: METHODS;
+  }
 
 /* TODO: need typing request error */
 interface Response<T> {
@@ -25,29 +25,24 @@ interface Response<T> {
   response: T
 }
 
+type HTTPMethod = <PayloadType, ResponseType>
+  (url: string, options?: Options<PayloadType>) => Promise<Response<ResponseType>>
+
 export class HTTPTransport {
-  get<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}) {
-    return this.request<ResponseType>(url, { ...options, method: METHODS.GET }, options.timeout);
-  }
+  get: HTTPMethod = (url, options = {}) => this
+    .request(url, { ...options, method: METHODS.GET });
 
-  post<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}) {
-    return this.request<ResponseType>(url, { ...options, method: METHODS.POST }, options.timeout);
-  }
+  post: HTTPMethod = (url, options = {}) => this
+    .request(url, { ...options, method: METHODS.POST });
 
-  put<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}) {
-    return this.request<ResponseType>(url, { ...options, method: METHODS.PUT }, options.timeout);
-  }
+  put: HTTPMethod = (url, options = {}) => this
+    .request(url, { ...options, method: METHODS.PUT });
 
-  delete<PayloadType, ResponseType>(url: string, options: Options<PayloadType> = {}) {
-    return this.request<ResponseType>(url, { ...options, method: METHODS.DELETE }, options.timeout);
-  }
+  delete: HTTPMethod = (url, options = {}) => this
+    .request(url, { ...options, method: METHODS.DELETE });
 
-  request<ResponseType>(
-    url: string,
-    options:RequestOptions,
-    timeout = 10000,
-  ): Promise<Response<ResponseType>> {
-    const { headers = {}, method, data = {} } = options;
+  request<R>(url: string, options: RequestOptions): Promise<R> {
+    const { headers = {}, method, data = {}, timeout = 10000 } = options;
 
     return new Promise((resolve, reject) => {
       if (!method) {
@@ -68,12 +63,13 @@ export class HTTPTransport {
       });
 
       xhr.onload = () => {
-        const { status = 0, response } = xhr;
+        const { status, response } = xhr;
         if (status >= 200 && status < 300) {
           const respHeads = xhr.getAllResponseHeaders();
           const isJSON = respHeads
             .includes('content-type: application/json') && isValidJSON(response);
 
+          // @ts-expect-error-next-line
           resolve({ status, response: isJSON ? JSON.parse(response) : response });
         } else reject(new Error(`${response}`));
       };
