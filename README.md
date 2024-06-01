@@ -9,8 +9,9 @@
 ### Start and use:
 - clone repo
 - install dependencies: pnpm
-- for build run: pnpm build
-- for dev run: pnpm start
+- for create build run: pnpm build
+- for use build localy run: pnpm start
+- for use dev-server run: pnpm dev
 
 ### Used tools:
 

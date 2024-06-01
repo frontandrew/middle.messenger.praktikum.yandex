@@ -13,7 +13,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "vite --open",
+    "dev": "vite --open --port=4000",
     "start": "pnpm build && node ./server.js",
     "build": "pnpm lint:code && pnpm lint:style && pnpm type:check && rm -rf ./dist && vite build",
     "lint:code": "eslint .",
