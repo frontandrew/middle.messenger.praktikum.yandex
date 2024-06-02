@@ -4,13 +4,13 @@ import { Component } from 'core';
 import type { FormChildren, FormProps } from './type';
 import './style.css';
 
-export abstract class Form<C extends FormChildren, P extends FormProps>
+export class Form<C extends FormChildren, P extends FormProps>
   extends Component<C, P> {
   constructor({
     disabled = false,
     hasError = false,
 
-    onInput = (event: Event) => {
+    onInput = (event: InputEvent) => {
       this.updateErrorState(false);
       return event;
     },
@@ -18,7 +18,7 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
       this.reset();
       return event;
     },
-    onSubmit = (event: Event) => {
+    onSubmit = (event: SubmitEvent) => {
       event.preventDefault();
       this.handleSubmit();
       return event;
@@ -37,15 +37,16 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
     } as C & P);
   }
 
-  handleSubmit() {
+  handleSubmit(): PlainObject | undefined {
     this.validate();
     this.props.hasError = this.getErrorState();
 
     if (!this.props.hasError) {
-      this.submitForm();
+      return this.submitForm();
     }
 
     this.updateErrorState(this.props.hasError);
+    return undefined;
   }
 
   reset() {
@@ -69,7 +70,9 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
   }
 
   updateErrorState(state: boolean) {
-    this.children.submit?.setDisabled(state);
+    if (this.children.submit) {
+      this.children.submit.setDisabled(state);
+    }
   }
 
   validate() {
@@ -78,15 +81,22 @@ export abstract class Form<C extends FormChildren, P extends FormProps>
     });
   }
 
-  submitForm() {
-    const submitted = Object.entries(this.children).reduce(
-      (acc, [key, child]) => {
-        if (child instanceof Field) return ({ ...acc, [key]: child.children.input.props.value });
+  submitForm(): PlainObject {
+    const submitted = Object
+      .entries(this.children)
+      .reduce((acc, [key, child]) => {
+        if (child instanceof Field && child.props.type !== 'file') {
+          return ({ ...acc, [key]: child.value });
+        }
+
+        if (child instanceof Field && child.props.type === 'file' && child.file instanceof File) {
+          return { ...acc, [key]: child.file };
+        }
+
         return acc;
-      },
-      {},
-    );
+      }, {});
 
     console.warn(`SBMT{${this.count}}:[${this.instance}:${this.id}]:`, submitted);
+    return submitted;
   }
 }

@@ -1,0 +1,11 @@
+.header-chat {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    gap: 0.625em;
+}
+
+.header-chat__title {
+    flex-grow: 1;
+}

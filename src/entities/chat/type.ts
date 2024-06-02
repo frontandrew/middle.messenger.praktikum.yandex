@@ -1,8 +1,10 @@
 export interface ChatType {
-  id: number,
-  name: string,
-  avatar?: string,
-  lastMessage?: string,
-  date?: string,
-  count?: number,
+  id: number;
+  title: string;
+  avatar: string | null;
+  unreadCount: number;
+  authorId: number
+  lastMessage: string | null;
+  time: string | null;
+  isCurrent: boolean;
 }

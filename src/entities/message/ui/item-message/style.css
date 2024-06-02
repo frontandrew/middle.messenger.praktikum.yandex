@@ -36,7 +36,7 @@
 }
 
 /* TYPE */
-.message_text {
+.message_message {
     padding: 11px;
 
     time {
@@ -47,7 +47,7 @@
     }
 }
 
-.message_media {
+.message_file {
     img {
         display: block;
         object-fit: cover;

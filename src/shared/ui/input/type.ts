@@ -7,9 +7,8 @@ export interface InputProps extends Props {
   name: string;
   type: InputType;
 
-  // label?: string;
-  // inline?: string;
-  // textHelp?: string;
+  tabindex?: number;
+  autofocus?: boolean;
   accept?: InputAccept;
   classes?: string;
   disabled?: boolean;

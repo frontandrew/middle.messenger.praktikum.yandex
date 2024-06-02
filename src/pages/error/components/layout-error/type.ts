@@ -5,7 +5,6 @@ import type { Children, Props } from 'core';
 export interface LayoutErrorProps extends Props {
   title: string,
   message: string,
-  target: string,
 }
 
 export interface LayoutErrorChildren extends Children {

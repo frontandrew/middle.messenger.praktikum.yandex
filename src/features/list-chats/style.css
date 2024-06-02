@@ -1,0 +1,10 @@
+.list-chats {
+    height: 100%;
+    min-width: 19.375em;
+
+    overflow-x: hidden auto;
+}
+
+.list-chats__message {
+    transform: translateY(-4em);
+}

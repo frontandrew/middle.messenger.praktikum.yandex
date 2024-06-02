@@ -4,25 +4,30 @@ import type { DialogChildren, DialogProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class Dialog extends Component<DialogChildren, DialogProps> {
-  constructor({ isOpen = false, ...rest }) {
+export class Dialog<C extends DialogChildren, P extends DialogProps> extends Component<C, P> {
+  constructor({ isOpen = false, onClick, ...rest }: DialogProps) {
     super({
       isOpen,
-      onClick: () => this.close(),
+      onClick: () => {
+        if (onClick) onClick();
+        this.close();
+      },
       ...rest,
-    } as DialogChildren & DialogProps);
+    } as C & P);
   }
 
   public setVisibility(state: boolean) {
-    this.setProps({ isOpen: state });
+    this.setProps({ isOpen: state } as P);
   }
 
   public close() {
-    this.setProps({ isOpen: false });
+    if (this.props.closeHandler) this.props.closeHandler();
+    this.setProps({ isOpen: false } as P);
   }
 
   public open() {
-    this.setProps({ isOpen: true });
+    if (this.props.openHandler) this.props.openHandler();
+    this.setProps({ isOpen: true } as P);
   }
 
   render() {

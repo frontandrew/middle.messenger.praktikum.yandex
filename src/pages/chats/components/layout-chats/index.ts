@@ -1,97 +1,116 @@
-import { Avatar, Button, ButtonIcon, Menu, Text } from 'ui';
+import { Button, ButtonIcon, Dialog, Menu } from 'ui';
 import { Component } from 'core';
+import { IconAdd, IconMedia, IconPlus } from 'images';
+import { withRouter } from 'routing';
+import { withStore } from 'store';
 
-import { IconAdd, IconFile, IconLoc, IconMedia } from 'images';
+import { usersServ } from 'services/users';
+import { chatsServ } from 'services/chats';
+import { HeaderChat } from 'entities/chat';
+
+import { DialogSelectFile } from 'widgets/dialog-file-select';
+import { SearchUsers } from 'widgets/search-users';
+
+import {
+  FormChat,
+  FormMessage,
+  FormSearch,
+  ListChats,
+  ListMessages,
+  MenuAttach,
+} from 'features';
+
 import { ButtonAttach } from '../button-attach';
-import { FormMessage } from '../form-message';
-import { FormSearch } from '../form-search';
-import { ListChats } from '../list-chats';
-import { ListMessages } from '../list-messages';
 
 import type { LayoutChatsChildren, LayoutChatsProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export { LayoutChatsProps };
+const ComponentRS = withStore(
+  (state) => ({ selectedChat: Boolean(state.chat) }),
+)(withRouter(Component));
 
-export class LayoutChats extends Component<LayoutChatsChildren, LayoutChatsProps> {
-  constructor({ user, chats, messages }: LayoutChatsProps) {
+export class LayoutChats extends ComponentRS<LayoutChatsChildren, LayoutChatsProps> {
+  constructor() {
     super({
+      selectedChat: null,
       redirect: new Button({
         type: 'button',
         variant: 'text',
-        page: 'user',
         label: 'Profile ❯',
         classes: 'text_light-color',
+        onClick: () => this.router.go('/settings'),
+        tabindex: 100,
+      }),
+      actionCreateChat: new ButtonIcon({
+        pic: IconPlus,
+        onClick: () => this.callCreateChatForm(),
       }),
 
-      listChats: new ListChats(chats),
-      listMessages: new ListMessages(messages),
-
-      formSearch: new FormSearch({}),
+      listChats: new ListChats(),
+      listMessages: new ListMessages(),
+      formSearch: new FormSearch({ fieldName: 'chats-search' }),
       formMessage: new FormMessage(),
-
-      imageChat: new Avatar({
-        pic: user.image,
-        size: 'small',
-      }),
-
-      titleChat: new Text({
-        tag: 'h1',
-        text: user.nickName,
-        classes: 'messages__title text_title',
-      }),
-
-      actionsChat: new ButtonIcon({
-        variant: 'transparent',
-        onClick: () => {
-          this.callMenuChat();
+      headerChat: new HeaderChat(),
+      menuAttach: new MenuAttach(),
+      dialogChatAvatar: new DialogSelectFile({
+        fileSubmitHandler: async (file: File) => {
+          const result = await chatsServ.changeAvatar(file);
+          return result;
         },
+        isOpen: false,
       }),
+
       actionAttach: new ButtonAttach({
         onClick: () => {
           this.callMenuAttach();
         },
       }),
-
-      menuAttach: new Menu({
-        position: { left: 20, bottom: 4 },
-        itemsProps: [
-          {
-            label: 'Photo or Video',
-            icon: IconMedia,
-            onClick: () => {},
-          },
-          {
-            label: 'File',
-            icon: IconFile,
-            onClick: () => {},
-          },
-          {
-            label: 'Location',
-            icon: IconLoc,
-            onClick: () => {},
-          },
-        ],
+      actionsChat: new ButtonIcon({
+        variant: 'transparent',
+        onClick: () => this.callMenuChat(),
       }),
-
       menuChat: new Menu({
         position: { right: 0.5, top: 4 },
         itemsProps: [
           {
             label: 'Add user',
             icon: IconAdd,
-            onClick: () => {},
+            onClick: () => this.callAddUsersDialog(),
           },
           {
-            classes: 'menu-item__remove-user-img',
+            classes: 'menu-item__icon',
             label: 'Remove user',
             icon: IconAdd,
-            onClick: () => {},
+            onClick: () => this.callRemoveUsersDialog(),
+          },
+          {
+            label: 'Change avatar',
+            icon: IconMedia,
+            onClick: () => this.callChatAvatarDialog(),
           },
         ],
       }),
+      usersSearch: new Dialog({
+        closeHandler: (): void => this.resetUsersSearch(),
+        isOpen: false,
+        content: new SearchUsers(),
+      }),
+      createChat: new Dialog({
+        isOpen: false,
+        content: new FormChat({
+          onSubmit: (event: SubmitEvent) => {
+            event.preventDefault();
+            this.handleChatCreate();
+            return event;
+          },
+        }),
+      }),
     } as LayoutChatsChildren & LayoutChatsProps);
+  }
+
+  resetUsersSearch() {
+    this.children.usersSearch.children.content.reset();
   }
 
   callMenuAttach() {
@@ -100,6 +119,67 @@ export class LayoutChats extends Component<LayoutChatsChildren, LayoutChatsProps
 
   callMenuChat() {
     this.children.menuChat.showMenu();
+  }
+
+  callCreateChatForm() {
+    this.children.createChat.open();
+  }
+
+  callAddUsersDialog() {
+    this.children.usersSearch.children.content.setProps({
+      searchHandler: async (search) => {
+        const users = await usersServ.searchUsers({ login: search });
+        return users;
+      },
+      submitHandler: async (ids) => {
+        const result = await chatsServ.addUsersToChat(ids);
+        return result;
+      },
+    });
+    this.children.usersSearch.children.content
+      .children.action.setProps({ label: 'Add selected users' });
+    this.children.usersSearch.open();
+  }
+
+  async callRemoveUsersDialog() {
+    this.children.usersSearch.children.content.setProps({
+      searchHandler: async (search) => {
+        const users = await chatsServ.getChatUsers({ name: search, offset: 0, limit: 100 });
+        return users;
+      },
+      submitHandler: async (ids) => {
+        const result = await chatsServ.removeUsersFromChat(ids);
+        return result;
+      },
+    });
+
+    /* Call userSearch submit to show current chat users on open dialog */
+    await this.children.usersSearch.children.content.handleUsersSearch();
+
+    this.children.usersSearch.children.content
+      .children.action.setProps({ label: 'Remove selected users' });
+    this.children.usersSearch.open();
+  }
+
+  callChatAvatarDialog() {
+    this.children.dialogChatAvatar.open();
+  }
+
+  private async handleChatCreate() {
+    const chatForm = this.children.createChat.children.content;
+    const data = chatForm.handleSubmit();
+
+    if (!chatForm.props.hasError && typeof data?.chatTitle === 'string') {
+      const result = await chatsServ.createNewChat({ title: data.chatTitle as string });
+
+      if (!result) {
+        chatForm.setProps({ hasError: true });
+        return;
+      }
+
+      this.children.createChat.children.content.reset();
+      this.children.createChat.close();
+    }
   }
 
   render() {

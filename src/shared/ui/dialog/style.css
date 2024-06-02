@@ -1,7 +1,4 @@
 .dialog {
-    width: fit-content;
-    height: fit-content;
-
     margin: auto;
     z-index: var(--z-index-modal);
 }

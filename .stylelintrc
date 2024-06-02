@@ -8,5 +8,5 @@
     "number-max-precision": 8,
     "selector-class-pattern": ["^([a-z-]*)?(__([a-z-]*))?(_([a-z-]*))?$", { "message": "Expected BEM notation" }]
   },
-  "ignoreFiles": ["build/*", "dist/*", "node_modules/*"]
+  "ignoreFiles": ["build/**", "dist/**", "node_modules/**", "**/*.ts", "**/*.hbs", "**/*.js", "src/assets/**"]
 }

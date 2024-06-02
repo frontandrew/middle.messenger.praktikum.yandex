@@ -2,5 +2,9 @@
     {{#>Surface classes="layout-reg"}}
         {{{title}}}
         {{{form}}}
+        {{{redirect}}}
+        {{#if isLoading}}
+            {{{loader}}}
+        {{/if}}
     {{/Surface}}
 {{/BaseLayout}}

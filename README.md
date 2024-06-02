@@ -9,8 +9,9 @@
 ### Start and use:
 - clone repo
 - install dependencies: pnpm
-- for build run: pnpm build
-- for dev run: pnpm start
+- for create build run: pnpm build
+- for use build localy run: pnpm start
+- for use dev-server run: pnpm dev
 
 ### Used tools:
 
@@ -20,6 +21,16 @@
 - [ESLint](https://eslint.org/) - statically analyzes your code to quickly find problems
 - [Stylelint](https://stylelint.io/) - a mighty CSS linter that helps you avoid errors and enforce conventions.
 - [Express](https://expressjs.com/) - fast, unopinionated, minimalist web framework for Node.js
+
+### Features:
+
+- Self made reactivenes with out any frameworks
+- Used vanilla Web Socket api
+- Self made state management with out frameworks
+- Separat buisness logic and view layer
+- Architecture with Feature Slised Design
+- Used event-bus pattern for one way data stream
+- Self made routing based on native browser history
 
 ---
 

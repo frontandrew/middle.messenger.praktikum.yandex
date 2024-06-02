@@ -4,11 +4,11 @@ import type { Avatar } from 'ui';
 import type { ChatType } from '../../type';
 
 export interface ItemChatProps extends Props, ChatType {
-  active: boolean,
+  onClick: () => void;
 }
 
 export interface ItemChatChildren extends Children {
-  avatar: Avatar,
+  avatarChat: Avatar;
 }
 
 export interface ItemChatKeyAttr { key: { value: string } }

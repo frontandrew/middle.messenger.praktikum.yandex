@@ -1,12 +1,15 @@
 import { Button, Field, Form } from 'ui';
 
-import type { FormPassChildren, FormPassProps } from './type';
+import type { FormPassChildren, FormPassData, FormPassProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
+export type { FormPassChildren, FormPassData, FormPassProps };
+
 export class FormPass extends Form<FormPassChildren, FormPassProps> {
-  constructor() {
+  constructor({ onSubmit }: FormPassProps) {
     super({
+      onSubmit,
       passCurr: new Field({
         name: 'oldPassword',
         type: 'password',
@@ -32,7 +35,7 @@ export class FormPass extends Form<FormPassChildren, FormPassProps> {
         label: 'Save',
         type: 'submit',
       }),
-    } as FormPassChildren);
+    } as FormPassChildren & FormPassProps);
   }
 
   render() {

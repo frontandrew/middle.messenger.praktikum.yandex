@@ -1,16 +1,18 @@
 import { Button, Text } from 'ui';
 import { Component } from 'core';
+import { withRouter } from 'routing';
 
 import type { LayoutErrorChildren, LayoutErrorProps } from './type';
 
 import template from './template.hbs?raw';
 import './style.css';
 
-export class LayoutError extends Component<LayoutErrorChildren, LayoutErrorProps> {
+const ComponentWithRouter = withRouter(Component);
+
+export class LayoutError extends ComponentWithRouter<LayoutErrorChildren, LayoutErrorProps> {
   constructor({
     title = 'Error...',
     message = 'An unexpected error has occurred. Try restarting or come back later.',
-    target = 'login',
   }: LayoutErrorProps) {
     super({
       title: new Text({
@@ -24,9 +26,9 @@ export class LayoutError extends Component<LayoutErrorChildren, LayoutErrorProps
         classes: 'error-page__message',
       }),
       redirect: new Button({
-        label: `Return to ${target} page`,
+        label: `Return to chats page`,
         type: 'button',
-        page: target,
+        onClick: () => this.router.go('/messenger'),
         variant: 'link',
       }),
     } as LayoutErrorChildren & LayoutErrorProps);

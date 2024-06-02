@@ -1,0 +1,37 @@
+.search-users {
+    display: flex;
+    flex-direction: column;
+    width: 20em;
+}
+
+.search-user__search {
+    width: 100%;
+
+    .divider {
+        margin-top: 0.625em;
+    }
+}
+
+.search-user__users {
+    display: grid;
+
+    min-height: 40vh;
+    max-height: 60vh;
+    flex-grow: 1;
+
+    overflow: hidden auto;
+}
+
+.search-user__actions {
+    margin-bottom: 0.769231em;
+
+    .divider {
+        margin-bottom: 0.625em;
+    }
+}
+
+.search-user__message {
+    width: 100%;
+    text-align: center;
+    margin-top: 0.363636em;
+}

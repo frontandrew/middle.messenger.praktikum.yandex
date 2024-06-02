@@ -1,5 +1,7 @@
 import { Button, Field, Form } from 'ui';
 
+import { usersServ as serv } from 'services/users';
+
 import type { FormRegChildren, FormRegData, FormRegProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
@@ -7,15 +9,19 @@ import './style.css';
 export type { FormRegChildren, FormRegData, FormRegProps };
 
 export class FormReg extends Form<FormRegChildren, FormRegProps> {
-  constructor(data: FormRegData) {
+  constructor(props?: FormRegProps) {
     super({
-      data,
+      onSubmit: (event: Event) => {
+        event.preventDefault();
+        this.handleRegistration();
+        return event;
+      },
+
       email: new Field({
         name: 'email',
         type: 'text',
         label: 'Email',
         required: true,
-        value: data?.email,
       }),
       login: new Field({
         name: 'login',
@@ -23,52 +29,63 @@ export class FormReg extends Form<FormRegChildren, FormRegProps> {
         label: 'Login',
         textHelp: 'Only letters and numbers accepted.',
         required: true,
-        value: data?.login,
       }),
       firstName: new Field({
         name: 'first_name',
         type: 'text',
         label: 'Name',
         required: true,
-        value: data?.firstName,
       }),
       secondName: new Field({
         name: 'second_name',
         type: 'text',
         label: 'Surname',
-        value: data?.secondName,
+        required: true,
       }),
       phone: new Field({
         name: 'phone',
         type: 'text',
         label: 'Phone',
         required: true,
-        value: data?.phone,
       }),
       password: new Field({
         name: 'password',
         type: 'password',
         label: 'Password',
         required: true,
-        value: data?.password,
       }),
       passwordMore: new Field({
         name: 'password_more',
         type: 'password',
         label: 'Repeat password',
         required: true,
-        value: data?.passwordMore,
       }),
       submit: new Button({
         label: 'Register',
         type: 'submit',
       }),
-      redirect: new Button({
-        label: 'Sign in',
-        page: 'login',
-        variant: 'link',
-      }),
+      ...props,
     } as FormRegChildren & FormRegProps);
+  }
+
+  handleRegistration() {
+    const regData = this.handleSubmit() as FormRegData;
+
+    if (regData) {
+      this.validatePasswordRepeate(regData);
+    }
+    if (!this.props.hasError) {
+      serv.regUser(regData);
+    }
+  }
+
+  validatePasswordRepeate(data: FormRegData) {
+    if (data.passwordMore !== data.password) {
+      this.children.passwordMore.setProps({ hasError: true, textError: `Passwords don't match` });
+      this.setProps({ hasError: true });
+    }
+
+    this.updateErrorState(this.props.hasError!);
   }
 
   render() {

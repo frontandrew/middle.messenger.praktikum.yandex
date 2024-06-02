@@ -6,21 +6,32 @@
         </div>
         {{> Divider}}
         {{{listChats}}}
+        {{{actionCreateChat}}}
     </nav>
-    <div class="messages__container">
-        <header class="messages__row">
-            {{{imageChat}}}
-            {{{titleChat}}}
-            {{{actionsChat}}}
-        </header>
-        {{> Divider}}
-        {{{listMessages}}}
-        {{> Divider}}
-        <footer class="messages__row">
-            {{{actionAttach}}}
-            {{{formMessage}}}
-        </footer>
-    </div>
-    {{{menuChat}}}
+    {{#if selectedChat}}
+        <div class="messages__container">
+            <header class="messages__row">
+                {{{headerChat}}}
+                {{{actionsChat}}}
+            </header>
+            {{> Divider}}
+            {{{listMessages}}}
+            {{> Divider}}
+            <footer class="messages__row">
+                {{{actionAttach}}}
+                {{{formMessage}}}
+            </footer>
+        </div>
+    {{else}}
+        {{#> BaseLayout}}
+            <p class="text text_light-color">
+                Please select chat from list or create new one
+            </p>
+        {{/BaseLayout}}
+    {{/if}}
+    {{{dialogChatAvatar}}}
+    {{{usersSearch}}}
+    {{{createChat}}}
     {{{menuAttach}}}
+    {{{menuChat}}}
 </div>

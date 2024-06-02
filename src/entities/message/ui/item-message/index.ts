@@ -8,7 +8,7 @@ import './style.css';
 
 export class ItemMessage extends Component<ItemMessageChildren, ItemMessageProps> {
   constructor({ type, ...props }: MessageType) {
-    const isMediaType = type === 'media';
+    const isMediaType = type === 'file';
 
     super({ type, isMediaType, ...props } as ItemMessageChildren & ItemMessageProps);
   }

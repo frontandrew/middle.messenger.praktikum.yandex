@@ -1,23 +1,22 @@
 import { Avatar } from 'ui';
 import { Component } from 'core';
 
-import type { ItemChatChildren, ItemChatProps } from './type';
-import type { ChatType } from '../../type';
+import type { ChatType } from 'entities/chat';
 
+import type { ItemChatChildren, ItemChatProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
 export class ItemChat extends Component<ItemChatChildren, ItemChatProps> {
-  constructor({ avatar, ...chat }: ChatType) {
+  constructor(chat: ChatType) {
     super({
-      avatar: new Avatar({ pic: avatar }),
-      active: false,
       ...chat,
+      avatarChat: new Avatar({ pic: chat.avatar || null }),
     } as ItemChatChildren & ItemChatProps);
   }
 
   toggleActive() {
-    this.setProps({ active: !this.props.active });
+    this.setProps({ isCurrent: !this.props.isCurrent });
   }
 
   render() {

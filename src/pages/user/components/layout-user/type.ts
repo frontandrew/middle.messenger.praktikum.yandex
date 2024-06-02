@@ -1,6 +1,7 @@
-import { Button, Dialog, Text } from 'ui';
-
+import type { Button, Text } from 'ui';
 import type { Children, Props } from 'core';
+
+import type { DialogSelectFile } from 'widgets/dialog-file-select';
 
 import { ControlAvatar } from '../control-avatar';
 import { FormInfo } from '../form-info';
@@ -22,7 +23,7 @@ export interface LayoutUserChildren extends Children {
   changeInfo: Button,
   changePass: Button,
   signOut: Button,
-  avatarDialog: Dialog,
+  avatarDialog: DialogSelectFile,
 }
 
 export interface LayoutUserProps extends Props {

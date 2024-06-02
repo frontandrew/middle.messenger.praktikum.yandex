@@ -1,0 +1,26 @@
+.form-file {
+    width: 17.5em;
+
+    .input-file {
+        padding: 2.8125em 0;
+    }
+
+    .button {
+        margin-bottom: 0.769231em;
+    }
+}
+
+.form-file__title {
+    width: 100%;
+    text-align: center;
+
+    font-size: .9375em;
+}
+
+.form-file__error {
+    width: 100%;
+    text-align: center;
+
+    margin-top: 0.363636em;
+    font-size: 0.6875em;
+}

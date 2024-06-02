@@ -17,7 +17,7 @@ export type Children = { [key: string]: Child };
 export type Prop = unknown;
 export type Props = { [key: string]: Prop };
 
-export abstract class Component <C extends Children, P extends Props> {
+export class Component <C extends Children, P extends Props> {
   static EVENTS = {
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
@@ -31,6 +31,7 @@ export abstract class Component <C extends Children, P extends Props> {
   public children;
   public events;
 
+  protected parentNode: Node | null = null;
   protected _element: HTMLElement | null = null;
   protected count;
 
@@ -84,13 +85,11 @@ export abstract class Component <C extends Children, P extends Props> {
   _init() {
     this.instance = Object.getPrototypeOf(this).constructor.name;
     this.init();
-    this.createChildren();
-    this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
+    // this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
+    this.dispatchComponentDidMount();
   }
 
   init() {}
-
-  createChildren() {}
 
   _render() {
     const element = this.createDOMElement();
@@ -105,13 +104,14 @@ export abstract class Component <C extends Children, P extends Props> {
 
     this._attachEvents();
 
+    this.count += 1;
     this.meta = {
       props: { ...this.props },
       children: { ...this.children },
       events: { ...this.events },
+      count: this.count,
     };
-
-    console.warn(`RNDR{${this.count += 1}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
+    // console.warn(`RNDR{${this.count}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
   }
 
   render() {
@@ -140,13 +140,16 @@ export abstract class Component <C extends Children, P extends Props> {
   }
 
   _componentDidMount(props: P) {
-    this.componentDidMount(props);
+    // console.warn(`CDM{${this.count}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
+    if (this.componentDidMount(props)) {
+      this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
+    }
   }
 
-  // Может переопределять пользователь, необязательно трогать. Не используется
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   componentDidMount(props: P) {
     if (props) return true;
-    return false;
+    return true;
   }
 
   dispatchComponentDidMount() {
@@ -221,10 +224,21 @@ export abstract class Component <C extends Children, P extends Props> {
   }
 
   show() {
-    (this.getContent() as HTMLElement).style.display = 'block';
+    if (this.parentNode) {
+      this.parentNode.appendChild(this.getContent() as Node);
+    }
+    console.warn(
+      `SHOW{${this.count}}:[${this.instance}:${this.id}]:`,
+      { ...this.meta, elem: this._element },
+    );
   }
 
   hide() {
-    (this.getContent() as HTMLElement).style.display = 'none';
+    this.parentNode = this._element?.parentNode as Node;
+    this._element?.remove();
+    console.warn(
+      `HIDE{${this.count}}:[${this.instance}:${this.id}]:`,
+      { ...this.meta, elem: this._element },
+    );
   }
 }

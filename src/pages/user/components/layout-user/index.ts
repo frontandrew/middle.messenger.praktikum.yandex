@@ -1,37 +1,61 @@
-import { Button, ButtonIcon, Dialog, Text } from 'ui';
+import { Button, ButtonIcon, Text } from 'ui';
 import { Arrow } from 'images';
 import { Component } from 'core';
+import { withRouter } from 'routing';
+import { withStore } from 'store';
+
+import { formatUserPassPayload, usersServ } from 'services/users';
+import { authServ } from 'services/auth';
+
+import { DialogSelectFile } from 'widgets/dialog-file-select';
 
 import { ControlAvatar } from '../control-avatar';
-import { FormAvatar } from '../form-avatar';
 import { FormInfo } from '../form-info';
 import { FormPass } from '../form-pass';
 
-import type { LayoutUserArgs, LayoutUserChildren, LayoutUserProps } from './type';
+import type { FormInfoData } from '../form-info';
+import type { FormPassData } from '../form-pass';
+
+import type { LayoutUserChildren, LayoutUserProps } from './type';
 import template from './template.hbs?raw';
 import './style.css';
 
-export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
-  constructor({ image, data }: LayoutUserArgs) {
+const ComponentWithRouter = withRouter(Component);
+const UserNick = withStore((state) => ({ text: state.user?.nickName }))(Text);
+
+export class LayoutUser extends ComponentWithRouter<LayoutUserChildren, LayoutUserProps> {
+  constructor() {
     super({
       showActions: true,
       showInfo: true,
       back: new ButtonIcon({
         pic: Arrow,
-        page: 'chats',
+        onClick: () => this.router.go('/messenger'),
       }),
       avatar: new ControlAvatar({
-        image,
         disabled: false,
-        onClick: () => this.children.avatarDialog?.open(),
+        onClick: () => this.children.avatarDialog.open(),
       }),
-      nick: new Text({
+      nick: new UserNick({
         classes: 'user-nick',
-        text: data.nickName,
+        text: '',
         tag: 'h1',
       }),
-      formInfo: new FormInfo({ data, isEdit: false }),
-      formPass: new FormPass(),
+      formInfo: new FormInfo({
+        isEdit: false,
+        onSubmit: (event: SubmitEvent) => {
+          event.preventDefault();
+          this.handleUserInfoChange();
+          return event;
+        },
+      }),
+      formPass: new FormPass({
+        onSubmit: (event: SubmitEvent) => {
+          event.preventDefault();
+          this.handleUserPassChange();
+          return event;
+        },
+      }),
       changeInfo: new Button({
         variant: 'link',
         label: 'Change user data',
@@ -45,22 +69,71 @@ export class LayoutUser extends Component<LayoutUserChildren, LayoutUserProps> {
       signOut: new Button({
         variant: 'link',
         label: 'Sign out',
-        page: 'login',
+        onClick: () => authServ.signOut(),
       }),
-      avatarDialog: new Dialog({
+      avatarDialog: new DialogSelectFile({
+        fileSubmitHandler: async (file: File) => {
+          const avatar = new FormData();
+          avatar.append('avatar', file, file.name);
+
+          const result = await usersServ.updateAvatar(avatar);
+          return result;
+        },
         isOpen: false,
-        content: new FormAvatar(),
       }),
     } as LayoutUserChildren & LayoutUserProps);
   }
 
   handleEditPass() {
+    this.children.avatar.setProps({ disabled: true });
     this.setProps({ showActions: false, showInfo: false });
   }
 
   handleEditInfo() {
     this.setProps({ showActions: false });
+    this.children.avatar.setProps({ disabled: true });
     this.children.formInfo.setEditMode(true);
+  }
+
+  private async handleUserInfoChange() {
+    const userInfo = this.children.formInfo.handleSubmit();
+    if (!this.children.formInfo.props.hasError && userInfo) {
+      const isUpdated = await usersServ.updateUser(userInfo as FormInfoData);
+
+      if (isUpdated) {
+        this.children.formInfo.setEditMode(false);
+        this.setProps({ showActions: true, showInfo: true });
+      }
+
+      // TODO: form info error state
+      // if (!isUpdated) {}
+    }
+  }
+
+  private async handleUserPassChange() {
+    const passData = this.children.formPass.handleSubmit() as FormPassData;
+    this.validatePasswordRepeate(passData);
+
+    if (!this.children.formPass.props.hasError && passData) {
+      const isPassChanged = await usersServ.updatePass(formatUserPassPayload(passData));
+
+      if (isPassChanged) {
+        this.setProps({ showActions: true, showInfo: true });
+      }
+
+      // TODO: form pass error state
+      // if (isPassChanged) {}
+    }
+  }
+
+  private validatePasswordRepeate(data: FormPassData) {
+    if (data.passNew !== data.passNewMore) {
+      this.children.formPass.children.passNewMore
+        .setProps({ hasError: true, textError: `Passwords don't match` });
+      this.children.formPass.setProps({ hasError: true });
+    }
+
+    this.children.formPass.updateErrorState(this.children.formPass.props.hasError!);
   }
 
   render() {

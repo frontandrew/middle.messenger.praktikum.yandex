@@ -8,6 +8,9 @@ export interface FieldProps extends InputProps {
   textHelp?: string;
   label?: string;
   inline?: boolean;
+  disabled?: boolean;
+  value?: string;
+  file?: File;
 }
 
 export interface FieldChildren extends Children {

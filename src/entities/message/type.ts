@@ -1,9 +1,11 @@
-export interface MessageType {
-  id: number,
-  type: 'text' | 'media',
-  origin: 'incoming' | 'outgoing' | 'system',
+import { MessageResponseType } from 'services/mssg';
 
-  content?: string | null,
-  userId?: number,
-  date?: string,
+export interface MessageType {
+  id: number;
+  type: MessageResponseType;
+  origin: 'incoming' | 'outgoing' | 'system';
+  isRead: boolean;
+  content: string;
+  userId: number;
+  time: string;
 }

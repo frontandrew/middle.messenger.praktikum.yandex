@@ -26,7 +26,8 @@
     --surface-shadow: 0 0 6px 0 var(--shadow-color);
 
     /** LAYERS */
-    --z-index-content: 1000;
+    --z-index-common: -1000;
     --z-index-context: 2000;
     --z-index-modal: 6000;
+    --z-index-loader: 10000;
 }

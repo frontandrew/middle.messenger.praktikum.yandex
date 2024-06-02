@@ -1,6 +1,15 @@
 export { deepCopy } from './deep-copy';
 export { deepEqual } from './deep-equal';
-export { validators } from './validators';
+export { first } from './first';
+export { identity } from './identity';
+export { isEmpty } from './is-empty';
+export { isArray } from './is-array';
+export { isPlainObject } from './is-plain-object';
+export { isValidJSON } from './is-valid-json';
+export { keying } from './keying';
+export { last } from './last';
+export { merge } from './merge';
+export { range } from './range';
 export { registerPartials } from './register-partials';
-
-export type { ValidatorParams, ValidationState } from './validators';
+export { set } from './set';
+export { trim } from './trim';
