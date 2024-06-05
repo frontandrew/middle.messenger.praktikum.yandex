@@ -1,3 +1,4 @@
+export { classNames } from './class-names';
 export { deepCopy } from './deep-copy';
 export { deepEqual } from './deep-equal';
 export { first } from './first';
