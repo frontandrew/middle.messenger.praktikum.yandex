@@ -9,6 +9,7 @@ export { isValidJSON } from './is-valid-json';
 export { keying } from './keying';
 export { last } from './last';
 export { merge } from './merge';
+export { omit } from './omit';
 export { range } from './range';
 export { registerPartials } from './register-partials';
 export { set } from './set';
