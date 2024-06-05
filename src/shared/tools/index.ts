@@ -1,6 +1,7 @@
 export { deepCopy } from './deep-copy';
 export { deepEqual } from './deep-equal';
 export { first } from './first';
+export { flatten } from './flatten';
 export { identity } from './identity';
 export { isEmpty } from './is-empty';
 export { isArray } from './is-array';
