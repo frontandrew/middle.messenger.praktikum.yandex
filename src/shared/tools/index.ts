@@ -15,4 +15,5 @@ export { omit } from './omit';
 export { range } from './range';
 export { registerPartials } from './register-partials';
 export { set } from './set';
+export { take } from './take';
 export { trim } from './trim';
