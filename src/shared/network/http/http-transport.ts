@@ -1,6 +1,6 @@
 import { REST_HOST } from 'config';
 import { isValidJSON } from 'tools';
-import { queryStringify } from './tools';
+import { queryStringify } from '../tools';
 
 enum METHODS {
   GET = 'GET',
