@@ -12,6 +12,7 @@ export { keying } from './keying';
 export { last } from './last';
 export { merge } from './merge';
 export { omit } from './omit';
+export { pick } from './pick';
 export { range } from './range';
 export { registerPartials } from './register-partials';
 export { set } from './set';
