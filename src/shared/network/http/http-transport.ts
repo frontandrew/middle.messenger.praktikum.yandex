@@ -2,7 +2,7 @@ import { REST_HOST } from 'config';
 import { isValidJSON } from 'tools';
 import { queryStringify } from '../tools';
 
-enum METHODS {
+export enum METHODS {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -29,19 +29,19 @@ type HTTPMethod = <PayloadType, ResponseType>
   (url: string, options?: Options<PayloadType>) => Promise<Response<ResponseType>>
 
 export class HTTPTransport {
-  get: HTTPMethod = (url, options = {}) => this
+  public get: HTTPMethod = (url, options = {}) => this
     .request(url, { ...options, method: METHODS.GET });
 
-  post: HTTPMethod = (url, options = {}) => this
+  public post: HTTPMethod = (url, options = {}) => this
     .request(url, { ...options, method: METHODS.POST });
 
-  put: HTTPMethod = (url, options = {}) => this
+  public put: HTTPMethod = (url, options = {}) => this
     .request(url, { ...options, method: METHODS.PUT });
 
-  delete: HTTPMethod = (url, options = {}) => this
+  public delete: HTTPMethod = (url, options = {}) => this
     .request(url, { ...options, method: METHODS.DELETE });
 
-  request<R>(url: string, options: RequestOptions): Promise<R> {
+  private request<R>(url: string, options: RequestOptions): Promise<R> {
     const { headers = {}, method, data = {}, timeout = 10000 } = options;
 
     return new Promise((resolve, reject) => {
@@ -58,7 +58,7 @@ export class HTTPTransport {
       const xhr = new XMLHttpRequest();
       xhr.withCredentials = true;
       xhr.timeout = timeout;
-      Object.values(headers).forEach(([key, value]) => {
+      Object.entries(headers).forEach(([key, value]) => {
         xhr.setRequestHeader(key, value);
       });
 

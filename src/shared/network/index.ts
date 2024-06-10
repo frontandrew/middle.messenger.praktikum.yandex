@@ -1,4 +1,4 @@
-export { HTTPTransport } from './http/http-transport';
+export { HTTPTransport, METHODS } from './http/http-transport';
 export { WSTransport, MssgTypes } from './ws/ws-transport';
 
 export type {
