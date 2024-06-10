@@ -6,3 +6,4 @@
 src/assets/**
 server.js
 vite.config.js
+mocha.config.js
