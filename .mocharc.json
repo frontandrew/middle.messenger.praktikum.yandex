@@ -1,4 +1,0 @@
-{
-  "spec": "src/**/*.spec.ts",
-  "require": ["./mocha.config.js", "tsx"]
-}
