@@ -10,11 +10,11 @@ class Router {
   public routes: Route[] = [];
   public history: History = window.history;
 
-  setAuthState(state: boolean) {
+  public setAuthState(state: boolean) {
     this.authState = state;
   }
 
-  use({ pathname, component, needAuth }: {
+  public use({ pathname, component, needAuth }: {
     pathname: string,
     component: RouteView,
     needAuth: boolean
@@ -29,7 +29,7 @@ class Router {
     return this;
   }
 
-  start() {
+  public start() {
     window.onpopstate = ({ currentTarget }) => {
       if (
         currentTarget
@@ -65,25 +65,21 @@ class Router {
     this.currentRoute!.render();
   }
 
-  go(pathname: string) {
+  public go(pathname: string) {
     this.onRoute(pathname);
   }
 
-  back() {
+  public back() {
     this.history.back();
   }
 
-  forward() {
+  public forward() {
     this.history.forward();
   }
 
-  getRoute(pathname: string): Route | null {
+  private getRoute(pathname: string): Route | null {
     return this.routes.find((route) => route.match(pathname)) ?? null;
   }
 }
 
 export const router = new Router();
-
-// TODO: remove after debug
-// @ts-expect-error-next-line
-window.router = router;
