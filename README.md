@@ -8,10 +8,15 @@
 
 ### Start and use:
 - clone repo
-- install dependencies: pnpm
-- for create build run: pnpm build
-- for use build localy run: pnpm start
-- for use dev-server run: pnpm dev
+- install dependencies: `pnpm i`
+- for create build run: `pnpm build`
+- for code lint run: `pnpm check:lint`
+- for style lint run: `pnpm check:style`
+- for type check run: `pnpm check:type`
+- for tests run: `pnpm check:test`
+- for all checks run: `pnpm check`
+- for use build localy run: `pnpm start`
+- for use dev-server run: `pnpm dev`
 
 ### Used tools:
 
@@ -21,8 +26,9 @@
 - [ESLint](https://eslint.org/) - statically analyzes your code to quickly find problems
 - [Stylelint](https://stylelint.io/) - a mighty CSS linter that helps you avoid errors and enforce conventions.
 - [Express](https://expressjs.com/) - fast, unopinionated, minimalist web framework for Node.js
+- [Husky](https://typicode.github.io/husky/) - automatically lint your commit messages, code, and run tests upon committing or pushing
 
-### Features:
+### Project features:
 
 - Self made reactivenes with out any frameworks
 - Used vanilla Web Socket api
