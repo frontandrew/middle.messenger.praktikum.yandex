@@ -225,18 +225,18 @@ export class Component <C extends Children, P extends Props> {
     if (this.parentNode) {
       this.parentNode.appendChild(this.getContent() as Node);
     }
-    console.warn(
-      `SHOW{${this.count}}:[${this.instance}:${this.id}]:`,
-      { ...this.meta, elem: this._element },
-    );
+    // console.warn(
+    //   `SHOW{${this.count}}:[${this.instance}:${this.id}]:`,
+    //   { ...this.meta, elem: this._element },
+    // );
   }
 
   public hide() {
     this.parentNode = this._element?.parentNode as Node;
     this._element?.remove();
-    console.warn(
-      `HIDE{${this.count}}:[${this.instance}:${this.id}]:`,
-      { ...this.meta, elem: this._element },
-    );
+    // console.warn(
+    //   `HIDE{${this.count}}:[${this.instance}:${this.id}]:`,
+    //   { ...this.meta, elem: this._element },
+    // );
   }
 }
