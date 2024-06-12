@@ -16,7 +16,7 @@
     "dev": "vite --open --port=4000",
     "start": "npm run build && node ./server.js",
     "build": "npm run check && rm -rf ./dist && vite build",
-    "check": "npm run check:lint && npm run check:style && npm run check:type && npm run check:test",
+    "check": "npm-run-all --parallel check:*",
     "check:lint": "eslint .",
     "check:style": "stylelint \"**/*.css\" -c ./.stylelintrc",
     "check:test": "vitest run",
