@@ -30,13 +30,11 @@ export class Component <C extends Children, P extends Props> {
   public props;
   public children;
   public events;
+  public count: number;
+  public meta: Nullable<UnknownObject> = null;
 
-  protected parentNode: Node | null = null;
-  protected _element: HTMLElement | null = null;
-  protected count;
-
-  private meta: Nullable<UnknownObject> = null;
-
+  private parentNode: Node | null = null;
+  private _element: HTMLElement | null = null;
   private eventBus: () => EventBus;
 
   constructor(args: C & P) {
@@ -53,7 +51,7 @@ export class Component <C extends Children, P extends Props> {
     this.instance = 'Component';
     this.meta = { children, events, props };
     this.eventBus = () => eventBus;
-    this._registerEvents(eventBus);
+    this.registerEvents(eventBus);
     eventBus.emit(Component.EVENTS.INIT);
   }
 
@@ -75,23 +73,23 @@ export class Component <C extends Children, P extends Props> {
     return { children, events, props };
   }
 
-  _registerEvents(eventBus: EventBus) {
-    eventBus.on(Component.EVENTS.INIT, this._init.bind(this));
-    eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-    eventBus.on(Component.EVENTS.FLOW_RENDER, this._render.bind(this));
-    eventBus.on(Component.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+  private registerEvents(eventBus: EventBus) {
+    eventBus.on(Component.EVENTS.INIT, this.initInner.bind(this));
+    eventBus.on(Component.EVENTS.FLOW_CDM, this.componentDidMountInner.bind(this));
+    eventBus.on(Component.EVENTS.FLOW_RENDER, this.renderInner.bind(this));
+    eventBus.on(Component.EVENTS.FLOW_CDU, this.componentDidUpdateInner.bind(this));
   }
 
-  _init() {
+  private initInner() {
     this.instance = Object.getPrototypeOf(this).constructor.name;
     this.init();
     // this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
     this.dispatchComponentDidMount();
   }
 
-  init() {}
+  public init() {}
 
-  _render() {
+  private renderInner() {
     const element = this.createDOMElement();
 
     Object.values(this.children).forEach((child) => {
@@ -102,7 +100,7 @@ export class Component <C extends Children, P extends Props> {
     if (this._element) this._element.replaceWith(element as Node);
     this._element = element as HTMLElement;
 
-    this._attachEvents();
+    this.attachEvents();
 
     this.count += 1;
     this.meta = {
@@ -114,11 +112,11 @@ export class Component <C extends Children, P extends Props> {
     // console.warn(`RNDR{${this.count}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
   }
 
-  render() {
+  public render() {
     return '';
   }
 
-  createDOMElement() {
+  private createDOMElement() {
     const stubs = Object.entries(this.children).reduce(
       (acc, [key, child]) => ({
         ...acc,
@@ -139,7 +137,7 @@ export class Component <C extends Children, P extends Props> {
     return resultElement;
   }
 
-  _componentDidMount(props: P) {
+  private componentDidMountInner(props: P) {
     // console.warn(`CDM{${this.count}}:[${`${this.instance}:${this.id}`}]:`, this.meta);
     if (this.componentDidMount(props)) {
       this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
@@ -147,21 +145,21 @@ export class Component <C extends Children, P extends Props> {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  componentDidMount(props: P) {
+  public componentDidMount(props: P) {
     if (props) return true;
     return true;
   }
 
-  dispatchComponentDidMount() {
+  private dispatchComponentDidMount() {
     this.eventBus().emit(Component.EVENTS.FLOW_CDM);
     // console.log(`dispatch:CDM[${this.id}]`);
   }
 
-  _componentDidUpdate(oldProps: P, newProps: P) {
+  private componentDidUpdateInner(oldProps: P, newProps: P) {
     const isEqual = this.componentDidUpdate(oldProps, newProps);
 
     if (!isEqual) {
-      this._detachEvents();
+      this.detachEvents();
       this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
       return true;
     }
@@ -170,7 +168,7 @@ export class Component <C extends Children, P extends Props> {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps: P, newProps: P) {
+  public componentDidUpdate(oldProps: P, newProps: P) {
     const isEqual = deepEqual(newProps, oldProps);
     // console.warn(`EQUA{${this.count}}:[${this.instance}:${this.id}]:`, {
     //   eql: isEqual,
@@ -195,7 +193,7 @@ export class Component <C extends Children, P extends Props> {
     this.eventBus().emit(Component.EVENTS.FLOW_CDU, oldProps, this.props);
   }
 
-  get element() {
+  public get element() {
     return this._element;
   }
 
@@ -207,7 +205,7 @@ export class Component <C extends Children, P extends Props> {
     return createProxy(args);
   }
 
-  _attachEvents() {
+  private attachEvents() {
     if (Object.keys(this.events).length <= 0) return;
 
     Object.entries(this.events).forEach(([key, value]) => {
@@ -215,7 +213,7 @@ export class Component <C extends Children, P extends Props> {
     });
   }
 
-  _detachEvents() {
+  private detachEvents() {
     if (Object.keys(this.events).length <= 0) return;
 
     Object.entries(this.events).forEach(([key, value]) => {
@@ -223,7 +221,7 @@ export class Component <C extends Children, P extends Props> {
     });
   }
 
-  show() {
+  public show() {
     if (this.parentNode) {
       this.parentNode.appendChild(this.getContent() as Node);
     }
@@ -233,7 +231,7 @@ export class Component <C extends Children, P extends Props> {
     );
   }
 
-  hide() {
+  public hide() {
     this.parentNode = this._element?.parentNode as Node;
     this._element?.remove();
     console.warn(
