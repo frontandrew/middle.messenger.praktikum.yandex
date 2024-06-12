@@ -20,7 +20,8 @@
     "check:lint": "eslint .",
     "check:style": "stylelint \"**/*.css\" -c ./.stylelintrc",
     "check:test": "vitest run",
-    "check:type": "tsc --noEmit"
+    "check:type": "tsc --noEmit",
+    "prepare": "node -v && husky install"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
