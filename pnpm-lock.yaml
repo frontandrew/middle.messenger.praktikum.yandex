@@ -31,6 +31,9 @@ devDependencies:
   '@typescript-eslint/parser':
     specifier: ^7.0.2
     version: 7.0.2(eslint@8.57.0)(typescript@5.3.3)
+  chai:
+    specifier: ^4.3.10
+    version: 4.3.10
   eslint:
     specifier: ^8.57.0
     version: 8.57.0
@@ -46,9 +49,15 @@ devDependencies:
   express:
     specifier: ^4.19.2
     version: 4.19.2
+  husky:
+    specifier: 8.0.3
+    version: 8.0.3
   jsdom:
     specifier: ^24.1.0
     version: 24.1.0
+  mocha:
+    specifier: ^10.4.0
+    version: 10.4.0
   npm-run-all:
     specifier: ^4.1.5
     version: 4.1.5
@@ -2331,6 +2340,7 @@ packages:
   /glob@8.1.0:
     resolution: {integrity: sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==}
     engines: {node: '>=12'}
+    deprecated: Glob versions prior to v9 are no longer supported
     dependencies:
       fs.realpath: 1.0.0
       inflight: 1.0.6
@@ -2539,6 +2549,12 @@ packages:
   /human-signals@5.0.0:
     resolution: {integrity: sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==}
     engines: {node: '>=16.17.0'}
+    dev: true
+
+  /husky@8.0.3:
+    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /iconv-lite@0.4.24:
