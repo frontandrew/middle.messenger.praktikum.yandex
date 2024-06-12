@@ -1,6 +1,6 @@
+import { expect, describe, beforeAll, beforeEach, test } from 'vitest';
 import { useFakeXMLHttpRequest, spy } from 'sinon';
 import { REST_HOST } from 'config';
-import { expect } from 'chai';
 
 import type { SinonFakeXMLHttpRequest, SinonSpy } from 'sinon';
 
@@ -61,31 +61,31 @@ describe('Instance of HTTPTransport', () => {
         http.get(testURL);
       });
 
-      it(`open XHR with param "method" equals "GET"`, () => {
+      test(`open XHR with param "method" equals "GET"`, () => {
         expect(openSpy.args[0]).is.include(METHODS.GET, 'Incorrect request method');
       });
-      it(`open XHR with param "url" equals "[HOST]+[/url]"`, () => {
+      test(`open XHR with param "url" equals "[HOST]+[/url]"`, () => {
         expect(openSpy.args[0]).is.include(`${REST_HOST}${testURL}`, 'Incorrect request URL');
       });
     });
 
     describe(`with data param`, () => {
-      before(() => {
+      beforeAll(() => {
         http.get<ObjectPayload, void>(testURL, { data: objectPayload });
       });
 
-      it(`open XHR with param "url" equals "[HOST]+[/url]+[?stringified data]"`, () => {
+      test(`open XHR with param "url" equals "[HOST]+[/url]+[?stringified data]"`, () => {
         const expectedURL = `${REST_HOST}${testURL}?${queryStringify(objectPayload)}`;
         expect(openSpy.args[0]).is.include(expectedURL, 'Incorrect request URL params');
       });
     });
 
     describe(`with headers param`, () => {
-      before(() => {
+      beforeAll(() => {
         http.get(testURL, { headers });
       });
 
-      it(`open XHR with param "headers", witch include setted headers`, () => {
+      test(`open XHR with param "headers", witch include setted headers`, () => {
         expect(request.requestHeaders).is.include(headers, 'Incorrect request headers');
       });
     });
@@ -98,20 +98,20 @@ describe('Instance of HTTPTransport', () => {
         http.post(testURL);
       });
 
-      it(`open XHR with param "method" equals "post"`, () => {
+      test(`open XHR with param "method" equals "post"`, () => {
         expect(openSpy.args[0]).is.include(METHODS.POST, 'Incorrect request method');
       });
-      it(`open XHR with param "url" equals "[HOST]+[/url]"`, () => {
+      test(`open XHR with param "url" equals "[HOST]+[/url]"`, () => {
         expect(openSpy.args[0]).is.include(`${REST_HOST}${testURL}`, 'Incorrect request URL');
       });
     });
 
     describe(`with "data" param type of "Object"`, () => {
-      before(() => {
+      beforeAll(() => {
         http.post<ObjectPayload, void>(testURL, { data: objectPayload });
       });
 
-      it(`send XHR with param "body" stringifyed to JSON and content type header`, () => {
+      test(`send XHR with param "body" stringifyed to JSON and content type header`, () => {
         expect(sendSpy.args[0].length).is.eq(1, 'Expected only one argument');
         expect(typeof (sendSpy.args[0][0])).is.eq('string', 'Incorrect request body type');
         expect(request.requestHeaders).is.include(jsonHeader, 'Content type header error');
@@ -119,11 +119,11 @@ describe('Instance of HTTPTransport', () => {
     });
 
     describe(`with "data" param type of "FormData"`, () => {
-      before(() => {
+      beforeAll(() => {
         http.post<FormData, void>(testURL, { data: formDataPayload });
       });
 
-      it(`send XHR with param "body" stringifyed to JSON and content type header`, () => {
+      test(`send XHR with param "body" stringifyed to JSON and content type header`, () => {
         expect(sendSpy.args[0].length).is.eq(1, 'Expected only one argument');
         expect(sendSpy.args[0][0]).is.instanceof(FormData, 'Incorrect request body type');
         expect(request.requestHeaders).is.not.include(jsonHeader, 'Content type header error');
@@ -131,11 +131,11 @@ describe('Instance of HTTPTransport', () => {
     });
 
     describe(`with headers param`, () => {
-      before(() => {
+      beforeAll(() => {
         http.post(testURL, { headers });
       });
 
-      it(`open XHR with param "headers", witch include setted headers`, () => {
+      test(`open XHR with param "headers", witch include setted headers`, () => {
         expect(request.requestHeaders).is.include(headers, 'Incorrect request headers');
       });
     });
@@ -148,30 +148,30 @@ describe('Instance of HTTPTransport', () => {
         http.put(testURL);
       });
 
-      it(`open XHR with param "method" equals "PUT"`, () => {
+      test(`open XHR with param "method" equals "PUT"`, () => {
         expect(openSpy.args[0]).is.include(METHODS.PUT, 'Incorrect request method');
       });
-      it(`open XHR with param "url" equals "[HOST]+[/url]"`, () => {
+      test(`open XHR with param "url" equals "[HOST]+[/url]"`, () => {
         expect(openSpy.args[0]).is.include(`${REST_HOST}${testURL}`, 'Incorrect request URL');
       });
     });
 
     describe(`with headers param`, () => {
-      before(() => {
+      beforeAll(() => {
         http.put(testURL, { headers });
       });
 
-      it(`open XHR with param "headers", witch include setted headers`, () => {
+      test(`open XHR with param "headers", witch include setted headers`, () => {
         expect(request.requestHeaders).is.include(headers, 'Incorrect request headers');
       });
     });
 
     describe(`with "data" param type of "Object"`, () => {
-      before(() => {
+      beforeAll(() => {
         http.put<ObjectPayload, void>(testURL, { data: objectPayload });
       });
 
-      it(`send XHR with param "body" stringifyed to JSON and content type header`, () => {
+      test(`send XHR with param "body" stringifyed to JSON and content type header`, () => {
         expect(sendSpy.args[0].length).is.eq(1, 'Expected only one argument');
         expect(typeof (sendSpy.args[0][0])).is.eq('string', 'Incorrect request body type');
         expect(request.requestHeaders).is.include(jsonHeader, 'Content type header error');
@@ -179,11 +179,11 @@ describe('Instance of HTTPTransport', () => {
     });
 
     describe(`with "data" param type of "FormData"`, () => {
-      before(() => {
+      beforeAll(() => {
         http.put<FormData, void>(testURL, { data: formDataPayload });
       });
 
-      it(`send XHR with param "body" stringifyed to JSON and content type header`, () => {
+      test(`send XHR with param "body" stringifyed to JSON and content type header`, () => {
         expect(sendSpy.args[0].length).is.eq(1, 'Expected only one argument');
         expect(sendSpy.args[0][0]).is.instanceof(FormData, 'Incorrect request body type');
         expect(request.requestHeaders).is.not.include(jsonHeader, 'Content type header error');
@@ -198,30 +198,30 @@ describe('Instance of HTTPTransport', () => {
         http.delete(testURL);
       });
 
-      it(`open XHR with param "method" equals "DELETE"`, () => {
+      test(`open XHR with param "method" equals "DELETE"`, () => {
         expect(openSpy.args[0]).is.include(METHODS.DELETE, 'Incorrect request method');
       });
-      it(`open XHR with param "url" equals "[HOST]+[/url]"`, () => {
+      test(`open XHR with param "url" equals "[HOST]+[/url]"`, () => {
         expect(openSpy.args[0]).is.include(`${REST_HOST}${testURL}`, 'Incorrect request URL');
       });
     });
 
     describe(`with headers param`, () => {
-      before(() => {
+      beforeAll(() => {
         http.delete(testURL, { headers });
       });
 
-      it(`open XHR with param "headers", witch include setted headers`, () => {
+      test(`open XHR with param "headers", witch include setted headers`, () => {
         expect(request.requestHeaders).is.include(headers, 'Incorrect request headers');
       });
     });
 
     describe(`with "data" param type of "Object"`, () => {
-      before(() => {
+      beforeAll(() => {
         http.delete<ObjectPayload, void>(testURL, { data: objectPayload });
       });
 
-      it(`send XHR with param "body" stringifyed to JSON and content type header`, () => {
+      test(`send XHR with param "body" stringifyed to JSON and content type header`, () => {
         expect(sendSpy.args[0].length).is.eq(1, 'Expected only one argument');
         expect(typeof (sendSpy.args[0][0])).is.eq('string', 'Incorrect request body type');
         expect(request.requestHeaders).is.include(jsonHeader, 'Content type header error');
@@ -229,11 +229,11 @@ describe('Instance of HTTPTransport', () => {
     });
 
     describe(`with "data" param type of "FormData"`, () => {
-      before(() => {
+      beforeAll(() => {
         http.delete<FormData, void>(testURL, { data: formDataPayload });
       });
 
-      it(`send XHR with param "body" stringifyed to JSON and content type header`, () => {
+      test(`send XHR with param "body" stringifyed to JSON and content type header`, () => {
         expect(sendSpy.args[0].length).is.eq(1, 'Expected only one argument');
         expect(sendSpy.args[0][0]).is.instanceof(FormData, 'Incorrect request body type');
         expect(request.requestHeaders).is.not.include(jsonHeader, 'Content type header error');
