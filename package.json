@@ -14,7 +14,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite --open --port=4000",
-    "start": "npm build && node ./server.js",
+    "start": "npm run build && node ./server.js",
     "build": "npm run check && rm -rf ./dist && vite build",
     "test": "vitest run --silent",
     "check": "npm-run-all --parallel check:*",
