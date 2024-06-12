@@ -4,7 +4,7 @@ import { Children, Component, Props } from 'core';
 import { router } from './router';
 import { Route } from './route';
 
-describe.only('Instance of Router', async () => {
+describe('Instance of Router', async () => {
   class PageStub extends Component<Children, Props> {
     constructor() {
       super({});
