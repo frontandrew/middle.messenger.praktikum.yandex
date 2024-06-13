@@ -2,7 +2,7 @@
 
 ##### Yet another chat with NO features!
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/2fefbe2e-8013-415f-8abf-f5622e6ee641/deploy-status)](https://app.netlify.com/sites/ephemeral-duckanoo-a59b6e/deploys) [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.png?v=103)](https://opensource.org/licenses/mit-license.php)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2fefbe2e-8013-415f-8abf-f5622e6ee641/deploy-status)](https://app.netlify.com/sites/ephemeral-duckanoo-a59b6e/deploys) [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg)](https://opensource.org/licenses/mit-license.php)
 
 ### Start and use:
 - clone repo
