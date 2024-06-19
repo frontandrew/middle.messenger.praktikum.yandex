@@ -18,6 +18,7 @@
     "strictNullChecks": true,
     "noImplicitAny": true,
     "baseUrl": "./src",
+    "types": ["vitest/jsdom"],
     "paths": {
       "apis/*": ["./shared/apis/*"],
       "config": ["./shared/config/index"],

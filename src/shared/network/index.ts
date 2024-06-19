@@ -1,5 +1,5 @@
-export { HTTPTransport } from './http-transport';
-export { WSTransport, MssgTypes } from './ws-transport';
+export { HTTPTransport, METHODS } from './http/http-transport';
+export { WSTransport, MssgTypes } from './ws/ws-transport';
 
 export type {
   CloseHandler,
@@ -7,4 +7,4 @@ export type {
   ErrorHandler,
   MessageHandler,
   WSTransportArgs,
-} from './ws-transport';
+} from './ws/ws-transport';

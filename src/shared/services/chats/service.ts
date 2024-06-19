@@ -1,4 +1,4 @@
-import { RESOURCES, UNREAD_TIMEOUT } from 'config';
+import { RESOURCES } from 'config';
 import { keying } from 'tools';
 import { store } from 'store';
 
@@ -144,12 +144,12 @@ class ChatsService {
     // }
 
     /* TODO: TEMPORARY SOLUTION! need to rework!! */
-    const list = await this.api.getChats(this.lastSearch ?? {})
-      .then(({ response }) => response.map(formatChatResponse))
-      .catch(() => []);
+    // const list = await this.api.getChats(this.lastSearch ?? {})
+    //   .then(({ response }) => response.map(formatChatResponse))
+    //   .catch(() => []);
 
-    store.set('chats', keying(list, 'id'));
-    window.setTimeout(() => this.getUreadCount(), UNREAD_TIMEOUT);
+    // store.set('chats', keying(list, 'id'));
+    // window.setTimeout(() => this.getUreadCount(), UNREAD_TIMEOUT);
   }
 }
 
